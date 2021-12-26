@@ -210,7 +210,7 @@
         app:layout_constraintVertical_bias="0.652" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/iv_profile_pic"
         android:layout_width="130dp"
         android:layout_height="131dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -250,7 +250,7 @@
         app:strokeWidth="2dp" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/cb_admin"
         android:layout_width="172dp"
         android:layout_height="34dp"
         android:backgroundTint="#000000"
