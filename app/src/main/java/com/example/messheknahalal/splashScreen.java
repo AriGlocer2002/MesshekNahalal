@@ -14,7 +14,7 @@ public class splashScreen extends AppCompatActivity {
     ImageView img_logo1;
     Animation logoAnim;
     Intent intent;
-    private static int LOGINSCREEN = 6000;
+    private static int LOGINSCREEN = 5500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

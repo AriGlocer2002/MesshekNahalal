@@ -8,26 +8,14 @@
     tools:context=".splashScreen">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="414dp"
-        android:layout_height="161dp"
-        android:layout_marginBottom="584dp"
-        android:src="@drawable/header"
+        android:id="@+id/imageView3"
+        android:layout_width="415dp"
+        android:layout_height="732dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="413dp"
-        android:layout_height="101dp"
-        android:layout_marginTop="640dp"
-        android:src="@drawable/foot"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/main_background" />
 
     <ImageView
         android:id="@+id/img_logo1"
@@ -39,6 +27,8 @@
         app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
