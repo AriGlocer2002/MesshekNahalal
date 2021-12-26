@@ -1,12 +1,14 @@
 package com.example.messheknahalal;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatCheckBox;
 
 public class signUpScreen extends AppCompatActivity {
 
@@ -15,7 +17,6 @@ public class signUpScreen extends AppCompatActivity {
     Button btn_login2, btn_signUp2;
     CheckBox cb_admin;
     ImageView iv_profile_pic;
-
 
 
     @Override
@@ -38,5 +39,18 @@ public class signUpScreen extends AppCompatActivity {
         btn_signUp2 = findViewById(R.id.btn_signUp2);
 
         iv_profile_pic = findViewById(R.id.iv_profile_pic);
+
+
+        et_admin_code_signUp.setVisibility(View.INVISIBLE);
+
+        cb_admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                et_admin_code_signUp.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+
     }
 }
