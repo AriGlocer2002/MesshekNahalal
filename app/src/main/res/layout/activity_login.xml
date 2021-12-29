@@ -3,15 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/main_background"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_img">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="375dp"
+        android:layout_height="218dp"
+        android:layout_below="@id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        app:srcCompat="@drawable/back3" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="306dp"
         android:layout_height="47dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/textView"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         app:srcCompat="@drawable/back1" />
 
@@ -37,20 +46,22 @@
         android:textSize="45dp"
         app:layout_constraintVertical_bias="0.097" />
 
+
     <EditText
         android:id="@+id/et_email_login"
         android:layout_width="286dp"
         android:layout_height="45dp"
-        android:layout_marginLeft="25dp"
         android:layout_below="@id/imageView"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:backgroundTint="#000000"
-        android:drawableRight="@drawable/email_icon"
+        android:drawableRight="@drawable/ic_email"
         android:drawableTint="@color/black"
         android:ems="10"
         android:fontFamily="@font/heebo_regular"
         android:hint="Email account"
         android:inputType="textPersonName"
+        android:textColor="@color/black"
         android:textColorHint="@android:color/black"
         android:textSize="20dp" />
 
@@ -59,14 +70,15 @@
         android:layout_width="288dp"
         android:layout_height="45dp"
         android:layout_below="@+id/et_email_login"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="25dp"
         android:backgroundTint="#000000"
-        android:drawableRight="@drawable/password_icon"
+        android:drawableRight="@drawable/ic_password"
         android:drawableTint="@color/black"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColor="@color/black"
         android:textColorHint="@android:color/black"
         android:textSize="20dp" />
 
@@ -74,8 +86,8 @@
         android:id="@+id/iv_newPassword"
         android:layout_width="170dp"
         android:layout_height="29dp"
-        android:layout_marginLeft="30dp"
         android:layout_below="@id/et_password_login"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         app:srcCompat="@drawable/back2" />
 
@@ -83,8 +95,8 @@
         android:id="@+id/tv_newPassword"
         android:layout_width="161dp"
         android:layout_height="28dp"
-        android:layout_marginLeft="35dp"
         android:layout_below="@id/et_password_login"
+        android:layout_marginLeft="35dp"
         android:layout_marginTop="10dp"
         android:text="Forgot your password?"
         android:textColor="#3454C5"
@@ -94,8 +106,8 @@
         android:id="@+id/btn_login1"
         android:layout_width="228dp"
         android:layout_height="53dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/iv_newPassword"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:backgroundTint="#59D674"
         android:text="Login"
@@ -111,5 +123,7 @@
         android:background="@drawable/back1"
         android:text="Sign up"
         android:textColor="@android:color/black" />
+
+
 
 </RelativeLayout>

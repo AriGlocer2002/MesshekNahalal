@@ -16,6 +16,10 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".mainScreen"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".loginScreen"
             android:exported="false">
         </activity>

@@ -4,9 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_background"
+    android:background="@drawable/background_img"
     android:foregroundTint="@color/black">
 
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="403dp"
+        android:layout_height="163dp"
+        android:layout_below="@id/imageView9"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-6dp"
+        app:srcCompat="@drawable/back3" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="228dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/imageView9"
+        android:layout_marginLeft="15dp"
+        app:srcCompat="@drawable/back1" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -14,24 +31,24 @@
         android:layout_height="47dp"
         android:layout_above="@+id/imageView9"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         app:srcCompat="@drawable/back1" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="295dp"
         android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
         android:layout_above="@+id/imageView9"
-        android:layout_marginBottom="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
         app:srcCompat="@drawable/logo2" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="197dp"
         android:layout_height="67dp"
-        android:layout_centerHorizontal="true"
         android:layout_above="@+id/imageView4"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/grenze_semi_bold_italic"
         android:gravity="center"
@@ -43,32 +60,32 @@
         android:id="@+id/btn_login2"
         android:layout_width="104dp"
         android:layout_height="38dp"
-        android:backgroundTint="#C268D9"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/back1"
         android:text="Login"
         android:textColor="@android:color/black"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
         app:strokeColor="#000000"
         app:strokeWidth="2dp" />
 
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="366dp"
-        android:layout_height="314dp"
+        android:layout_width="379dp"
+        android:layout_height="318dp"
         android:layout_above="@+id/cb_admin"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
-        app:srcCompat="@drawable/back1" />
+        android:layout_marginBottom="16dp"
+        app:srcCompat="@drawable/back4" />
 
 
     <EditText
         android:id="@+id/et_name_signUp"
-        android:layout_width="316dp"
-        android:layout_height="47dp"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/imageView4"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="5dp"
         android:backgroundTint="#000000"
         android:ems="10"
@@ -83,7 +100,7 @@
         android:layout_width="316dp"
         android:layout_height="47dp"
         android:layout_below="@+id/et_name_signUp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
         android:ems="10"
@@ -97,80 +114,80 @@
         android:id="@+id/et_id_number_signUp"
         android:layout_width="316dp"
         android:layout_height="47dp"
+        android:layout_below="@id/et_last_name_signUp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:hint="Id number"
         android:inputType="textPersonName"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:layout_below="@id/et_last_name_signUp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="-5dp"/>
+        android:textColorHint="@color/black" />
 
     <EditText
         android:id="@+id/et_phone_number_signUp"
         android:layout_width="316dp"
         android:layout_height="47dp"
+        android:layout_below="@+id/et_id_number_signUp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:hint="Phone number"
         android:inputType="phone"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:layout_below="@+id/et_id_number_signUp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="-5dp"/>
+        android:textColorHint="@color/black" />
 
     <EditText
         android:id="@+id/et_email_address_signUp"
         android:layout_width="316dp"
         android:layout_height="47dp"
+        android:layout_below="@+id/et_phone_number_signUp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:hint="E-mail address"
         android:inputType="textEmailAddress"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:layout_below="@+id/et_phone_number_signUp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="-5dp"/>
+        android:textColorHint="@color/black" />
 
     <EditText
         android:id="@+id/et_password_signUp"
         android:layout_width="316dp"
         android:layout_height="47dp"
+        android:layout_below="@+id/et_email_address_signUp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:layout_below="@+id/et_email_address_signUp"
-        android:layout_marginTop="-5dp"
-        android:layout_marginLeft="30dp"/>
+        android:textColorHint="@color/black" />
 
     <EditText
         android:id="@+id/et_confirm_password_signUp"
         android:layout_width="316dp"
         android:layout_height="47dp"
+        android:layout_below="@+id/et_password_signUp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:hint="Confirm password"
         android:inputType="textPassword"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:layout_below="@+id/et_password_signUp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="-5dp"/>
+        android:textColorHint="@color/black" />
 
     <ImageView
         android:id="@+id/iv_profile_pic"
         android:layout_width="130dp"
         android:layout_height="131dp"
-        android:layout_alignParentEnd="true"
         android:layout_below="@+id/imageView9"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="7dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         app:srcCompat="@drawable/default_profile_picture" />
 
     <ImageView
@@ -180,7 +197,7 @@
         android:layout_below="@+id/imageView9"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         app:srcCompat="@drawable/profile_picture_frame" />
 
     <Button
@@ -223,6 +240,8 @@
         android:inputType="textPassword"
         android:textColor="@color/black"
         android:textColorHint="@color/black" />
+
+
 
 
 </RelativeLayout>

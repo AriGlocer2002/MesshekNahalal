@@ -1,5 +1,6 @@
 package com.example.messheknahalal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ public class signUpScreen extends AppCompatActivity {
     Button btn_login2, btn_signUp2;
     CheckBox cb_admin;
     ImageView iv_profile_pic;
+    Intent intent;
 
 
     @Override
@@ -50,6 +52,15 @@ public class signUpScreen extends AppCompatActivity {
             }
         });
 
+
+
+        btn_signUp2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(signUpScreen.this, mainScreen.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
