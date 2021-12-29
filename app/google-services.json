@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "207809977898",
+    "project_id": "messheknahalalproject",
+    "database": "https://messheknahalalproject-default-rtdb.firebaseio.com/",
+    "storage_bucket": "messheknahalalproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207809977898:android:16474cb5206e9162c96d53",
+        "android_client_info": {
+          "package_name": "com.example.messheknahalal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207809977898-qof01sgll16cv0ddmoguu0q1gi3ff227.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWfavYJXMiPFYcK2Wvve1myQVyQgx42jM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207809977898-qof01sgll16cv0ddmoguu0q1gi3ff227.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
