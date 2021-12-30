@@ -8,22 +8,31 @@
     android:foregroundTint="@color/black">
 
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="403dp"
-        android:layout_height="163dp"
-        android:layout_below="@id/imageView9"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-6dp"
-        app:srcCompat="@drawable/back3" />
+    <Button
+        android:id="@+id/btn_login2"
+        android:layout_width="104dp"
+        android:layout_height="38dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/back1"
+        android:text="Login"
+        android:textColor="@android:color/black"
+        app:strokeColor="#000000"
+        app:strokeWidth="2dp" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="228dp"
-        android:layout_height="150dp"
-        android:layout_below="@id/imageView9"
-        android:layout_marginLeft="15dp"
-        app:srcCompat="@drawable/back1" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="197dp"
+        android:layout_height="67dp"
+        android:layout_above="@+id/imageView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/grenze_semi_bold_italic"
+        android:gravity="center"
+        android:text="Sign Up"
+        android:textColor="@color/black"
+        android:textSize="45dp" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -43,31 +52,6 @@
         android:layout_marginBottom="15dp"
         app:srcCompat="@drawable/logo2" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="197dp"
-        android:layout_height="67dp"
-        android:layout_above="@+id/imageView4"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/grenze_semi_bold_italic"
-        android:gravity="center"
-        android:text="Sign Up"
-        android:textColor="@color/black"
-        android:textSize="45dp" />
-
-    <Button
-        android:id="@+id/btn_login2"
-        android:layout_width="104dp"
-        android:layout_height="38dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/back1"
-        android:text="Login"
-        android:textColor="@android:color/black"
-        app:strokeColor="#000000"
-        app:strokeWidth="2dp" />
 
 
     <ImageView
@@ -181,23 +165,40 @@
         android:textColorHint="@color/black" />
 
     <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="403dp"
+        android:layout_height="163dp"
+        android:layout_below="@id/imageView9"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-6dp"
+        app:srcCompat="@drawable/back3" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="228dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/imageView9"
+        android:layout_marginLeft="15dp"
+        app:srcCompat="@drawable/back1" />
+
+    <ImageView
         android:id="@+id/iv_profile_pic"
-        android:layout_width="130dp"
-        android:layout_height="131dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:layout_below="@+id/imageView9"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="21dp"
         app:srcCompat="@drawable/default_profile_picture" />
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="132dp"
-        android:layout_height="135dp"
+        android:layout_width="121dp"
+        android:layout_height="113dp"
         android:layout_below="@+id/imageView9"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
         app:srcCompat="@drawable/profile_picture_frame" />
 
     <Button
