@@ -1,80 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
     android:background="@drawable/background_img"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragment"
+    tools:openDrawer="start">
 
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="306dp"
-        android:layout_height="47dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        app:srcCompat="@drawable/back1" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="295dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        app:srcCompat="@drawable/logo2" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPagerHome"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_below="@+id/imageView"
-        android:layout_marginHorizontal="0dp"/>
-
-    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-        android:id="@+id/dots"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/viewPagerHome"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        app:dotsColor="@color/white"/>
-
-    <ImageView
-        android:id="@+id/imageView6"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/dots"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="75dp"
-        android:src="@drawable/back4" />
+        android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/dots"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="95dp">
-
-        <TextView
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="10dp"
-            android:text="@string/home_screen_string"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            />
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="4dp"/>
 
-    </ScrollView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-</RelativeLayout>
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="306dp"
+                android:layout_height="47dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/back1" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="295dp"
+                android:layout_height="55dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/logo2" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPagerHome"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@+id/imageView"
+                android:layout_marginHorizontal="0dp"/>
+
+            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                android:id="@+id/dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewPagerHome"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                app:dotsColor="@color/white"/>
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/dots"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="35dp"
+                android:layout_marginBottom="85dp"
+                android:src="@drawable/back4" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/dots"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginBottom="105dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:scrollbars="vertical"
+                    android:text="@string/home_screen_string"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+            </ScrollView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:background="@color/purple_700"
+        app:headerLayout="@layout/header_navigation_drawer"
+        app:menu="@menu/navigation_drawer"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

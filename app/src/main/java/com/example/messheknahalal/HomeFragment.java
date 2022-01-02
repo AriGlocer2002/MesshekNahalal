@@ -4,12 +4,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
 
 import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
@@ -28,14 +30,12 @@ public class HomeFragment extends Fragment {
     VPadapter adapter;
     WormDotsIndicator dotsIndicator;
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         viewPager2 = view.findViewById(R.id.viewPagerHome);
         dotsIndicator = view.findViewById(R.id.dots);
-
 
         imageList = new ArrayList<>();
         imageList.add(new viewPagerItem(R.drawable.image_nahalal));
@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment {
         viewPager2.setAdapter(adapter);
         dotsIndicator.setViewPager2(viewPager2);
 
+        
 
     }
 

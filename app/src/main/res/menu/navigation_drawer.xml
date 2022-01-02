@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/item1"
+            android:icon="@drawable/ic_profile"
+            android:iconTint="@color/black"
+            android:title="My profile"
+            android:checked="false" />
+        <item
+            android:id="@+id/item2"
+            android:icon="@drawable/ic_home"
+            android:iconTint="@color/black"
+            android:title="Home"
+            android:checked="false" />
+        <item
+            android:id="@+id/item6"
+            android:icon="@drawable/ic_receipt"
+            android:iconTint="@color/black"
+            android:title="My orders"
+            android:checked="false" />
+    </group>
+
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/item3"
+            android:icon="@drawable/ic_phone"
+            android:iconTint="@color/black"
+            android:title="Call us"
+            android:checked="false" />
+        <item
+            android:id="@+id/item4"
+            android:icon="@drawable/ic_email"
+            android:iconTint="@color/black"
+            android:title="Email us"
+            android:checked="false" />
+        <item
+            android:id="@+id/item5"
+            android:checked="false"
+            android:icon="@drawable/ic_map"
+            android:iconTint="@color/black"
+            android:title="Find us" />
+    </group>
+
+    <group android:id="@+id/group3">
+        <item
+            android:id="@+id/item7"
+            android:checked="false"
+            android:icon="@drawable/ic_logout"
+            android:iconTint="@color/black"
+            android:title="Log out" />
+    </group>
+
+</menu>
