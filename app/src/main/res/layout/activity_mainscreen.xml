@@ -17,18 +17,35 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:elevation="4dp"/>
+            android:layout_height="?attr/actionBarSize">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_cart"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    app:srcCompat="@drawable/ic_shopping_cart"
+                    app:tint="@color/black" />
+            </RelativeLayout>
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <FrameLayout
+                android:id="@+id/container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/container"/>
+                android:layout_height="match_parent" />
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNav"
@@ -38,7 +55,7 @@
                 android:background="?android:attr/windowBackground"
                 app:itemIconTint="@drawable/bottom_nav_icon_color_selector"
                 app:itemTextColor="@drawable/bottom_nav_icon_color_selector"
-                app:menu="@menu/menu"/>
+                app:menu="@menu/menu" />
 
 
         </RelativeLayout>
