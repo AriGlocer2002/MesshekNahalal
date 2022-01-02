@@ -10,4 +10,8 @@
 
 במושב 75 משקים חקלאיים ותיקים, ו-75 משקים חקלאיים נוספים, שמאוישים בימים אלה במסגרת פרויקט איוש נחלות בלתי מאוישות, על ידי עיגול חדש המקיף את העיגול המקורי.\  \ </string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 </resources>
