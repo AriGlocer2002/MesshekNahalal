@@ -7,8 +7,6 @@
     android:padding="16dp"
     android:layout_height="match_parent">
 
-    
-
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="100dp"
