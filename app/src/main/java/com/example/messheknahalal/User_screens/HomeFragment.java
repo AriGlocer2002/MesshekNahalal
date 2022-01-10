@@ -1,4 +1,4 @@
-package com.example.messheknahalal;
+package com.example.messheknahalal.User_screens;
 
 import android.os.Bundle;
 
@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
 
+import com.example.messheknahalal.R;
+import com.example.messheknahalal.VPadapter;
+import com.example.messheknahalal.viewPagerItem;
 import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 

@@ -114,7 +114,7 @@
         android:textColor="@android:color/black" />
 
     <Button
-        android:id="@+id/btn_signUp1"
+        android:id="@+id/btn_signUp"
         android:layout_width="104dp"
         android:layout_height="38dp"
         android:layout_alignParentEnd="true"

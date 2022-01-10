@@ -181,6 +181,7 @@
         android:layout_marginLeft="15dp"
         app:srcCompat="@drawable/back1" />
 
+
     <ImageView
         android:id="@+id/iv_profile_pic"
         android:layout_width="110dp"
@@ -201,15 +202,17 @@
         android:layout_marginEnd="15dp"
         app:srcCompat="@drawable/profile_picture_frame" />
 
+
+
     <Button
-        android:id="@+id/btn_signUp2"
+        android:id="@+id/btn_confirm"
         android:layout_width="205dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="100dp"
         android:backgroundTint="#59D674"
-        android:text="Sign Up"
+        android:text="Confirm"
         android:textColor="@android:color/black"
         app:strokeColor="#000000"
         app:strokeWidth="2dp" />
@@ -232,7 +235,7 @@
         android:id="@+id/et_admin_code_signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_signUp2"
+        android:layout_above="@+id/btn_confirm"
         android:layout_marginLeft="25dp"
         android:layout_marginBottom="5dp"
         android:backgroundTint="#000000"

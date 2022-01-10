@@ -16,7 +16,7 @@
             android:exported="false">
         </activity>
         <activity
-            android:name=".mainScreen"
+            android:name=".User_screens.mainScreen"
             android:exported="false">
         </activity>
         <activity
