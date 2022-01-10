@@ -25,9 +25,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class signUpScreen extends AppCompatActivity {
@@ -38,16 +42,23 @@ public class signUpScreen extends AppCompatActivity {
     CheckBox cb_admin;
     ImageView iv_profile_pic;
     Intent intent;
-    String uid;
 
-    FirebaseAuth firebaseAuth;
+    FirebaseAuth auth2;
+    DatabaseReference userRef, adminRef, personRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+
+        auth2 = FirebaseAuth.getInstance();
+
+        userRef = FirebaseDatabase.getInstance().getReference("User");
+        adminRef = FirebaseDatabase.getInstance().getReference("Admin");
+        personRef = FirebaseDatabase.getInstance().getReference("Person");
+
+
 
         et_name_signUp = findViewById(R.id.et_name_signUp);
         et_last_name_signUp = findViewById(R.id.et_last_name_signUp);
@@ -85,25 +96,6 @@ public class signUpScreen extends AppCompatActivity {
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String femail = et_email_address_signUp.getText().toString();
-                Log.d("ariel", femail);
-                String fpassword = et_password_signUp.getText().toString();
-                Log.d("ariel", fpassword);
-
-
-                firebaseAuth.createUserWithEmailAndPassword(femail, fpassword)
-                        .addOnCompleteListener(signUpScreen.this, task -> {
-                            if (task.isSuccessful()) {
-                                Log.d("ariel", "success");
-                                // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = firebaseAuth.getCurrentUser();
-                                uid = user.getUid().toString();
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.d("ariel", task.getException().toString());
-                            }
-                        });
-
 
                 //check that the email is a real email
                 //check if the id is in the db
@@ -132,35 +124,23 @@ public class signUpScreen extends AppCompatActivity {
 
                 //create a new person in the db
                 else {
-                    DataBaseHelper dbp = new DataBaseHelper("Person");
-                    DataBaseHelper db;
+                    Person person = new Person(id, name, last_name, email, password, phone);
 
-                    Person p = new Person(id, name, last_name, email, password, phone);
-
-                    //String keyPerson = "Person_" + id;
-                    String keyPerson = uid;
-                    dbp.getRef().child(keyPerson).setValue(p);
-
+                    personRef.child("Person_"+id).setValue(person);
 
                     if (cb_admin.isChecked()) {
                         //create a new admin in the db
-                        db = new DataBaseHelper("Admin");
-
                         Admin admin = new Admin(id, name, last_name, email, password, phone, code);
-                        //String keyAdmin = "Admin_" + id;
-                        String keyAdmin = uid;
-                        db.getRef().child(keyAdmin).child("code").setValue(admin.getCode());
-                        db.getRef().child(keyAdmin).child("id").setValue(admin.getId());
+                        adminRef.child("Admin_"+id).setValue(admin);
 
                     } else {
                         //create a new user in the db
-                        db = new DataBaseHelper("User");
 
                         User user = new User(id, name, last_name, email, password, phone, "");
-                        //String keyUser = "User_" + id;
-                        String keyUser = uid;
-                        db.getRef().child(keyUser).child("id").setValue(user.getId());
-                        db.getRef().child(keyUser).child("last_login").setValue(user.getLast_login());
+                        String date = user.getCurrentDate();
+                        user.setLast_login(date);
+
+                        userRef.child("User_"+id).setValue(user);
                     }
 
                     intent = new Intent(signUpScreen.this, mainScreen.class);
@@ -173,6 +153,8 @@ public class signUpScreen extends AppCompatActivity {
 
 
     }
+
+
 
     public boolean emptyET() {
 

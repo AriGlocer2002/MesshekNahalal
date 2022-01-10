@@ -10,9 +10,9 @@ public class DataBaseHelper {
     private DatabaseReference ref;
     private FirebaseAuth auth;
 
-    public DataBaseHelper(String table){
+    public DataBaseHelper(String dataList){
         this.db = FirebaseDatabase.getInstance();
-        this.ref = db.getReference(table);
+        this.ref = db.getReference(dataList);
     }
 
     public DataBaseHelper(FirebaseDatabase db, DatabaseReference ref) {
