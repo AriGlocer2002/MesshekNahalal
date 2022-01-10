@@ -6,19 +6,19 @@
         android:id="@+id/group1"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/item1"
+            android:id="@+id/myProfile_item"
             android:icon="@drawable/ic_profile"
             android:iconTint="@color/black"
             android:title="My profile"
             android:checked="false" />
         <item
-            android:id="@+id/item2"
+            android:id="@+id/home_item"
             android:icon="@drawable/ic_home"
             android:iconTint="@color/black"
             android:title="Home"
             android:checked="false" />
         <item
-            android:id="@+id/item6"
+            android:id="@+id/myOrders_item"
             android:icon="@drawable/ic_receipt"
             android:iconTint="@color/black"
             android:title="My orders"
@@ -29,19 +29,19 @@
         android:id="@+id/group2"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/item3"
+            android:id="@+id/callUs_item"
             android:icon="@drawable/ic_phone"
             android:iconTint="@color/black"
             android:title="Call us"
             android:checked="false" />
         <item
-            android:id="@+id/item4"
+            android:id="@+id/emailUs_item"
             android:icon="@drawable/ic_email"
             android:iconTint="@color/black"
             android:title="Email us"
             android:checked="false" />
         <item
-            android:id="@+id/item5"
+            android:id="@+id/findUs_item"
             android:checked="false"
             android:icon="@drawable/ic_map"
             android:iconTint="@color/black"
@@ -50,7 +50,7 @@
 
     <group android:id="@+id/group3">
         <item
-            android:id="@+id/item7"
+            android:id="@+id/logOut_item"
             android:checked="false"
             android:icon="@drawable/ic_logout"
             android:iconTint="@color/black"

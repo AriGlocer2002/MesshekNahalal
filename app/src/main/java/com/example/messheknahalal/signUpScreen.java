@@ -2,7 +2,6 @@ package com.example.messheknahalal;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,29 +9,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.messheknahalal.Objects.Admin;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.Objects.User;
-import com.example.messheknahalal.User_screens.mainScreen;
-import com.example.messheknahalal.Utils.DataBaseHelper;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 public class signUpScreen extends AppCompatActivity {
 
@@ -143,7 +128,7 @@ public class signUpScreen extends AppCompatActivity {
                         userRef.child("User_"+id).setValue(user);
                     }
 
-                    intent = new Intent(signUpScreen.this, mainScreen.class);
+                    intent = new Intent(signUpScreen.this, mainScreenUser.class);
 
                     startActivity(intent);
                 }

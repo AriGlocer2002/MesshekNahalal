@@ -50,8 +50,6 @@ public class HomeFragment extends Fragment {
         viewPager2.setAdapter(adapter);
         dotsIndicator.setViewPager2(viewPager2);
 
-        
-
     }
 
     @Override

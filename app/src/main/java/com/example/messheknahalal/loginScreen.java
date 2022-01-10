@@ -2,23 +2,16 @@ package com.example.messheknahalal;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.messheknahalal.User_screens.mainScreen;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class loginScreen extends AppCompatActivity {
 
@@ -52,7 +45,7 @@ public class loginScreen extends AppCompatActivity {
                 String email = et_email_login.getText().toString();
                 String password = et_password_login.getText().toString();
 
-                firebaseAuth.signInWithEmailAndPassword(email, password)
+                /*firebaseAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(loginScreen.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -70,6 +63,10 @@ public class loginScreen extends AppCompatActivity {
                                 }
                             }
                         });
+
+                 */
+                intent = new Intent(loginScreen.this, mainScreenUser.class);
+                startActivity(intent);
             }
         });
 
