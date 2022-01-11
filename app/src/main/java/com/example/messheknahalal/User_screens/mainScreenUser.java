@@ -1,6 +1,7 @@
 package com.example.messheknahalal.User_screens;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.loginScreen;
+import com.example.messheknahalal.signUpScreen;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -26,6 +28,7 @@ public class mainScreenUser extends AppCompatActivity {
     BottomNavigationView bottomNav;
     DrawerLayout drawerMenu;
     NavigationView nav_view;
+    Intent intent;
 
 
     @Override
@@ -59,15 +62,56 @@ public class mainScreenUser extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 switch (item.getItemId()){
-                    case R.id.logOut_item:
-                        Intent intent = new Intent(mainScreenUser.this, loginScreen.class);
+                    case R.id.myProfile_item:
+
+                        break;
+
+                    case R.id.myOrders_item:
+
+                        break;
+
+                    case R.id.callUs_item:
+                        intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:0506829187"));
                         startActivity(intent);
+                        break;
+
+                    case R.id.emailUs_item:
+                        sendEmail("ariogl02@gmail.com", "", "");
+                        break;
+
+                    case R.id.findUs_item:
+                        String addressString = "Agriculture and Sustainability Center WIZO Nahalal";
+                        Uri geoLocation = Uri.parse("geo:0,0?q="+addressString);
+
+                        intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(geoLocation);
+
+                        startActivity(intent);
+                        break;
+
+                    case R.id.logOut_item:
+                        intent = new Intent(mainScreenUser.this, loginScreen.class);
+                        startActivity(intent);
+                        break;
                 }
                 return false;
             }
         });
 
 
+    }
+
+    public void sendEmail(String recipientsList, String subject, String text){
+        String[] recipients = recipientsList.split(",");
+
+        intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_EMAIL, recipients);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT,text);
+
+        intent.setType("message/rfc822");
+        startActivity(Intent.createChooser(intent, "Choose an email client"));
     }
 
 

@@ -28,7 +28,7 @@ public class signUpScreen extends AppCompatActivity {
     ImageView iv_profile_pic;
     Intent intent;
 
-    FirebaseAuth auth2;
+    FirebaseAuth auth;
     DatabaseReference userRef, adminRef, personRef;
 
     @Override
@@ -36,8 +36,7 @@ public class signUpScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-
-        auth2 = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         userRef = FirebaseDatabase.getInstance().getReference("User");
         adminRef = FirebaseDatabase.getInstance().getReference("Admin");
@@ -78,6 +77,14 @@ public class signUpScreen extends AppCompatActivity {
         });
 
 
+        btn_login2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(signUpScreen.this, loginScreen.class);
+                startActivity(intent);
+            }
+        });
+
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +106,12 @@ public class signUpScreen extends AppCompatActivity {
 
                 //checking if the all the fields are filled with information
                 if (emptyET()) {
-                    Toast.makeText(signUpScreen.this, "Please complete all the fields", Toast.LENGTH_LONG).show();
+                    Toast.makeText(signUpScreen.this, "Please finish completing all the fields", Toast.LENGTH_LONG).show();
+                }
+
+                //check that the password has at least 8 characters
+                else if(password.length()<8){
+                    Toast.makeText(signUpScreen.this, "The password is too short! Please choose a new password", Toast.LENGTH_LONG).show();
                 }
 
                 //check if the password and the confirmed password are the same
@@ -129,7 +141,6 @@ public class signUpScreen extends AppCompatActivity {
                     }
 
                     intent = new Intent(signUpScreen.this, mainScreenUser.class);
-
                     startActivity(intent);
                 }
 
