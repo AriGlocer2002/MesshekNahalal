@@ -8,10 +8,11 @@ public class Person {
 
     private String id;
     private String name;
-    private String surname;
+    private String last_name;
     private String email;
     private String password;
     private String phone;
+    private String type;
 
 
     public Person(){
@@ -20,21 +21,24 @@ public class Person {
     public Person(String id){
         this.id = id;
         this.name = null;
-        this.surname = null;
+        this.last_name = null;
         this.email = null;
         this.password = null;
         this.phone = null;
+        this.type = null;
     }
+
 
     public Person(String id, String name, String surname,
                   String email,
-                  String password, String phone) {
+                  String password, String phone, String type) {
         this.id = id;
         this.name = name;
-        this.surname = surname;
+        this.last_name = surname;
         this.email = email;
         this.password = password;
         this.phone = phone;
+        this.type = type;
     }
 
     public String getId() {
@@ -53,12 +57,12 @@ public class Person {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLast_name(String surname) {
+        this.last_name = surname;
     }
 
     public String getEmail() {
@@ -85,15 +89,24 @@ public class Person {
         this.phone = phone;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email=" + email +
-                ", password=" + password +
-                ", phone=" + phone +
+                ", last_name='" + last_name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 }

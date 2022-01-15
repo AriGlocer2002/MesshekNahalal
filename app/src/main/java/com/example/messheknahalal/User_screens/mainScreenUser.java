@@ -24,7 +24,6 @@ import com.google.android.material.navigation.NavigationView;
 public class mainScreenUser extends AppCompatActivity {
 
 
-
     BottomNavigationView bottomNav;
     DrawerLayout drawerMenu;
     NavigationView nav_view;
@@ -35,6 +34,7 @@ public class mainScreenUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainscreen);
+
 
 
         //bottom navigation bar
@@ -111,7 +111,7 @@ public class mainScreenUser extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_TEXT,text);
 
         intent.setType("message/rfc822");
-        startActivity(Intent.createChooser(intent, "Choose an email client"));
+        startActivity(intent);
     }
 
 

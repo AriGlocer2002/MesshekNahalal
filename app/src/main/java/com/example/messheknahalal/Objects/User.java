@@ -14,8 +14,8 @@ public class User extends Person {
         //required for firebase
     }
 
-    public User(String id, String name, String surname, String email, String password, String phone, String last_login) {
-        super(id, name, surname, email, password, phone);
+    public User(String id, String name, String surname, String email, String password, String phone, String type, String last_login) {
+        super(id, name, surname, email, password, phone, type);
         this.last_login = last_login;
     }
 

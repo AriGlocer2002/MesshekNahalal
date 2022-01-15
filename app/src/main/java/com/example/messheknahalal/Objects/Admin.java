@@ -8,8 +8,8 @@ public class Admin extends Person {
         super(null);
     }
 
-    public Admin(String id, String name, String surname, String email, String password, String phone, String code) {
-        super(id, name, surname, email, password, phone);
+    public Admin(String id, String name, String surname, String email, String password, String phone, String type, String code) {
+        super(id, name, surname, email, password, phone, type);
         this.code = code;
     }
 
