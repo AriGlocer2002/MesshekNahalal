@@ -137,34 +137,39 @@ public class signUpScreen extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
                 if(ds.exists()) {
+                    Boolean notExist = true;
                     for (DataSnapshot d : ds.getChildren()) {
                         Person p = d.getValue(Person.class);
-                        if(p.getEmail().equals(email)){
+                        if (p.getEmail().equals(email)) {
                             showAlertDialog("Error", "This email address is already binded to another account");
-                        }else if(p.getId().equals(id)){
+                            notExist = false;
+                        } else if (p.getId().equals(id)) {
                             showAlertDialog("Error", "This id number is already binded to another account");
+                            notExist = false;
                         }
                     }
-                    //create an account
-                    if(type.equals("admin")){
-                        createAdmin();
-                    }else{
-                        createUser();
-                    }
-                    //FireBaseAuth
-                    auth.createUserWithEmailAndPassword(email, password).
-                            addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        snackBar("Account successfully created");
-                                        intent = new Intent(getApplicationContext(), loginScreen.class);
-                                        startActivity(intent);
-                                    } else {
-                                        Toast.makeText(signUpScreen.this, "Firebase Auth error", Toast.LENGTH_LONG).show();
+                    if (notExist == true) {
+                        //create an account
+                        if (type.equals("admin")) {
+                            createAdmin();
+                        } else {
+                            createUser();
+                        }
+                        //FireBaseAuth
+                        auth.createUserWithEmailAndPassword(email, password).
+                                addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            snackBar("Account successfully created");
+                                            intent = new Intent(getApplicationContext(), loginScreen.class);
+                                            startActivity(intent);
+                                        } else {
+                                            Toast.makeText(signUpScreen.this, "Firebase Auth error", Toast.LENGTH_LONG).show();
+                                        }
                                     }
-                                }
-                            });
+                                });
+                    }
                 }
             }
 
