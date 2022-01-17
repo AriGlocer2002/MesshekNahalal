@@ -12,6 +12,10 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <activity
+            android:name=".myProfileScreen"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".signUpScreen"
             android:exported="false">
         </activity>

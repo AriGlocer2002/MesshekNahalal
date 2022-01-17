@@ -55,10 +55,10 @@ public class mainScreenUser extends AppCompatActivity {
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 switch (item.getItemId()){
                     case R.id.myProfile_item:
-
+                        intent = new Intent(mainScreenUser.this, loginScreen.class);
+                        startActivity(intent);
                         break;
 
                     case R.id.myOrders_item:
@@ -152,7 +152,6 @@ public class mainScreenUser extends AppCompatActivity {
                 Toast.makeText(this, "Shopping", Toast.LENGTH_SHORT).show();
                 return true;
         }
-
         return false;
     }
 }

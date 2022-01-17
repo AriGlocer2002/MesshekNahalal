@@ -37,8 +37,8 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewPager2 = view.findViewById(R.id.viewPagerHome);
-        dotsIndicator = view.findViewById(R.id.dots);
+        viewPager2 = view.findViewById(R.id.fragment_home_viewPager);
+        dotsIndicator = view.findViewById(R.id.fragment_home_dots);
 
         imageList = new ArrayList<>();
         imageList.add(new viewPagerItem(R.drawable.image_nahalal));
