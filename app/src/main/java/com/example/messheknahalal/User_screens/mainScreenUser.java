@@ -23,19 +23,15 @@ import com.google.android.material.navigation.NavigationView;
 
 public class mainScreenUser extends AppCompatActivity {
 
-
     BottomNavigationView bottomNav;
     DrawerLayout drawerMenu;
     NavigationView nav_view;
     Intent intent;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainscreen);
-
-
 
         //bottom navigation bar
         bottomNav = findViewById(R.id.bottomNav);

@@ -6,11 +6,9 @@ import java.net.PasswordAuthentication;
 
 public class Person {
 
-    private String id;
     private String name;
     private String last_name;
     private String email;
-    private String password;
     private String phone;
     private String type;
 
@@ -18,35 +16,12 @@ public class Person {
     public Person(){
     }
 
-    public Person(String id){
-        this.id = id;
-        this.name = null;
-        this.last_name = null;
-        this.email = null;
-        this.password = null;
-        this.phone = null;
-        this.type = null;
-    }
-
-
-    public Person(String id, String name, String surname,
-                  String email,
-                  String password, String phone, String type) {
-        this.id = id;
+    public Person(String name, String last_name, String email, String phone, String type) {
         this.name = name;
-        this.last_name = surname;
+        this.last_name = last_name;
         this.email = email;
-        this.password = password;
         this.phone = phone;
         this.type = type;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -61,8 +36,8 @@ public class Person {
         return last_name;
     }
 
-    public void setLast_name(String surname) {
-        this.last_name = surname;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getEmail() {
@@ -71,14 +46,6 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhone() {
@@ -100,11 +67,9 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", type='" + type + '\'' +
                 '}';

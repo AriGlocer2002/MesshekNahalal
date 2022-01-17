@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
+    android:background="@drawable/background_img"
+    tools:context=".User_screens.HomeFragment"
+    tools:openDrawer="start">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:elevation="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/iv_my_profile_logo_background"
+        android:layout_width="306dp"
+        android:layout_height="47dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        app:srcCompat="@drawable/back1" />
+
+    <ImageView
+        android:id="@+id/iv_my_profile_logo"
+        android:layout_width="295dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        app:srcCompat="@drawable/logo2" />
+
+    <TextView
+        android:id="@+id/tv_my_profile_title"
+        android:layout_width="197dp"
+        android:layout_height="67dp"
+        android:layout_below="@+id/iv_my_profile_logo_background"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/grenze_semi_bold_italic"
+        android:gravity="center"
+        android:text="My Profile"
+        android:textColor="@color/black"
+        android:textSize="45dp" />
+
+    <ImageView
+        android:id="@+id/iv_my_profile_b1"
+        android:layout_width="383dp"
+        android:layout_height="497dp"
+        android:layout_below="@+id/tv_my_profile_title"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/back5" />
+
+    <ImageView
+        android:id="@+id/iv_my_profile_b2"
+        android:layout_width="128dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tv_my_profile_title"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/back6" />
+
+    <ImageView
+        android:id="@+id/iv_my_profile_pp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_below="@+id/tv_my_profile_title"
+        android:layout_marginTop="19dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/default_profile_picture" />
+
+    <ImageView
+        android:id="@+id/iv_my_profile_frame_pp"
+        android:layout_width="121dp"
+        android:layout_height="113dp"
+        android:layout_below="@+id/tv_my_profile_title"
+        android:layout_marginTop="18dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/profile_picture_frame" />
+
+    <ImageView
+        android:id="@+id/iv_my_profile_b3"
+        android:layout_width="334dp"
+        android:layout_height="269dp"
+        android:layout_below="@+id/iv_my_profile_b2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/back4" />
+
+    <EditText
+        android:id="@+id/my_profile_et_name"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_my_profile_b2"
+       android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="#000000"
+        android:foregroundTint="#000000"
+        android:ems="10"
+        android:hint="Name"
+        android:drawableRight="@drawable/ic_profile"
+        android:drawableTint="@color/black"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
+
+    <EditText
+        android:id="@+id/my_profile_et_last_name"
+        android:layout_width="316dp"
+        android:layout_height="47dp"
+        android:layout_below="@+id/my_profile_et_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-5dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:hint="Last Name"
+        android:drawableRight="@drawable/ic_profile"
+        android:drawableTint="@color/black"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintVertical_bias="0.311" />
+
+    <EditText
+        android:id="@+id/my_profile_et_phone_number"
+        android:layout_width="316dp"
+        android:layout_height="47dp"
+        android:layout_below="@+id/my_profile_et_last_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-5dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:hint="Phone number"
+        android:drawableRight="@drawable/ic_phone"
+        android:drawableTint="@color/black"
+        android:inputType="phone"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
+
+    <EditText
+        android:id="@+id/my_profile_et_email_address"
+        android:layout_width="316dp"
+        android:layout_height="47dp"
+        android:layout_below="@+id/my_profile_et_phone_number"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-5dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:hint="E-mail address"
+        android:drawableRight="@drawable/ic_email"
+        android:drawableTint="@color/black"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
+
+    <EditText
+        android:id="@+id/my_profile_et_password"
+        android:layout_width="316dp"
+        android:layout_height="47dp"
+        android:layout_below="@+id/my_profile_et_email_address"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-5dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:hint="Password"
+        android:drawableRight="@drawable/ic_password"
+        android:drawableTint="@color/black"
+        android:inputType="textPassword"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
+
+    <EditText
+        android:id="@+id/my_profile_et_confirm_password"
+        android:layout_width="316dp"
+        android:layout_height="47dp"
+        android:layout_below="@+id/my_profile_et_password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-5dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:hint="Confirm password"
+        android:drawableRight="@drawable/ic_password"
+        android:drawableTint="@color/black"
+        android:inputType="textPassword"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="205dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/iv_my_profile_b3"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="#59D674"
+        android:text="Update"
+        android:textColor="@android:color/black"
+        app:strokeWidth="2dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:background="#03A113"
+        app:headerLayout="@layout/header_navigation_drawer"
+        app:menu="@menu/navigation_drawer"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

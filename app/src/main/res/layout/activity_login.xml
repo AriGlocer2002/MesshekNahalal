@@ -83,7 +83,7 @@
         android:textSize="20dp" />
 
     <ImageView
-        android:id="@+id/iv_newPassword"
+        android:id="@+id/iv_forgot_password"
         android:layout_width="170dp"
         android:layout_height="29dp"
         android:layout_below="@id/et_password_login"
@@ -92,7 +92,7 @@
         app:srcCompat="@drawable/back2" />
 
     <TextView
-        android:id="@+id/tv_newPassword"
+        android:id="@+id/tv_forgot_password"
         android:layout_width="161dp"
         android:layout_height="28dp"
         android:layout_below="@id/et_password_login"
@@ -106,7 +106,7 @@
         android:id="@+id/btn_login1"
         android:layout_width="228dp"
         android:layout_height="53dp"
-        android:layout_below="@+id/iv_newPassword"
+        android:layout_below="@+id/iv_forgot_password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:backgroundTint="#59D674"

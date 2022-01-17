@@ -1,6 +1,7 @@
 package com.example.messheknahalal;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,22 +20,28 @@ import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Random;
+
 public class loginScreen extends AppCompatActivity{
 
-    EditText et_email_login, et_password_login;
-    Button btn_login1, btn_sign_up;
+    EditText et_email_login, et_password_login, et_email_dialog;
+    Button btn_login1, btn_sign_up, btn_reset_password_dialog, btn_back_dialog;
     Intent intent;
-    ImageView iv_newPassword;
-    TextView tv_newPassword;
+    ImageView iv_forgot_password;
+    TextView tv_forgot_password;
     ProgressDialog progressDialog;
+    Dialog d;
 
     FirebaseAuth auth;
     DatabaseReference personRef = FirebaseDatabase.getInstance().getReference().child("Person");
@@ -45,14 +52,18 @@ public class loginScreen extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        btn_reset_password_dialog = findViewById(R.id.btn_reset_password_dialog);
+        btn_back_dialog = findViewById(R.id.btn_back_dialog);
+        et_email_dialog = findViewById(R.id.et_email_dialog);
+
         auth = FirebaseAuth.getInstance();
 
         et_email_login = findViewById(R.id.et_email_login);
         et_password_login = findViewById(R.id.et_password_login);
         btn_login1 = findViewById(R.id.btn_login1);
         btn_sign_up = findViewById(R.id.btn_signUp);
-        iv_newPassword = findViewById(R.id.iv_newPassword);
-        tv_newPassword = findViewById(R.id.tv_newPassword);
+        iv_forgot_password = findViewById(R.id.iv_forgot_password);
+        tv_forgot_password = findViewById(R.id.tv_forgot_password);
 
         progressDialog = new ProgressDialog(this);
 
@@ -84,6 +95,14 @@ public class loginScreen extends AppCompatActivity{
             }
         });
 
+        iv_forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createforgotPassDialog();
+            }
+        });
+
+
         btn_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,6 +119,56 @@ public class loginScreen extends AppCompatActivity{
         AlertDialog dialog = builder.create();
         dialog.setMessage(message);
         dialog.show();
+    }
+
+    private void createforgotPassDialog() {
+        d = new Dialog(this);
+        d.setContentView(R.layout.reset_password_dialog);
+        d.setTitle("Reset Password");
+        d.setCancelable(true);
+        et_email_dialog = d.findViewById(R.id.et_email_dialog);
+        btn_reset_password_dialog = d.findViewById(R.id.btn_reset_password_dialog);
+        btn_back_dialog = d.findViewById(R.id.btn_back_dialog);
+        d.show();
+
+        btn_back_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                d.dismiss();
+            }
+        });
+
+//        btn_reset_password_dialog.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//                String emailNewPassword = et_email_dialog.getText().toString();
+//
+//                AuthCredential credential = EmailAuthProvider.getCredential("user@example.com", "password1234");
+//
+//                user.reauthenticate(credential)
+//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                if (task.isSuccessful()) {
+//                                    int rndPassword = (new Random()).nextInt((99999999 - 10000000) + 1) + 10000000;
+//                                    user.updatePassword(rndPassword).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<Void> task) {
+//                                            if (task.isSuccessful()) {
+//                                                Log.d("OK", "Password updated");
+//                                            } else {
+//                                                Log.d("ERROR", "Error password not updated");
+//                                            }
+//                                        }
+//                                    });
+//                                } else {
+//                                    Log.d("ERROR", "Error auth failed");
+//                                }
+//                            }
+//                        });
+//            }
+//        });
     }
 
     private void checkPersonType(String email){
@@ -121,7 +190,7 @@ public class loginScreen extends AppCompatActivity{
                             startActivity(intent);
                         }
                     }
-                    Toast.makeText(loginScreen.this, "checkPersonType: not found person", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(loginScreen.this, "checkPersonType: not found person", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -133,30 +202,6 @@ public class loginScreen extends AppCompatActivity{
     }
 
 
-//    private void isValidPassword(String email, String password) {
-//        personRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                personList = new ArrayList<Person>();
-//                for (DataSnapshot data: snapshot.getChildren()) {
-//                    Person p = data.getValue(Person.class);
-//                    if(p.getEmail().equals(email) && p.getPassword().equals(password)) {
-//                        personList.add(p);
-//                        Toast.makeText(loginScreen.this, "found "+p.getName(), Toast.LENGTH_LONG).show();
-//                        String type = p.getType();
-//                        intent = new Intent(loginScreen.this, mainScreenUser.class);
-//                        startActivity(intent);
-//                    }
-//                }
-//                    Toast.makeText(loginScreen.this, "Sorry! the email address or the password are incorrect. Please try again!", Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError dbe) {
-//                 Log.d("ERROR", dbe.getMessage());
-//            }
-//        });
-//    }
 
 
 

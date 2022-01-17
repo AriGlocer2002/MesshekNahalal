@@ -54,14 +54,13 @@
         app:srcCompat="@drawable/logo2" />
 
 
-
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="379dp"
-        android:layout_height="318dp"
+        android:layout_width="378dp"
+        android:layout_height="279dp"
         android:layout_above="@+id/cb_admin"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="30dp"
         app:srcCompat="@drawable/back4" />
 
 
@@ -96,24 +95,10 @@
         app:layout_constraintVertical_bias="0.311" />
 
     <EditText
-        android:id="@+id/et_id_number_signUp"
-        android:layout_width="316dp"
-        android:layout_height="47dp"
-        android:layout_below="@id/et_last_name_signUp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="-5dp"
-        android:backgroundTint="#000000"
-        android:ems="10"
-        android:hint="Id number"
-        android:inputType="textPersonName"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black" />
-
-    <EditText
         android:id="@+id/et_phone_number_signUp"
         android:layout_width="316dp"
         android:layout_height="47dp"
-        android:layout_below="@+id/et_id_number_signUp"
+        android:layout_below="@+id/et_last_name_signUp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
@@ -169,16 +154,17 @@
         android:id="@+id/imageView2"
         android:layout_width="403dp"
         android:layout_height="163dp"
-        android:layout_below="@id/imageView9"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-6dp"
+        android:layout_marginBottom="110dp"
         app:srcCompat="@drawable/back3" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="228dp"
         android:layout_height="150dp"
-        android:layout_below="@id/imageView9"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="117dp"
         android:layout_marginLeft="15dp"
         app:srcCompat="@drawable/back1" />
 
@@ -189,7 +175,7 @@
         android:layout_height="110dp"
         android:layout_below="@+id/imageView9"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="21dp"
         app:srcCompat="@drawable/default_profile_picture" />
 
@@ -199,10 +185,9 @@
         android:layout_height="113dp"
         android:layout_below="@+id/imageView9"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="11dp"
         android:layout_marginEnd="15dp"
         app:srcCompat="@drawable/profile_picture_frame" />
-
 
 
     <Button
@@ -211,20 +196,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="130dp"
         android:backgroundTint="#59D674"
         android:text="Confirm"
         android:textColor="@android:color/black"
-        app:strokeColor="#000000"
         app:strokeWidth="2dp" />
 
     <CheckBox
         android:id="@+id/cb_admin"
         android:layout_width="172dp"
         android:layout_height="34dp"
-        android:layout_above="@id/et_admin_code_signUp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="225dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="1dp"
         android:backgroundTint="#000000"
         android:buttonTint="#000000"
         android:checked="false"

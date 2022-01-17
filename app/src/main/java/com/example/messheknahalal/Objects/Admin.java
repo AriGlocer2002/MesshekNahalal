@@ -5,11 +5,14 @@ public class Admin extends Person {
     private String code;
 
     public  Admin(){
-        super(null);
     }
 
-    public Admin(String id, String name, String surname, String email, String password, String phone, String type, String code) {
-        super(id, name, surname, email, password, phone, type);
+    public Admin(String code) {
+        this.code = code;
+    }
+
+    public Admin(String name, String last_name, String email, String phone, String type, String code) {
+        super(name, last_name, email, phone, type);
         this.code = code;
     }
 
@@ -24,7 +27,7 @@ public class Admin extends Person {
     @Override
     public String toString() {
         return "Admin{" +
-                "code=" + code +
+                "code='" + code + '\'' +
                 '}';
     }
 }

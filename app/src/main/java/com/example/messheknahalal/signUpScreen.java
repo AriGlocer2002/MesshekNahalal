@@ -35,7 +35,7 @@ import java.util.ArrayList;
 
 public class signUpScreen extends AppCompatActivity {
 
-    EditText et_name_signUp, et_last_name_signUp, et_id_number_signUp, et_phone_number_signUp,
+    EditText et_name_signUp, et_last_name_signUp, et_phone_number_signUp,
             et_email_address_signUp, et_password_signUp, et_confirm_password_signUp, et_admin_code_signUp;
     Button btn_login2, btn_confirm;
     CheckBox cb_admin;
@@ -56,7 +56,6 @@ public class signUpScreen extends AppCompatActivity {
 
         et_name_signUp = findViewById(R.id.et_name_signUp);
         et_last_name_signUp = findViewById(R.id.et_last_name_signUp);
-        et_id_number_signUp = findViewById(R.id.et_id_number_signUp);
         et_phone_number_signUp = findViewById(R.id.et_phone_number_signUp);
         et_email_address_signUp = findViewById(R.id.et_email_address_signUp);
         et_password_signUp = findViewById(R.id.et_password_signUp);
@@ -94,7 +93,6 @@ public class signUpScreen extends AppCompatActivity {
                 String email = et_email_address_signUp.getText().toString();
                 String password = et_password_signUp.getText().toString();
                 String confirm_password = et_confirm_password_signUp.getText().toString();
-                String id = et_id_number_signUp.getText().toString();
                 String code = et_admin_code_signUp.getText().toString();
 
                 //checking if the all the fields are filled with information
@@ -114,17 +112,19 @@ public class signUpScreen extends AppCompatActivity {
                     showAlertDialog("Error", "The passwords are different");
                 }
                 //check if the admin code is the same that in the db
-                else if(cb_admin.isChecked() && adminCodeCheck(code)){
+                else if(cb_admin.isChecked() && !code.equals("12345")){
+                    //the admin code is 12345
                     showAlertDialog("Error", "The admin code is not valid");
                 }
                 //create a new person in the db
                 else {
                     if (cb_admin.isChecked()) {
                         //create a new admin in the db
-                        createPerson("admin", email, id, password);
+                        createPerson("admin", email, password);
                     } else {
                         //create a new user in the db
-                        createPerson("user", email, id, password);
+                        createPerson("user", email, password);
+
                     }
                 }
             }
@@ -132,7 +132,7 @@ public class signUpScreen extends AppCompatActivity {
 
     }
 
-    private void createPerson(String type, String email, String id, String password){
+    private void createPerson(String type, String email, String password){
         personRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
@@ -141,10 +141,7 @@ public class signUpScreen extends AppCompatActivity {
                     for (DataSnapshot d : ds.getChildren()) {
                         Person p = d.getValue(Person.class);
                         if (p.getEmail().equals(email)) {
-                            showAlertDialog("Error", "This email address is already binded to another account");
-                            notExist = false;
-                        } else if (p.getId().equals(id)) {
-                            showAlertDialog("Error", "This id number is already binded to another account");
+                            showAlertDialog("Error", "This email address is already connected to another account");
                             notExist = false;
                         }
                     }
@@ -162,6 +159,7 @@ public class signUpScreen extends AppCompatActivity {
                                     public void onComplete(Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
                                             snackBar("Account successfully created");
+                                            Toast.makeText(signUpScreen.this, "Shopping 1", Toast.LENGTH_SHORT).show();
                                             intent = new Intent(getApplicationContext(), loginScreen.class);
                                             startActivity(intent);
                                         } else {
@@ -184,31 +182,31 @@ public class signUpScreen extends AppCompatActivity {
         String name = et_name_signUp.getText().toString();
         String last_name = et_last_name_signUp.getText().toString();
         String email = et_email_address_signUp.getText().toString();
-        String password = et_password_signUp.getText().toString();
-        String id = et_id_number_signUp.getText().toString();
         String phone = et_phone_number_signUp.getText().toString();
         String code = et_admin_code_signUp.getText().toString();
 
-        Admin admin = new Admin(id, name, last_name, email, password, phone, "admin", code);
-        adminRef.child("Admin_"+id).setValue(admin);
-        Person person = new Person(id, name, last_name, email, password, phone, "admin");
-        personRef.child("Person_"+id).setValue(person);
+        Admin admin = new Admin(name, last_name, email, phone, "admin", code);
+        Person person = new Person(name, last_name, email, phone, "admin");
+        email = email.replace(".","-");
+        adminRef.child("Admin_"+email).setValue(admin);
+        personRef.child("Person_"+email).setValue(person);
     }
 
     private void createUser(){
         String name = et_name_signUp.getText().toString();
         String last_name = et_last_name_signUp.getText().toString();
         String email = et_email_address_signUp.getText().toString();
-        String password = et_password_signUp.getText().toString();
-        String id = et_id_number_signUp.getText().toString();
         String phone = et_phone_number_signUp.getText().toString();
 
-        User user = new User(id, name, last_name, email, password, phone, "user", "");
+        Toast.makeText(signUpScreen.this, "Shopping 2", Toast.LENGTH_SHORT).show();
+
+        User user = new User(name, last_name, email, phone, "user", "");
         String date = user.getCurrentDate();
         user.setLast_login(date);
-        userRef.child("User_"+id).setValue(user);
-        Person person = new Person(id, name, last_name, email, password, phone, "user");
-        personRef.child("Person_"+id).setValue(person);
+        Person person = new Person(name, last_name, email, phone, "user");
+        email = email.replace(".","-");
+        userRef.child("User_"+email).setValue(user);
+        personRef.child("Person_"+email).setValue(person);
     }
 
     public void snackBar(String message){
@@ -217,18 +215,12 @@ public class signUpScreen extends AppCompatActivity {
         snackbar.show();
     }
 
-    public boolean adminCodeCheck(String code){
-
-        return false;
-    }
-
     public boolean emptyET() {
         String name = et_name_signUp.getText().toString();
         String last_name = et_last_name_signUp.getText().toString();
         String email = et_email_address_signUp.getText().toString();
         String password = et_password_signUp.getText().toString();
         String confirm_password = et_confirm_password_signUp.getText().toString();
-        String id = et_id_number_signUp.getText().toString();
         String phone = et_phone_number_signUp.getText().toString();
         String admin_code;
 
@@ -239,7 +231,7 @@ public class signUpScreen extends AppCompatActivity {
         }
         return name.isEmpty() || last_name.isEmpty() || email.isEmpty()
                 || password.isEmpty() || confirm_password.isEmpty()
-                || id.isEmpty() || phone.isEmpty() || admin_code.isEmpty();
+                || phone.isEmpty() || admin_code.isEmpty();
     }
 
     private void showAlertDialog(String title, String message){
