@@ -128,50 +128,72 @@ public class signUpScreen extends AppCompatActivity {
 
     }
 
-    private void createPerson(String type, String email, String password){
-        personRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot ds) {
-                if(ds.exists()) {
-                    Boolean notExist = true;
-                    for (DataSnapshot d : ds.getChildren()) {
-                        Person p = d.getValue(Person.class);
-                        if (p.getEmail().equals(email)) {
-                            showAlertDialog("Error", "This email address is already connected to another account");
-                            notExist = false;
-                        }
-                    }
-                    if (notExist == true) {
-                        //create an account
-                        if (type.equals("admin")) {
-                            createAdmin();
-                        } else {
-                            createUser();
-                        }
-                        //FireBaseAuth
-                        auth.createUserWithEmailAndPassword(email, password).
-                                addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            snackBar("Account successfully created");
-                                            Toast.makeText(signUpScreen.this, "Shopping 1", Toast.LENGTH_SHORT).show();
-                                            intent = new Intent(getApplicationContext(), loginScreen.class);
-                                            startActivity(intent);
-                                        } else {
-                                            Toast.makeText(signUpScreen.this, "Firebase Auth error", Toast.LENGTH_LONG).show();
-                                        }
-                                    }
-                                });
-                    }
-                }
-            }
+//    private void createPerson(String type, String email, String password){
+//        personRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot ds) {
+//                if(ds.exists()) {
+//                    Boolean notExist = true;
+//                    for (DataSnapshot d : ds.getChildren()) {
+//                        Person p = d.getValue(Person.class);
+//                        if (p.getEmail().equals(email)) {
+//                            showAlertDialog("Error", "This email address is already connected to another account");
+//                            notExist = false;
+//                        }
+//                    }
+//                    if (notExist == true) {
+//                        //create an account
+//                        if (type.equals("admin")) {
+//                            createAdmin();
+//                        } else {
+//                            createUser();
+//                        }
+//                        //FireBaseAuth
+//                        auth.createUserWithEmailAndPassword(email, password).
+//                                addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
+//                                    @Override
+//                                    public void onComplete(Task<AuthResult> task) {
+//                                        if (task.isSuccessful()) {
+//                                            snackBar("Account successfully created");
+//                                            Toast.makeText(signUpScreen.this, "Shopping 1", Toast.LENGTH_SHORT).show();
+//                                            intent = new Intent(getApplicationContext(), loginScreen.class);
+//                                            startActivity(intent);
+//                                        } else {
+//                                            Toast.makeText(signUpScreen.this, "Firebase Auth error", Toast.LENGTH_LONG).show();
+//                                        }
+//                                    }
+//                                });
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError dbe) {
+//                Log.d("ERROR", dbe.getMessage());
+//            }
+//        });
+//    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError dbe) {
-                Log.d("ERROR", dbe.getMessage());
-            }
-        });
+    private void createPerson(String type, String email, String password){
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            if (type.equals("admin")) {
+                                createAdmin();
+                            } else {
+                                createUser();
+                            }
+
+                            snackBar("Account successfully created");
+                            Toast.makeText(signUpScreen.this, "Shopping 1", Toast.LENGTH_SHORT).show();
+                            intent = new Intent(getApplicationContext(), loginScreen.class);
+                            startActivity(intent);
+                        } else {
+                            showAlertDialog("Error", "This email address is already connected to another account");
+                        }
+                    }
+                });
     }
 
     private void createAdmin(){
@@ -193,8 +215,6 @@ public class signUpScreen extends AppCompatActivity {
         String last_name = et_last_name_signUp.getText().toString();
         String email = et_email_address_signUp.getText().toString();
         String phone = et_phone_number_signUp.getText().toString();
-
-        Toast.makeText(signUpScreen.this, "Shopping 2", Toast.LENGTH_SHORT).show();
 
         User user = new User(name, last_name, email, phone, "user", "");
         String date = user.getCurrentDate();

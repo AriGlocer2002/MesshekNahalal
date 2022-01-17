@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.loginScreen;
+import com.example.messheknahalal.myProfileScreen;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -57,7 +58,7 @@ public class mainScreenUser extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.myProfile_item:
-                        intent = new Intent(mainScreenUser.this, loginScreen.class);
+                        intent = new Intent(mainScreenUser.this, myProfileScreen.class);
                         startActivity(intent);
                         break;
 

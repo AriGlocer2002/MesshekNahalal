@@ -16,7 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.google.android.material.navigation.NavigationView;
 
-public class myProfileScreen extends AppCompatActivity {
+public class myProfileScreen extends AppCompatActivity{
 
     DrawerLayout drawerMenu;
     NavigationView nav_view;
@@ -107,7 +107,6 @@ public class myProfileScreen extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action_bar_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
