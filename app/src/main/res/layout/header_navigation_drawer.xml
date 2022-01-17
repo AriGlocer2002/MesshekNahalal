@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/header_nv_iv_pp"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
@@ -16,7 +16,7 @@
         app:srcCompat="@drawable/default_profile_picture" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/header_nv_iv_frame_pp"
         android:layout_width="103dp"
         android:layout_height="103dp"
         android:layout_centerHorizontal="true"
@@ -26,10 +26,10 @@
         tools:layout_editor_absoluteY="26dp"/>
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/header_nv_tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView7"
+        android:layout_below="@+id/header_nv_iv_frame_pp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:text="Ariel Glocer"
@@ -37,17 +37,14 @@
         android:textSize="25dp" />
 
     <TextView
-        android:id="@+id/tv_email"
+        android:id="@+id/header_nv_tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_name"
+        android:layout_below="@+id/header_nv_tv_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:text="ariogl02@gmail.com"
         android:textColor="#AAA8A8"
         android:textSize="20dp" />
-
-
-
 
 </RelativeLayout>

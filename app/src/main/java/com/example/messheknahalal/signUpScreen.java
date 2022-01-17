@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.messheknahalal.Objects.Admin;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.Objects.User;
-import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -28,10 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class signUpScreen extends AppCompatActivity {
 
@@ -54,17 +50,17 @@ public class signUpScreen extends AppCompatActivity {
         adminRef = FirebaseDatabase.getInstance().getReference("Admin");
         personRef = FirebaseDatabase.getInstance().getReference("Person");
 
-        et_name_signUp = findViewById(R.id.et_name_signUp);
-        et_last_name_signUp = findViewById(R.id.et_last_name_signUp);
-        et_phone_number_signUp = findViewById(R.id.et_phone_number_signUp);
-        et_email_address_signUp = findViewById(R.id.et_email_address_signUp);
-        et_password_signUp = findViewById(R.id.et_password_signUp);
-        et_confirm_password_signUp = findViewById(R.id.et_confirm_password_signUp);
-        et_admin_code_signUp = findViewById(R.id.et_admin_code_signUp);
-        cb_admin = findViewById(R.id.cb_admin);
-        btn_login2 = findViewById(R.id.btn_login2);
-        btn_confirm = findViewById(R.id.btn_confirm);
-        iv_profile_pic = findViewById(R.id.iv_profile_pic);
+        et_name_signUp = findViewById(R.id.sign_up_screen_et_name);
+        et_last_name_signUp = findViewById(R.id.sign_up_screen_et_last_name);
+        et_phone_number_signUp = findViewById(R.id.sign_up_screen_et_phone_number);
+        et_email_address_signUp = findViewById(R.id.sign_up_screen_et_email_address);
+        et_password_signUp = findViewById(R.id.sign_up_screen_et_password);
+        et_confirm_password_signUp = findViewById(R.id.sign_up_screen_et_confirm_password);
+        et_admin_code_signUp = findViewById(R.id.sign_up_screen_et_admin_code);
+        cb_admin = findViewById(R.id.sign_up_screen_cb_admin);
+        btn_login2 = findViewById(R.id.sign_up_screen_btn_login);
+        btn_confirm = findViewById(R.id.sign_up_screen_btn_confirm);
+        iv_profile_pic = findViewById(R.id.sign_up_screen_iv_pp);
         et_admin_code_signUp.setVisibility(View.INVISIBLE);
 
         cb_admin.setOnClickListener(new View.OnClickListener() {
@@ -211,7 +207,7 @@ public class signUpScreen extends AppCompatActivity {
 
     public void snackBar(String message){
         Snackbar snackbar = Snackbar
-                .make(findViewById(R.id.activity_sign_up), message, Snackbar.LENGTH_LONG);
+                .make(findViewById(R.id.sign_up_screen), message, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/main_screen_user_drawer_layout"
     android:background="@drawable/background_img"
     tools:context=".User_screens.HomeFragment"
     tools:openDrawer="start">
@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/main_screen_user_toolbar"
             android:elevation="0dp"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -27,12 +27,12 @@
             android:layout_height="match_parent">
 
             <FrameLayout
-                android:id="@+id/container"
+                android:id="@+id/main_screen_user_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNav"
+                android:id="@+id/main_screen_user_bottomNav"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -47,7 +47,7 @@
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
+        android:id="@+id/main_screen_user_nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

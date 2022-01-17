@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/activity_sign_up"
+    android:id="@+id/sign_up_screen"
     android:layout_height="match_parent"
     android:background="@drawable/background_img"
     android:foregroundTint="@color/black">
 
 
     <Button
-        android:id="@+id/btn_login2"
+        android:id="@+id/sign_up_screen_btn_login"
         android:layout_width="104dp"
         android:layout_height="38dp"
         android:layout_alignParentEnd="true"
@@ -23,10 +23,10 @@
         app:strokeWidth="2dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/sign_up_screen_screen_title"
         android:layout_width="197dp"
         android:layout_height="67dp"
-        android:layout_above="@+id/imageView4"
+        android:layout_above="@+id/sign_up_screen_iv_logo_background"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/grenze_semi_bold_italic"
@@ -36,39 +36,39 @@
         android:textSize="45dp" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/sign_up_screen_iv_logo_background"
         android:layout_width="306dp"
         android:layout_height="47dp"
-        android:layout_above="@+id/imageView9"
+        android:layout_above="@+id/sign_up_screen_iv_b1"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         app:srcCompat="@drawable/back1" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/sign_up_screen_iv_logo"
         android:layout_width="295dp"
         android:layout_height="55dp"
-        android:layout_above="@+id/imageView9"
+        android:layout_above="@+id/sign_up_screen_iv_b1"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         app:srcCompat="@drawable/logo2" />
 
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/sign_up_screen_iv_b1"
         android:layout_width="378dp"
         android:layout_height="279dp"
-        android:layout_above="@+id/cb_admin"
+        android:layout_above="@+id/sign_up_screen_cb_admin"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         app:srcCompat="@drawable/back4" />
 
 
     <EditText
-        android:id="@+id/et_name_signUp"
+        android:id="@+id/sign_up_screen_et_name"
         android:layout_width="321dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView4"
+        android:layout_below="@+id/sign_up_screen_iv_logo_background"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="5dp"
         android:backgroundTint="#000000"
@@ -80,10 +80,10 @@
         android:textColorHint="@color/black" />
 
     <EditText
-        android:id="@+id/et_last_name_signUp"
+        android:id="@+id/sign_up_screen_et_last_name"
         android:layout_width="316dp"
         android:layout_height="47dp"
-        android:layout_below="@+id/et_name_signUp"
+        android:layout_below="@+id/sign_up_screen_et_name"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
@@ -95,10 +95,10 @@
         app:layout_constraintVertical_bias="0.311" />
 
     <EditText
-        android:id="@+id/et_phone_number_signUp"
+        android:id="@+id/sign_up_screen_et_phone_number"
         android:layout_width="316dp"
         android:layout_height="47dp"
-        android:layout_below="@+id/et_last_name_signUp"
+        android:layout_below="@+id/sign_up_screen_et_last_name"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
@@ -109,10 +109,10 @@
         android:textColorHint="@color/black" />
 
     <EditText
-        android:id="@+id/et_email_address_signUp"
+        android:id="@+id/sign_up_screen_et_email_address"
         android:layout_width="316dp"
         android:layout_height="47dp"
-        android:layout_below="@+id/et_phone_number_signUp"
+        android:layout_below="@+id/sign_up_screen_et_phone_number"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
@@ -123,10 +123,10 @@
         android:textColorHint="@color/black" />
 
     <EditText
-        android:id="@+id/et_password_signUp"
+        android:id="@+id/sign_up_screen_et_password"
         android:layout_width="316dp"
         android:layout_height="47dp"
-        android:layout_below="@+id/et_email_address_signUp"
+        android:layout_below="@+id/sign_up_screen_et_email_address"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
@@ -137,10 +137,10 @@
         android:textColorHint="@color/black" />
 
     <EditText
-        android:id="@+id/et_confirm_password_signUp"
+        android:id="@+id/sign_up_screen_et_confirm_password"
         android:layout_width="316dp"
         android:layout_height="47dp"
-        android:layout_below="@+id/et_password_signUp"
+        android:layout_below="@+id/sign_up_screen_et_password"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
@@ -151,7 +151,7 @@
         android:textColorHint="@color/black" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/sign_up_screen_iv_b2"
         android:layout_width="403dp"
         android:layout_height="163dp"
         android:layout_alignParentBottom="true"
@@ -160,7 +160,7 @@
         app:srcCompat="@drawable/back3" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/sign_up_screen_iv_b3"
         android:layout_width="228dp"
         android:layout_height="150dp"
         android:layout_alignParentBottom="true"
@@ -170,20 +170,20 @@
 
 
     <ImageView
-        android:id="@+id/iv_profile_pic"
+        android:id="@+id/sign_up_screen_iv_pp"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:layout_below="@+id/imageView9"
+        android:layout_below="@+id/sign_up_screen_iv_b1"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="21dp"
         app:srcCompat="@drawable/default_profile_picture" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/sign_up_screen_iv_frame_pp"
         android:layout_width="121dp"
         android:layout_height="113dp"
-        android:layout_below="@+id/imageView9"
+        android:layout_below="@+id/sign_up_screen_iv_b1"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="15dp"
@@ -191,7 +191,7 @@
 
 
     <Button
-        android:id="@+id/btn_confirm"
+        android:id="@+id/sign_up_screen_btn_confirm"
         android:layout_width="205dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -203,7 +203,7 @@
         app:strokeWidth="2dp" />
 
     <CheckBox
-        android:id="@+id/cb_admin"
+        android:id="@+id/sign_up_screen_cb_admin"
         android:layout_width="172dp"
         android:layout_height="34dp"
         android:layout_alignParentBottom="true"
@@ -217,10 +217,10 @@
         android:textColorHint="#000000" />
 
     <EditText
-        android:id="@+id/et_admin_code_signUp"
+        android:id="@+id/sign_up_screen_et_admin_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_confirm"
+        android:layout_above="@+id/sign_up_screen_btn_confirm"
         android:layout_marginLeft="25dp"
         android:layout_marginBottom="5dp"
         android:backgroundTint="#000000"
@@ -229,8 +229,5 @@
         android:inputType="textPassword"
         android:textColor="@color/black"
         android:textColorHint="@color/black" />
-
-
-
 
 </RelativeLayout>

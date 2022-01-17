@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,18 +19,13 @@ import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Random;
 
 public class loginScreen extends AppCompatActivity{
 
@@ -52,18 +46,18 @@ public class loginScreen extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        btn_reset_password_dialog = findViewById(R.id.btn_reset_password_dialog);
-        btn_back_dialog = findViewById(R.id.btn_back_dialog);
-        et_email_dialog = findViewById(R.id.et_email_dialog);
+        btn_reset_password_dialog = findViewById(R.id.dialog_rp_btn_confirm);
+        btn_back_dialog = findViewById(R.id.dialog_rp_btn_back);
+        et_email_dialog = findViewById(R.id.dialog_rp_et_email);
 
         auth = FirebaseAuth.getInstance();
 
-        et_email_login = findViewById(R.id.et_email_login);
-        et_password_login = findViewById(R.id.et_password_login);
-        btn_login1 = findViewById(R.id.btn_login1);
-        btn_sign_up = findViewById(R.id.btn_signUp);
-        iv_forgot_password = findViewById(R.id.iv_forgot_password);
-        tv_forgot_password = findViewById(R.id.tv_forgot_password);
+        et_email_login = findViewById(R.id.login_screen_et_email);
+        et_password_login = findViewById(R.id.login_screen_et_password);
+        btn_login1 = findViewById(R.id.login_screen_btn_login);
+        btn_sign_up = findViewById(R.id.login_screen_btn_sign_up);
+        iv_forgot_password = findViewById(R.id.login_screen_iv_forgot_password);
+        tv_forgot_password = findViewById(R.id.login_screen_tv_forgot_password);
 
         progressDialog = new ProgressDialog(this);
 
@@ -126,9 +120,9 @@ public class loginScreen extends AppCompatActivity{
         d.setContentView(R.layout.reset_password_dialog);
         d.setTitle("Reset Password");
         d.setCancelable(true);
-        et_email_dialog = d.findViewById(R.id.et_email_dialog);
-        btn_reset_password_dialog = d.findViewById(R.id.btn_reset_password_dialog);
-        btn_back_dialog = d.findViewById(R.id.btn_back_dialog);
+        et_email_dialog = d.findViewById(R.id.dialog_rp_et_email);
+        btn_reset_password_dialog = d.findViewById(R.id.dialog_rp_btn_confirm);
+        btn_back_dialog = d.findViewById(R.id.dialog_rp_btn_back);
         d.show();
 
         btn_back_dialog.setOnClickListener(new View.OnClickListener() {

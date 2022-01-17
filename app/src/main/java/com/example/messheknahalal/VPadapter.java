@@ -7,7 +7,6 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 
@@ -51,7 +50,7 @@ public class VPadapter extends RecyclerView.Adapter<VPadapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            picture = itemView.findViewById(R.id.iv_home_screen);
+            picture = itemView.findViewById(R.id.vp_home_iv_pic);
 
         }
     }

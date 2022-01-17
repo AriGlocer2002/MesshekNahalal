@@ -24,7 +24,7 @@
             app:srcCompat="@drawable/back1" />
 
         <ImageView
-            android:id="@+id/iv_home_screen"
+            android:id="@+id/vp_home_iv_pic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"

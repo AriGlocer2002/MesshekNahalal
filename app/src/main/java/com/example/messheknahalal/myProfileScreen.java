@@ -1,11 +1,10 @@
-package com.example.messheknahalal.User_screens;
+package com.example.messheknahalal;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,16 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 
-import com.example.messheknahalal.R;
-import com.example.messheknahalal.loginScreen;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.google.android.material.navigation.NavigationView;
 
-public class mainScreenUser extends AppCompatActivity {
+public class myProfileScreen extends AppCompatActivity {
 
-    BottomNavigationView bottomNav;
     DrawerLayout drawerMenu;
     NavigationView nav_view;
     Intent intent;
@@ -30,19 +25,13 @@ public class mainScreenUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_screen_user);
+        setContentView(R.layout.activity_my_profile);
 
-        //bottom navigation bar
-        bottomNav = findViewById(R.id.main_screen_user_bottomNav);
 
-        bottomNav.setOnItemSelectedListener(bottomNavMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_user_container, new HomeFragment()).commit();
+        drawerMenu = findViewById(R.id.my_profile_drawer_layout);
+        nav_view = findViewById(R.id.my_profile_nav_view);
 
-        //Navigation menu
-        drawerMenu = findViewById(R.id.main_screen_user_drawer_layout);
-        nav_view = findViewById(R.id.main_screen_user_nav_view);
-
-        Toolbar toolbar = findViewById(R.id.main_screen_user_toolbar);
+        Toolbar toolbar = findViewById(R.id.my_profile_toolbar);
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerMenu, toolbar,
@@ -57,8 +46,9 @@ public class mainScreenUser extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 switch (item.getItemId()){
-                    case R.id.myProfile_item:
-
+                    case R.id.home_item:
+                        intent = new Intent(myProfileScreen.this, mainScreenUser.class);
+                        startActivity(intent);
                         break;
 
                     case R.id.myOrders_item:
@@ -86,14 +76,13 @@ public class mainScreenUser extends AppCompatActivity {
                         break;
 
                     case R.id.logOut_item:
-                        intent = new Intent(mainScreenUser.this, loginScreen.class);
+                        intent = new Intent(myProfileScreen.this, loginScreen.class);
                         startActivity(intent);
                         break;
                 }
                 return false;
             }
         });
-
 
     }
 
@@ -109,28 +98,6 @@ public class mainScreenUser extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-    public BottomNavigationView.OnItemSelectedListener bottomNavMethod = new
-            BottomNavigationView.OnItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-                    Fragment fragment = null;
-
-                    switch (menuItem.getItemId()) {
-                        case R.id.home:
-                            fragment = new HomeFragment();
-                            break;
-
-                        case R.id.products:
-                            fragment = new ProductsFragment();
-                            break;
-                    }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_user_container, fragment).commit();
-                    return true;
-                }
-            };
-
     public void onBackPressed(){
         //if drawer is open close the drawer
         if(drawerMenu.isDrawerOpen(GravityCompat.START)){
@@ -144,18 +111,4 @@ public class mainScreenUser extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()){
-            case R.id.shopping:
-                Toast.makeText(this, "Shopping", Toast.LENGTH_SHORT).show();
-                return true;
-        }
-
-        return false;
-    }
 }
-
-
-

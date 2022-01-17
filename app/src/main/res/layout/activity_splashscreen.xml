@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/img_logo1"
+        android:id="@+id/splash_screen_iv_main_logo"
         android:layout_width="685dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="30dp"

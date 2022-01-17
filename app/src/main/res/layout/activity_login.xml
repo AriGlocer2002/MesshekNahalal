@@ -7,34 +7,34 @@
     android:background="@drawable/background_img">
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/login_screen_iv_b1"
         android:layout_width="375dp"
         android:layout_height="218dp"
-        android:layout_below="@id/imageView"
+        android:layout_below="@id/login_screen_iv_logo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="3dp"
         app:srcCompat="@drawable/back3" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/login_screen_iv_logo_background"
         android:layout_width="306dp"
         android:layout_height="47dp"
-        android:layout_below="@id/textView"
+        android:layout_below="@id/login_screen_title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         app:srcCompat="@drawable/back1" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/login_screen_iv_logo"
         android:layout_width="295dp"
         android:layout_height="55dp"
-        android:layout_below="@id/textView"
+        android:layout_below="@id/login_screen_title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         app:srcCompat="@drawable/logo2" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/login_screen_title"
         android:layout_width="197dp"
         android:layout_height="67dp"
         android:layout_centerHorizontal="true"
@@ -48,10 +48,10 @@
 
 
     <EditText
-        android:id="@+id/et_email_login"
+        android:id="@+id/login_screen_et_email"
         android:layout_width="286dp"
         android:layout_height="45dp"
-        android:layout_below="@id/imageView"
+        android:layout_below="@id/login_screen_iv_logo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:backgroundTint="#000000"
@@ -66,10 +66,10 @@
         android:textSize="20dp" />
 
     <EditText
-        android:id="@+id/et_password_login"
+        android:id="@+id/login_screen_et_password"
         android:layout_width="288dp"
         android:layout_height="45dp"
-        android:layout_below="@+id/et_email_login"
+        android:layout_below="@+id/login_screen_et_email"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:backgroundTint="#000000"
@@ -83,19 +83,19 @@
         android:textSize="20dp" />
 
     <ImageView
-        android:id="@+id/iv_forgot_password"
+        android:id="@+id/login_screen_iv_forgot_password"
         android:layout_width="170dp"
         android:layout_height="29dp"
-        android:layout_below="@id/et_password_login"
+        android:layout_below="@id/login_screen_et_password"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         app:srcCompat="@drawable/back2" />
 
     <TextView
-        android:id="@+id/tv_forgot_password"
+        android:id="@+id/login_screen_tv_forgot_password"
         android:layout_width="161dp"
         android:layout_height="28dp"
-        android:layout_below="@id/et_password_login"
+        android:layout_below="@id/login_screen_et_password"
         android:layout_marginLeft="35dp"
         android:layout_marginTop="10dp"
         android:text="Forgot your password?"
@@ -103,10 +103,10 @@
         android:textSize="15dp" />
 
     <Button
-        android:id="@+id/btn_login1"
+        android:id="@+id/login_screen_btn_login"
         android:layout_width="228dp"
         android:layout_height="53dp"
-        android:layout_below="@+id/iv_forgot_password"
+        android:layout_below="@+id/login_screen_iv_forgot_password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:backgroundTint="#59D674"
@@ -114,7 +114,7 @@
         android:textColor="@android:color/black" />
 
     <Button
-        android:id="@+id/btn_signUp"
+        android:id="@+id/login_screen_btn_sign_up"
         android:layout_width="104dp"
         android:layout_height="38dp"
         android:layout_alignParentEnd="true"
@@ -123,7 +123,6 @@
         android:background="@drawable/back1"
         android:text="Sign up"
         android:textColor="@android:color/black" />
-
 
 
 </RelativeLayout>
