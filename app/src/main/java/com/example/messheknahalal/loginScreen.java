@@ -6,11 +6,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,8 +79,7 @@ public class loginScreen extends AppCompatActivity{
                 } else {
                     progressDialog.setMessage("Login Please Wait...");
                     progressDialog.show();
-                    auth.signInWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(loginScreen.this, new OnCompleteListener<AuthResult>() {
+                    auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(loginScreen.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
@@ -137,8 +138,67 @@ public class loginScreen extends AppCompatActivity{
             }
         });
 
+        btn_confirm_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = et_email_dialog.getText().toString();
+                FirebaseAuth auth = FirebaseAuth.getInstance();
 
-        //usefull for myProfileScreen
+                if (email.isEmpty()) {
+                    Toast.makeText(loginScreen.this, "Please fill the field", Toast.LENGTH_SHORT).show();
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    Toast.makeText(loginScreen.this, "This email address is not valid", Toast.LENGTH_SHORT).show();
+                } else {
+                    auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(loginScreen.this, "Please verify your email inbox.\nWe have just sent you a message to reset your password." + email, Toast.LENGTH_SHORT).show();
+                                d.dismiss();
+                            } else {
+                                Toast.makeText(loginScreen.this, "Sorry, this email address is not linked to an account.\n Please try again.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+
+
+    private void checkPersonType(String email){
+        personRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot ds) {
+                //if exists the dataSnapshot
+                if(ds.exists()){
+                    for(DataSnapshot d: ds.getChildren()){
+                        Person p = d.getValue(Person.class);
+                        if(p.getEmail().equals(email)){
+                            String type = p.getType();
+                            if(type.equals("user")){
+                                intent = new Intent(getApplicationContext(), mainScreenUser.class);
+                            }else{
+                                //change later
+                                //intent = new Intent(getApplicationContext(), mainScreenAdmin.class);
+                            }
+                            startActivity(intent);
+                        }
+                    }
+                    //Toast.makeText(loginScreen.this, "checkPersonType: not found person", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError dbe) {
+                Log.d("ERROR", dbe.getMessage());
+            }
+        });
+    }
+
+
+    //usefull for myProfileScreen
 //
 //        btn_confirm_dialog.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -172,41 +232,5 @@ public class loginScreen extends AppCompatActivity{
 //            }
 //        });
 //    }
-    }
-
-    private void checkPersonType(String email){
-        personRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot ds) {
-                //if exists the dataSnapshot
-                if(ds.exists()){
-                    for(DataSnapshot d: ds.getChildren()){
-                        Person p = d.getValue(Person.class);
-                        if(p.getEmail().equals(email)){
-                            String type = p.getType();
-                            if(type.equals("user")){
-                                intent = new Intent(getApplicationContext(), mainScreenUser.class);
-                            }else{
-                                //change later
-                                //intent = new Intent(getApplicationContext(), mainScreenAdmin.class);
-                            }
-                            startActivity(intent);
-                        }
-                    }
-                    //Toast.makeText(loginScreen.this, "checkPersonType: not found person", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError dbe) {
-                Log.d("ERROR", dbe.getMessage());
-            }
-        });
-    }
-
-
-
-
-
 
 }

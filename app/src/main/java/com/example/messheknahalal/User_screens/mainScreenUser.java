@@ -3,8 +3,10 @@ package com.example.messheknahalal.User_screens;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,9 @@ import com.example.messheknahalal.loginScreen;
 import com.example.messheknahalal.myProfileScreen;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.EmailAuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class mainScreenUser extends AppCompatActivity {
 
@@ -27,6 +32,8 @@ public class mainScreenUser extends AppCompatActivity {
     DrawerLayout drawerMenu;
     NavigationView nav_view;
     Intent intent;
+    TextView nd_tv_name, nd_tv_email;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,15 @@ public class mainScreenUser extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_user_container, new HomeFragment()).commit();
 
         //Navigation menu
+        nd_tv_name = findViewById(R.id.header_nd_tv_name);
+        nd_tv_email = findViewById(R.id.header_nd_tv_email);
+
+        FirebaseUser user = auth.getCurrentUser();
+
+        String userEmail = user.getEmail();
+        Toast.makeText(mainScreenUser.this, userEmail, Toast.LENGTH_SHORT).show();
+
+
         drawerMenu = findViewById(R.id.main_screen_user_drawer_layout);
         nav_view = findViewById(R.id.main_screen_user_nav_view);
 
@@ -87,6 +103,7 @@ public class mainScreenUser extends AppCompatActivity {
                         break;
 
                     case R.id.logOut_item:
+                        FirebaseAuth.getInstance().signOut();
                         intent = new Intent(mainScreenUser.this, loginScreen.class);
                         startActivity(intent);
                         break;

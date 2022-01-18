@@ -15,17 +15,27 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class myProfileScreen extends AppCompatActivity{
 
     DrawerLayout drawerMenu;
     NavigationView nav_view;
     Intent intent;
+    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User");
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+
+        FirebaseUser user = auth.getCurrentUser();
+        String userEmail = user.getEmail();
+
 
 
         drawerMenu = findViewById(R.id.my_profile_drawer_layout);
@@ -76,6 +86,7 @@ public class myProfileScreen extends AppCompatActivity{
                         break;
 
                     case R.id.logOut_item:
+                        FirebaseAuth.getInstance().signOut();
                         intent = new Intent(myProfileScreen.this, loginScreen.class);
                         startActivity(intent);
                         break;
