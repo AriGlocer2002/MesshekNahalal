@@ -7,7 +7,7 @@
     android:id="@+id/my_profile_drawer_layout"
     android:background="@drawable/background_img"
     tools:context=".User_screens.HomeFragment"
-    tools:openDrawer="start">
+    tools:openDrawer="">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,10 +57,10 @@
                 android:textColor="@color/black"
                 android:textSize="45dp" />
 
-             <ImageView
+            <ImageView
                 android:id="@+id/my_profile_iv_b1"
-                android:layout_width="360dp"
-                android:layout_height="495dp"
+                android:layout_width="366dp"
+                android:layout_height="486dp"
                 android:layout_below="@+id/my_profile_tv_title"
                 android:layout_centerHorizontal="true"
                 app:srcCompat="@drawable/back5" />
@@ -92,10 +92,11 @@
                 android:layout_marginTop="18dp"
                 app:srcCompat="@drawable/profile_picture_frame" />
 
+
             <ImageView
                 android:id="@+id/my_profile_iv_b3"
-                android:layout_width="334dp"
-                android:layout_height="269dp"
+                android:layout_width="335dp"
+                android:layout_height="220dp"
                 android:layout_below="@+id/my_profile_iv_b2"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
@@ -109,11 +110,11 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:backgroundTint="#000000"
-                android:foregroundTint="#000000"
-                android:ems="10"
-                android:hint="Name"
                 android:drawableRight="@drawable/ic_profile"
                 android:drawableTint="@color/black"
+                android:ems="10"
+                android:foregroundTint="#000000"
+                android:hint=""
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
 
@@ -126,7 +127,7 @@
                 android:layout_marginTop="-5dp"
                 android:backgroundTint="#000000"
                 android:ems="10"
-                android:hint="Last Name"
+                android:hint=""
                 android:drawableRight="@drawable/ic_profile"
                 android:drawableTint="@color/black"
                 android:textColor="@color/black"
@@ -142,70 +143,71 @@
                 android:layout_marginTop="-5dp"
                 android:backgroundTint="#000000"
                 android:ems="10"
-                android:hint="Phone number"
+                android:hint=""
                 android:drawableRight="@drawable/ic_phone"
                 android:drawableTint="@color/black"
                 android:inputType="phone"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
 
-            <EditText
-                android:id="@+id/my_profile_et_email_address"
-                android:layout_width="316dp"
-                android:layout_height="47dp"
+            <ImageView
+                android:id="@+id/my_profile_iv_b4"
+                android:layout_width="325dp"
+                android:layout_height="66dp"
                 android:layout_below="@+id/my_profile_et_phone_number"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="-5dp"
+                android:layout_marginTop="9dp"
+                app:srcCompat="@drawable/back7" />
+
+            <TextView
+                android:id="@+id/my_profile_tv_no_change_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/my_profile_et_phone_number"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="You can't change your email address"
+                android:textColor="@color/black" />
+
+
+            <EditText
+                android:id="@+id/my_profile_et_email_address"
+                android:layout_width="323dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/my_profile_tv_no_change_pass"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
                 android:backgroundTint="#000000"
-                android:ems="10"
-                android:hint="E-mail address"
                 android:drawableRight="@drawable/ic_email"
                 android:drawableTint="@color/black"
+                android:ems="10"
+                android:hint=""
                 android:inputType="textEmailAddress"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
 
-            <EditText
-                android:id="@+id/my_profile_et_password"
-                android:layout_width="316dp"
-                android:layout_height="47dp"
-                android:layout_below="@+id/my_profile_et_email_address"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="-5dp"
-                android:backgroundTint="#000000"
-                android:ems="10"
-                android:hint="Password"
-                android:drawableRight="@drawable/ic_password"
-                android:drawableTint="@color/black"
-                android:inputType="textPassword"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black" />
-
-            <EditText
-                android:id="@+id/my_profile_et_confirm_password"
-                android:layout_width="316dp"
-                android:layout_height="47dp"
-                android:layout_below="@+id/my_profile_et_password"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="-5dp"
-                android:backgroundTint="#000000"
-                android:ems="10"
-                android:hint="Confirm password"
-                android:drawableRight="@drawable/ic_password"
-                android:drawableTint="@color/black"
-                android:inputType="textPassword"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black" />
 
             <Button
                 android:id="@+id/my_profile_btn_update"
                 android:layout_width="205dp"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@id/my_profile_iv_b3"
-                android:layout_marginTop="15dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
                 android:backgroundTint="#59D674"
                 android:text="Update"
+                android:textColor="@android:color/black"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/my_profile_btn_reset_pass"
+                android:layout_width="205dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/my_profile_btn_update"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="#FB3D3D"
+                android:text="Reset password"
                 android:textColor="@android:color/black"
                 app:strokeWidth="2dp" />
 

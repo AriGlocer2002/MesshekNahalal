@@ -31,12 +31,6 @@ public class User extends Person {
         this.last_login = last_login;
     }
 
-    public String getCurrentDate(){
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        String formattedDate = simpleDateFormat.format(c);
-        return formattedDate;
-    }
 
     @Override
     public String toString() {

@@ -100,7 +100,7 @@ public class signUpScreen extends AppCompatActivity {
                     showAlertDialog("Error", "This email address is not valid");
                 }
                 //check that the password has at least 8 characters
-                else if(password.length()<8){
+                else if(password.length()<6){
                     showAlertDialog("Error", "The password is too short!\nPlease choose a new password");
                 }
                 //check if the password and the confirmed password are the same
@@ -128,7 +128,6 @@ public class signUpScreen extends AppCompatActivity {
 
     }
 
-
     private void createPerson(String type, String email, String password){
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -139,9 +138,8 @@ public class signUpScreen extends AppCompatActivity {
                             } else {
                                 createUser();
                             }
-
                             snackBar("Account successfully created");
-                            Toast.makeText(signUpScreen.this, "Shopping 1", Toast.LENGTH_SHORT).show();
+                            //fix snack bar time delay
                             intent = new Intent(getApplicationContext(), loginScreen.class);
                             startActivity(intent);
                         } else {
@@ -172,8 +170,6 @@ public class signUpScreen extends AppCompatActivity {
         String phone = et_phone_number_signUp.getText().toString();
 
         User user = new User(name, last_name, email, phone, "user", "");
-        String date = user.getCurrentDate();
-        user.setLast_login(date);
         Person person = new Person(name, last_name, email, phone, "user");
         email = email.replace(".","-");
         userRef.child("User_"+email).setValue(user);

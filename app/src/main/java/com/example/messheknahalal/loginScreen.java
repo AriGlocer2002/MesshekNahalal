@@ -21,6 +21,7 @@ import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -98,7 +99,7 @@ public class loginScreen extends AppCompatActivity{
         iv_forgot_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createforgotPassDialog();
+                createForgotPassDialog();
             }
         });
 
@@ -112,7 +113,7 @@ public class loginScreen extends AppCompatActivity{
         });
     }
 
-    private void showAlertDialog(String title, String message){
+    public void showAlertDialog(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(loginScreen.this);
         builder.setTitle(title);
         builder.setPositiveButton("OK",null);
@@ -121,7 +122,7 @@ public class loginScreen extends AppCompatActivity{
         dialog.show();
     }
 
-    private void createforgotPassDialog() {
+    public void createForgotPassDialog() {
         d = new Dialog(this);
         d.setContentView(R.layout.reset_password_dialog);
         d.setTitle("Reset Password");
@@ -153,10 +154,10 @@ public class loginScreen extends AppCompatActivity{
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(loginScreen.this, "Please verify your email inbox.\nWe have just sent you a message to reset your password." + email, Toast.LENGTH_SHORT).show();
+                                snackBar("Please verify your email inbox to reset your password");
                                 d.dismiss();
                             } else {
-                                Toast.makeText(loginScreen.this, "Sorry, this email address is not linked to an account.\n Please try again.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(loginScreen.this, "Sorry, this email address is not linked to an account.\n Try again.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -166,8 +167,13 @@ public class loginScreen extends AppCompatActivity{
 
     }
 
+    public void snackBar(String message){
+        Snackbar snackbar = Snackbar
+                .make(findViewById(R.id.activity_login), message, Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
 
-    private void checkPersonType(String email){
+    public void checkPersonType(String email){
         personRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
@@ -196,41 +202,4 @@ public class loginScreen extends AppCompatActivity{
             }
         });
     }
-
-
-    //usefull for myProfileScreen
-//
-//        btn_confirm_dialog.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//                String emailNewPassword = et_email_dialog.getText().toString();
-//
-//                AuthCredential credential = EmailAuthProvider.getCredential("user@example.com", "password1234");
-//
-//                user.reauthenticate(credential)
-//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<Void> task) {
-//                                if (task.isSuccessful()) {
-//                                    int rndPassword = (new Random()).nextInt((99999999 - 10000000) + 1) + 10000000;
-//                                    user.updatePassword(rndPassword).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                        @Override
-//                                        public void onComplete(@NonNull Task<Void> task) {
-//                                            if (task.isSuccessful()) {
-//                                                Log.d("OK", "Password updated");
-//                                            } else {
-//                                                Log.d("ERROR", "Error password not updated");
-//                                            }
-//                                        }
-//                                    });
-//                                } else {
-//                                    Log.d("ERROR", "Error auth failed");
-//                                }
-//                            }
-//                        });
-//            }
-//        });
-//    }
-
 }
