@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class mainScreenUser extends AppCompatActivity {
     NavigationView nav_view;
     Intent intent;
     TextView nd_tv_name, nd_tv_email;
+    ImageView profile_img;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User");
     FirebaseFirestore fStore;
@@ -61,14 +63,16 @@ public class mainScreenUser extends AppCompatActivity {
         String date = getCurrentDate();
         userRef.child(userPath).child("last_login").setValue(date);
 
+
         //profile image
-        StorageReference profileRef = rStore.child("profiles/pp_"+userPath+".jpg");
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into();
-            }
-        });
+        profile_img = findViewById(R.id.header_nd_iv_pp);
+//        StorageReference profileRef = rStore.child("profiles/pp_"+userPath+".jpg");
+//        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                Picasso.get().load(uri).into(profile_img);
+//            }
+//        });
 
         //bottom navigation bar
         bottomNav = findViewById(R.id.main_screen_user_bottomNav);
