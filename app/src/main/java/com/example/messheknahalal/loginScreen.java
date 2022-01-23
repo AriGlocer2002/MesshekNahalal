@@ -169,7 +169,12 @@ public class loginScreen extends AppCompatActivity{
 
     public void snackBar(String message){
         Snackbar snackbar = Snackbar
-                .make(findViewById(R.id.activity_login), message, Snackbar.LENGTH_LONG);
+                .make(findViewById(R.id.activity_login), message, Snackbar.LENGTH_INDEFINITE)
+                .setAction("OK",new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                    }
+                });
         snackbar.show();
     }
 

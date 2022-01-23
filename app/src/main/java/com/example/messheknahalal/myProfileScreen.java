@@ -1,5 +1,6 @@
 package com.example.messheknahalal;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,7 +39,8 @@ public class myProfileScreen extends AppCompatActivity{
     DrawerLayout drawerMenu;
     NavigationView nav_view;
     Intent intent;
-    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User");
+    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User"),
+                      personRef = FirebaseDatabase.getInstance().getReference().child("Person");
     FirebaseAuth auth = FirebaseAuth.getInstance();
     Button btn_update_data, btn_reset_pass;
     EditText et_name, et_last_name, et_email, et_phone;
@@ -50,6 +52,8 @@ public class myProfileScreen extends AppCompatActivity{
 
         FirebaseUser user = auth.getCurrentUser();
         String userEmail = user.getEmail();
+        String userPath = "User_"+userEmail.replace(".","-");
+        String personPath = "Person_"+userEmail.replace(".","-");
 
         //show the data of the user
         showData(userEmail);
@@ -71,12 +75,41 @@ public class myProfileScreen extends AppCompatActivity{
             }
         });
 
-//        btn_update_data.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        et_phone = findViewById(R.id.my_profile_et_phone_number);
+        et_name = findViewById(R.id.my_profile_et_name);
+        et_last_name = findViewById(R.id.my_profile_et_last_name);
+
+        btn_update_data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //check fields
+                   if (et_name.getText().toString().isEmpty() ||
+                           et_last_name.getText().toString().isEmpty() ||
+                           et_phone.getText().toString().isEmpty()) {
+
+                        showAlertDialog("Empty fields", "Please finish to complete all the fields.");
+                    }else {
+                      String name = et_name.getText().toString();
+                      String last_name = et_last_name.getText().toString();
+                      String phone = et_phone.getText().toString();
+
+                      name = capitalizeString(name);
+                      last_name = capitalizeString(last_name);
+
+                      userRef.child(userPath).child("name").setValue(name);
+                      userRef.child(userPath).child("last_name").setValue(last_name);
+                      userRef.child(userPath).child("phone").setValue(phone);
+
+                      personRef.child(personPath).child("name").setValue(name);
+                      personRef.child(personPath).child("last_name").setValue(last_name);
+                      personRef.child(personPath).child("phone").setValue(phone);
+
+                      intent = new Intent(myProfileScreen.this, mainScreenUser.class);
+                      startActivity(intent);
+                   }
+            }
+        });
+
 
         drawerMenu = findViewById(R.id.my_profile_drawer_layout);
         nav_view = findViewById(R.id.my_profile_nav_view);
@@ -201,6 +234,29 @@ public class myProfileScreen extends AppCompatActivity{
                 Log.d("ERROR", dbe.getMessage());
             }
         });
+    }
+
+    private void showAlertDialog(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(myProfileScreen.this);
+        builder.setTitle(title);
+        builder.setPositiveButton("OK",null);
+        AlertDialog dialog = builder.create();
+        dialog.setMessage(message);
+        dialog.show();
+    }
+
+    public static String capitalizeString(String string) {
+        char[] chars = string.toLowerCase().toCharArray();
+        boolean found = false;
+        for (int i = 0; i < chars.length; i++) {
+            if (!found && Character.isLetter(chars[i])) {
+                chars[i] = Character.toUpperCase(chars[i]);
+                found = true;
+            } else if (Character.isWhitespace(chars[i]) || chars[i]=='.' || chars[i]=='\'') { // You can add other chars here
+                found = false;
+            }
+        }
+        return String.valueOf(chars);
     }
 
 }

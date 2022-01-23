@@ -23,7 +23,7 @@
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/profile_picture_frame"
         tools:layout_editor_absoluteX="90dp"
-        tools:layout_editor_absoluteY="26dp"/>
+        tools:layout_editor_absoluteY="26dp" />
 
     <TextView
         android:id="@+id/header_nd_tv_name"

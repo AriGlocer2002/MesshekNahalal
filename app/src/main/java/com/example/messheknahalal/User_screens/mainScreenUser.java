@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.loginScreen;
 import com.example.messheknahalal.myProfileScreen;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.EmailAuthCredential;
@@ -27,6 +28,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -41,6 +45,8 @@ public class mainScreenUser extends AppCompatActivity {
     TextView nd_tv_name, nd_tv_email;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User");
+    FirebaseFirestore fStore;
+    StorageReference rStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,15 @@ public class mainScreenUser extends AppCompatActivity {
         //reset last login date
         String date = getCurrentDate();
         userRef.child(userPath).child("last_login").setValue(date);
+
+        //profile image
+        StorageReference profileRef = rStore.child("profiles/pp_"+userPath+".jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into();
+            }
+        });
 
         //bottom navigation bar
         bottomNav = findViewById(R.id.main_screen_user_bottomNav);

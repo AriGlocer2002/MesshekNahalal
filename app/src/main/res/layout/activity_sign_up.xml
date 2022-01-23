@@ -177,6 +177,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="21dp"
+        android:clickable="true"
+        android:longClickable="false"
         app:srcCompat="@drawable/default_profile_picture" />
 
     <ImageView

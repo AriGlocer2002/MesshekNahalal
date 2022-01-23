@@ -1,8 +1,11 @@
 package com.example.messheknahalal;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -19,6 +22,8 @@ import com.example.messheknahalal.Objects.Admin;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.Objects.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
@@ -28,6 +33,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 public class signUpScreen extends AppCompatActivity {
 
@@ -37,6 +47,8 @@ public class signUpScreen extends AppCompatActivity {
     CheckBox cb_admin;
     ImageView iv_profile_pic;
     Intent intent;
+    FirebaseFirestore fStore;
+    StorageReference rStore;
     FirebaseAuth auth;
     DatabaseReference userRef, adminRef, personRef;
 
@@ -62,6 +74,23 @@ public class signUpScreen extends AppCompatActivity {
         btn_confirm = findViewById(R.id.sign_up_screen_btn_confirm);
         iv_profile_pic = findViewById(R.id.sign_up_screen_iv_pp);
         et_admin_code_signUp.setVisibility(View.INVISIBLE);
+
+        fStore = FirebaseFirestore.getInstance();
+        rStore = FirebaseStorage.getInstance().getReference();
+
+        iv_profile_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = et_email_address_signUp.getText().toString();
+                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    showAlertDialog("Error", "This email address is not valid and you can't save a profile picture");
+                }else {
+                    //open gallery
+                    Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(openGalleryIntent, 1000);
+                }
+            }
+        });
 
         cb_admin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,9 +168,6 @@ public class signUpScreen extends AppCompatActivity {
                                 createUser();
                             }
                             snackBar("Account successfully created");
-                            //fix snack bar time delay
-                            intent = new Intent(getApplicationContext(), loginScreen.class);
-                            startActivity(intent);
                         } else {
                             showAlertDialog("Error", "This email address is already linked to another account");
                         }
@@ -156,6 +182,9 @@ public class signUpScreen extends AppCompatActivity {
         String phone = et_phone_number_signUp.getText().toString();
         String code = et_admin_code_signUp.getText().toString();
 
+        name = capitalizeString(name);
+        last_name = capitalizeString(last_name);
+
         Admin admin = new Admin(name, last_name, email, phone, "admin", code);
         Person person = new Person(name, last_name, email, phone, "admin");
         email = email.replace(".","-");
@@ -169,6 +198,9 @@ public class signUpScreen extends AppCompatActivity {
         String email = et_email_address_signUp.getText().toString();
         String phone = et_phone_number_signUp.getText().toString();
 
+        name = capitalizeString(name);
+        last_name = capitalizeString(last_name);
+
         User user = new User(name, last_name, email, phone, "user", "");
         Person person = new Person(name, last_name, email, phone, "user");
         email = email.replace(".","-");
@@ -176,9 +208,53 @@ public class signUpScreen extends AppCompatActivity {
         personRef.child("Person_"+email).setValue(person);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode==1000) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri imageUri = data.getData();
+                //check size of img
+                uploadImageToFirebase(imageUri);
+            }
+        }
+    }
+
+    private void uploadImageToFirebase(Uri imageUri) {
+
+        String emailProfile = et_email_address_signUp.getText().toString().replace(".","-");
+
+        StorageReference fileRef = rStore.child("profiles/pp_"+emailProfile+".jpg");
+        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(iv_profile_pic);
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(signUpScreen.this, "FAILED!!!!", Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
     public void snackBar(String message){
         Snackbar snackbar = Snackbar
-                .make(findViewById(R.id.sign_up_screen), message, Snackbar.LENGTH_LONG);
+                .make(findViewById(R.id.sign_up_screen), message, Snackbar.LENGTH_INDEFINITE)
+        .setAction("Log In",new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(signUpScreen.this, loginScreen.class);
+                startActivity(intent);
+            }
+        });
         snackbar.show();
     }
 
@@ -208,5 +284,19 @@ public class signUpScreen extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.setMessage(message);
         dialog.show();
+    }
+
+    public static String capitalizeString(String string) {
+        char[] chars = string.toLowerCase().toCharArray();
+        boolean found = false;
+        for (int i = 0; i < chars.length; i++) {
+            if (!found && Character.isLetter(chars[i])) {
+                chars[i] = Character.toUpperCase(chars[i]);
+                found = true;
+            } else if (Character.isWhitespace(chars[i]) || chars[i]=='.' || chars[i]=='\'') { // You can add other chars here
+                found = false;
+            }
+        }
+        return String.valueOf(chars);
     }
 }
