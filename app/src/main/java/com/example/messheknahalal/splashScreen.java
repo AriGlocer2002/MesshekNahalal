@@ -9,7 +9,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.example.messheknahalal.Utils.DataBaseHelper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class splashScreen extends AppCompatActivity {
 
@@ -35,7 +39,10 @@ public class splashScreen extends AppCompatActivity {
         new Handler().postDelayed( new Runnable() {
             @Override
             public void run() {
-                intent = new Intent(splashScreen.this, loginScreen.class);
+                if(FirebaseAuth.getInstance().getCurrentUser() == null)
+                    intent = new Intent(splashScreen.this, loginScreen.class);
+                else
+                    intent = new Intent(splashScreen.this, mainScreenUser.class);
                 startActivity(intent);
                 finish();
             }

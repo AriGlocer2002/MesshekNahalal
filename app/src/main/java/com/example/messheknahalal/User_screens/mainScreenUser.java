@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.loginScreen;
 import com.example.messheknahalal.myProfileScreen;
@@ -30,8 +32,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -44,10 +49,9 @@ public class mainScreenUser extends AppCompatActivity {
     NavigationView nav_view;
     Intent intent;
     TextView nd_tv_name, nd_tv_email;
-    ImageView profile_img;
+    ImageView nv_profile_img;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User");
-    FirebaseFirestore fStore;
     StorageReference rStore;
 
     @Override
@@ -58,21 +62,31 @@ public class mainScreenUser extends AppCompatActivity {
         FirebaseUser user = auth.getCurrentUser();
         String userEmail = user.getEmail();
         String userPath = "User_"+userEmail.replace(".","-");
+        rStore = FirebaseStorage.getInstance().getReference();
 
         //reset last login date
         String date = getCurrentDate();
         userRef.child(userPath).child("last_login").setValue(date);
 
+        //setting profile information in the navigation drawer
+        NavigationView navigationView = findViewById(R.id.main_screen_user_nav_view);
+        View headerView = navigationView.getHeaderView(0);
+
+        TextView navUserName = headerView.findViewById(R.id.header_nd_tv_name);
+        TextView email = headerView.findViewById(R.id.header_nd_tv_email);
+        email.setText(user.getEmail());
 
         //profile image
-        profile_img = findViewById(R.id.header_nd_iv_pp);
-//        StorageReference profileRef = rStore.child("profiles/pp_"+userPath+".jpg");
-//        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                Picasso.get().load(uri).into(profile_img);
-//            }
-//        });
+        nv_profile_img = headerView.findViewById(R.id.header_nd_iv_pp);
+        StorageReference profileRef = rStore.child("profiles/pp_"+userEmail.replace(".","-")+".jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(mainScreenUser.this).load(uri).centerCrop().into(nv_profile_img);
+            }
+        });
+
+
 
         //bottom navigation bar
         bottomNav = findViewById(R.id.main_screen_user_bottomNav);
@@ -84,7 +98,6 @@ public class mainScreenUser extends AppCompatActivity {
         nd_tv_name = findViewById(R.id.header_nd_tv_name);
         nd_tv_email = findViewById(R.id.header_nd_tv_email);
 
-        Toast.makeText(mainScreenUser.this, userEmail, Toast.LENGTH_SHORT).show();
 
 
         drawerMenu = findViewById(R.id.main_screen_user_drawer_layout);

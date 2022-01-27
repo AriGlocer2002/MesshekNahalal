@@ -1,15 +1,22 @@
 package com.example.messheknahalal;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,10 +26,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.Objects.User;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -33,17 +43,24 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class myProfileScreen extends AppCompatActivity{
 
-    DrawerLayout drawerMenu;
-    NavigationView nav_view;
+
     Intent intent;
+    StorageReference rStore;
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User"),
                       personRef = FirebaseDatabase.getInstance().getReference().child("Person");
     FirebaseAuth auth = FirebaseAuth.getInstance();
+    ImageView nv_profile_img, screen_profile_img;
+    DrawerLayout drawerMenu;
+    NavigationView nav_view;
     Button btn_update_data, btn_reset_pass;
     EditText et_name, et_last_name, et_email, et_phone;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +71,45 @@ public class myProfileScreen extends AppCompatActivity{
         String userEmail = user.getEmail();
         String userPath = "User_"+userEmail.replace(".","-");
         String personPath = "Person_"+userEmail.replace(".","-");
+        rStore = FirebaseStorage.getInstance().getReference();
+
+        //setting profile information in the navigation drawer
+        NavigationView navigationView = findViewById(R.id.my_profile_nav_view);
+        View headerView = navigationView.getHeaderView(0);
+
+        TextView navUserName = headerView.findViewById(R.id.header_nd_tv_name);
+        TextView email = headerView.findViewById(R.id.header_nd_tv_email);
+        email.setText(user.getEmail());
+
+        //setting profile image in the navigation drawer
+        nv_profile_img = headerView.findViewById(R.id.header_nd_iv_pp);
+        StorageReference profileRef = rStore.child("profiles/pp_"+userEmail.replace(".","-")+".jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(myProfileScreen.this).load(uri).centerCrop().into(nv_profile_img);
+            }
+        });
+
+
+        //setting profile image in the screen
+        screen_profile_img = findViewById(R.id.my_profile_iv_pp);
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(myProfileScreen.this).load(uri).centerCrop().into(screen_profile_img);
+            }
+        });
+
+        //changing profile picture
+        screen_profile_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    //open gallery
+                    Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(openGalleryIntent, 1000);
+            }
+        });
 
         //show the data of the user
         showData(userEmail);
@@ -168,6 +224,45 @@ public class myProfileScreen extends AppCompatActivity{
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode==1000) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri imageUri = data.getData();
+                //check size of img
+                uploadImageToFirebase(imageUri);
+
+            }
+        }
+    }
+
+    private void uploadImageToFirebase(Uri imageUri) {
+
+        String emailProfile = et_email.getText().toString().replace(".","-");
+
+        StorageReference fileRef = rStore.child("profiles/pp_"+emailProfile+".jpg");
+        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(getApplicationContext()).load(uri).centerCrop().into(screen_profile_img);
+                        Glide.with(getApplicationContext()).load(uri).centerCrop().into(nv_profile_img);
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(myProfileScreen.this, "FAILED!!!!", Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
     public void sendEmail(String recipientsList, String subject, String text){

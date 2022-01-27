@@ -79,8 +79,9 @@
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_below="@+id/my_profile_tv_title"
-                android:layout_marginTop="19dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="19dp"
+                android:clickable="true"
                 app:srcCompat="@drawable/default_profile_picture" />
 
             <ImageView

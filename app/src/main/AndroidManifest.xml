@@ -13,23 +13,28 @@
 
         <activity
             android:name=".myProfileScreen"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".signUpScreen"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".User_screens.mainScreenUser"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".loginScreen"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".splashScreen"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

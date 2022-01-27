@@ -38,7 +38,7 @@ import java.util.Random;
 public class loginScreen extends AppCompatActivity{
 
     EditText et_email_login, et_password_login, et_email_dialog;
-    Button btn_login1, btn_sign_up, btn_confirm_dialog, btn_back_dialog;
+    Button btn_login, btn_sign_up, btn_confirm_dialog, btn_back_dialog;
     Intent intent;
     ImageView iv_forgot_password;
     TextView tv_forgot_password;
@@ -62,14 +62,14 @@ public class loginScreen extends AppCompatActivity{
 
         et_email_login = findViewById(R.id.login_screen_et_email);
         et_password_login = findViewById(R.id.login_screen_et_password);
-        btn_login1 = findViewById(R.id.login_screen_btn_login);
+        btn_login = findViewById(R.id.login_screen_btn_login);
         btn_sign_up = findViewById(R.id.login_screen_btn_sign_up);
         iv_forgot_password = findViewById(R.id.login_screen_iv_forgot_password);
         tv_forgot_password = findViewById(R.id.login_screen_tv_forgot_password);
 
         progressDialog = new ProgressDialog(this);
 
-        btn_login1.setOnClickListener(new View.OnClickListener() {
+        btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = et_email_login.getText().toString();

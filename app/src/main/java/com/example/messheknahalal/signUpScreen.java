@@ -2,6 +2,7 @@ package com.example.messheknahalal;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,9 +19,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.Admin;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.Objects.User;
+import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -75,19 +78,40 @@ public class signUpScreen extends AppCompatActivity {
         iv_profile_pic = findViewById(R.id.sign_up_screen_iv_pp);
         et_admin_code_signUp.setVisibility(View.INVISIBLE);
 
+
         fStore = FirebaseFirestore.getInstance();
         rStore = FirebaseStorage.getInstance().getReference();
 
+        //to pick a profile picture
         iv_profile_pic.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick (View view) {
+                //the email is not linked to any account
                 String email = et_email_address_signUp.getText().toString();
-                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                if(email.isEmpty()){
+                    showAlertDialog("Error", "You can't pick a profile picture without an email");
+                }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     showAlertDialog("Error", "This email address is not valid and you can't save a profile picture");
-                }else {
-                    //open gallery
-                    Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(openGalleryIntent, 1000);
+                } else {
+                    String emailPath = "Person_"+email.replace(".", "-");
+                    personRef.child(emailPath).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot ds) {
+                            //if exists the dataSnapshot
+                            if (ds.exists()) {
+                                showAlertDialog("Error", "This email is already linked to another account\nIf you want to set a profile picture to it you can do it from the 'My Profile' screen");
+                            } else {
+                                //open gallery
+                                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                startActivityForResult(openGalleryIntent, 1000);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError dbe) {
+                            Log.d("ERROR", dbe.getMessage());
+                        }
+                    });
                 }
             }
         });
@@ -154,7 +178,6 @@ public class signUpScreen extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void createPerson(String type, String email, String password){
@@ -214,8 +237,10 @@ public class signUpScreen extends AppCompatActivity {
         if (requestCode==1000) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri imageUri = data.getData();
+
                 //check size of img
                 uploadImageToFirebase(imageUri);
+
             }
         }
     }
@@ -232,7 +257,7 @@ public class signUpScreen extends AppCompatActivity {
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Picasso.get().load(uri).into(iv_profile_pic);
+                        Glide.with(getApplicationContext()).load(uri).centerCrop().into(iv_profile_pic);
                     }
                 });
             }
@@ -248,17 +273,17 @@ public class signUpScreen extends AppCompatActivity {
     public void snackBar(String message){
         Snackbar snackbar = Snackbar
                 .make(findViewById(R.id.sign_up_screen), message, Snackbar.LENGTH_INDEFINITE)
-        .setAction("Log In",new View.OnClickListener(){
+        .setAction("Continue",new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                intent = new Intent(signUpScreen.this, loginScreen.class);
+                intent = new Intent(signUpScreen.this, mainScreenUser.class);
                 startActivity(intent);
             }
         });
         snackbar.show();
     }
 
-    public boolean emptyET() {
+    private boolean emptyET() {
         String name = et_name_signUp.getText().toString();
         String last_name = et_last_name_signUp.getText().toString();
         String email = et_email_address_signUp.getText().toString();
