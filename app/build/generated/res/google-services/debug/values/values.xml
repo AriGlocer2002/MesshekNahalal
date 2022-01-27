@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">207809977898-qof01sgll16cv0ddmoguu0q1gi3ff227.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">207809977898</string>
+    <string name="google_api_key" translatable="false">AIzaSyCWfavYJXMiPFYcK2Wvve1myQVyQgx42jM</string>
+    <string name="google_app_id" translatable="false">1:207809977898:android:16474cb5206e9162c96d53</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCWfavYJXMiPFYcK2Wvve1myQVyQgx42jM</string>
+    <string name="google_storage_bucket" translatable="false">messheknahalalproject.appspot.com</string>
+    <string name="project_id" translatable="false">messheknahalalproject</string>
+</resources>
