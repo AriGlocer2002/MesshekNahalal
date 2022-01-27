@@ -2,6 +2,7 @@ package com.example.messheknahalal;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +46,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -82,22 +85,15 @@ public class myProfileScreen extends AppCompatActivity{
         email.setText(user.getEmail());
 
         //setting profile image in the navigation drawer
+        //setting profile image in the screen
+        screen_profile_img = findViewById(R.id.my_profile_iv_pp);
         nv_profile_img = headerView.findViewById(R.id.header_nd_iv_pp);
         StorageReference profileRef = rStore.child("profiles/pp_"+userEmail.replace(".","-")+".jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Glide.with(myProfileScreen.this).load(uri).centerCrop().into(nv_profile_img);
-            }
-        });
-
-
-        //setting profile image in the screen
-        screen_profile_img = findViewById(R.id.my_profile_iv_pp);
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
                 Glide.with(myProfileScreen.this).load(uri).centerCrop().into(screen_profile_img);
+                Glide.with(myProfileScreen.this).load(uri).centerCrop().into(nv_profile_img);
             }
         });
 
@@ -240,8 +236,11 @@ public class myProfileScreen extends AppCompatActivity{
     }
 
     private void uploadImageToFirebase(Uri imageUri) {
-
         String emailProfile = et_email.getText().toString().replace(".","-");
+
+        Dialog d = new Dialog(this);
+        d.setContentView(R.layout.loading_dialog);
+        d.show();
 
         StorageReference fileRef = rStore.child("profiles/pp_"+emailProfile+".jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -253,8 +252,19 @@ public class myProfileScreen extends AppCompatActivity{
                     public void onSuccess(Uri uri) {
                         Glide.with(getApplicationContext()).load(uri).centerCrop().into(screen_profile_img);
                         Glide.with(getApplicationContext()).load(uri).centerCrop().into(nv_profile_img);
+                        d.dismiss();
                     }
                 });
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                double progress=(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
+
+                ProgressBar progressBar = d.findViewById(R.id.progressBar_loading_dialog);
+                TextView textViewProgress = d.findViewById(R.id.textPercent_loading_dialog);
+                progressBar.setProgress((int)progress);
+                textViewProgress.setText(progress+"%");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -264,6 +274,7 @@ public class myProfileScreen extends AppCompatActivity{
             }
         });
     }
+
 
     public void sendEmail(String recipientsList, String subject, String text){
         String[] recipients = recipientsList.split(",");

@@ -2,6 +2,7 @@ package com.example.messheknahalal;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +15,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +41,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
@@ -180,6 +184,7 @@ public class signUpScreen extends AppCompatActivity {
         });
     }
 
+
     private void createPerson(String type, String email, String password){
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -237,7 +242,6 @@ public class signUpScreen extends AppCompatActivity {
         if (requestCode==1000) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri imageUri = data.getData();
-
                 //check size of img
                 uploadImageToFirebase(imageUri);
 
@@ -249,6 +253,10 @@ public class signUpScreen extends AppCompatActivity {
 
         String emailProfile = et_email_address_signUp.getText().toString().replace(".","-");
 
+        Dialog d = new Dialog(this);
+        d.setContentView(R.layout.loading_dialog);
+        d.show();
+
         StorageReference fileRef = rStore.child("profiles/pp_"+emailProfile+".jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -258,8 +266,19 @@ public class signUpScreen extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         Glide.with(getApplicationContext()).load(uri).centerCrop().into(iv_profile_pic);
+                        d.dismiss();
                     }
                 });
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                double progress=(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
+
+                ProgressBar progressBar = d.findViewById(R.id.progressBar_loading_dialog);
+                TextView textViewProgress = d.findViewById(R.id.textPercent_loading_dialog);
+                progressBar.setProgress((int)progress);
+                textViewProgress.setText(progress+"%");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
