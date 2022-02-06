@@ -12,7 +12,17 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <activity
-            android:name=".myProfileScreen"
+            android:name=".Admin_screens.mainScreenAdmin"
+            android:exported="false"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".Admin_screens.MyProfileScreenAdmin"
+            android:exported="false"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".User_screens.MyProfileScreenUser"
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>

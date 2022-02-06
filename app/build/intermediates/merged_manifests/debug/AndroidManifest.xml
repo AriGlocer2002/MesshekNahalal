@@ -27,7 +27,17 @@
         android:testOnly="true"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
         <activity
-            android:name="com.example.messheknahalal.myProfileScreen"
+            android:name="com.example.messheknahalal.Admin_screens.mainScreenAdmin"
+            android:exported="false"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.messheknahalal.Admin_screens.MyProfileScreenAdmin"
+            android:exported="false"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.messheknahalal.User_screens.MyProfileScreenUser"
             android:exported="false"
             android:screenOrientation="portrait" >
         </activity>

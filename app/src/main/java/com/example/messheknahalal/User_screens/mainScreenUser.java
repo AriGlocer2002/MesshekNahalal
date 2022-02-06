@@ -3,7 +3,7 @@ package com.example.messheknahalal.User_screens;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,23 +20,21 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.loginScreen;
-import com.example.messheknahalal.myProfileScreen;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -51,7 +49,8 @@ public class mainScreenUser extends AppCompatActivity {
     TextView nd_tv_name, nd_tv_email;
     ImageView nv_profile_img;
     FirebaseAuth auth = FirebaseAuth.getInstance();
-    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User");
+    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User"),
+                      personRef = FirebaseDatabase.getInstance().getReference().child("Person");
     StorageReference rStore;
 
     @Override
@@ -62,6 +61,7 @@ public class mainScreenUser extends AppCompatActivity {
         FirebaseUser user = auth.getCurrentUser();
         String userEmail = user.getEmail();
         String userPath = "User_"+userEmail.replace(".","-");
+        String personPath = "Person_"+userEmail.replace(".","-");
         rStore = FirebaseStorage.getInstance().getReference();
 
         //reset last login date
@@ -72,7 +72,8 @@ public class mainScreenUser extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.main_screen_user_nav_view);
         View headerView = navigationView.getHeaderView(0);
 
-        TextView navUserName = headerView.findViewById(R.id.header_nd_tv_name);
+        loadDrawerNameAndLastName(personPath);
+
         TextView email = headerView.findViewById(R.id.header_nd_tv_email);
         email.setText(user.getEmail());
 
@@ -86,19 +87,15 @@ public class mainScreenUser extends AppCompatActivity {
             }
         });
 
-
-
         //bottom navigation bar
         bottomNav = findViewById(R.id.main_screen_user_bottomNav);
 
         bottomNav.setOnItemSelectedListener(bottomNavMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_user_container, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_user_container, new HomeFragmentUser()).commit();
 
         //Navigation menu
         nd_tv_name = findViewById(R.id.header_nd_tv_name);
         nd_tv_email = findViewById(R.id.header_nd_tv_email);
-
-
 
         drawerMenu = findViewById(R.id.main_screen_user_drawer_layout);
         nav_view = findViewById(R.id.main_screen_user_nav_view);
@@ -118,7 +115,7 @@ public class mainScreenUser extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.myProfile_item:
-                        intent = new Intent(mainScreenUser.this, myProfileScreen.class);
+                        intent = new Intent(mainScreenUser.this, MyProfileScreenUser.class);
                         startActivity(intent);
                         break;
 
@@ -156,7 +153,29 @@ public class mainScreenUser extends AppCompatActivity {
             }
         });
 
+    }
 
+    public void loadDrawerNameAndLastName(String path){
+        personRef.child(path).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Person p= snapshot.getValue(Person.class);
+                String name = p.getName();
+                String last_name = p.getLast_name();
+                String fullName = name+" "+last_name;
+
+                NavigationView navigationView = findViewById(R.id.main_screen_user_nav_view);
+                View headerView = navigationView.getHeaderView(0);
+
+                TextView navUserName = headerView.findViewById(R.id.header_nd_tv_name);
+                navUserName.setText(fullName);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError dbe) {
+                Log.d("ERROR", dbe.getMessage());
+            }
+        });
     }
 
     public void sendEmail(String recipientsList, String subject, String text){
@@ -180,11 +199,11 @@ public class mainScreenUser extends AppCompatActivity {
 
                     switch (menuItem.getItemId()) {
                         case R.id.home:
-                            fragment = new HomeFragment();
+                            fragment = new HomeFragmentUser();
                             break;
 
                         case R.id.products:
-                            fragment = new ProductsFragment();
+                            fragment = new ProductsFragmentUser();
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_user_container, fragment).commit();

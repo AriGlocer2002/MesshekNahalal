@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_home_user_relative_layout"
+    android:background="@drawable/background_img"
+    tools:context=".User_screens.HomeFragmentUser">
+
+
+            <ImageView
+                android:id="@+id/fragment_home_user_iv_logo_background"
+                android:layout_width="306dp"
+                android:layout_height="47dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/back1" />
+
+            <ImageView
+                android:id="@+id/fragment_home_user_iv_logo"
+                android:layout_width="295dp"
+                android:layout_height="55dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/logo2" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/fragment_home_user_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@+id/fragment_home_user_iv_logo"
+                android:layout_marginHorizontal="0dp"/>
+
+            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                android:id="@+id/fragment_home_user_dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fragment_home_user_viewPager"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                app:dotsColor="@color/white"/>
+
+            <ImageView
+                android:id="@+id/fragment_home_user_iv_b1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/fragment_home_user_dots"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="35dp"
+                android:layout_marginBottom="85dp"
+                android:src="@drawable/back4" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/fragment_home_user_dots"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginBottom="105dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:scrollbars="vertical"
+                    android:text="@string/fragment_home_string"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+            </ScrollView>
+
+</RelativeLayout>

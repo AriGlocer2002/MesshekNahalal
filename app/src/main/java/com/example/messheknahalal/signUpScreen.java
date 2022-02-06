@@ -27,6 +27,7 @@ import com.example.messheknahalal.Objects.Admin;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.Objects.User;
 import com.example.messheknahalal.User_screens.mainScreenUser;
+import com.example.messheknahalal.Utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -58,6 +59,8 @@ public class signUpScreen extends AppCompatActivity {
     StorageReference rStore;
     FirebaseAuth auth;
     DatabaseReference userRef, adminRef, personRef;
+
+    boolean confiramtion = true;   //todo - turns to true if user enter a code that sent to phone when register, otherwise cannot upload a pic
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,9 +96,9 @@ public class signUpScreen extends AppCompatActivity {
                 //the email is not linked to any account
                 String email = et_email_address_signUp.getText().toString();
                 if(email.isEmpty()){
-                    showAlertDialog("Error", "You can't pick a profile picture without an email");
+                    Utils.showAlertDialog("Error", "You can't pick a profile picture without an email", signUpScreen.this);
                 }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    showAlertDialog("Error", "This email address is not valid and you can't save a profile picture");
+                    Utils.showAlertDialog("Error", "This email address is not valid and you can't save a profile picture", signUpScreen.this);
                 } else {
                     String emailPath = "Person_"+email.replace(".", "-");
                     personRef.child(emailPath).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -103,7 +106,7 @@ public class signUpScreen extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot ds) {
                             //if exists the dataSnapshot
                             if (ds.exists()) {
-                                showAlertDialog("Error", "This email is already linked to another account\nIf you want to set a profile picture to it you can do it from the 'My Profile' screen");
+                                Utils.showAlertDialog("Error", "This email is already linked to another account\nIf you want to set a profile picture to it you can do it from the 'My Profile' screen", signUpScreen.this);
                             } else {
                                 //open gallery
                                 Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -150,24 +153,24 @@ public class signUpScreen extends AppCompatActivity {
 
                 //checking if the all the fields are filled with information
                 if (emptyET()) {
-                    showAlertDialog("Empty fields", "Please finish to complete all the fields.");
+                    Utils.showAlertDialog("Empty fields", "Please finish to complete all the fields.", signUpScreen.this);
                 }
                 //validate email address
                 else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    showAlertDialog("Error", "This email address is not valid");
+                    Utils.showAlertDialog("Error", "This email address is not valid", signUpScreen.this);
                 }
                 //check that the password has at least 8 characters
                 else if(password.length()<6){
-                    showAlertDialog("Error", "The password is too short!\nPlease choose a new password");
+                    Utils.showAlertDialog("Error", "The password is too short!\nPlease choose a new password", signUpScreen.this);
                 }
                 //check if the password and the confirmed password are the same
                 else if (!password.equals(confirm_password)) {
-                    showAlertDialog("Error", "The passwords are different");
+                    Utils.showAlertDialog("Error", "The passwords are different", signUpScreen.this);
                 }
                 //check if the admin code is the same that in the db
                 else if(cb_admin.isChecked() && !code.equals("12345")){
                     //the admin code is 12345
-                    showAlertDialog("Error", "The admin code is not valid");
+                    Utils.showAlertDialog("Error", "The admin code is not valid", signUpScreen.this);
                 }
                 //create a new person in the db
                 else {
@@ -197,7 +200,7 @@ public class signUpScreen extends AppCompatActivity {
                             }
                             snackBar("Account successfully created");
                         } else {
-                            showAlertDialog("Error", "This email address is already linked to another account");
+                            Utils.showAlertDialog("Error", "This email address is already linked to another account", signUpScreen.this);
                         }
                     }
                 });
@@ -210,8 +213,8 @@ public class signUpScreen extends AppCompatActivity {
         String phone = et_phone_number_signUp.getText().toString();
         String code = et_admin_code_signUp.getText().toString();
 
-        name = capitalizeString(name);
-        last_name = capitalizeString(last_name);
+        name = Utils.capitalizeString(name);
+        last_name = Utils.capitalizeString(last_name);
 
         Admin admin = new Admin(name, last_name, email, phone, "admin", code);
         Person person = new Person(name, last_name, email, phone, "admin");
@@ -226,8 +229,8 @@ public class signUpScreen extends AppCompatActivity {
         String email = et_email_address_signUp.getText().toString();
         String phone = et_phone_number_signUp.getText().toString();
 
-        name = capitalizeString(name);
-        last_name = capitalizeString(last_name);
+        name = Utils.capitalizeString(name);
+        last_name = Utils.capitalizeString(last_name);
 
         User user = new User(name, last_name, email, phone, "user", "");
         Person person = new Person(name, last_name, email, phone, "user");
@@ -243,7 +246,11 @@ public class signUpScreen extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 Uri imageUri = data.getData();
                 //check size of img
-                uploadImageToFirebase(imageUri);
+                //todo - turns to true if user enter a code that sent to phone when register, otherwise cannot upload a pic
+                if (confiramtion) {
+                    uploadImageToFirebase(imageUri);
+                } else {
+                }
 
             }
         }
@@ -321,26 +328,4 @@ public class signUpScreen extends AppCompatActivity {
                 || phone.isEmpty() || admin_code.isEmpty();
     }
 
-    private void showAlertDialog(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(signUpScreen.this);
-        builder.setTitle(title);
-        builder.setPositiveButton("OK",null);
-        AlertDialog dialog = builder.create();
-        dialog.setMessage(message);
-        dialog.show();
-    }
-
-    public static String capitalizeString(String string) {
-        char[] chars = string.toLowerCase().toCharArray();
-        boolean found = false;
-        for (int i = 0; i < chars.length; i++) {
-            if (!found && Character.isLetter(chars[i])) {
-                chars[i] = Character.toUpperCase(chars[i]);
-                found = true;
-            } else if (Character.isWhitespace(chars[i]) || chars[i]=='.' || chars[i]=='\'') { // You can add other chars here
-                found = false;
-            }
-        }
-        return String.valueOf(chars);
-    }
 }

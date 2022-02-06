@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -45,7 +46,7 @@ public class loginScreen extends AppCompatActivity{
     ProgressDialog progressDialog;
     Dialog d;
 
-    FirebaseAuth auth;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
     DatabaseReference personRef = FirebaseDatabase.getInstance().getReference().child("Person");
 
 
@@ -57,8 +58,6 @@ public class loginScreen extends AppCompatActivity{
         btn_confirm_dialog = findViewById(R.id.dialog_rp_btn_confirm);
         btn_back_dialog = findViewById(R.id.dialog_rp_btn_back);
         et_email_dialog = findViewById(R.id.dialog_rp_et_email);
-
-        auth = FirebaseAuth.getInstance();
 
         et_email_login = findViewById(R.id.login_screen_et_email);
         et_password_login = findViewById(R.id.login_screen_et_password);
@@ -179,25 +178,21 @@ public class loginScreen extends AppCompatActivity{
     }
 
     public void checkPersonType(String email){
-        personRef.addValueEventListener(new ValueEventListener() {
+        String personPath = "Person_"+email.replace(".","-");
+        personRef.child(personPath).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
                 //if exists the dataSnapshot
                 if(ds.exists()){
-                    for(DataSnapshot d: ds.getChildren()){
-                        Person p = d.getValue(Person.class);
-                        if(p.getEmail().equals(email)){
-                            String type = p.getType();
-                            if(type.equals("user")){
-                                intent = new Intent(getApplicationContext(), mainScreenUser.class);
-                            }else{
-                                //change later
-                                //intent = new Intent(getApplicationContext(), mainScreenAdmin.class);
-                            }
-                            startActivity(intent);
-                        }
+                    String type = ds.getValue(Person.class).getType().toString();
+                    if(type.equals("user")){
+                        intent = new Intent(getApplicationContext(), mainScreenUser.class);
+                    }else{
+                        intent = new Intent(getApplicationContext(), mainScreenAdmin.class);
                     }
-                    //Toast.makeText(loginScreen.this, "checkPersonType: not found person", Toast.LENGTH_LONG).show();
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(loginScreen.this, "checkPersonType: not found person", Toast.LENGTH_LONG).show();
                 }
             }
 
