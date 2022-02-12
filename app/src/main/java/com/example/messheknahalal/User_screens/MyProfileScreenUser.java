@@ -145,8 +145,8 @@ public class MyProfileScreenUser extends AppCompatActivity{
                     String last_name = et_last_name.getText().toString();
                     String phone = et_phone.getText().toString();
 
-                    name = capitalizeString(name);
-                    last_name = capitalizeString(last_name);
+                    name = Utils.capitalizeString(name);
+                    last_name = Utils.capitalizeString(last_name);
 
                     userRef.child(userPath).child("name").setValue(name);
                     userRef.child(userPath).child("last_name").setValue(last_name);
@@ -306,32 +306,64 @@ public class MyProfileScreenUser extends AppCompatActivity{
         snackbar.show();
     }
 
+//    public void showData(String email){
+//        et_email = findViewById(R.id.my_profile_user_et_email_address);
+//        et_phone = findViewById(R.id.my_profile_user_et_phone_number);
+//        et_name = findViewById(R.id.my_profile_user_et_name);
+//        et_last_name = findViewById(R.id.my_profile_user_et_last_name);
+//
+//        userRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot ds) {
+//                //if exists the dataSnapshot
+//                if(ds.exists()){
+//                    for(DataSnapshot d: ds.getChildren()){
+//                        User user = d.getValue(User.class);
+//                        if(user.getEmail().equals(email)){
+//                            String name = user.getName();
+//                            String last_name = user.getLast_name();
+//                            String phone = user.getPhone();
+//
+//                            et_name.setText(name);
+//                            et_last_name.setText(last_name);
+//                            et_phone.setText(phone);
+//                            et_email.setText(email);
+//                            et_email.setEnabled(false);
+//                        }
+//                    }
+//                    //Toast.makeText(loginScreen.this, "checkPersonType: not found person", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError dbe) {
+//                Log.d("ERROR", dbe.getMessage());
+//            }
+//        });
+//    }
+
     public void showData(String email){
         et_email = findViewById(R.id.my_profile_user_et_email_address);
         et_phone = findViewById(R.id.my_profile_user_et_phone_number);
         et_name = findViewById(R.id.my_profile_user_et_name);
         et_last_name = findViewById(R.id.my_profile_user_et_last_name);
+        String personPath = "Person_"+email.replace(".","-");
 
-        userRef.addValueEventListener(new ValueEventListener() {
+        personRef.child(personPath).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
                 //if exists the dataSnapshot
-                if(ds.exists()){
-                    for(DataSnapshot d: ds.getChildren()){
-                        User user = d.getValue(User.class);
-                        if(user.getEmail().equals(email)){
-                            String name = user.getName();
-                            String last_name = user.getLast_name();
-                            String phone = user.getPhone();
+                if (ds.exists()) {
+                    Person p = ds.getValue(Person.class);
+                    String name = p.getName();
+                    String last_name = p.getLast_name();
+                    String phone = p.getPhone();
 
-                            et_name.setText(name);
-                            et_last_name.setText(last_name);
-                            et_phone.setText(phone);
-                            et_email.setText(email);
-                            et_email.setEnabled(false);
-                        }
-                    }
-                    //Toast.makeText(loginScreen.this, "checkPersonType: not found person", Toast.LENGTH_LONG).show();
+                    et_name.setText(name);
+                    et_last_name.setText(last_name);
+                    et_phone.setText(phone);
+                    et_email.setText(email);
+                    et_email.setEnabled(false);
                 }
             }
 
@@ -342,14 +374,16 @@ public class MyProfileScreenUser extends AppCompatActivity{
         });
     }
 
-    public void loadDrawerNameAndLastName(String path){
+
+
+    public void loadDrawerNameAndLastName(String path) {
         personRef.child(path).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Person p= snapshot.getValue(Person.class);
+                Person p = snapshot.getValue(Person.class);
                 String name = p.getName();
                 String last_name = p.getLast_name();
-                String fullName = name+" "+last_name;
+                String fullName = name + " " + last_name;
 
                 NavigationView navigationView = findViewById(R.id.my_profile_user_nav_view);
                 View headerView = navigationView.getHeaderView(0);
@@ -363,20 +397,6 @@ public class MyProfileScreenUser extends AppCompatActivity{
                 Log.d("ERROR", dbe.getMessage());
             }
         });
-    }
-
-    public static String capitalizeString(String string) {
-        char[] chars = string.toLowerCase().toCharArray();
-        boolean found = false;
-        for (int i = 0; i < chars.length; i++) {
-            if (!found && Character.isLetter(chars[i])) {
-                chars[i] = Character.toUpperCase(chars[i]);
-                found = true;
-            } else if (Character.isWhitespace(chars[i]) || chars[i]=='.' || chars[i]=='\'') { // You can add other chars here
-                found = false;
-            }
-        }
-        return String.valueOf(chars);
     }
 
 }

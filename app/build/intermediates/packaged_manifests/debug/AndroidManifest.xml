@@ -27,6 +27,11 @@
         android:testOnly="true"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
         <activity
+            android:name="com.example.messheknahalal.Admin_screens.CreateNewProductAdmin"
+            android:exported="false"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.example.messheknahalal.Admin_screens.mainScreenAdmin"
             android:exported="false"
             android:screenOrientation="portrait" >

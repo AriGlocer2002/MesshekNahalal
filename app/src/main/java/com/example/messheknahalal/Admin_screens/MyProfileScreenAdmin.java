@@ -148,8 +148,8 @@ public class MyProfileScreenAdmin extends AppCompatActivity {
                     String last_name = et_last_name.getText().toString();
                     String phone = et_phone.getText().toString();
 
-                    name = capitalizeString(name);
-                    last_name = capitalizeString(last_name);
+                    name = Utils.capitalizeString(name);
+                    last_name = Utils.capitalizeString(last_name);
 
                     adminRef.child(adminPath).child("name").setValue(name);
                     adminRef.child(adminPath).child("last_name").setValue(last_name);
@@ -279,27 +279,23 @@ public class MyProfileScreenAdmin extends AppCompatActivity {
         et_phone = findViewById(R.id.my_profile_admin_et_phone_number);
         et_name = findViewById(R.id.my_profile_admin_et_name);
         et_last_name = findViewById(R.id.my_profile_admin_et_last_name);
+        String personPath = "Person_"+email.replace(".","-");
 
-        adminRef.addValueEventListener(new ValueEventListener() {
+        personRef.child(personPath).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
                 //if exists the dataSnapshot
-                if(ds.exists()){
-                    for(DataSnapshot d: ds.getChildren()){
-                        Admin admin = d.getValue(Admin.class);
-                        if(admin.getEmail().equals(email)){
-                            String name = admin.getName();
-                            String last_name = admin.getLast_name();
-                            String phone = admin.getPhone();
+                if (ds.exists()) {
+                    Person p = ds.getValue(Person.class);
+                    String name = p.getName();
+                    String last_name = p.getLast_name();
+                    String phone = p.getPhone();
 
-                            et_name.setText(name);
-                            et_last_name.setText(last_name);
-                            et_phone.setText(phone);
-                            et_email.setText(email);
-                            et_email.setEnabled(false);
-                        }
-                    }
-                    //Toast.makeText(loginScreen.this, "checkPersonType: not found person", Toast.LENGTH_LONG).show();
+                    et_name.setText(name);
+                    et_last_name.setText(last_name);
+                    et_phone.setText(phone);
+                    et_email.setText(email);
+                    et_email.setEnabled(false);
                 }
             }
 
@@ -331,20 +327,5 @@ public class MyProfileScreenAdmin extends AppCompatActivity {
                 Log.d("ERROR", dbe.getMessage());
             }
         });
-    }
-
-
-    public static String capitalizeString(String string) {
-        char[] chars = string.toLowerCase().toCharArray();
-        boolean found = false;
-        for (int i = 0; i < chars.length; i++) {
-            if (!found && Character.isLetter(chars[i])) {
-                chars[i] = Character.toUpperCase(chars[i]);
-                found = true;
-            } else if (Character.isWhitespace(chars[i]) || chars[i]=='.' || chars[i]=='\'') { // You can add other chars here
-                found = false;
-            }
-        }
-        return String.valueOf(chars);
     }
 }

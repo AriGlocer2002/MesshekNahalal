@@ -1,9 +1,11 @@
 package com.example.messheknahalal.Admin_screens;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +15,9 @@ import com.example.messheknahalal.R;
 
 public class ProductsFragmentAdmin extends Fragment {
 
+    Button btn_create_new_product;
+    Intent intent;
+
     public ProductsFragmentAdmin() {
         // Required empty public constructor
     }
@@ -21,6 +26,15 @@ public class ProductsFragmentAdmin extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        btn_create_new_product = view.findViewById(R.id.fragment_products_admin_btn_new_product);
+
+        btn_create_new_product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getContext(), CreateNewProductAdmin.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
