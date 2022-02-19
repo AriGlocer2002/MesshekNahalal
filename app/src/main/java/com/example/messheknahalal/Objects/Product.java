@@ -2,28 +2,20 @@ package com.example.messheknahalal.Objects;
 
 
 public class Product {
-    private String name;
     private String type;
-    private float stock;
-    private float price;
+    private String name;
+    private String stock;
+    private String price;
 
     public Product(){
 
     }
 
-    public Product(String name, String type, float stock, float price) {
-        this.name = name;
+    public Product(String type, String name, String stock, String price) {
         this.type = type;
+        this.name = name;
         this.stock = stock;
         this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getType() {
@@ -34,19 +26,27 @@ public class Product {
         this.type = type;
     }
 
-    public float getStock() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStock() {
         return stock;
     }
 
-    public void setStock(float stock) {
+    public void setStock(String stock) {
         this.stock = stock;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -55,8 +55,8 @@ public class Product {
         return "Product{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
-                ", stock=" + stock +
-                ", price=" + price +
+                ", stock='" + stock + '\'' +
+                ", price='" + price + '\'' +
                 '}';
     }
 }

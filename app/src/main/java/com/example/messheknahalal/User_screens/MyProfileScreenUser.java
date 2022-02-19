@@ -306,42 +306,6 @@ public class MyProfileScreenUser extends AppCompatActivity{
         snackbar.show();
     }
 
-//    public void showData(String email){
-//        et_email = findViewById(R.id.my_profile_user_et_email_address);
-//        et_phone = findViewById(R.id.my_profile_user_et_phone_number);
-//        et_name = findViewById(R.id.my_profile_user_et_name);
-//        et_last_name = findViewById(R.id.my_profile_user_et_last_name);
-//
-//        userRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot ds) {
-//                //if exists the dataSnapshot
-//                if(ds.exists()){
-//                    for(DataSnapshot d: ds.getChildren()){
-//                        User user = d.getValue(User.class);
-//                        if(user.getEmail().equals(email)){
-//                            String name = user.getName();
-//                            String last_name = user.getLast_name();
-//                            String phone = user.getPhone();
-//
-//                            et_name.setText(name);
-//                            et_last_name.setText(last_name);
-//                            et_phone.setText(phone);
-//                            et_email.setText(email);
-//                            et_email.setEnabled(false);
-//                        }
-//                    }
-//                    //Toast.makeText(loginScreen.this, "checkPersonType: not found person", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError dbe) {
-//                Log.d("ERROR", dbe.getMessage());
-//            }
-//        });
-//    }
-
     public void showData(String email){
         et_email = findViewById(R.id.my_profile_user_et_email_address);
         et_phone = findViewById(R.id.my_profile_user_et_phone_number);

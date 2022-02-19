@@ -2089,8 +2089,8 @@ id continuousVelocity
 id coordinator
 id cos
 id counterclockwise
-id create_new_product_admin_et_product_name
-id create_new_product_admin_et_product_price
+id create_new_product_admin_btn_back
+id create_new_product_admin_btn_confirm
 id create_new_product_admin_iv_b1
 id create_new_product_admin_iv_b3
 id create_new_product_admin_iv_b4
@@ -2099,6 +2099,9 @@ id create_new_product_admin_iv_logo_background
 id create_new_product_admin_iv_portrait_aquare
 id create_new_product_admin_iv_upload_image
 id create_new_product_admin_spinner_type
+id create_new_product_admin_tie_product_name
+id create_new_product_admin_tie_product_price
+id create_new_product_admin_tie_product_stock_amount
 id create_new_product_admin_title
 id create_new_product_admin_tv_product_picture
 id create_new_product_admin_tv_type_title
@@ -2510,6 +2513,9 @@ id test_radiobutton_app_button_tint
 id text
 id text2
 id textEnd
+id textInput_create_new_product_admin_et_product_name
+id textInput_create_new_product_admin_tie_product_price
+id textInput_create_new_product_admin_tie_product_stock_amount
 id textPercent_loading_dialog
 id textProgress
 id textSpacerNoButtons
