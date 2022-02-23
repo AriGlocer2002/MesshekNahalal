@@ -1,5 +1,7 @@
 package com.example.messheknahalal.Objects;
 
+import androidx.annotation.NonNull;
+
 public class Admin extends Person {
 
     private String code;
@@ -24,6 +26,7 @@ public class Admin extends Person {
         this.code = code;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Admin{" +

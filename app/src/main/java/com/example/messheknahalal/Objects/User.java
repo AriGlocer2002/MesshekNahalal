@@ -1,5 +1,7 @@
 package com.example.messheknahalal.Objects;
 
+import androidx.annotation.NonNull;
+
 import com.example.messheknahalal.Objects.Person;
 
 import java.text.SimpleDateFormat;
@@ -32,10 +34,14 @@ public class User extends Person {
     }
 
 
+    @NonNull
     @Override
     public String toString() {
-        return "User{" +
+
+        return super.toString() + "User{" +
                 "last_login='" + last_login + '\'' +
                 '}';
     }
+
+
 }

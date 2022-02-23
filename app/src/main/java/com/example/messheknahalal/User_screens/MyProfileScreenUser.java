@@ -269,7 +269,7 @@ public class MyProfileScreenUser extends AppCompatActivity{
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(MyProfileScreenUser.this, "FAILED!!!!", Toast.LENGTH_LONG).show();
+                Toast.makeText(MyProfileScreenUser.this, e.getMessage(), Toast.LENGTH_LONG).show();
 
             }
         });

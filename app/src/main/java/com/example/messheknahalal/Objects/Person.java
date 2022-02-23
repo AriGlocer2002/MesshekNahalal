@@ -2,6 +2,8 @@ package com.example.messheknahalal.Objects;
 
 import android.provider.ContactsContract;
 
+import androidx.annotation.NonNull;
+
 import java.net.PasswordAuthentication;
 
 public class Person {
@@ -64,6 +66,7 @@ public class Person {
         this.type = type;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Person{" +

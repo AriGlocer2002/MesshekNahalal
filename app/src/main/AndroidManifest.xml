@@ -12,6 +12,11 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <activity
+            android:name=".Admin_screens.UsersListViewScreenAdmin"
+            android:exported="false"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".Admin_screens.CreateNewProductAdmin"
             android:exported="false"
             android:screenOrientation="portrait">

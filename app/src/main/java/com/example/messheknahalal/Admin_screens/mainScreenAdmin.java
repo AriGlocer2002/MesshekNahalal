@@ -120,9 +120,10 @@ public class mainScreenAdmin extends AppCompatActivity {
 //
 //                        break;
 //
-//                    case R.id.users_item:
-//
-//                        break;
+                    case R.id.users_item:
+                        intent = new Intent(mainScreenAdmin.this, UsersListViewScreenAdmin.class);
+                        startActivity(intent);
+                        break;
 //
 //                    case R.id.products_item:
 //
