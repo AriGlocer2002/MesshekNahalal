@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
@@ -194,11 +195,12 @@ public class MyProfileScreenAdmin extends AppCompatActivity {
 //                    case R.id.orders_item:
 //
 //                        break;
-//
-//                    case R.id.users_item:
-//
-//                        break;
-//
+
+                      case R.id.users_item:
+                          intent = new Intent(MyProfileScreenAdmin.this, UsersListViewScreenAdmin.class);
+                          startActivity(intent);
+                          break;
+
 //                    case R.id.products_item:
 //
 //                        break;
@@ -327,5 +329,12 @@ public class MyProfileScreenAdmin extends AppCompatActivity {
                 Log.d("ERROR", dbe.getMessage());
             }
         });
+    }
+
+    public void onBackPressed(){
+        //if drawer is open close the drawer
+        if(drawerMenu.isDrawerOpen(GravityCompat.START)){
+            drawerMenu.closeDrawer(GravityCompat.START);
+        }
     }
 }

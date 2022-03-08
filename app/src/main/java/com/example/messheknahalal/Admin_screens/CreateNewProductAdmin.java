@@ -22,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.Person;
@@ -210,6 +211,7 @@ public class CreateNewProductAdmin extends AppCompatActivity {
 
             }
         });
+
     }
 
 }

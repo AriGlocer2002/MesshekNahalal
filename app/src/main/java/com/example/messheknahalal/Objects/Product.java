@@ -1,6 +1,8 @@
 package com.example.messheknahalal.Objects;
 
 
+import androidx.annotation.NonNull;
+
 public class Product {
     private String type;
     private String name;
@@ -50,6 +52,7 @@ public class Product {
         this.price = price;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Product{" +

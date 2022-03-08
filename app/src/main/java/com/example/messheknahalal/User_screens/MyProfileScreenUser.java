@@ -276,7 +276,7 @@ public class MyProfileScreenUser extends AppCompatActivity{
     }
 
 
-    public void sendEmail(String recipientsList, String subject, String text){
+    public void sendEmail(@NonNull String recipientsList, String subject, String text){
         String[] recipients = recipientsList.split(",");
 
         intent = new Intent(Intent.ACTION_SEND);
@@ -306,7 +306,7 @@ public class MyProfileScreenUser extends AppCompatActivity{
         snackbar.show();
     }
 
-    public void showData(String email){
+    public void showData(@NonNull String email){
         et_email = findViewById(R.id.my_profile_user_et_email_address);
         et_phone = findViewById(R.id.my_profile_user_et_phone_number);
         et_name = findViewById(R.id.my_profile_user_et_name);
@@ -362,5 +362,7 @@ public class MyProfileScreenUser extends AppCompatActivity{
             }
         });
     }
+
+
 
 }

@@ -43,8 +43,7 @@ public class mainScreenAdmin extends AppCompatActivity {
     Intent intent;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     StorageReference rStore;
-    DatabaseReference adminRef = FirebaseDatabase.getInstance().getReference("Admin"),
-            personRef = FirebaseDatabase.getInstance().getReference().child("Person");
+    DatabaseReference personRef = FirebaseDatabase.getInstance().getReference().child("Person");
 
     BottomNavigationView bottomNav;
     DrawerLayout drawerMenu;
@@ -60,7 +59,6 @@ public class mainScreenAdmin extends AppCompatActivity {
 
         FirebaseUser admin = auth.getCurrentUser();
         String adminEmail = admin.getEmail();
-        String adminPath = "Admin_"+adminEmail.replace(".","-");
         String personPath = "Person_"+adminEmail.replace(".","-");
         rStore = FirebaseStorage.getInstance().getReference();
 

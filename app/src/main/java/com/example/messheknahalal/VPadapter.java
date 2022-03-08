@@ -43,7 +43,7 @@ public class VPadapter extends RecyclerView.Adapter<VPadapter.ViewHolder> {
         return viewPagerItemArrayList.size();
     }
 
-    public class ViewHolder extends  RecyclerView.ViewHolder{
+    public static class ViewHolder extends  RecyclerView.ViewHolder{
 
         ImageView picture;
 

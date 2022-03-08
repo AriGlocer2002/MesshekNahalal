@@ -1,5 +1,7 @@
 package com.example.messheknahalal.Objects;
 
+import androidx.annotation.NonNull;
+
 public class Order {
     private String date;
     private String status;
@@ -39,6 +41,7 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Order{" +

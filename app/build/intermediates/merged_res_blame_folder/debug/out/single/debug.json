@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_profile.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_profile.xml"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_email.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_email.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_profile.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_profile.xml"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_heebo_black.ttf.flat",

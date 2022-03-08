@@ -2,6 +2,7 @@ package com.example.messheknahalal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -54,7 +55,8 @@ public class splashScreen extends AppCompatActivity {
                     intent = new Intent(splashScreen.this, loginScreen.class);
                 startActivity(intent);
                 finish();
-                }else{
+                }
+                else{
                     FirebaseUser person = auth.getCurrentUser();
                     String email = person.getEmail();
                     checkPersonType(email);
@@ -63,7 +65,7 @@ public class splashScreen extends AppCompatActivity {
         },LOGINSCREEN);
     }
 
-    public void checkPersonType(String email){
+    public void checkPersonType(@NonNull String email){
         String personPath = "Person_"+email.replace(".","-");
         personRef.child(personPath).addValueEventListener(new ValueEventListener() {
             @Override
@@ -89,9 +91,5 @@ public class splashScreen extends AppCompatActivity {
         });
     }
 
-
-
-
-
-
+    public void onBackPressed(){}
 }

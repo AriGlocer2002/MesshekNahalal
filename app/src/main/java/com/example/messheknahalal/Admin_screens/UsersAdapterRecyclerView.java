@@ -41,7 +41,6 @@ public class UsersAdapterRecyclerView extends RecyclerView.Adapter<UsersAdapterR
     private LayoutInflater inflater;
     private DatabaseReference usersRef;
 
-
     class UsersAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         RelativeLayout rl_user_item;
@@ -126,7 +125,7 @@ public class UsersAdapterRecyclerView extends RecyclerView.Adapter<UsersAdapterR
             usersRef.child(path).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
-                    users.remove(getAdapterPosition());
+                    users.remove(adapterPosition);
 //                    UsersAdapterRecyclerView.this.notifyItemRemoved(getAdapterPosition());
                     UsersAdapterRecyclerView.this.notifyItemRangeChanged(0, adapterPosition+1);
 //                    notifyDataSetChanged();

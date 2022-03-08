@@ -3,9 +3,12 @@ package com.example.messheknahalal.Utils;
 import android.app.AlertDialog;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 public class Utils {
 
-    final public static String capitalizeString(String string) {
+    @NonNull
+    public static String capitalizeString(@NonNull String string) {
         char[] chars = string.toLowerCase().toCharArray();
         boolean found = false;
         for (int i = 0; i < chars.length; i++) {
@@ -19,7 +22,7 @@ public class Utils {
         return String.valueOf(chars);
     }
 
-    final public static void showAlertDialog(String title, String message, Context context){
+    public static void showAlertDialog(String title, String message, Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setPositiveButton("OK",null);

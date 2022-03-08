@@ -3,6 +3,7 @@ package com.example.messheknahalal.Admin_screens;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,6 +47,7 @@ public class UsersAdapterFirebase  extends
     StorageReference rStore;
     private LayoutInflater inflater;
     private final DatabaseReference usersRef;
+    private final DatabaseReference peopleRef;
 
     public UsersAdapterFirebase(@NonNull FirebaseRecyclerOptions<User> options, Context context) {
         super(options);
@@ -53,7 +55,7 @@ public class UsersAdapterFirebase  extends
         this.context = context;
 
         usersRef = FirebaseDatabase.getInstance().getReference("User");
-        rStore = FirebaseStorage.getInstance().getReference();
+        peopleRef = FirebaseDatabase.getInstance().getReference("Person");
     }
 
     public class UserViewHolderFirebase extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
@@ -98,13 +100,31 @@ public class UsersAdapterFirebase  extends
         @Override
         public void onClick(View view) {
             if (view == users_lv_item_iv_phone) {
-                Toast.makeText(context, getItem(getBindingAdapterPosition()).getPhone(), Toast.LENGTH_SHORT).show();
+                Intent intent_phone = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + getItem(getBindingAdapterPosition()).getPhone()));
+                context.startActivity(intent_phone);
             }
             if (view == users_lv_item_iv_email) {
-                Toast.makeText(context, getItem(getBindingAdapterPosition()).getEmail(), Toast.LENGTH_SHORT).show();
+                Intent intent_mail = new Intent(Intent.ACTION_SENDTO);
+                intent_mail.setData(Uri.parse("mailto:"));
+                intent_mail.putExtra(Intent.EXTRA_EMAIL, new String[]{getItem(getBindingAdapterPosition()).getEmail()});
+                context.startActivity(intent_mail);
             }
             if (view == users_lv_item_iv_message) {
-                Toast.makeText(context, getItem(getBindingAdapterPosition()).getPhone(), Toast.LENGTH_SHORT).show();
+                String text = "";
+
+                /*Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                sendIntent.setType("text/plain");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+//                sendIntent.putExtra("jid", getItem(getBindingAdapterPosition()).getPhone());
+                sendIntent.putExtra("jid", "+972585556627");
+//                sendIntent.setPackage("com.whatsapp");
+                context.startActivity(sendIntent);*/
+
+                String number = "+972" + getItem(getBindingAdapterPosition()).getPhone();
+                String url = "https://api.whatsapp.com/send?phone="+number + "&text=" + text;
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                context.startActivity(i);
             }
         }
 
@@ -137,24 +157,25 @@ public class UsersAdapterFirebase  extends
 
         public void deleteUser(String path){
             usersRef.child(path).removeValue();
+            peopleRef.child(path).removeValue();
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolderFirebase holder, int position, @NonNull User model) {
-        User tmp = getItem(position);
 
-        holder.tv_full_name.setText(tmp.getName()+" "+tmp.getLast_name());
-        holder.tv_email.setText(tmp.getEmail());
-        holder.tv_phone.setText(tmp.getPhone());
+        holder.tv_full_name.setText(model.getName()+" "+ model.getLast_name());
+        holder.tv_email.setText(model.getEmail());
+        holder.tv_phone.setText(model.getPhone());
 
-        Log.d("ariel", "E-mail is " + getItem(position).getEmail());
-        StorageReference profileRef = rStore.child("profiles/pp_" +getItem(position).getEmail().replace(".","-")+".jpg");
+        Log.d("ariel", "E-mail is " + model.getEmail());
+        Log.d("ariel", "E-mail is " + model);
+        rStore = FirebaseStorage.getInstance().getReference();
+        StorageReference profileRef = rStore.child("profiles/pp_" + model.getEmail().replace(".","-")+".jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(context).load(uri).centerCrop().into(holder.users_lv_item_iv_pp);
-
             }
         });
 

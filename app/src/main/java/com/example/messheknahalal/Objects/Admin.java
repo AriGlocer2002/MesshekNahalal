@@ -29,7 +29,7 @@ public class Admin extends Person {
     @NonNull
     @Override
     public String toString() {
-        return "Admin{" +
+        return super.toString() + "Admin{" +
                 "code='" + code + '\'' +
                 '}';
     }

@@ -1,9 +1,7 @@
 package com.example.messheknahalal;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,8 +19,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
 import com.example.messheknahalal.Objects.Admin;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.Objects.User;
@@ -45,7 +45,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 public class signUpScreen extends AppCompatActivity {
 
@@ -60,7 +59,7 @@ public class signUpScreen extends AppCompatActivity {
     FirebaseAuth auth;
     DatabaseReference userRef, adminRef, personRef;
 
-    boolean confiramtion = true;   //todo - turns to true if user enter a code that sent to phone when register, otherwise cannot upload a pic
+    boolean confirmation = true;   //todo - turns to true if user enter a code that sent to phone when register, otherwise cannot upload a pic
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,6 +186,7 @@ public class signUpScreen extends AppCompatActivity {
         });
     }
 
+    public void onBackPressed(){}
 
     private void createPerson(String type, String email, String password){
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
@@ -247,7 +247,7 @@ public class signUpScreen extends AppCompatActivity {
                 Uri imageUri = data.getData();
                 //check size of img
                 //todo - turns to true if user enter a code that sent to phone when register, otherwise cannot upload a pic
-                if (confiramtion) {
+                if (confirmation) {
                     uploadImageToFirebase(imageUri);
                 } else {
                 }
@@ -302,7 +302,7 @@ public class signUpScreen extends AppCompatActivity {
         .setAction("Continue",new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                intent = new Intent(signUpScreen.this, mainScreenUser.class);
+                intent = new Intent(signUpScreen.this, cb_admin.isChecked() ? mainScreenAdmin.class : mainScreenUser.class);
                 startActivity(intent);
             }
         });

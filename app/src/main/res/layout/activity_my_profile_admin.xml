@@ -82,7 +82,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="19dp"
                 android:clickable="true"
-                app:srcCompat="@drawable/default_profile_picture" />
+                app:srcCompat="@drawable/default_profile_picture"
+                android:focusable="true" />
 
             <ImageView
                 android:id="@+id/my_profile_admin_iv_frame_pp"
@@ -111,7 +112,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:backgroundTint="#000000"
-                android:drawableRight="@drawable/ic_profile"
+                android:drawableEnd="@drawable/ic_profile"
                 android:drawableTint="@color/black"
                 android:ems="10"
                 android:foregroundTint="#000000"
@@ -129,7 +130,7 @@
                 android:backgroundTint="#000000"
                 android:ems="10"
                 android:hint=""
-                android:drawableRight="@drawable/ic_profile"
+                android:drawableEnd="@drawable/ic_profile"
                 android:drawableTint="@color/black"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
@@ -145,7 +146,7 @@
                 android:backgroundTint="#000000"
                 android:ems="10"
                 android:hint=""
-                android:drawableRight="@drawable/ic_phone"
+                android:drawableEnd="@drawable/ic_phone"
                 android:drawableTint="@color/black"
                 android:inputType="phone"
                 android:textColor="@color/black"
@@ -179,7 +180,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="0dp"
                 android:backgroundTint="#000000"
-                android:drawableRight="@drawable/ic_email"
+                android:drawableEnd="@drawable/ic_email"
                 android:drawableTint="@color/black"
                 android:ems="10"
                 android:hint=""

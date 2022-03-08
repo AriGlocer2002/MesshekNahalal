@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
 import com.example.messheknahalal.Objects.Person;
@@ -112,6 +113,8 @@ public class loginScreen extends AppCompatActivity{
         });
     }
 
+    public void onBackPressed(){}
+
     public void showAlertDialog(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(loginScreen.this);
         builder.setTitle(title);
@@ -177,7 +180,7 @@ public class loginScreen extends AppCompatActivity{
         snackbar.show();
     }
 
-    public void checkPersonType(String email){
+    public void checkPersonType(@NonNull String email){
         String personPath = "Person_"+email.replace(".","-");
         personRef.child(personPath).addValueEventListener(new ValueEventListener() {
             @Override
