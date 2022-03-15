@@ -12,7 +12,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <activity
-            android:name=".Admin_screens.UsersListViewScreenAdmin"
+            android:name=".Admin_screens.UsersRecycleViewScreenAdmin"
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>

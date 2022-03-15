@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +23,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.ObservableSnapshotArray;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -46,6 +46,7 @@ public class UsersAdapterFirebase  extends
 //    ArrayList<User> users;
     StorageReference rStore;
     private LayoutInflater inflater;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
     private final DatabaseReference usersRef;
     private final DatabaseReference peopleRef;
 
@@ -78,21 +79,21 @@ public class UsersAdapterFirebase  extends
 
             rl_user_item = itemView.findViewById(R.id.rl_user_item);
 
-            tv_full_name = itemView.findViewById(R.id.users_lv_item_tv_full_name);
-            tv_email = itemView.findViewById(R.id.users_lv_item_tv_email);
-            tv_phone = itemView.findViewById(R.id.users_lv_item_tv_phone);
+            tv_full_name = itemView.findViewById(R.id.users_rv_item_tv_full_name);
+            tv_email = itemView.findViewById(R.id.users_rv_item_tv_email);
+            tv_phone = itemView.findViewById(R.id.users_rv_item_tv_phone);
 
-            users_lv_item_iv_phone = itemView.findViewById(R.id.users_lv_item_iv_phone);
+            users_lv_item_iv_phone = itemView.findViewById(R.id.users_rv_item_iv_phone);
             users_lv_item_iv_phone.setOnClickListener(this);
 
-            users_lv_item_iv_email = itemView.findViewById(R.id.users_lv_item_iv_email);
+            users_lv_item_iv_email = itemView.findViewById(R.id.users_rv_item_iv_email);
             users_lv_item_iv_email.setOnClickListener(this);
 
-            users_lv_item_iv_message = itemView.findViewById(R.id.users_lv_item_iv_message);
+            users_lv_item_iv_message = itemView.findViewById(R.id.users_rv_item_iv_message);
             users_lv_item_iv_message.setOnClickListener(this);
 
-            users_lv_item_iv_pp = itemView.findViewById(R.id.users_lv_item_iv_pp);
-            users_lv_item_iv_pp_frame = itemView.findViewById(R.id.users_lv_item_iv_pp_frame);
+            users_lv_item_iv_pp = itemView.findViewById(R.id.users_rv_item_iv_pp);
+            users_lv_item_iv_pp_frame = itemView.findViewById(R.id.users_rv_item_iv_pp_frame);
 
             itemView.setOnLongClickListener(this);
         }
@@ -112,14 +113,6 @@ public class UsersAdapterFirebase  extends
             if (view == users_lv_item_iv_message) {
                 String text = "";
 
-                /*Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                sendIntent.setType("text/plain");
-                sendIntent.putExtra(Intent.EXTRA_TEXT, text);
-//                sendIntent.putExtra("jid", getItem(getBindingAdapterPosition()).getPhone());
-                sendIntent.putExtra("jid", "+972585556627");
-//                sendIntent.setPackage("com.whatsapp");
-                context.startActivity(sendIntent);*/
-
                 String number = "+972" + getItem(getBindingAdapterPosition()).getPhone();
                 String url = "https://api.whatsapp.com/send?phone="+number + "&text=" + text;
                 Intent i = new Intent(Intent.ACTION_VIEW);
@@ -137,7 +130,10 @@ public class UsersAdapterFirebase  extends
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String email = "User_" + getItem(getBindingAdapterPosition()).getEmail().replace(".","-");
+
+                        String email = getItem(getBindingAdapterPosition()).getEmail();
+                        delateAuthUser(email);
+                        email = "User_" + email.replace(".","-");
                         deleteUser(email);
                     }
                 });
@@ -159,6 +155,12 @@ public class UsersAdapterFirebase  extends
             usersRef.child(path).removeValue();
             peopleRef.child(path).removeValue();
         }
+
+        public void delateAuthUser (String email){
+           // String userID = auth.getuID.(email);
+
+        }
+
     }
 
     @Override
@@ -190,7 +192,7 @@ public class UsersAdapterFirebase  extends
     @Override
     public UserViewHolderFirebase onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.user_lv_item, parent, false);
+                .inflate(R.layout.user_rv_item, parent, false);
 
         return new UserViewHolderFirebase(view);
     }

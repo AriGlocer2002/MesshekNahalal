@@ -1,11 +1,8 @@
 package com.example.messheknahalal.Admin_screens;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,14 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.User;
 import com.example.messheknahalal.R;
-import com.example.messheknahalal.User_screens.MyProfileScreenUser;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -62,21 +55,21 @@ public class UsersAdapterRecyclerView extends RecyclerView.Adapter<UsersAdapterR
 
             rl_user_item = itemView.findViewById(R.id.rl_user_item);
 
-            tv_full_name = itemView.findViewById(R.id.users_lv_item_tv_full_name);
-            tv_email = itemView.findViewById(R.id.users_lv_item_tv_email);
-            tv_phone = itemView.findViewById(R.id.users_lv_item_tv_phone);
+            tv_full_name = itemView.findViewById(R.id.users_rv_item_tv_full_name);
+            tv_email = itemView.findViewById(R.id.users_rv_item_tv_email);
+            tv_phone = itemView.findViewById(R.id.users_rv_item_tv_phone);
 
-            users_lv_item_iv_phone = itemView.findViewById(R.id.users_lv_item_iv_phone);
+            users_lv_item_iv_phone = itemView.findViewById(R.id.users_rv_item_iv_phone);
             users_lv_item_iv_phone.setOnClickListener(this);
 
-            users_lv_item_iv_email = itemView.findViewById(R.id.users_lv_item_iv_email);
+            users_lv_item_iv_email = itemView.findViewById(R.id.users_rv_item_iv_email);
             users_lv_item_iv_email.setOnClickListener(this);
 
-            users_lv_item_iv_message = itemView.findViewById(R.id.users_lv_item_iv_message);
+            users_lv_item_iv_message = itemView.findViewById(R.id.users_rv_item_iv_message);
             users_lv_item_iv_message.setOnClickListener(this);
 
-            users_lv_item_iv_pp = itemView.findViewById(R.id.users_lv_item_iv_pp);
-            users_lv_item_iv_pp_frame = itemView.findViewById(R.id.users_lv_item_iv_pp_frame);
+            users_lv_item_iv_pp = itemView.findViewById(R.id.users_rv_item_iv_pp);
+            users_lv_item_iv_pp_frame = itemView.findViewById(R.id.users_rv_item_iv_pp_frame);
 
             itemView.setOnLongClickListener(this);
         }
@@ -146,7 +139,7 @@ public class UsersAdapterRecyclerView extends RecyclerView.Adapter<UsersAdapterR
     @NonNull
     @Override
     public UsersAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.user_lv_item, parent, false);
+        View view = inflater.inflate(R.layout.user_rv_item, parent, false);
         /*ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = (int) (parent.getHeight() * 0.166666666);*/
 
@@ -179,6 +172,7 @@ public class UsersAdapterRecyclerView extends RecyclerView.Adapter<UsersAdapterR
         }
         holder.users_lv_item_iv_pp.setBackgroundColor(backgroundColor);*/
     }
+
 
     @Override
     public int getItemCount() {

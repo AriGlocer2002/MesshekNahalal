@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,9 +20,6 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.R;
-import com.example.messheknahalal.Admin_screens.HomeFragmentAdmin;
-import com.example.messheknahalal.User_screens.MyProfileScreenUser;
-import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.example.messheknahalal.loginScreen;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -119,7 +115,7 @@ public class mainScreenAdmin extends AppCompatActivity {
 //                        break;
 //
                     case R.id.users_item:
-                        intent = new Intent(mainScreenAdmin.this, UsersListViewScreenAdmin.class);
+                        intent = new Intent(mainScreenAdmin.this, UsersRecycleViewScreenAdmin.class);
                         startActivity(intent);
                         break;
 //

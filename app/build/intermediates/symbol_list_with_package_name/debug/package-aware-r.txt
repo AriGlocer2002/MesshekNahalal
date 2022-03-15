@@ -3247,8 +3247,13 @@ id users_lv_item_tv_full_name
 id users_lv_item_tv_phone
 id users_lv_screen_b1
 id users_lv_screen_b2
+id users_lv_screen_btn_login
+id users_lv_screen_container
+id users_lv_screen_drawer_layout
 id users_lv_screen_et_password
 id users_lv_screen_lv
+id users_lv_screen_nav_view
+id users_lv_screen_toolbar
 id users_lv_screen_tv
 id users_lv_screen_tv_title
 id vertical_only

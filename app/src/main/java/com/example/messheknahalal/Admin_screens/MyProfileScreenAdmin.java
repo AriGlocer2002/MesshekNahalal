@@ -1,7 +1,6 @@
 package com.example.messheknahalal.Admin_screens;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -25,12 +24,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
-import com.example.messheknahalal.Objects.Admin;
-import com.example.messheknahalal.Objects.Admin;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.R;
-import com.example.messheknahalal.Admin_screens.MyProfileScreenAdmin;
-import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
 import com.example.messheknahalal.Utils.Utils;
 import com.example.messheknahalal.loginScreen;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -197,7 +192,7 @@ public class MyProfileScreenAdmin extends AppCompatActivity {
 //                        break;
 
                       case R.id.users_item:
-                          intent = new Intent(MyProfileScreenAdmin.this, UsersListViewScreenAdmin.class);
+                          intent = new Intent(MyProfileScreenAdmin.this, UsersRecycleViewScreenAdmin.class);
                           startActivity(intent);
                           break;
 
