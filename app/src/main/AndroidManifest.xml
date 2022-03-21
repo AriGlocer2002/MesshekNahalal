@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
+
+        <activity
+            android:name=".Admin_screens.AdminsRecycleViewScreenAdmin"
+            android:exported="false"
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".Admin_screens.UsersRecycleViewScreenAdmin"
             android:exported="false"

@@ -83,7 +83,7 @@
                 app:srcCompat="@drawable/back5" />
 
             <EditText
-                android:id="@+id/users_rv_screen_et_password"
+                android:id="@+id/users_rv_screen_et_admin_list_access"
                 android:layout_width="231dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/users_rv_screen_tv"

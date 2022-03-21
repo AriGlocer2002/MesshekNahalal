@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.Objects.User;
 import com.example.messheknahalal.R;
+import com.example.messheknahalal.Utils.Utils;
 import com.example.messheknahalal.loginScreen;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -55,11 +58,30 @@ public class UsersRecycleViewScreenAdmin extends AppCompatActivity {
     ImageView nv_profile_img;
     TextView nd_tv_name, nd_tv_email;
     NavigationView nav_view;
+    EditText et_adminListAccess;
+    Button btn_login;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_rv_admin);
+
+        et_adminListAccess = findViewById(R.id.users_rv_screen_et_admin_list_access);
+        btn_login = findViewById(R.id.users_rv_screen_btn_login);
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //todo - cambiar luego passAccess
+                if(et_adminListAccess.getText().toString().equals("12345")){
+                    intent = new Intent(UsersRecycleViewScreenAdmin.this, AdminsRecycleViewScreenAdmin.class);
+                    startActivity(intent);
+                }else{
+                    Utils.showAlertDialog("Access denied", "Wrong access password", UsersRecycleViewScreenAdmin.this);
+                }
+            }
+        });
+
 
         rv_users = findViewById(R.id.users_rv_screen_rv);
         users = new ArrayList<>();
@@ -79,35 +101,6 @@ public class UsersRecycleViewScreenAdmin extends AppCompatActivity {
         Log.d("murad", "rv_events.getChildCount() = " + rv_users.getChildCount());
 //        rv_users.setLayoutManager(new LinearLayoutManager(this));
         rv_users.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-
-
-        /*adapter = new UsersAdapterRecyclerView(users, UsersListViewScreenAdmin.this);
-        //get all the users from data base
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot ds : snapshot.getChildren()){
-                        User u = ds.getValue(User.class);
-                        Log.d("ariel", u.toString());
-                        users.add(u);
-                        int position = users.indexOf(u);
-                        adapter.notifyItemInserted(position);
-                        adapter.notifyItemRangeChanged(position, 1);
-//                        adapter.notifyDataSetChanged();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError dbe) {
-                Log.d("Error",dbe.getMessage());
-            }
-        });
-
-        rv_users.setAdapter(adapter);
-        rv_users.setLayoutManager(new LinearLayoutManager(this));*/
-
 
 
         //setting profile information in the navigation drawer

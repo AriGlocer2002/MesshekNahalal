@@ -47,7 +47,7 @@ public class AdminsRecycleViewScreenAdmin extends AppCompatActivity {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     DatabaseReference personRef = FirebaseDatabase.getInstance().getReference().child("Person");
 
-    ArrayList<Admin> Admins;
+    ArrayList<Admin> admins;
     DrawerLayout drawerMenu;
     ImageView nv_profile_img;
     TextView nd_tv_name, nd_tv_email;
@@ -70,7 +70,7 @@ public class AdminsRecycleViewScreenAdmin extends AppCompatActivity {
                 .setLifecycleOwner(this)
                 .build();
 
-        adminAdapter = new UsersAdapterFirebase(options, this);
+        adminAdapter = new AdminsAdapterFirebase(options, this);
 
         rv_admins.setAdapter(adminAdapter);
         Log.d("murad", "rv_events.getChildCount() = " + rv_admins.getChildCount());
@@ -78,37 +78,8 @@ public class AdminsRecycleViewScreenAdmin extends AppCompatActivity {
         rv_admins.setLayoutManager(new WrapContentLinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
 
-        /*adapter = new AdminsAdapterRecyclerView(admins, adminsListViewScreenAdmin.this);
-        //get all the admins from data base
-        adminRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot ds : snapshot.getChildren()){
-                        Admin u = ds.getValue(Admin.class);
-                        Log.d("ariel", u.toString());
-                        admins.add(u);
-                        int position = admins.indexOf(u);
-                        adapter.notifyItemInserted(position);
-                        adapter.notifyItemRangeChanged(position, 1);
-//                        adapter.notifyDataSetChanged();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError dbe) {
-                Log.d("Error",dbe.getMessage());
-            }
-        });
-
-        rv_admins.setAdapter(adapter);
-        rv_admins.setLayoutManager(new LinearLayoutManager(this));*/
-
-
-
         //setting profile information in the navigation drawer
-        FirebaseAdmin admin = auth.getCurrentAdmin();
+        FirebaseUser admin = auth.getCurrentUser();
         String adminEmail = admin.getEmail();
         String personPath = "Person_"+adminEmail.replace(".","-");
         rStore = FirebaseStorage.getInstance().getReference();

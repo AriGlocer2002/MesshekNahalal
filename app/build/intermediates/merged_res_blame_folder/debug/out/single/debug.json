@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_email.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_email.xml"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_profile.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_email.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_email.xml"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_heebo_black.ttf.flat",
@@ -34,6 +34,10 @@
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_viewpager_item.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\viewpager_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_user_rv_item.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\user_rv_item.xml"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_main_screen_user.xml.flat",
@@ -74,10 +78,6 @@
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_shopping_basket.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_shopping_basket.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_user_lv_item.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\user_lv_item.xml"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_grenze_light.ttf.flat",
@@ -188,10 +188,6 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\spinner_bg.xml"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_users_lv.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_users_lv.xml"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_grenze_semi_bold_italic.ttf.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\grenze_semi_bold_italic.ttf"
     },
@@ -224,8 +220,8 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\heebo_light.ttf"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_users_lv_background.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\users_lv_background.xml"
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_users_rl_background.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\users_rl_background.xml"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_home_user.xml.flat",
@@ -238,6 +234,10 @@
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_user_circle.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_user_circle.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_admin_rv_item.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\admin_rv_item.xml"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher.webp.flat",
@@ -304,6 +304,10 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_shopping_cart.xml"
     },
     {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_admins_rv_admin.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_admins_rv_admin.xml"
+    },
+    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_grenze_regular.ttf.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\grenze_regular.ttf"
     },
@@ -334,5 +338,9 @@
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_heebo_regular.ttf.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\heebo_regular.ttf"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_users_rv_admin.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_users_rv_admin.xml"
     }
 ]

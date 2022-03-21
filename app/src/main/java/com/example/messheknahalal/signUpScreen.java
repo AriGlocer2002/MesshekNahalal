@@ -57,7 +57,7 @@ public class signUpScreen extends AppCompatActivity {
     FirebaseFirestore fStore;
     StorageReference rStore;
     FirebaseAuth auth;
-    DatabaseReference userRef, adminRef, personRef;
+    DatabaseReference userRef, adminRef, personRef, adminCodeRef;
 
     boolean confirmation = true;   //todo - turns to true if user enter a code that sent to phone when register, otherwise cannot upload a pic
 
@@ -67,6 +67,7 @@ public class signUpScreen extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         auth = FirebaseAuth.getInstance();
 
+        adminCodeRef = FirebaseDatabase.getInstance().getReference("AdminCode");
         userRef = FirebaseDatabase.getInstance().getReference("User");
         adminRef = FirebaseDatabase.getInstance().getReference("Admin");
         personRef = FirebaseDatabase.getInstance().getReference("Person");
@@ -166,45 +167,89 @@ public class signUpScreen extends AppCompatActivity {
                 else if (!password.equals(confirm_password)) {
                     Utils.showAlertDialog("Error", "The passwords are different", signUpScreen.this);
                 }
-                //check if the admin code is the same that in the db
-                else if(cb_admin.isChecked() && !code.equals("12345")){
-                    //the admin code is 12345
-                    Utils.showAlertDialog("Error", "The admin code is not valid", signUpScreen.this);
-                }
+//                //check if the admin code is the same that in the db
+//                else if(cb_admin.isChecked() && !code.equals("12345")){
+//                    //the admin code is 12345
+//                    Utils.showAlertDialog("Error", "The admin code is not valid", signUpScreen.this);
+//                }
                 //create a new person in the db
                 else {
-                    if (cb_admin.isChecked()) {
+                    //if (cb_admin.isChecked()) {
                         //create a new admin in the db
-                        createPerson("admin", email, password);
-                    } else {
+                    //    createPerson("admin", email, password);
+                    //} else {
                         //create a new user in the db
-                        createPerson("user", email, password);
+                        createPerson(code, email, password);
 
                     }
                 }
-            }
+
         });
     }
 
     public void onBackPressed(){}
 
-    private void createPerson(String type, String email, String password){
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            if (type.equals("admin")) {
-                                createAdmin();
-                            } else {
-                                createUser();
+    private void createPerson(String code, String email, String password){
+
+        adminCodeRef.child("code").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot ds) {
+                //if exists the dataSnapshot
+                if (ds.exists()) {
+
+                    String codeDB = ds.getValue().toString();
+
+                    if (cb_admin.isChecked() && codeDB.equals(code)) {
+
+                        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+
+                                    createAdmin();
+                                    snackBar("Account successfully created");
+
+                                } else {
+                                    Utils.showAlertDialog("Error", "This email address is already linked to another account", signUpScreen.this);
+                                }
                             }
-                            snackBar("Account successfully created");
-                        } else {
-                            Utils.showAlertDialog("Error", "This email address is already linked to another account", signUpScreen.this);
-                        }
+                        });
+
+                    } else if (cb_admin.isChecked() && !codeDB.equals(code)) {
+                        Utils.showAlertDialog("Error", "The admin code is not valid", signUpScreen.this);
+                    } else if(!cb_admin.isChecked()){
+                        createUser();
+                        snackBar("Account successfully created");
                     }
-                });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError dbe) {
+                Log.d("ERROR", dbe.getMessage());
+            }
+        });
     }
+
+
+
+//    private void createPerson(String type, String email, String password){
+//        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            if (type.equals("admin")) {
+//                                createAdmin();
+//                            } else {
+//                                createUser();
+//                            }
+//                            snackBar("Account successfully created");
+//                        } else {
+//                            Utils.showAlertDialog("Error", "This email address is already linked to another account", signUpScreen.this);
+//                        }
+//                    }
+//                });
+//    }
 
     private void createAdmin(){
         String name = et_name_signUp.getText().toString();

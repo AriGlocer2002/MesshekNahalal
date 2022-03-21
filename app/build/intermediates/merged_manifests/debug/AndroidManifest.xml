@@ -26,7 +26,12 @@
         android:testOnly="true"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
         <activity
-            android:name="com.example.messheknahalal.Admin_screens.UsersListViewScreenAdmin"
+            android:name="com.example.messheknahalal.Admin_screens.AdminsRecycleViewScreenAdmin"
+            android:exported="false"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.messheknahalal.Admin_screens.UsersRecycleViewScreenAdmin"
             android:exported="false"
             android:screenOrientation="portrait" >
         </activity>
