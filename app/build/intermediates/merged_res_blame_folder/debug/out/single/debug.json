@@ -1,11 +1,7 @@
 [
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_profile.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_profile.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_email.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_email.xml"
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_more_ic.png.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\more_ic.png"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_heebo_black.ttf.flat",
@@ -16,48 +12,32 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\upload_image_img.png"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.webp"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_bottom_nav_icon_color_selector.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\bottom_nav_icon_color_selector.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_splashscreen.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_splashscreen.xml"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_background_dropdown_spinner_items.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\background_dropdown_spinner_items.xml"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_viewpager_item.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\viewpager_item.xml"
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_shelves.png.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\shelves.png"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_user_rv_item.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\user_rv_item.xml"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_main_screen_user.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_main_screen_user.xml"
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_viewpager_item.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\viewpager_item.xml"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_gan_yarak.jpeg.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\gan_yarak.jpeg"
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_producttype_selected_background.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\producttype_selected_background.xml"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_spinner_sla.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\spinner_sla.xml"
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_products_rv_admin.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_products_rv_admin.xml"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.webp"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_vegetables_pic.jpeg.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable-v24\\vegetables_pic.jpeg"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_back3.xml.flat",
@@ -72,16 +52,8 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\heebo_medium.ttf"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_products_user.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\fragment_products_user.xml"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_shopping_basket.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_shopping_basket.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_grenze_light.ttf.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\grenze_light.ttf"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_ic_logout.png.flat",
@@ -96,44 +68,16 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_login.xml"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_message.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_message.xml"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_back6.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\back6.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\menu_action_bar_menu.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\menu\\action_bar_menu.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_heebo_bold.ttf.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\heebo_bold.ttf"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_portarit_square.png.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\portarit_square.png"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_map.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_map.xml"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_logo1.png.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\logo1.png"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\menu_navigation_drawer_admin.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\menu\\navigation_drawer_admin.xml"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher.webp.flat",
@@ -144,24 +88,16 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\fragment_products_admin.xml"
     },
     {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout-v23_activity_products_rv_admin.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout-v23\\activity_products_rv_admin.xml"
+    },
+    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.webp"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_sign_up.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_sign_up.xml"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_background_spinner1.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\background_spinner1.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_profile_picture_frame.png.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable-v24\\profile_picture_frame.png"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_back2.xml.flat",
@@ -176,6 +112,186 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\menu\\navigation_drawer_user.xml"
     },
     {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_grenze_semi_bold_italic.ttf.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\grenze_semi_bold_italic.ttf"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_fruit.png.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\fruit.png"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\menu_menu.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\menu\\menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_logo2.png.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\logo2.png"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\menu_action_bar_menu_1.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\menu\\action_bar_menu_1.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_heebo_light.ttf.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\heebo_light.ttf"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_back1.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\back1.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_home_admin.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\fragment_home_admin.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_return_ic.jpg.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable-v24\\return_ic.jpg"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_default_profile_picture.png.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable-v24\\default_profile_picture.png"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_back4.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\back4.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_shopping_cart.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_shopping_cart.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_bees_pic.jpeg.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\bees_pic.jpeg"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_grenze_regular.ttf.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\grenze_regular.ttf"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_phone.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_phone.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_back7.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\back7.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_heebo_regular.ttf.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\heebo_regular.ttf"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_vegetable.png.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\vegetable.png"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_users_rv_admin.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_users_rv_admin.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_profile.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_email.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_email.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_bottom_nav_icon_color_selector.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\bottom_nav_icon_color_selector.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_splashscreen.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_splashscreen.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_main_screen_user.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_main_screen_user.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_gan_yarak.jpeg.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\gan_yarak.jpeg"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\menu_action_bar_menu_2.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\menu\\action_bar_menu_2.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_spinner_sla.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\spinner_sla.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_vegetables_pic.jpeg.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable-v24\\vegetables_pic.jpeg"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_all_rv_rl_background.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\all_rv_rl_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_products_user.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\fragment_products_user.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_grenze_light.ttf.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\grenze_light.ttf"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_message.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_message.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_back6.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\back6.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_portarit_square.png.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\portarit_square.png"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_heebo_bold.ttf.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\heebo_bold.ttf"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_map.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_map.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\menu_navigation_drawer_admin.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\menu\\navigation_drawer_admin.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_sign_up.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_sign_up.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_profile_picture_frame.png.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable-v24\\profile_picture_frame.png"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_default_product_pic_rv.png.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\default_product_pic_rv.png"
+    },
+    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_main_screen_admin.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_main_screen_admin.xml"
     },
@@ -188,18 +304,6 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\spinner_bg.xml"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_grenze_semi_bold_italic.ttf.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\grenze_semi_bold_italic.ttf"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\menu_menu.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\menu\\menu.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_logo2.png.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\logo2.png"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_create_new_product_admin.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_create_new_product_admin.xml"
     },
@@ -208,28 +312,12 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\back5.xml"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_back1.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\back1.xml"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_my_profile_user.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_my_profile_user.xml"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_heebo_light.ttf.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\heebo_light.ttf"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_users_rl_background.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\users_rl_background.xml"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_home_user.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\fragment_home_user.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_user_circle.xml.flat",
@@ -238,10 +326,6 @@
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_admin_rv_item.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\admin_rv_item.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\anim_fade_in.xml.flat",
@@ -256,24 +340,16 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_home.xml"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_home_admin.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\fragment_home_admin.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_default_profile_picture.png.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable-v24\\default_profile_picture.png"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_background_img.jpeg.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable-v24\\background_img.jpeg"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_back4.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\back4.xml"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_image_nahalal.jpg.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\image_nahalal.jpg"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_producttype_unselected_background.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\producttype_unselected_background.xml"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_my_profile_admin.xml.flat",
@@ -284,8 +360,8 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.webp"
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_products_rv_item.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\products_rv_item.xml"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher_round.webp.flat",
@@ -296,32 +372,20 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\grenze_thin.ttf"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_bees_pic.jpeg.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\bees_pic.jpeg"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_shopping_cart.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_shopping_cart.xml"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_admins_rv_admin.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_admins_rv_admin.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_grenze_regular.ttf.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\grenze_regular.ttf"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_phone.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\ic_phone.xml"
-    },
-    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_human_skull.png.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable-v24\\human_skull.png"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_receipt.xml.flat",
@@ -330,17 +394,5 @@
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_lettuce_img.jpeg.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\lettuce_img.jpeg"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_back7.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\back7.xml"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_heebo_regular.ttf.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\font\\heebo_regular.ttf"
-    },
-    {
-        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_users_rv_admin.xml.flat",
-        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_users_rv_admin.xml"
     }
 ]

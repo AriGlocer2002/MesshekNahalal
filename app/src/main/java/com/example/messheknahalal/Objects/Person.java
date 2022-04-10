@@ -1,22 +1,17 @@
 package com.example.messheknahalal.Objects;
 
-import android.provider.ContactsContract;
-
 import androidx.annotation.NonNull;
-
-import java.net.PasswordAuthentication;
 
 public class Person {
 
-    private String name;
-    private String last_name;
-    private String email;
-    private String phone;
-    private String type;
+    protected String name;
+    protected String last_name;
+    protected String email;
+    protected String phone;
+    protected String type;
+    protected String token;
 
-
-    public Person(){
-    }
+    public Person(){}
 
     public Person(String name, String last_name, String email, String phone, String type) {
         this.name = name;
@@ -24,6 +19,15 @@ public class Person {
         this.email = email;
         this.phone = phone;
         this.type = type;
+    }
+
+    public Person(String name, String last_name, String email, String phone, String type, String token) {
+        this.name = name;
+        this.last_name = last_name;
+        this.email = email;
+        this.phone = phone;
+        this.type = type;
+        this.token = token;
     }
 
     public String getName() {
@@ -75,6 +79,15 @@ public class Person {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", type='" + type + '\'' +
+                ", token='" + token + '\'' +
                 '}';
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

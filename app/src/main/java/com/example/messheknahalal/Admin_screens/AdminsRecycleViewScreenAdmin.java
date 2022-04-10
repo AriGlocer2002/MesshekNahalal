@@ -4,15 +4,18 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -73,8 +76,6 @@ public class AdminsRecycleViewScreenAdmin extends AppCompatActivity {
         adminAdapter = new AdminsAdapterFirebase(options, this);
 
         rv_admins.setAdapter(adminAdapter);
-        Log.d("murad", "rv_events.getChildCount() = " + rv_admins.getChildCount());
-//        rv_admins.setLayoutManager(new LinearLayoutManager(this));
         rv_admins.setLayoutManager(new WrapContentLinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
 
@@ -137,10 +138,11 @@ public class AdminsRecycleViewScreenAdmin extends AppCompatActivity {
 //                    case R.id.orders_item:
 //
 //                        break;
-//
-//                    case R.id.products_item:
-//
-//                        break;
+
+                    case R.id.products_item:
+                        intent = new Intent(AdminsRecycleViewScreenAdmin.this, ProductsRecycleViewScreenAdmin.class);
+                        startActivity(intent);
+                        break;
 
                     case R.id.logOut_item:
                         FirebaseAuth.getInstance().signOut();
@@ -177,7 +179,27 @@ public class AdminsRecycleViewScreenAdmin extends AppCompatActivity {
     }
 
     public void onBackPressed(){
+        //if drawer is open close the drawer
+        if(drawerMenu.isDrawerOpen(GravityCompat.START)){
+            drawerMenu.closeDrawer(GravityCompat.START);
+        }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_bar_menu_2, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.return_ic:
+                intent = new Intent(this, UsersRecycleViewScreenAdmin.class);
+                startActivity(intent);
+                return true;
+        }
+        return false;
+    }
 }

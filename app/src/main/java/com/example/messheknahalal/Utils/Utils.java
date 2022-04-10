@@ -30,4 +30,31 @@ public class Utils {
         dialog.setMessage(message);
         dialog.show();
     }
+
+    @NonNull
+    public static String emailToPath(@NonNull String email){
+        return email.replace(".", "-");
+    }
+
+    @NonNull
+    public static String emailForFCM(@NonNull String email){
+        return email.replace(".", "-").replace("@", "%");
+    }
+
+    @NonNull
+    public static String emailToUserPath(@NonNull String email){
+        return "User_" + email.replace(".", "-");
+    }
+
+    @NonNull
+    public static String emailToPersonPath(@NonNull String email){
+        return "Person_" + email.replace(".", "-");
+    }
+
+    @NonNull
+    public static String productNameToPath(@NonNull String name){
+        String path = "product_"+name.replace(" ","-");
+        path = path.replace(".", "-");
+        return path;
+    }
 }

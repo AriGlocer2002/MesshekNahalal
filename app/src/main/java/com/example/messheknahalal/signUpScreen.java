@@ -41,6 +41,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -218,8 +219,19 @@ public class signUpScreen extends AppCompatActivity {
                     } else if (cb_admin.isChecked() && !codeDB.equals(code)) {
                         Utils.showAlertDialog("Error", "The admin code is not valid", signUpScreen.this);
                     } else if(!cb_admin.isChecked()){
-                        createUser();
-                        snackBar("Account successfully created");
+                        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+
+                                    createUser();
+                                    snackBar("Account successfully created");
+
+                                } else {
+                                    Utils.showAlertDialog("Error", "This email address is already linked to another account", signUpScreen.this);
+                                }
+                            }
+                        });
                     }
                 }
             }
@@ -268,20 +280,76 @@ public class signUpScreen extends AppCompatActivity {
         personRef.child("Person_"+email).setValue(person);
     }
 
+    /*private void createUser(){
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        System.out.println("Token " + token);
+
+                        String name = et_name_signUp.getText().toString();
+                        String last_name = et_last_name_signUp.getText().toString();
+                        String email = et_email_address_signUp.getText().toString();
+                        String phone = et_phone_number_signUp.getText().toString();
+
+                        name = Utils.capitalizeString(name);
+                        last_name = Utils.capitalizeString(last_name);
+
+                        User user = new User(name, last_name, email, phone, "user", "", token);
+                        Person person = new Person(name, last_name, email, phone, "user", token);
+                        email = email.replace(".","-");
+
+                        userRef.child("User_"+email).setValue(user);
+                        personRef.child("Person_"+email).setValue(person);
+                    }
+                });
+
+
+    }*/
+
     private void createUser(){
-        String name = et_name_signUp.getText().toString();
-        String last_name = et_last_name_signUp.getText().toString();
-        String email = et_email_address_signUp.getText().toString();
-        String phone = et_phone_number_signUp.getText().toString();
 
-        name = Utils.capitalizeString(name);
-        last_name = Utils.capitalizeString(last_name);
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-        User user = new User(name, last_name, email, phone, "user", "");
-        Person person = new Person(name, last_name, email, phone, "user");
-        email = email.replace(".","-");
-        userRef.child("User_"+email).setValue(user);
-        personRef.child("Person_"+email).setValue(person);
+        FirebaseMessaging.getInstance().subscribeToTopic("Notification_to_" + Utils.emailForFCM(email)).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (!task.isSuccessful()) {
+                    Log.d("ariel", "Subscribing to topic failed");
+                    return;
+                }
+
+                Log.d("ariel", "Subscribing to topic succeeded");
+
+                String name = et_name_signUp.getText().toString();
+                String last_name = et_last_name_signUp.getText().toString();
+                String email = et_email_address_signUp.getText().toString();
+                String phone = et_phone_number_signUp.getText().toString();
+
+                name = Utils.capitalizeString(name);
+                last_name = Utils.capitalizeString(last_name);
+
+                User user = new User(name, last_name, email, phone, "user");
+                Person person = new Person(name, last_name, email, phone, "user");
+
+                personRef.child(Utils.emailToPersonPath(email)).setValue(person);
+                userRef.child(Utils.emailToUserPath(email)).setValue(user);
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
     @Override

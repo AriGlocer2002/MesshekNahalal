@@ -22,8 +22,11 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.R;
+import com.example.messheknahalal.Utils.Utils;
 import com.example.messheknahalal.loginScreen;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +36,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -144,9 +148,18 @@ public class mainScreenUser extends AppCompatActivity {
                         break;
 
                     case R.id.logOut_item:
-                        FirebaseAuth.getInstance().signOut();
-                        intent = new Intent(mainScreenUser.this, loginScreen.class);
-                        startActivity(intent);
+
+                        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic("Notification_to_" + Utils.emailForFCM(userEmail))
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                FirebaseAuth.getInstance().signOut();
+                                intent = new Intent(mainScreenUser.this, loginScreen.class);
+                                startActivity(intent);
+                            }
+                        });
                         break;
                 }
                 return false;
@@ -220,7 +233,7 @@ public class mainScreenUser extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action_bar_menu, menu);
+        getMenuInflater().inflate(R.menu.action_bar_menu_1, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

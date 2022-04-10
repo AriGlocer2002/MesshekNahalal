@@ -8,6 +8,7 @@ public class Product {
     private String name;
     private String stock;
     private String price;
+    private String picture;
 
     public Product(){
 
@@ -18,6 +19,14 @@ public class Product {
         this.name = name;
         this.stock = stock;
         this.price = price;
+    }
+
+    public Product(String type, String name, String stock, String price, String picture) {
+        this.type = type;
+        this.name = name;
+        this.stock = stock;
+        this.price = price;
+        this.picture = picture;
     }
 
     public String getType() {
@@ -61,5 +70,13 @@ public class Product {
                 ", stock='" + stock + '\'' +
                 ", price='" + price + '\'' +
                 '}';
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

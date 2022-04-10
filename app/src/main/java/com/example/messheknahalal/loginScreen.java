@@ -21,6 +21,8 @@ import androidx.core.view.GravityCompat;
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.User_screens.mainScreenUser;
+import com.example.messheknahalal.Utils.Utils;
+import com.example.messheknahalal.delete_user.FirebaseNotificationPushService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -34,6 +36,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Random;
 
@@ -82,11 +85,21 @@ public class loginScreen extends AppCompatActivity{
                     progressDialog.show();
                     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(loginScreen.this, new OnCompleteListener<AuthResult>() {
                                 @Override
-                                public void onComplete(Task<AuthResult> task) {
+                                public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         //check if the person is admin or user
-                                        checkPersonType(email);
-                                    } else {
+
+                                        FirebaseMessaging.getInstance().subscribeToTopic("Notification_to_" + Utils.emailForFCM(email)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    checkPersonType(email);
+                                                }
+                                            }
+                                        });
+
+                                    }
+                                    else {
                                         showAlertDialog("Error", "Wrong email or password!\nPlease try again!");
                                     }
                                     progressDialog.dismiss();
@@ -102,7 +115,6 @@ public class loginScreen extends AppCompatActivity{
                 createForgotPassDialog();
             }
         });
-
 
         btn_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,6 +208,16 @@ public class loginScreen extends AppCompatActivity{
                     startActivity(intent);
                 }else {
                     Toast.makeText(loginScreen.this, "checkPersonType: not found person", Toast.LENGTH_LONG).show();
+
+                    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+                    firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Log.d("ariel", "the user was successfully deleted");
+                        }
+                    });
                 }
             }
 

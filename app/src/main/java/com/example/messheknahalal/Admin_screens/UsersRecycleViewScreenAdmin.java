@@ -162,10 +162,11 @@ public class UsersRecycleViewScreenAdmin extends AppCompatActivity {
 //                    case R.id.orders_item:
 //
 //                        break;
-//
-//                    case R.id.products_item:
-//
-//                        break;
+
+                    case R.id.products_item:
+                        intent = new Intent(UsersRecycleViewScreenAdmin.this, ProductsRecycleViewScreenAdmin.class);
+                        startActivity(intent);
+                        break;
 
                     case R.id.logOut_item:
                         FirebaseAuth.getInstance().signOut();

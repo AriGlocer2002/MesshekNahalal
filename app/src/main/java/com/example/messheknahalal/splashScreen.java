@@ -62,7 +62,7 @@ public class splashScreen extends AppCompatActivity {
                     checkPersonType(email);
                 }
             }
-        },LOGINSCREEN);
+        }, LOGINSCREEN);
     }
 
     public void checkPersonType(@NonNull String email){

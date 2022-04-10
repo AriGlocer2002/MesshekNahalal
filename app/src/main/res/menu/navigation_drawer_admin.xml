@@ -30,10 +30,10 @@
             android:title="Users"
             android:checked="false" />
         <item
-            android:id="@+id/edit_products_item"
+            android:id="@+id/products_item"
             android:icon="@drawable/ic_shopping_basket"
             android:iconTint="@color/black"
-            android:title="Edit products"
+            android:title="Products"
             android:checked="false" />
     </group>
 

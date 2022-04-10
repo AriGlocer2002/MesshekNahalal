@@ -33,6 +33,8 @@
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/drawable/ic_user_circle.xml" value="0.134" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/drawable/menu_open.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/drawable/password_icon.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/drawable/producttype_selected_background.xml" value="0.278" />
+        <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/drawable/producttype_unselected_background.xml" value="0.278" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/drawable/shopping_cart.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/drawable/spinner_bg.xml" value="0.14" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/drawable/spinner_sla.xml" value="0.14" />
@@ -49,6 +51,7 @@
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_my_profile.xml" value="0.33" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_my_profile_admin.xml" value="0.14285714285714285" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_my_profile_user.xml" value="0.1875" />
+        <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_products_rv_admin.xml" value="0.3625" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_register.xml" value="0.3569230769230769" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_splashscreen.xml" value="0.33" />
@@ -65,10 +68,13 @@
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/header_navigation_drawer.xml" value="0.33" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/loading_dialog.xml" value="0.3625" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/lv.xml" value="0.3569230769230769" />
+        <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/products_rv_item.xml" value="0.3625" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/reset_password_dialog.xml" value="0.3625" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/user_lv_item.xml" value="0.4726598702502317" />
+        <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/user_rv_item.xml" value="0.3625" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/viewpager_item.xml" value="0.4836692147324531" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/menu/action_bar_menu.xml" value="0.3625" />
+        <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/menu/action_bar_menu_2.xml" value="0.25" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/menu/menu.xml" value="0.1" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/menu/navigation_drawer.xml" value="0.33" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/menu/navigation_drawer_admin.xml" value="0.3625" />

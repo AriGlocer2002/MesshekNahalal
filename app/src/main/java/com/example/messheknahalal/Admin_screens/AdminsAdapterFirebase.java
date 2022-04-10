@@ -132,7 +132,6 @@ public class AdminsAdapterFirebase extends
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         String email = getItem(getBindingAdapterPosition()).getEmail();
-                        delateAuthAdmin(email);
                         email = "Admin_" + email.replace(".","-");
                         deleteAdmin(email);
                     }
@@ -155,12 +154,6 @@ public class AdminsAdapterFirebase extends
             adminsRef.child(path).removeValue();
             peopleRef.child(path).removeValue();
         }
-
-        public void delateAuthAdmin (String email){
-          //  String adminID = auth.getuID.(email);
-
-        }
-
     }
 
     @Override
@@ -170,8 +163,6 @@ public class AdminsAdapterFirebase extends
         holder.tv_email.setText(model.getEmail());
         holder.tv_phone.setText(model.getPhone());
 
-        Log.d("ariel", "E-mail is " + model.getEmail());
-        Log.d("ariel", "E-mail is " + model);
         rStore = FirebaseStorage.getInstance().getReference();
         StorageReference profileRef = rStore.child("profiles/pp_" + model.getEmail().replace(".","-")+".jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -180,12 +171,6 @@ public class AdminsAdapterFirebase extends
                 Glide.with(context).load(uri).centerCrop().into(holder.admins_rv_item_iv_pp);
             }
         });
-
-        /*int backgroundColor = 0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            backgroundColor = ((GradientDrawable) holder.rl_admin_item.getBackground()).getColor().getDefaultColor();
-        }
-        holder.admins_lv_item_iv_pp.setBackgroundColor(backgroundColor);*/
     }
 
     @NonNull

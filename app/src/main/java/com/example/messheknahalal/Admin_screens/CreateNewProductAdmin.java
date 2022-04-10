@@ -30,8 +30,10 @@ import com.example.messheknahalal.Objects.Product;
 import com.example.messheknahalal.Objects.User;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.Utils.Utils;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -172,8 +174,7 @@ public class CreateNewProductAdmin extends AppCompatActivity {
 
     private void uploadImageToFirebase(Uri imageUri) {
         //Checking product name format
-        String productName = tie_name.getText().toString().replace(" ","-");
-        productName = productName.replace(".","-");
+        String productName = Utils.productNameToPath(tie_name.getText().toString());
 
         String productType = (String)spinner.getSelectedItem();
 
@@ -181,7 +182,7 @@ public class CreateNewProductAdmin extends AppCompatActivity {
         d.setContentView(R.layout.loading_dialog);
         d.show();
 
-        StorageReference fileRef = rStore.child("products/"+productType+"/imgProduct_"+productName+".jpg");
+        StorageReference fileRef = rStore.child("products/"+productType+"/"+productName+".jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -190,7 +191,25 @@ public class CreateNewProductAdmin extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         Glide.with(getApplicationContext()).load(uri).centerCrop().into(product_img);
-                        d.dismiss();
+
+                        String productName = tie_name.getText().toString();
+
+                        productName = productName.replace(" ", "-");
+                        productName = productName.replace(".", "-");
+
+                        Log.d("ariel", uri.toString());
+
+                        productRef = FirebaseDatabase.getInstance().getReference("Product").child(productType);
+                        productRef.child("product_"+productName).child("picture").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Log.d("ariel", "picture successfully uploaded");
+                                }
+                                d.dismiss();
+                            }
+                        });
+
                     }
                 });
             }

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.User;
 import com.example.messheknahalal.R;
+import com.example.messheknahalal.Utils.Utils;
+import com.example.messheknahalal.delete_user.FCMSend;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.ObservableSnapshotArray;
@@ -29,8 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class UsersAdapterFirebase  extends
-        FirebaseRecyclerAdapter<User, UsersAdapterFirebase.UserViewHolderFirebase> {
+public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAdapterFirebase.UserViewHolderFirebase> {
 
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
@@ -43,7 +43,6 @@ public class UsersAdapterFirebase  extends
     private FirebaseRecyclerOptions<User> options;
     private final Context context;
 
-//    ArrayList<User> users;
     StorageReference rStore;
     private LayoutInflater inflater;
     FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -132,9 +131,10 @@ public class UsersAdapterFirebase  extends
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         String email = getItem(getBindingAdapterPosition()).getEmail();
-                        delateAuthUser(email);
-                        email = "User_" + email.replace(".","-");
-                        deleteUser(email);
+                        String token = getItem(getBindingAdapterPosition()).getToken();
+
+
+                        deleteUser(email, token);
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -151,14 +151,15 @@ public class UsersAdapterFirebase  extends
             return true;
         }
 
-        public void deleteUser(String path){
-            usersRef.child(path).removeValue();
-            peopleRef.child(path).removeValue();
-        }
+        public void deleteUser(String email, String token){
 
-        public void delateAuthUser (String email){
-           // String userID = auth.getuID.(email);
+            String userPath = Utils.emailToUserPath(email);
+            String personPath = Utils.emailToPersonPath(email);
 
+            usersRef.child(userPath).removeValue();
+            peopleRef.child(personPath).removeValue();
+
+            FCMSend.sendNotificationsToDeleteUser(context, email);
         }
 
     }
@@ -170,8 +171,6 @@ public class UsersAdapterFirebase  extends
         holder.tv_email.setText(model.getEmail());
         holder.tv_phone.setText(model.getPhone());
 
-        Log.d("ariel", "E-mail is " + model.getEmail());
-        Log.d("ariel", "E-mail is " + model);
         rStore = FirebaseStorage.getInstance().getReference();
         StorageReference profileRef = rStore.child("profiles/pp_" + model.getEmail().replace(".","-")+".jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -180,17 +179,11 @@ public class UsersAdapterFirebase  extends
                 Glide.with(context).load(uri).centerCrop().into(holder.users_lv_item_iv_pp);
             }
         });
-
-        /*int backgroundColor = 0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            backgroundColor = ((GradientDrawable) holder.rl_user_item.getBackground()).getColor().getDefaultColor();
-        }
-        holder.users_lv_item_iv_pp.setBackgroundColor(backgroundColor);*/
     }
 
     @NonNull
     @Override
-    public UserViewHolderFirebase onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UsersAdapterFirebase.UserViewHolderFirebase onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.user_rv_item, parent, false);
 
