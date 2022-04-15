@@ -89,7 +89,7 @@
                     android:layout_toEndOf="@id/products_rv_screen_btn_shelf"
                     android:backgroundTint="@android:color/transparent"
                     android:drawableBottom="@drawable/more_ic"
-                    android:drawableTint="@color/black" />
+                    android:drawableTint="@color/black"/>
 
             </RelativeLayout>
 

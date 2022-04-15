@@ -2880,8 +2880,14 @@ id flip
 id floating
 id forever
 id fragment_container_view_tag
+id fragment_home_admin_btn_my_profile
+id fragment_home_admin_btn_orders
+id fragment_home_admin_btn_products
+id fragment_home_admin_btn_users
+id fragment_home_admin_dots
 id fragment_home_admin_iv_logo
 id fragment_home_admin_iv_logo_background
+id fragment_home_admin_viewPager
 id fragment_home_user_dots
 id fragment_home_user_iv_b1
 id fragment_home_user_iv_logo
@@ -3111,6 +3117,7 @@ id products_rv_item_iv_pp
 id products_rv_item_iv_pp_frame
 id products_rv_item_tv_full_name
 id products_rv_item_tv_price
+id products_rv_item_tv_price_logo
 id products_rv_item_tv_price_num
 id products_rv_item_tv_stock
 id products_rv_item_tv_stock_num

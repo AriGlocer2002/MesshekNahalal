@@ -2879,8 +2879,14 @@ int id flip 0x7f0a00f3
 int id floating 0x7f0a00f4
 int id forever 0x7f0a00f5
 int id fragment_container_view_tag 0x7f0a00f6
+int id fragment_home_admin_btn_my_profile 0x7f0a02bd
+int id fragment_home_admin_btn_orders 0x7f0a02be
+int id fragment_home_admin_btn_products 0x7f0a02bf
+int id fragment_home_admin_btn_users 0x7f0a02c0
+int id fragment_home_admin_dots 0x7f0a02bb
 int id fragment_home_admin_iv_logo 0x7f0a00f7
 int id fragment_home_admin_iv_logo_background 0x7f0a00f8
+int id fragment_home_admin_viewPager 0x7f0a02bc
 int id fragment_home_user_dots 0x7f0a00f9
 int id fragment_home_user_iv_b1 0x7f0a00fa
 int id fragment_home_user_iv_logo 0x7f0a00fb
@@ -3110,6 +3116,7 @@ int id products_rv_item_iv_pp 0x7f0a01da
 int id products_rv_item_iv_pp_frame 0x7f0a01db
 int id products_rv_item_tv_full_name 0x7f0a01dc
 int id products_rv_item_tv_price 0x7f0a01dd
+int id products_rv_item_tv_price_logo 0x7f0a02b6
 int id products_rv_item_tv_price_num 0x7f0a01de
 int id products_rv_item_tv_stock 0x7f0a01df
 int id products_rv_item_tv_stock_num 0x7f0a01e0
