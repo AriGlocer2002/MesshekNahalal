@@ -19,7 +19,7 @@
             android:id="@+id/products_rv_item_iv_pp"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="13dp"
             app:srcCompat="@drawable/default_product_pic_rv"
             tools:layout_editor_absoluteX="313dp"
@@ -29,7 +29,6 @@
             android:id="@+id/products_rv_item_iv_pp_frame"
             android:layout_width="85dp"
             android:layout_height="85dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             app:srcCompat="@drawable/portarit_square"
             tools:layout_editor_absoluteX="313dp"
@@ -40,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/products_rv_item_iv_pp_frame"
             android:fontFamily="@font/heebo_bold"
             android:text="Full name"
@@ -54,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/products_rv_item_tv_full_name"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/products_rv_item_iv_pp_frame"
             android:fontFamily="@font/heebo_light"
             android:text="Stock:"
@@ -67,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/products_rv_item_tv_full_name"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/products_rv_item_tv_stock"
             android:fontFamily="@font/heebo_regular"
             android:text="num"
@@ -75,40 +74,55 @@
             android:textSize="15dp" />
 
         <TextView
-            android:id="@+id/products_rv_item_tv_price_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/products_rv_item_button_edit"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:text="num"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            android:fontFamily="@font/heebo_regular" />
-
-        <TextView
             android:id="@+id/products_rv_item_tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/products_rv_item_button_edit"
-            android:layout_marginTop="10dp"
-            android:layout_toLeftOf="@+id/products_rv_item_tv_price_num"
-            android:layout_marginRight="10dp"
+            android:layout_below="@+id/products_rv_item_tv_stock_num"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/products_rv_item_iv_pp_frame"
+            android:fontFamily="@font/heebo_regular"
             android:text="Price:"
             android:textColor="@color/black"
-            android:textSize="15dp"
-            android:fontFamily="@font/heebo_regular" />
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/products_rv_item_tv_price_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/products_rv_item_tv_stock_num"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/products_rv_item_tv_price"
+            android:fontFamily="@font/heebo_regular"
+            android:text="num"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/products_rv_item_tv_price_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/products_rv_item_tv_stock_num"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/products_rv_item_tv_price_num"
+            android:fontFamily="@font/heebo_regular"
+            android:text="₪"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
 
         <Button
             android:id="@+id/products_rv_item_button_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="45dp"
             android:layout_marginEnd="10dp"
-            android:textSize="12sp"
-            android:text="Edit" />
+            android:text="Edit"
+            android:textSize="12sp" />
 
     </RelativeLayout>
 

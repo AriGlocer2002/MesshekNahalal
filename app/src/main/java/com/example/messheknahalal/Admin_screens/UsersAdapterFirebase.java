@@ -44,8 +44,6 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
     private final Context context;
 
     StorageReference rStore;
-    private LayoutInflater inflater;
-    FirebaseAuth auth = FirebaseAuth.getInstance();
     private final DatabaseReference usersRef;
     private final DatabaseReference peopleRef;
 
@@ -159,7 +157,7 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
             usersRef.child(userPath).removeValue();
             peopleRef.child(personPath).removeValue();
 
-            FCMSend.sendNotificationsToDeleteUser(context, email);
+            FCMSend.sendNotificationsToDeletePerson(context, email);
         }
 
     }

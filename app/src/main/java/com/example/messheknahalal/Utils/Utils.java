@@ -57,4 +57,8 @@ public class Utils {
         path = path.replace(".", "-");
         return path;
     }
+
+    public static String emailToAdminPath(String email) {
+        return "Admin_" + email.replace(".", "-");
+    }
 }

@@ -86,22 +86,22 @@
                     android:layout_height="85dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:drawableTint="@color/black"
                     android:layout_toEndOf="@id/products_rv_screen_btn_shelf"
-                    android:drawableBottom="@drawable/more_ic" />
+                    android:backgroundTint="@android:color/transparent"
+                    android:drawableBottom="@drawable/more_ic"
+                    android:drawableTint="@color/black" />
 
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/products_rv_screen_rv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="40dp"
-                android:layout_marginBottom="20sp"
+                android:layout_width="357dp"
+                android:layout_height="490dp"
                 android:layout_below="@+id/products_rv_screen_rl_buttons"
                 android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="40dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="20sp"
                 android:padding="3sp" />
 
         </RelativeLayout>

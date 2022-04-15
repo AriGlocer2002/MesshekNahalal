@@ -3,7 +3,6 @@ package com.example.messheknahalal.delete_user;
 import android.content.Context;
 import android.os.StrictMode;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -15,18 +14,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.messheknahalal.Utils.Utils;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class FCMSend {
@@ -35,7 +27,7 @@ public class FCMSend {
     //API key for FCM
     private static final String SERVER_KEY = "key=AAAAMGJwnio:APA91bHmsrZxwvWPa4fHLO2tNLr5HuwtLRLfYZYsFuByqTroeAze8VIqJ8YyCo3WIKtSPqlwFCsbvckAtzsJQA3eHn4Tpy5r17O1ZrGdsk7s1KCI3OVJPp9BziVP4OJDk0oWeCiZcF8I";
 
-    public static void sendNotificationToOneUser(@NonNull Context context, String email, String token) {
+    public static void sendNotificationToOnePerson(@NonNull Context context, String email, String token) {
 
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -97,7 +89,7 @@ public class FCMSend {
         }
     }
 
-    public static void sendNotificationToOneUser(@NonNull Context context, String email) {
+    public static void sendNotificationToOnePerson(@NonNull Context context, String email) {
 
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -158,15 +150,15 @@ public class FCMSend {
         }
     }
 
-    public static void sendNotificationsToDeleteUser(Context context, String email, String token) {
+    public static void sendNotificationsToDeletePerson(Context context, String email, String token) {
 
-        sendNotificationToOneUser(context, email, token);
+        sendNotificationToOnePerson(context, email, token);
 
     }
 
-    public static void sendNotificationsToDeleteUser(Context context, String email) {
+    public static void sendNotificationsToDeletePerson(Context context, String email) {
 
-        sendNotificationToOneUser(context, email);
+        sendNotificationToOnePerson(context, email);
 
     }
 }

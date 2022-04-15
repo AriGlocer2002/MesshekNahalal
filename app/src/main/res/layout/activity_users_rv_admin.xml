@@ -45,7 +45,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/users_rv_screen_rv"
                 android:layout_width="350dp"
-                android:layout_height="443dp"
+                android:layout_height="490dp"
                 android:layout_below="@+id/users_rv_screen_tv_title"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"

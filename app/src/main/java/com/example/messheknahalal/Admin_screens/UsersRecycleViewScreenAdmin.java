@@ -43,7 +43,7 @@ import java.util.ArrayList;
 
 public class UsersRecycleViewScreenAdmin extends AppCompatActivity {
 
-    UsersAdapterRecyclerView adapter;
+
     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User");
 
     RecyclerView rv_users;
@@ -98,8 +98,6 @@ public class UsersRecycleViewScreenAdmin extends AppCompatActivity {
         userAdapter = new UsersAdapterFirebase(options, this);
 
         rv_users.setAdapter(userAdapter);
-        Log.d("murad", "rv_events.getChildCount() = " + rv_users.getChildCount());
-//        rv_users.setLayoutManager(new LinearLayoutManager(this));
         rv_users.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
 

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.Admin;
 import com.example.messheknahalal.R;
+import com.example.messheknahalal.Utils.Utils;
+import com.example.messheknahalal.delete_user.FCMSend;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.ObservableSnapshotArray;
@@ -43,10 +44,7 @@ public class AdminsAdapterFirebase extends
     private FirebaseRecyclerOptions<Admin> options;
     private final Context context;
 
-    //    ArrayList<Admin> admins;
     StorageReference rStore;
-    private LayoutInflater inflater;
-    FirebaseAuth auth = FirebaseAuth.getInstance();
     private final DatabaseReference adminsRef;
     private final DatabaseReference peopleRef;
 
@@ -132,8 +130,9 @@ public class AdminsAdapterFirebase extends
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         String email = getItem(getBindingAdapterPosition()).getEmail();
-                        email = "Admin_" + email.replace(".","-");
-                        deleteAdmin(email);
+                        String token = getItem(getBindingAdapterPosition()).getToken();
+
+                        deleteAdmin(email, token);
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -150,9 +149,15 @@ public class AdminsAdapterFirebase extends
             return true;
         }
 
-        public void deleteAdmin(String path){
-            adminsRef.child(path).removeValue();
-            peopleRef.child(path).removeValue();
+        public void deleteAdmin(String email, String token){
+
+            String adminPath = Utils.emailToAdminPath(email);
+            String personPath = Utils.emailToPersonPath(email);
+
+            adminsRef.child(adminPath).removeValue();
+            peopleRef.child(personPath).removeValue();
+
+            FCMSend.sendNotificationsToDeletePerson(context, email);
         }
     }
 
