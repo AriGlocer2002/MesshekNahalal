@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,22 +16,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.R;
+import com.example.messheknahalal.SuperActivityWithNavigationDrawer;
 import com.example.messheknahalal.Utils.Utils;
-import com.example.messheknahalal.loginScreen;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,7 +40,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class MyProfileScreenAdmin extends AppCompatActivity {
+public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
 
     Intent intent;
     StorageReference rStore;
@@ -54,10 +48,7 @@ public class MyProfileScreenAdmin extends AppCompatActivity {
             personRef = FirebaseDatabase.getInstance().getReference().child("Person");
     FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    TextView nd_tv_name, nd_tv_email;
-    ImageView nv_profile_img, screen_profile_img;
-    DrawerLayout drawerMenu;
-    NavigationView nav_view;
+    ImageView screen_profile_img;
     Button btn_update_data, btn_reset_pass;
     EditText et_name, et_last_name, et_email, et_phone;
 
@@ -73,28 +64,8 @@ public class MyProfileScreenAdmin extends AppCompatActivity {
         String personPath = "Person_"+adminEmail.replace(".","-");
         rStore = FirebaseStorage.getInstance().getReference();
 
-        //setting profile information in the navigation drawer
-        NavigationView navigationView = findViewById(R.id.my_profile_admin_nav_view);
-        View headerView = navigationView.getHeaderView(0);
-
-        loadDrawerNameAndLastName(personPath);
-
-        TextView navAdminName = headerView.findViewById(R.id.header_nd_tv_name);
-        TextView email = headerView.findViewById(R.id.header_nd_tv_email);
-        email.setText(user.getEmail());
-
-        //setting profile image in the navigation drawer
         //setting profile image in the screen
         screen_profile_img = findViewById(R.id.my_profile_admin_iv_pp);
-        nv_profile_img = headerView.findViewById(R.id.header_nd_iv_pp);
-        StorageReference profileRef = rStore.child("profiles/pp_"+adminEmail.replace(".","-")+".jpg");
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(MyProfileScreenAdmin.this).load(uri).centerCrop().into(screen_profile_img);
-                Glide.with(MyProfileScreenAdmin.this).load(uri).centerCrop().into(nv_profile_img);
-            }
-        });
 
         //changing profile picture
         screen_profile_img.setOnClickListener(new View.OnClickListener() {
@@ -161,55 +132,8 @@ public class MyProfileScreenAdmin extends AppCompatActivity {
             }
         });
 
-        //Navigation menu
-        nd_tv_name = findViewById(R.id.header_nd_tv_name);
-        nd_tv_email = findViewById(R.id.header_nd_tv_email);
+        initializeNavigationDrawer(true);
 
-        drawerMenu = findViewById(R.id.my_profile_admin_drawer_layout);
-        nav_view = findViewById(R.id.my_profile_admin_nav_view);
-
-        Toolbar toolbar = findViewById(R.id.my_profile_admin_toolbar);
-        setSupportActionBar(toolbar);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerMenu, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerMenu.addDrawerListener(toggle);
-        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.black));
-        getSupportActionBar().setTitle("");
-        toggle.syncState();
-
-        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.home_item:
-                        intent = new Intent(MyProfileScreenAdmin.this, mainScreenAdmin.class);
-                        startActivity(intent);
-                        break;
-
-//                    case R.id.orders_item:
-//
-//                        break;
-
-                      case R.id.users_item:
-                          intent = new Intent(MyProfileScreenAdmin.this, UsersRecycleViewScreenAdmin.class);
-                          startActivity(intent);
-                          break;
-
-                    case R.id.products_item:
-                        intent = new Intent(MyProfileScreenAdmin.this, ProductsRecycleViewScreenAdmin.class);
-                        startActivity(intent);
-                        break;
-
-                    case R.id.logOut_item:
-                        FirebaseAuth.getInstance().signOut();
-                        intent = new Intent(MyProfileScreenAdmin.this, loginScreen.class);
-                        startActivity(intent);
-                        break;
-                }
-                return false;
-            }
-        });
     }
 
     @Override
@@ -266,13 +190,12 @@ public class MyProfileScreenAdmin extends AppCompatActivity {
     }
 
     public void snackBar(String message){
-        Snackbar snackbar = Snackbar
-                .make(findViewById(R.id.my_profile_admin_drawer_layout), message, Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.drawer_layout), message, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 
 
-    public void showData(String email){
+    public void showData(@NonNull String email){
         et_email = findViewById(R.id.my_profile_admin_et_email_address);
         et_phone = findViewById(R.id.my_profile_admin_et_phone_number);
         et_name = findViewById(R.id.my_profile_admin_et_name);
@@ -302,35 +225,5 @@ public class MyProfileScreenAdmin extends AppCompatActivity {
                 Log.d("ERROR", dbe.getMessage());
             }
         });
-    }
-
-    public void loadDrawerNameAndLastName(String path){
-        personRef.child(path).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Person p= snapshot.getValue(Person.class);
-                String name = p.getName();
-                String last_name = p.getLast_name();
-                String fullName = name+" "+last_name;
-
-                NavigationView navigationView = findViewById(R.id.my_profile_admin_nav_view);
-                View headerView = navigationView.getHeaderView(0);
-
-                TextView navAdminName = headerView.findViewById(R.id.header_nd_tv_name);
-                navAdminName.setText(fullName);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError dbe) {
-                Log.d("ERROR", dbe.getMessage());
-            }
-        });
-    }
-
-    public void onBackPressed(){
-        //if drawer is open close the drawer
-        if(drawerMenu.isDrawerOpen(GravityCompat.START)){
-            drawerMenu.closeDrawer(GravityCompat.START);
-        }
     }
 }

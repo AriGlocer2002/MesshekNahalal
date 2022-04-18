@@ -36,13 +36,9 @@ public class ProductsAdapterFirebase extends FirebaseRecyclerAdapter<Product, Pr
      * @param options
      */
 
-    private ObservableSnapshotArray<Product> productsSnapshotArray;
-    private FirebaseRecyclerOptions<Product> options;
     private final Context context;
 
-
     StorageReference rStore;
-    private LayoutInflater inflater;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     private final DatabaseReference vegetableRef;
     private final DatabaseReference fruitRef;
@@ -51,7 +47,6 @@ public class ProductsAdapterFirebase extends FirebaseRecyclerAdapter<Product, Pr
 
     public ProductsAdapterFirebase(@NonNull FirebaseRecyclerOptions<Product> options, Context context) {
         super(options);
-        this.productsSnapshotArray = options.getSnapshots();
         this.context = context;
 
         vegetableRef = FirebaseDatabase.getInstance().getReference("Vegetable");
@@ -128,16 +123,21 @@ public class ProductsAdapterFirebase extends FirebaseRecyclerAdapter<Product, Pr
             return true;
         }
 
-        public void deleteProduct(String name, String type){
+        public void deleteProduct(String name, @NonNull String type){
             String path = Utils.productNameToPath(name);
-            if(type.equals("Vegetable")) {
-                vegetableRef.child(path).removeValue();
-            }else if(type.equals("Fruit")){
-                fruitRef.child(path).removeValue();
-            }else if(type.equals("Shelf")){
-                shelfRef.child(path).removeValue();
-            }else{
-                otherRef.child(path).removeValue();
+            switch (type) {
+                case "Vegetable":
+                    vegetableRef.child(path).removeValue();
+                    break;
+                case "Fruit":
+                    fruitRef.child(path).removeValue();
+                    break;
+                case "Shelf":
+                    shelfRef.child(path).removeValue();
+                    break;
+                default:
+                    otherRef.child(path).removeValue();
+                    break;
             }
         }
     }

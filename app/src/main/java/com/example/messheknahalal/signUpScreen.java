@@ -51,6 +51,7 @@ public class signUpScreen extends AppCompatActivity {
 
     EditText et_name_signUp, et_last_name_signUp, et_phone_number_signUp,
             et_email_address_signUp, et_password_signUp, et_confirm_password_signUp, et_admin_code_signUp;
+
     Button btn_login2, btn_confirm;
     CheckBox cb_admin;
     ImageView iv_profile_pic;
@@ -176,14 +177,14 @@ public class signUpScreen extends AppCompatActivity {
                 //create a new person in the db
                 else {
                     //if (cb_admin.isChecked()) {
-                        //create a new admin in the db
+                    //create a new admin in the db
                     //    createPerson("admin", email, password);
                     //} else {
-                        //create a new user in the db
-                        createPerson(code, email, password);
+                    //create a new user in the db
+                    createPerson(code, email, password);
 
-                    }
                 }
+            }
 
         });
     }
@@ -343,12 +344,12 @@ public class signUpScreen extends AppCompatActivity {
                 userRef.child(Utils.emailToUserPath(email)).setValue(user);
             }
         })
-        .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                e.printStackTrace();
-            }
-        });
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        e.printStackTrace();
+                    }
+                });
 
     }
 
@@ -412,13 +413,13 @@ public class signUpScreen extends AppCompatActivity {
     public void snackBar(String message){
         Snackbar snackbar = Snackbar
                 .make(findViewById(R.id.sign_up_screen), message, Snackbar.LENGTH_INDEFINITE)
-        .setAction("Continue",new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(signUpScreen.this, cb_admin.isChecked() ? mainScreenAdmin.class : mainScreenUser.class);
-                startActivity(intent);
-            }
-        });
+                .setAction("Continue",new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        intent = new Intent(signUpScreen.this, cb_admin.isChecked() ? mainScreenAdmin.class : mainScreenUser.class);
+                        startActivity(intent);
+                    }
+                });
         snackbar.show();
     }
 

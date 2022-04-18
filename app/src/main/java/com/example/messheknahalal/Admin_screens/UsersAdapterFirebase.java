@@ -39,8 +39,6 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
      * @param options
      */
 
-    private ObservableSnapshotArray<User> usersSnapshotArray;
-    private FirebaseRecyclerOptions<User> options;
     private final Context context;
 
     StorageReference rStore;
@@ -49,11 +47,11 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
 
     public UsersAdapterFirebase(@NonNull FirebaseRecyclerOptions<User> options, Context context) {
         super(options);
-        this.usersSnapshotArray = options.getSnapshots();
+
         this.context = context;
 
-        usersRef = FirebaseDatabase.getInstance().getReference("User");
-        peopleRef = FirebaseDatabase.getInstance().getReference("Person");
+        this.usersRef = FirebaseDatabase.getInstance().getReference("User");
+        this.peopleRef = FirebaseDatabase.getInstance().getReference("Person");
     }
 
     public class UserViewHolderFirebase extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
@@ -111,7 +109,7 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
                 String text = "";
 
                 String number = "+972" + getItem(getBindingAdapterPosition()).getPhone();
-                String url = "https://api.whatsapp.com/send?phone="+number + "&text=" + text;
+                String url = "https://api.whatsapp.com/send?phone=" + number + "&text=" + text;
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 context.startActivity(i);
@@ -130,7 +128,6 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
 
                         String email = getItem(getBindingAdapterPosition()).getEmail();
                         String token = getItem(getBindingAdapterPosition()).getToken();
-
 
                         deleteUser(email, token);
                     }
@@ -182,8 +179,7 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
     @NonNull
     @Override
     public UsersAdapterFirebase.UserViewHolderFirebase onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.user_rv_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_rv_item, parent, false);
 
         return new UserViewHolderFirebase(view);
     }

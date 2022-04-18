@@ -22,16 +22,13 @@ import com.example.messheknahalal.Utils.Utils;
 import com.example.messheknahalal.delete_user.FCMSend;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.firebase.ui.database.ObservableSnapshotArray;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class AdminsAdapterFirebase extends
-        FirebaseRecyclerAdapter<Admin, AdminsAdapterFirebase.AdminViewHolderFirebase> {
+public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, AdminsAdapterFirebase.AdminViewHolderFirebase> {
 
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
@@ -40,8 +37,6 @@ public class AdminsAdapterFirebase extends
      * @param options
      */
 
-    private ObservableSnapshotArray<Admin> adminsSnapshotArray;
-    private FirebaseRecyclerOptions<Admin> options;
     private final Context context;
 
     StorageReference rStore;
@@ -50,7 +45,6 @@ public class AdminsAdapterFirebase extends
 
     public AdminsAdapterFirebase(@NonNull FirebaseRecyclerOptions<Admin> options, Context context) {
         super(options);
-        this.adminsSnapshotArray = options.getSnapshots();
         this.context = context;
 
         adminsRef = FirebaseDatabase.getInstance().getReference("Admin");
@@ -192,4 +186,3 @@ public class AdminsAdapterFirebase extends
         return getSnapshots().size();
     }
 }
-

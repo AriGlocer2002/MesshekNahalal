@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/users_rv_screen_drawer_layout"
+    android:id="@+id/drawer_layout"
     android:background="@drawable/background_img"
     tools:context=".Admin_screens.mainScreenAdmin"
     tools:openDrawer="start">
@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/users_rv_screen_toolbar"
+            android:id="@+id/toolbar"
             android:elevation="0dp"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
@@ -111,7 +111,7 @@
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/users_rv_screen_nav_view"
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

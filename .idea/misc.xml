@@ -81,6 +81,14 @@
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/menu/navigation_drawer.xml" value="0.33" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/menu/navigation_drawer_admin.xml" value="0.3625" />
         <entry key="..\:/Users/ariog/AndroidStudioProjects/MesshekNahalal/app/src/main/res/menu/navigation_drawer_user.xml" value="0.3625" />
+        <entry key="..\:/Users/murad/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_admins_rv_admin.xml" value="0.20153846153846153" />
+        <entry key="..\:/Users/murad/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_create_new_product_admin.xml" value="0.20153846153846153" />
+        <entry key="..\:/Users/murad/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_main_screen_admin.xml" value="0.21" />
+        <entry key="..\:/Users/murad/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_main_screen_user.xml" value="0.20153846153846153" />
+        <entry key="..\:/Users/murad/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_my_profile_admin.xml" value="0.20153846153846153" />
+        <entry key="..\:/Users/murad/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_my_profile_user.xml" value="0.20153846153846153" />
+        <entry key="..\:/Users/murad/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_products_rv_admin.xml" value="0.20153846153846153" />
+        <entry key="..\:/Users/murad/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_users_rv_admin.xml" value="0.20153846153846153" />
       </map>
     </option>
   </component>
