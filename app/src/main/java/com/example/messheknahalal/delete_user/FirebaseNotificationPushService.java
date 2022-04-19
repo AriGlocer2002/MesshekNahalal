@@ -21,12 +21,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
-import java.util.Locale;
 
 public class FirebaseNotificationPushService extends FirebaseMessagingService {
 
@@ -125,6 +123,14 @@ public class FirebaseNotificationPushService extends FirebaseMessagingService {
             String path = Utils.emailToUserPath(email);
             FirebaseDatabase.getInstance().getReference("User").child(path).child("token").setValue(token);
         }
+
+        FirebaseMessaging.getInstance().subscribeToTopic("Notification_to_" + Utils.emailForFCM(email)).addOnCompleteListener(
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
 
     }
 }

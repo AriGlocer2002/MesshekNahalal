@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
     android:background="@drawable/background_img"
-    tools:context=".Admin_screens.mainScreenAdmin"
+    tools:context=".Admin_screens.ProductsRecycleViewScreenAdmin"
     tools:openDrawer="start">
 
     <LinearLayout
@@ -41,57 +42,51 @@
                 android:textColor="@color/black"
                 android:textSize="35dp" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
                 android:id="@+id/products_rv_screen_rl_buttons"
                 android:layout_below="@id/products_rv_screen_tv_title"
                 android:layout_centerHorizontal="true">
 
-                <Button
+                <ImageView
                     android:id="@+id/products_rv_screen_btn_vegetable"
-                    android:layout_width="wrap_content"
-                    android:layout_height="85dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:drawableTint="@color/black"
-                    android:drawableBottom="@drawable/vegetable" />
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:padding="10dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:src="@drawable/vegetable" />
 
-                <Button
+                <ImageView
                     android:id="@+id/products_rv_screen_btn_fruit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="85dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:drawableTint="@color/black"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:padding="10dp"
+                    android:layout_marginHorizontal="5dp"
                     android:layout_toEndOf="@id/products_rv_screen_btn_vegetable"
-                    android:drawableBottom="@drawable/fruit" />
+                    android:src="@drawable/fruit" />
 
-                <Button
+                <ImageView
                     android:id="@+id/products_rv_screen_btn_shelf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="85dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:drawableTint="@color/black"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:padding="10dp"
+                    android:layout_marginHorizontal="5dp"
                     android:layout_toEndOf="@id/products_rv_screen_btn_fruit"
-                    android:drawableBottom="@drawable/shelves" />
+                    android:src="@drawable/shelves" />
 
-                <Button
+                <ImageView
                     android:id="@+id/products_rv_screen_btn_other"
-                    android:layout_width="wrap_content"
-                    android:layout_height="85dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginHorizontal="5dp"
                     android:layout_toEndOf="@id/products_rv_screen_btn_shelf"
-                    android:backgroundTint="@android:color/transparent"
-                    android:drawableBottom="@drawable/more_ic"
-                    android:drawableTint="@color/black"/>
+                    android:padding="10dp"
+                    android:src="@drawable/more_ic" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/products_rv_screen_rv"

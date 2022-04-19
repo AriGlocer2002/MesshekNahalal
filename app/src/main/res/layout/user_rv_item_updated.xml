@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+    app:cardCornerRadius="8dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rl_user_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/all_rv_rl_background"
+        android:padding="10dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/users_rv_item_iv_pp_frame"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            android:layout_gravity="center"
+            android:background="@drawable/user_background"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_mutate_background="false" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/users_rv_item_iv_pp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignStart="@+id/users_rv_item_iv_pp_frame"
+            android:layout_alignTop="@+id/users_rv_item_iv_pp_frame"
+            android:layout_alignEnd="@+id/users_rv_item_iv_pp_frame"
+            android:layout_alignBottom="@+id/users_rv_item_iv_pp_frame"
+            android:layout_gravity="center"
+            android:padding="2sp"
+            android:src="@drawable/sample_profile"
+            app:layout_constraintBottom_toBottomOf="@+id/users_rv_item_iv_pp_frame"
+            app:layout_constraintEnd_toEndOf="@+id/users_rv_item_iv_pp_frame"
+            app:layout_constraintStart_toStartOf="@+id/users_rv_item_iv_pp_frame"
+            app:layout_constraintTop_toTopOf="@+id/users_rv_item_iv_pp_frame"
+            app:riv_border_color="@color/white"
+            app:riv_border_width="2sp"
+            app:riv_corner_radius="25sp" />
+
+        <TextView
+            android:id="@+id/users_rv_item_tv_full_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/users_rv_item_iv_pp_frame"
+            android:fontFamily="@font/heebo_bold"
+            android:text="Full name"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/users_rv_item_iv_pp_frame"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/users_rv_item_tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/users_rv_item_tv_full_name"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/users_rv_item_iv_pp_frame"
+            android:fontFamily="@font/heebo_regular"
+            android:text="email"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            app:layout_constraintStart_toEndOf="@+id/users_rv_item_iv_pp_frame"
+            app:layout_constraintTop_toBottomOf="@+id/users_rv_item_tv_phone" />
+
+        <TextView
+            android:id="@+id/users_rv_item_tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/users_rv_item_tv_email"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/users_rv_item_iv_pp_frame"
+            android:fontFamily="@font/heebo_light"
+            android:text="Phone number"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            app:layout_constraintStart_toEndOf="@+id/users_rv_item_iv_pp_frame"
+            app:layout_constraintTop_toBottomOf="@+id/users_rv_item_tv_full_name" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/users_rv_item_iv_pp_frame"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintTop_toBottomOf="@+id/users_rv_item_iv_pp_frame">
+
+            <ImageView
+                android:id="@+id/users_rv_item_iv_phone"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_phone"
+                app:tint="@color/black" />
+
+            <ImageView
+                android:id="@+id/users_rv_item_iv_email"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_email"
+                app:tint="@color/black" />
+
+            <ImageView
+                android:id="@+id/users_rv_item_iv_message"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_message"
+                app:tint="@color/black" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

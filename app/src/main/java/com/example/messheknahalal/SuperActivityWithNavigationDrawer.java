@@ -2,7 +2,6 @@ package com.example.messheknahalal;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -44,11 +42,6 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
 
     protected Toolbar toolbar;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     protected void initializeNavigationDrawer(boolean isAdmin){
 
         drawerMenu = findViewById(R.id.drawer_layout);
@@ -64,7 +57,7 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
 
         drawerMenu.addDrawerListener(toggle);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.black));
-//        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("");
         toggle.syncState();
 
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

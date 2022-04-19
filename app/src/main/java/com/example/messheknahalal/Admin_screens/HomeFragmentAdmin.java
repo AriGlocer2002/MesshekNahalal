@@ -21,6 +21,8 @@ import java.util.ArrayList;
 
 public class HomeFragmentAdmin extends Fragment {
 
+    public static final String TAG = "HomeFragmentAdmin";
+
     public HomeFragmentAdmin() {
         // Required empty public constructor
     }

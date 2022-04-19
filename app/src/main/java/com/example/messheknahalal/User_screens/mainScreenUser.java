@@ -2,6 +2,7 @@ package com.example.messheknahalal.User_screens;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -35,7 +36,7 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer {
 
         FirebaseUser user = auth.getCurrentUser();
         String userEmail = user.getEmail();
-        String userPath = "User_"+userEmail.replace(".","-");
+        String userPath = "User_" + userEmail.replace(".","-");
 
         //reset last login date
         String date = getCurrentDate();
@@ -48,6 +49,8 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer {
         getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_user_container, new HomeFragmentUser()).commit();
 
         initializeNavigationDrawer(false);
+
+        Log.d("ariel", getLocalClassName());
     }
 
     public void sendEmail(@NonNull String recipientsList, String subject, String text){
@@ -67,18 +70,31 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-                    Fragment fragment = null;
+                    Fragment fragment;
+                    Fragment currentFragment;
+                    String TAG;
 
                     switch (menuItem.getItemId()) {
                         case R.id.home:
-                            fragment = new HomeFragmentUser();
+                            TAG = HomeFragmentUser.TAG;
+                            currentFragment = new HomeFragmentUser();
                             break;
 
                         case R.id.products:
-                            fragment = new ProductsFragmentUser();
+                            TAG = ProductsFragmentUser.TAG;
+                            currentFragment = new ProductsFragmentUser();
                             break;
+                        default:
+                            throw new IllegalStateException(
+                                    "Unexpected value: " + menuItem.getItemId());
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_user_container, fragment).commit();
+
+                    fragment = getSupportFragmentManager().findFragmentByTag(TAG);
+                    if (fragment == null){
+                        fragment = currentFragment;
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_admin_container, fragment, TAG).commit();
+                    }
+
                     return true;
                 }
             };

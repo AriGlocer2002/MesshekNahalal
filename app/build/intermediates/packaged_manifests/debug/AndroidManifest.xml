@@ -27,55 +27,52 @@
         android:testOnly="true"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
         <activity
+            android:name="com.example.messheknahalal.SuperActivityWithNavigationDrawer"
+            android:exported="false" />
+        <activity
             android:name="com.example.messheknahalal.Admin_screens.ProductsRecycleViewScreenAdmin"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.messheknahalal.Admin_screens.AdminsRecycleViewScreenAdmin"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.messheknahalal.Admin_screens.UsersRecycleViewScreenAdmin"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.messheknahalal.Admin_screens.CreateNewProductAdmin"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.messheknahalal.Admin_screens.EditProduct"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.messheknahalal.Admin_screens.mainScreenAdmin"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.messheknahalal.Admin_screens.MyProfileScreenAdmin"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.messheknahalal.User_screens.MyProfileScreenUser"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.messheknahalal.signUpScreen"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.messheknahalal.User_screens.mainScreenUser"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.messheknahalal.loginScreen"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.messheknahalal.splashScreen"
             android:exported="true"

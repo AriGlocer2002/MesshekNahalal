@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 public class HomeFragmentUser extends Fragment {
 
+    public static final String TAG = "HomeFragmentUser";
+
     public HomeFragmentUser() {
         // Required empty public constructor
     }
@@ -45,7 +47,6 @@ public class HomeFragmentUser extends Fragment {
 
         viewPager2.setAdapter(adapter);
         dotsIndicator.setViewPager2(viewPager2);
-
     }
 
     @Override

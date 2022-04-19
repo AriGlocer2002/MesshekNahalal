@@ -1,9 +1,5 @@
 package com.example.messheknahalal;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +8,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
 import com.example.messheknahalal.Objects.Person;
@@ -32,7 +31,7 @@ public class splashScreen extends AppCompatActivity {
     Intent intent;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     DatabaseReference personRef = FirebaseDatabase.getInstance().getReference().child("Person");
-    private static int LOGINSCREEN = 5500;
+    private static int LOGIN_SCREEN = 5500;
 
     DataBaseHelper user = new DataBaseHelper("User");
 
@@ -62,7 +61,7 @@ public class splashScreen extends AppCompatActivity {
                     checkPersonType(email);
                 }
             }
-        }, LOGINSCREEN);
+        }, LOGIN_SCREEN);
     }
 
     public void checkPersonType(@NonNull String email){

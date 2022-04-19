@@ -18,6 +18,8 @@ public class ProductsFragmentAdmin extends Fragment {
     Button btn_create_new_product;
     Intent intent;
 
+    public static final String TAG = "ProductsFragmentAdmin";
+
     public ProductsFragmentAdmin() {
         // Required empty public constructor
     }

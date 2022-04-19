@@ -18,16 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.Product;
 import com.example.messheknahalal.R;
-import com.example.messheknahalal.Utils.Utils;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.firebase.ui.database.ObservableSnapshotArray;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.StorageReference;
 
-public class ProductsAdapterFirebase extends FirebaseRecyclerAdapter<Product, ProductsAdapterFirebase.ProductViewHolderFirebase> {
+public class ProductsAdapterFirebase extends
+        FirebaseRecyclerAdapter<Product, ProductsAdapterFirebase.ProductViewHolderFirebase> {
 
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
@@ -38,24 +34,13 @@ public class ProductsAdapterFirebase extends FirebaseRecyclerAdapter<Product, Pr
 
     private final Context context;
 
-    StorageReference rStore;
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    private final DatabaseReference vegetableRef;
-    private final DatabaseReference fruitRef;
-    private final DatabaseReference shelfRef;
-    private final DatabaseReference otherRef;
-
     public ProductsAdapterFirebase(@NonNull FirebaseRecyclerOptions<Product> options, Context context) {
         super(options);
         this.context = context;
-
-        vegetableRef = FirebaseDatabase.getInstance().getReference("Vegetable");
-        fruitRef = FirebaseDatabase.getInstance().getReference("Fruit");
-        shelfRef = FirebaseDatabase.getInstance().getReference("Shelf");
-        otherRef = FirebaseDatabase.getInstance().getReference("Other");
     }
 
-    public class ProductViewHolderFirebase extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public class ProductViewHolderFirebase extends RecyclerView.ViewHolder implements View.OnClickListener,
+            View.OnLongClickListener {
 
         RelativeLayout rl_product_item;
 
@@ -63,7 +48,7 @@ public class ProductsAdapterFirebase extends FirebaseRecyclerAdapter<Product, Pr
         TextView tv_price;
         TextView tv_stock;
 
-        Button btn_edit, btn_vegetable, btn_fruit, btn_shelf, btn_other;
+        Button btn_edit;
 
         ImageView products_rv_item_iv_pp;
         ImageView products_rv_item_iv_pp_frame;
@@ -89,7 +74,8 @@ public class ProductsAdapterFirebase extends FirebaseRecyclerAdapter<Product, Pr
         @Override
         public void onClick(View view) {
             if (view == btn_edit) {
-                Intent intent = new Intent(context,EditProduct.class);
+                Intent intent = new Intent(context, EditProduct.class);
+                intent.putExtra("product", getItem(getBindingAdapterPosition()));
                 context.startActivity(intent);
             }
         }
@@ -98,23 +84,25 @@ public class ProductsAdapterFirebase extends FirebaseRecyclerAdapter<Product, Pr
         public boolean onLongClick(View view) {
             if (view == itemView){
 
-                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Confirm delete of product");
+
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        String product_name = getItem(getBindingAdapterPosition()).getName();
+                        String pid = getItem(getBindingAdapterPosition()).getPid();
                         String product_type = getItem(getBindingAdapterPosition()).getType();
-                        deleteProduct(product_name, product_type);
+                        deleteProduct(pid, product_type);
                     }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                     }
                 });
+
                 AlertDialog dialog = builder.create();
                 dialog.setMessage("Do you really want to delete this product?");
                 dialog.show();
@@ -123,22 +111,8 @@ public class ProductsAdapterFirebase extends FirebaseRecyclerAdapter<Product, Pr
             return true;
         }
 
-        public void deleteProduct(String name, @NonNull String type){
-            String path = Utils.productNameToPath(name);
-            switch (type) {
-                case "Vegetable":
-                    vegetableRef.child(path).removeValue();
-                    break;
-                case "Fruit":
-                    fruitRef.child(path).removeValue();
-                    break;
-                case "Shelf":
-                    shelfRef.child(path).removeValue();
-                    break;
-                default:
-                    otherRef.child(path).removeValue();
-                    break;
-            }
+        public void deleteProduct(String pid, @NonNull String type){
+            FirebaseDatabase.getInstance().getReference("Product").child(type).child(pid).removeValue();
         }
     }
 
@@ -146,7 +120,7 @@ public class ProductsAdapterFirebase extends FirebaseRecyclerAdapter<Product, Pr
     public void onBindViewHolder(@NonNull ProductsAdapterFirebase.ProductViewHolderFirebase holder, int position, @NonNull Product model) {
 
         holder.tv_full_name.setText(model.getName());
-        holder.tv_price.setText(model.getPrice());
+        holder.tv_price.setText(model.getPrice() + " ₪");
         holder.tv_stock.setText(model.getStock());
 
         String type = "Vegetable";

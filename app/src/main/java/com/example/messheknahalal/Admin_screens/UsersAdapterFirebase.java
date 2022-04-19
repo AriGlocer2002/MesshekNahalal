@@ -9,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,9 +22,7 @@ import com.example.messheknahalal.Utils.Utils;
 import com.example.messheknahalal.delete_user.FCMSend;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.firebase.ui.database.ObservableSnapshotArray;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -56,7 +54,8 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
 
     public class UserViewHolderFirebase extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        RelativeLayout rl_user_item;
+//        RelativeLayout rl_user_item;
+        ConstraintLayout rl_user_item;
 
         TextView tv_full_name;
         TextView tv_email;
@@ -88,7 +87,7 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
             users_lv_item_iv_message.setOnClickListener(this);
 
             users_lv_item_iv_pp = itemView.findViewById(R.id.users_rv_item_iv_pp);
-            users_lv_item_iv_pp_frame = itemView.findViewById(R.id.users_rv_item_iv_pp_frame);
+//            users_lv_item_iv_pp_frame = itemView.findViewById(R.id.users_rv_item_iv_pp_frame);
 
             itemView.setOnLongClickListener(this);
         }
@@ -179,7 +178,7 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
     @NonNull
     @Override
     public UsersAdapterFirebase.UserViewHolderFirebase onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_rv_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_rv_item_updated, parent, false);
 
         return new UserViewHolderFirebase(view);
     }

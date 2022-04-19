@@ -136,7 +136,7 @@ public class FCMSend {
             {
                 @NonNull
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<>();
                     params.put("Content-Type", "application/json");
                     params.put("Authorization", SERVER_KEY);
@@ -151,14 +151,10 @@ public class FCMSend {
     }
 
     public static void sendNotificationsToDeletePerson(Context context, String email, String token) {
-
         sendNotificationToOnePerson(context, email, token);
-
     }
 
     public static void sendNotificationsToDeletePerson(Context context, String email) {
-
         sendNotificationToOnePerson(context, email);
-
     }
 }

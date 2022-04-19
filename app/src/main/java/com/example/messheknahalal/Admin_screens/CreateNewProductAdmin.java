@@ -3,14 +3,11 @@ package com.example.messheknahalal.Admin_screens;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,20 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.Objects.Product;
-import com.example.messheknahalal.Objects.User;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.Utils.Utils;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -49,11 +40,9 @@ public class CreateNewProductAdmin extends AppCompatActivity {
     Button btn_back, btn_confirm;
     TextInputEditText tie_name, tie_stock, tie_price;
 
-    Intent intent;
     DatabaseReference productRef;
     StorageReference rStore = FirebaseStorage.getInstance().getReference();
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,12 +61,7 @@ public class CreateNewProductAdmin extends AppCompatActivity {
 
 
         //setting button back
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        btn_back.setOnClickListener(view -> onBackPressed());
 
         //changing product picture
         product_img.setOnClickListener(new View.OnClickListener() {
@@ -88,11 +72,12 @@ public class CreateNewProductAdmin extends AppCompatActivity {
                 if (productName.isEmpty()) {
                     Utils.showAlertDialog("Upload Image", "Please insert a product name before uploading image", CreateNewProductAdmin.this);
                 }
-                String productType = (String)spinner.getSelectedItem();
+                String productType = (String) spinner.getSelectedItem();
                 if(spinner != null && spinner.getSelectedItem() !=null && !productType.isEmpty()) {
                     Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(openGalleryIntent, 1000);
-                } else {
+                }
+                else {
                     Utils.showAlertDialog("Upload Image", "Please select a product type before uploading image", CreateNewProductAdmin.this);
                 }
             }
@@ -100,14 +85,14 @@ public class CreateNewProductAdmin extends AppCompatActivity {
 
         //setting spinner information
         String[] products_types = {"","Vegetable","Fruit","Shelf","Other"};
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.background_spinner1, products_types);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.background_spinner1, products_types);
         adapter.setDropDownViewResource(R.layout.background_dropdown_spinner_items);
 
         spinner.setAdapter(adapter);
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String productType = (String)spinner.getSelectedItem();
+                String productType = (String) spinner.getSelectedItem();
                 String productName = tie_name.getText().toString();
                 String productStock = tie_stock.getText().toString();
                 String productPrice = tie_price.getText().toString();
@@ -120,7 +105,7 @@ public class CreateNewProductAdmin extends AppCompatActivity {
                 if(productPrice.isEmpty()){
                     Utils.showAlertDialog("Create Product", "Please insert a price for the product", CreateNewProductAdmin.this);
                 }
-                if(spinner != null && spinner.getSelectedItem() !=null && !productType.isEmpty()) {
+                if(spinner != null && spinner.getSelectedItem() != null && !productType.isEmpty()) {
                     createProduct();
                 } else {
                     Utils.showAlertDialog("Create Product", "Please select a product type", CreateNewProductAdmin.this);
@@ -144,14 +129,31 @@ public class CreateNewProductAdmin extends AppCompatActivity {
 
         Product p = new Product(productType, productName, productStock, productPrice);
 
-        productName = productName.replace(" ", "-");
-        productName = productName.replace(".", "-");
-
         productRef = FirebaseDatabase.getInstance().getReference().child("Product").child(productType);
-        productRef.child("product_"+productName).setValue(p);
 
-        Toast.makeText(CreateNewProductAdmin.this, "The product has been created successfully", Toast.LENGTH_SHORT).show();
+        String pid = "Product-" + productRef.push().getKey();
+        p.setPid(pid);
 
+        Uri uri = (Uri) product_img.getTag();
+        Log.d("ariel", "imageUri is " + uri.toString());
+
+        uploadProductToFirebase(uri, p);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == 1000) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri imageUri = data.getData();
+                //check size of img
+                Glide.with(getApplicationContext()).load(imageUri).centerCrop().into(product_img);
+                product_img.setTag(imageUri);
+            }
+        }
+    }
+
+    public void resetAllFields(){
         tie_name.setText("");
         tie_stock.setText("");
         tie_price.setText("");
@@ -160,77 +162,78 @@ public class CreateNewProductAdmin extends AppCompatActivity {
         product_img.setImageResource(R.drawable.upload_image_img);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
-        if (requestCode==1000) {
-            if (resultCode == Activity.RESULT_OK) {
-                Uri imageUri = data.getData();
-                //check size of img
-                uploadImageToFirebase(imageUri);
-            }
+    private void uploadProductToFirebase(Uri imageUri, @NonNull Product product) {
+        //Checking product name format
+        String productType = product.getType();
+        String pid = product.getPid();
+
+        if(imageUri == null){
+            DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product")
+                    .child(productType).child(pid);
+
+            productRef.setValue(product).addOnSuccessListener(
+                    new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(CreateNewProductAdmin.this, "The product has been created successfully", Toast.LENGTH_SHORT).show();
+                            resetAllFields();
+                        }
+                    });
+        }
+        else {
+            uploadImageToFirebase(imageUri, product);
         }
     }
 
-    private void uploadImageToFirebase(Uri imageUri) {
-        //Checking product name format
-        String productName = Utils.productNameToPath(tie_name.getText().toString());
+    public void uploadImageToFirebase(Uri imageUri, @NonNull Product product){
 
-        String productType = (String)spinner.getSelectedItem();
+        String productType = product.getType();
+        String pid = product.getPid();
 
         Dialog d = new Dialog(this);
         d.setContentView(R.layout.loading_dialog);
         d.show();
 
-        StorageReference fileRef = rStore.child("products/"+productType+"/"+productName+".jpg");
+        StorageReference fileRef = rStore.child("products/"+productType+"/"+pid+".jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Glide.with(getApplicationContext()).load(uri).centerCrop().into(product_img);
+                        product.setPicture(uri.toString());
 
-                        String productName = tie_name.getText().toString();
+                        DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product")
+                                .child(productType).child(pid);
 
-                        productName = productName.replace(" ", "-");
-                        productName = productName.replace(".", "-");
-
-                        Log.d("ariel", uri.toString());
-
-                        productRef = FirebaseDatabase.getInstance().getReference("Product").child(productType);
-                        productRef.child("product_"+productName).child("picture").setValue(uri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    Log.d("ariel", "picture successfully uploaded");
-                                }
-                                d.dismiss();
-                            }
-                        });
-
+                        productRef.setValue(product).addOnSuccessListener(
+                                new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        d.dismiss();
+                                        Toast.makeText(CreateNewProductAdmin.this, "The product has been created successfully", Toast.LENGTH_SHORT).show();
+                                        resetAllFields();
+                                    }
+                                });
                     }
                 });
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                double progress=(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
+                double progress=(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount())/2;
 
                 ProgressBar progressBar = d.findViewById(R.id.progressBar_loading_dialog);
                 TextView textViewProgress = d.findViewById(R.id.textPercent_loading_dialog);
-                progressBar.setProgress((int)progress);
+                progressBar.setProgress((int) progress);
                 textViewProgress.setText(progress+"%");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(CreateNewProductAdmin.this, "FAILED!!!!", Toast.LENGTH_LONG).show();
-
             }
         });
-
     }
 
 }

@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.Person;
@@ -46,6 +45,7 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
     StorageReference rStore;
     DatabaseReference adminRef = FirebaseDatabase.getInstance().getReference().child("Admin"),
             personRef = FirebaseDatabase.getInstance().getReference().child("Person");
+
     FirebaseAuth auth = FirebaseAuth.getInstance();
 
     ImageView screen_profile_img;

@@ -1,6 +1,7 @@
 package com.example.messheknahalal.Admin_screens;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,7 @@ public class mainScreenAdmin extends SuperActivityWithNavigationDrawer {
         bottomNav.setOnItemSelectedListener(bottomNavMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_admin_container, new HomeFragmentAdmin()).commit();
 
-
+        Log.d("ariel", getLocalClassName());
     }
 
     public BottomNavigationView.OnItemSelectedListener bottomNavMethod = new
@@ -35,18 +36,31 @@ public class mainScreenAdmin extends SuperActivityWithNavigationDrawer {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-                    Fragment fragment = null;
+                    Fragment fragment;
+                    Fragment currentFragment;
+                    String TAG;
 
                     switch (menuItem.getItemId()) {
                         case R.id.home:
-                            fragment = new HomeFragmentAdmin();
+                            TAG = HomeFragmentAdmin.TAG;
+                            currentFragment = new HomeFragmentAdmin();
                             break;
 
                         case R.id.products:
-                            fragment = new ProductsFragmentAdmin();
+                            TAG = ProductsFragmentAdmin.TAG;
+                            currentFragment = new ProductsFragmentAdmin();
                             break;
+                        default:
+                            throw new IllegalStateException(
+                                    "Unexpected value: " + menuItem.getItemId());
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_admin_container, fragment).commit();
+
+                    fragment = getSupportFragmentManager().findFragmentByTag(TAG);
+                    if (fragment == null){
+                        fragment = currentFragment;
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_admin_container, fragment, TAG).commit();
+                    }
+
                     return true;
                 }
             };
