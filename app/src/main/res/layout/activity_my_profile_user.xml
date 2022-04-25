@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
     android:background="@drawable/background_img"
-    tools:context=".User_screens.HomeFragmentUser"
+    tools:context=".User_screens.MyProfileScreenUser"
     tools:openDrawer="start">
 
     <LinearLayout
@@ -74,26 +74,35 @@
                 android:layout_centerHorizontal="true"
                 app:srcCompat="@drawable/back6" />
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/my_profile_user_iv_frame_pp"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_alignStart="@id/my_profile_user_iv_b2"
+                android:layout_alignTop="@id/my_profile_user_iv_b2"
+                android:layout_alignEnd="@id/my_profile_user_iv_b2"
+                android:layout_alignBottom="@id/my_profile_user_iv_b2"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/user_background"
+                android:scaleType="centerCrop"/>
+
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/my_profile_user_iv_pp"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:layout_below="@+id/my_profile_user_tv_title"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="19dp"
+                android:layout_alignStart="@id/my_profile_user_iv_frame_pp"
+                android:layout_alignTop="@id/my_profile_user_iv_frame_pp"
+                android:layout_alignEnd="@id/my_profile_user_iv_frame_pp"
+                android:layout_alignBottom="@id/my_profile_user_iv_frame_pp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:src="@drawable/sample_profile"
+                app:riv_border_color="@color/white"
+                app:riv_border_width="2sp"
+                app:riv_corner_radius="25sp"
                 android:clickable="true"
-                app:srcCompat="@drawable/default_profile_picture"
                 android:focusable="true" />
-
-            <ImageView
-                android:id="@+id/my_profile_user_iv_frame_pp"
-                android:layout_width="121dp"
-                android:layout_height="113dp"
-                android:layout_below="@+id/my_profile_user_tv_title"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="18dp"
-                app:srcCompat="@drawable/profile_picture_frame" />
-
 
             <ImageView
                 android:id="@+id/my_profile_user_iv_b3"

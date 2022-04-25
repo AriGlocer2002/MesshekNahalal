@@ -18,6 +18,7 @@ import com.example.messheknahalal.R;
 import com.example.messheknahalal.Utils.Utils;
 import com.example.messheknahalal.loginScreen;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -63,7 +64,7 @@ public class FirebaseNotificationPushService extends FirebaseMessagingService {
 
         NotificationChannel channel = new NotificationChannel(
                 CHANNEL_ID,
-                "Message_Notification",
+                "Delete User",
                 NotificationManager.IMPORTANCE_HIGH);
 
         Intent intentToLoginScreen = new Intent(this, loginScreen.class);
@@ -83,26 +84,24 @@ public class FirebaseNotificationPushService extends FirebaseMessagingService {
 
         NotificationManagerCompat.from(this).notify(DELETE_PERSON_NOTIFICATION_ID, notification.build());
 
-
-        String token = remoteMessage.getData().get("token");
-
-        deleteCurrentFirebaseUser(email, token);
+        deleteCurrentFirebaseUser();
 
         super.onMessageReceived(remoteMessage);
     }
 
-    public void deleteCurrentFirebaseUser(String email, String token) {
+    public void deleteCurrentFirebaseUser() {
 
-        firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Log.d("ariel", "the user was successfully deleted");
+        firebaseUser.delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("ariel", "the user was successfully deleted");
 
-                Intent intent = new Intent(FirebaseNotificationPushService.this, loginScreen.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        });
+                        Intent intent = new Intent(FirebaseNotificationPushService.this, loginScreen.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                });
 
     }
 

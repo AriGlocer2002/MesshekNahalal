@@ -22,10 +22,8 @@ import com.example.messheknahalal.Utils.Utils;
 import com.example.messheknahalal.delete_user.FCMSend;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAdapterFirebase.UserViewHolderFirebase> {
@@ -165,14 +163,12 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
         holder.tv_email.setText(model.getEmail());
         holder.tv_phone.setText(model.getPhone());
 
-        rStore = FirebaseStorage.getInstance().getReference();
-        StorageReference profileRef = rStore.child("profiles/pp_" + model.getEmail().replace(".","-")+".jpg");
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(context).load(uri).centerCrop().into(holder.users_lv_item_iv_pp);
-            }
-        });
+        if (model.getPicture() != null && !model.getPicture().isEmpty()){
+            Glide.with(context).load(model.getPicture()).centerCrop().into(holder.users_lv_item_iv_pp);
+        }
+        else {
+            Glide.with(context).load(R.drawable.sample_profile).centerCrop().into(holder.users_lv_item_iv_pp);
+        }
     }
 
     @NonNull

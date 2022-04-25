@@ -10,6 +10,7 @@ public class Person {
     protected String phone;
     protected String type;
     protected String token;
+    protected String picture;
 
     public Person(){}
 
@@ -21,13 +22,13 @@ public class Person {
         this.type = type;
     }
 
-    public Person(String name, String last_name, String email, String phone, String type, String token) {
+    public Person(String name, String last_name, String email, String phone, String type, String picture) {
         this.name = name;
         this.last_name = last_name;
         this.email = email;
         this.phone = phone;
         this.type = type;
-        this.token = token;
+        this.picture = picture;
     }
 
     public String getName() {
@@ -80,6 +81,7 @@ public class Person {
                 ", phone='" + phone + '\'' +
                 ", type='" + type + '\'' +
                 ", token='" + token + '\'' +
+                ", picture='" + picture + '\'' +
                 '}';
     }
 
@@ -89,5 +91,13 @@ public class Person {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

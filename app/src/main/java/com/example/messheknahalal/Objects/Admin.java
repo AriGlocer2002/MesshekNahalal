@@ -6,8 +6,7 @@ public class Admin extends Person {
 
     private String code;
 
-    public  Admin(){
-    }
+    public  Admin(){}
 
     public Admin(String code) {
         this.code = code;
@@ -15,6 +14,11 @@ public class Admin extends Person {
 
     public Admin(String name, String last_name, String email, String phone, String type, String code) {
         super(name, last_name, email, phone, type);
+        this.code = code;
+    }
+
+    public Admin(String name, String last_name, String email, String phone, String type, String code, String picture) {
+        super(name, last_name, email, phone, type, picture);
         this.code = code;
     }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,23 +8,32 @@
     android:padding="16dp"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/header_nd_iv_pp"
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/header_nd_iv_frame_pp"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/default_profile_picture" />
+        android:layout_gravity="center"
+        android:background="@drawable/user_background"
+        android:scaleType="centerCrop"
+        app:riv_mutate_background="false" />
 
-    <ImageView
-        android:id="@+id/header_nd_iv_frame_pp"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        app:srcCompat="@drawable/profile_picture_frame"
-        tools:layout_editor_absoluteX="90dp"
-        tools:layout_editor_absoluteY="26dp" />
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/header_nd_iv_pp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignStart="@id/header_nd_iv_frame_pp"
+        android:layout_alignTop="@id/header_nd_iv_frame_pp"
+        android:layout_alignEnd="@id/header_nd_iv_frame_pp"
+        android:layout_alignBottom="@id/header_nd_iv_frame_pp"
+        android:layout_gravity="center"
+        android:layout_margin="3dp"
+        android:padding="2sp"
+        android:src="@drawable/sample_profile"
+        app:riv_border_color="@color/white"
+        app:riv_border_width="2sp"
+        app:riv_corner_radius="25sp" />
 
     <TextView
         android:id="@+id/header_nd_tv_name"
@@ -34,7 +44,7 @@
         android:layout_marginTop="5dp"
         android:text="Name and Last_name"
         android:textColor="@color/white"
-        android:textSize="25dp" />
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/header_nd_tv_email"
@@ -45,6 +55,6 @@
         android:layout_marginTop="5dp"
         android:text="Email"
         android:textColor="#AAA8A8"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
 </RelativeLayout>

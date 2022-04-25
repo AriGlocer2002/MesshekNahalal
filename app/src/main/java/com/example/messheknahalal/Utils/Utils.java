@@ -1,8 +1,11 @@
 package com.example.messheknahalal.Utils;
 
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.net.Uri;
 
+import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
 
 public class Utils {
@@ -58,7 +61,22 @@ public class Utils {
         return path;
     }
 
-    public static String emailToAdminPath(String email) {
+    @NonNull
+    public static String emailToAdminPath(@NonNull String email) {
         return "Admin_" + email.replace(".", "-");
+    }
+
+    /**
+     * get uri to drawable or any other resource type if u wish
+     * @param context - context
+     * @param drawableId - drawable res id
+     * @return - uri
+     */
+    public static Uri getUriToDrawable(@NonNull Context context, @AnyRes int drawableId) {
+
+        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
+                + "://" + context.getResources().getResourcePackageName(drawableId)
+                + '/' + context.getResources().getResourceTypeName(drawableId)
+                + '/' + context.getResources().getResourceEntryName(drawableId));
     }
 }

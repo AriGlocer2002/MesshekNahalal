@@ -46,7 +46,7 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer {
         bottomNav = findViewById(R.id.main_screen_user_bottomNav);
 
         bottomNav.setOnItemSelectedListener(bottomNavMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_user_container, new HomeFragmentUser()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_user_container, new HomeFragmentUser(), HomeFragmentUser.TAG).commit();
 
         initializeNavigationDrawer(false);
 

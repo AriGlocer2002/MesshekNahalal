@@ -12,8 +12,6 @@ public class Product implements Serializable {
     private String price;
     private String picture;
 
-    private String pid;
-
     public Product(){}
 
     public Product(String type, String name, String stock, String price) {
@@ -71,7 +69,6 @@ public class Product implements Serializable {
                 ", type='" + type + '\'' +
                 ", stock='" + stock + '\'' +
                 ", price='" + price + '\'' +
-                ", pid='" + pid + '\'' +
                 '}';
     }
 
@@ -81,13 +78,5 @@ public class Product implements Serializable {
 
     public void setPicture(String picture) {
         this.picture = picture;
-    }
-
-    public String getPid() {
-        return pid;
-    }
-
-    public void setPid(String pid) {
-        this.pid = pid;
     }
 }

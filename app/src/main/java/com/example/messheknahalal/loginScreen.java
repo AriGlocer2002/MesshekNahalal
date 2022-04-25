@@ -83,14 +83,15 @@ public class loginScreen extends AppCompatActivity{
                                     if (task.isSuccessful()) {
                                         //check if the person is admin or user
 
-                                        FirebaseMessaging.getInstance().subscribeToTopic("Notification_to_" + Utils.emailForFCM(email)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isSuccessful()){
-                                                    checkPersonType(email);
-                                                }
-                                            }
-                                        });
+                                        FirebaseMessaging.getInstance().subscribeToTopic("Notification_to_" + Utils.emailForFCM(email))
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if(task.isSuccessful()){
+                                                            checkPersonType(email);
+                                                        }
+                                                    }
+                                                });
 
                                     }
                                     else {
@@ -181,26 +182,29 @@ public class loginScreen extends AppCompatActivity{
                 .setAction("OK",new View.OnClickListener(){
                     @Override
                     public void onClick(View view) {
+
                     }
                 });
         snackbar.show();
     }
 
     public void checkPersonType(@NonNull String email){
-        String personPath = "Person_"+email.replace(".","-");
-        personRef.child(personPath).addValueEventListener(new ValueEventListener() {
+        String personPath = Utils.emailToPersonPath(email);
+        personRef.child(personPath).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
                 //if exists the dataSnapshot
                 if(ds.exists()){
-                    String type = ds.getValue(Person.class).getType().toString();
-                    if(type.equals("user")){
-                        intent = new Intent(getApplicationContext(), mainScreenUser.class);
-                    }else{
+                    String type = ds.getValue(Person.class).getType();
+                    if(type.equals("admin")){
                         intent = new Intent(getApplicationContext(), mainScreenAdmin.class);
                     }
+                    else{
+                        intent = new Intent(getApplicationContext(), mainScreenUser.class);
+                    }
                     startActivity(intent);
-                }else {
+                }
+                else {
                     Toast.makeText(loginScreen.this, "checkPersonType: not found person", Toast.LENGTH_LONG).show();
 
                     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -209,7 +213,7 @@ public class loginScreen extends AppCompatActivity{
                     firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            Log.d("ariel", "the user was successfully deleted");
+                            startActivity(new Intent(loginScreen.this, loginScreen.class));
                         }
                     });
                 }

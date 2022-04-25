@@ -13,8 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.messheknahalal.R;
-import com.example.messheknahalal.VPadapter;
-import com.example.messheknahalal.viewPagerItem;
+import com.example.messheknahalal.VPAdapter;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 import java.util.ArrayList;
@@ -29,8 +28,8 @@ public class HomeFragmentAdmin extends Fragment {
 
     Intent intent;
     ViewPager2 viewPager2;
-    ArrayList<viewPagerItem> imageList;
-    VPadapter adapter;
+    ArrayList<Integer> imageList;
+    VPAdapter adapter;
     WormDotsIndicator dotsIndicator;
     Button btn_my_profile, btn_orders, btn_users, btn_products;
 
@@ -42,11 +41,11 @@ public class HomeFragmentAdmin extends Fragment {
         dotsIndicator = view.findViewById(R.id.fragment_home_admin_dots);
 
         imageList = new ArrayList<>();
-        imageList.add(new viewPagerItem(R.drawable.image_nahalal));
-        imageList.add(new viewPagerItem(R.drawable.bees_pic));
-        imageList.add(new viewPagerItem(R.drawable.gan_yarak));
-        imageList.add(new viewPagerItem(R.drawable.lettuce_img));
-        adapter = new VPadapter(imageList);
+        imageList.add(R.drawable.image_nahalal);
+        imageList.add(R.drawable.bees_pic);
+        imageList.add(R.drawable.gan_yarak);
+        imageList.add(R.drawable.lettuce_img);
+        adapter = new VPAdapter(imageList);
 
         viewPager2.setAdapter(adapter);
         dotsIndicator.setViewPager2(viewPager2);

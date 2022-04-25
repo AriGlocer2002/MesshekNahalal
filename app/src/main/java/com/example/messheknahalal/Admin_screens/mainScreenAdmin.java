@@ -26,7 +26,7 @@ public class mainScreenAdmin extends SuperActivityWithNavigationDrawer {
         bottomNav = findViewById(R.id.main_screen_admin_bottomNav);
 
         bottomNav.setOnItemSelectedListener(bottomNavMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_admin_container, new HomeFragmentAdmin()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_admin_container, new HomeFragmentAdmin(), HomeFragmentAdmin.TAG).commit();
 
         Log.d("ariel", getLocalClassName());
     }

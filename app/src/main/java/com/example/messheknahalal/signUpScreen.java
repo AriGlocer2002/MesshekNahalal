@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
@@ -207,28 +206,26 @@ public class signUpScreen extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-
-                                    createAdmin();
-                                    snackBar("Account successfully created");
-
-                                } else {
+                                    createPerson(true);
+                                }
+                                else {
                                     Utils.showAlertDialog("Error", "This email address is already linked to another account", signUpScreen.this);
                                 }
                             }
                         });
 
-                    } else if (cb_admin.isChecked() && !codeDB.equals(code)) {
+                    }
+                    else if (cb_admin.isChecked() && !codeDB.equals(code)) {
                         Utils.showAlertDialog("Error", "The admin code is not valid", signUpScreen.this);
-                    } else if(!cb_admin.isChecked()){
+                    }
+                    else if(!cb_admin.isChecked()){
                         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-
-                                    createUser();
-                                    snackBar("Account successfully created");
-
-                                } else {
+                                    createPerson(false);
+                                }
+                                else {
                                     Utils.showAlertDialog("Error", "This email address is already linked to another account", signUpScreen.this);
                                 }
                             }
@@ -244,27 +241,36 @@ public class signUpScreen extends AppCompatActivity {
         });
     }
 
+    public void createPerson(boolean isAdmin){
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
+        FirebaseMessaging.getInstance().subscribeToTopic("Notification_to_" + Utils.emailForFCM(email))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("ariel", "Subscribing to topic succeeded");
 
-//    private void createPerson(String type, String email, String password){
-//        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            if (type.equals("admin")) {
-//                                createAdmin();
-//                            } else {
-//                                createUser();
-//                            }
-//                            snackBar("Account successfully created");
-//                        } else {
-//                            Utils.showAlertDialog("Error", "This email address is already linked to another account", signUpScreen.this);
-//                        }
-//                    }
-//                });
-//    }
+                        Uri imageUri = (Uri) iv_profile_pic.getTag();
 
-    private void createAdmin(){
+                        if (imageUri == null){
+                            uploadPerson(isAdmin);
+                        }
+                        else {
+                            uploadImageToFirebase(imageUri, isAdmin);
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(signUpScreen.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+        });
+    }
+
+    public void uploadPerson(boolean isAdmin){
+
         String name = et_name_signUp.getText().toString();
         String last_name = et_last_name_signUp.getText().toString();
         String email = et_email_address_signUp.getText().toString();
@@ -274,83 +280,56 @@ public class signUpScreen extends AppCompatActivity {
         name = Utils.capitalizeString(name);
         last_name = Utils.capitalizeString(last_name);
 
-        Admin admin = new Admin(name, last_name, email, phone, "admin", code);
-        Person person = new Person(name, last_name, email, phone, "admin");
-        email = email.replace(".","-");
-        adminRef.child("Admin_"+email).setValue(admin);
-        personRef.child("Person_"+email).setValue(person);
+
+        if (isAdmin){
+            Admin admin = new Admin(name, last_name, email, phone, "admin", code);
+            Person person = new Person(name, last_name, email, phone, "admin");
+
+            uploadAdmin(person, admin);
+        }
+        else {
+            User user = new User(name, last_name, email, phone, "user");
+            Person person = new Person(name, last_name, email, phone, "user");
+
+            uploadUser(person, user);
+        }
+
     }
 
-    /*private void createUser(){
+    public void uploadUser(@NonNull Person person, User user){
+        String email = person.getEmail();
 
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
+        personRef.child(Utils.emailToPersonPath(email)).setValue(person).addOnSuccessListener(
+                new OnSuccessListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            return;
-                        }
-
-                        // Get new FCM registration token
-                        String token = task.getResult();
-                        System.out.println("Token " + token);
-
-                        String name = et_name_signUp.getText().toString();
-                        String last_name = et_last_name_signUp.getText().toString();
-                        String email = et_email_address_signUp.getText().toString();
-                        String phone = et_phone_number_signUp.getText().toString();
-
-                        name = Utils.capitalizeString(name);
-                        last_name = Utils.capitalizeString(last_name);
-
-                        User user = new User(name, last_name, email, phone, "user", "", token);
-                        Person person = new Person(name, last_name, email, phone, "user", token);
-                        email = email.replace(".","-");
-
-                        userRef.child("User_"+email).setValue(user);
-                        personRef.child("Person_"+email).setValue(person);
+                    public void onSuccess(Void unused) {
+                        userRef.child(Utils.emailToUserPath(email)).setValue(user)
+                                .addOnSuccessListener(
+                                        unused1 -> snackBar("Account successfully created"))
+                                .addOnFailureListener(
+                                        e -> Toast.makeText(signUpScreen.this, "Registration failed", Toast.LENGTH_SHORT).show());
                     }
-                });
+                })
+                .addOnFailureListener(
+                        e -> Toast.makeText(signUpScreen.this, "Registration failed", Toast.LENGTH_SHORT).show());
+    }
 
+    public void uploadAdmin(@NonNull Person person, Admin admin){
+        String email = person.getEmail();
 
-    }*/
-
-    private void createUser(){
-
-        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-        FirebaseMessaging.getInstance().subscribeToTopic("Notification_to_" + Utils.emailForFCM(email)).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (!task.isSuccessful()) {
-                    Log.d("ariel", "Subscribing to topic failed");
-                    return;
-                }
-
-                Log.d("ariel", "Subscribing to topic succeeded");
-
-                String name = et_name_signUp.getText().toString();
-                String last_name = et_last_name_signUp.getText().toString();
-                String email = et_email_address_signUp.getText().toString();
-                String phone = et_phone_number_signUp.getText().toString();
-
-                name = Utils.capitalizeString(name);
-                last_name = Utils.capitalizeString(last_name);
-
-                User user = new User(name, last_name, email, phone, "user");
-                Person person = new Person(name, last_name, email, phone, "user");
-
-                personRef.child(Utils.emailToPersonPath(email)).setValue(person);
-                userRef.child(Utils.emailToUserPath(email)).setValue(user);
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
+        personRef.child(Utils.emailToPersonPath(email)).setValue(person).addOnSuccessListener(
+                new OnSuccessListener<Void>() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
-                        e.printStackTrace();
+                    public void onSuccess(Void unused) {
+                        adminRef.child(Utils.emailToAdminPath(email)).setValue(admin)
+                                .addOnSuccessListener(
+                                        unused1 -> snackBar("Account successfully created"))
+                                .addOnFailureListener(
+                                        e -> Toast.makeText(signUpScreen.this, "Registration failed", Toast.LENGTH_SHORT).show());
                     }
-                });
-
+                })
+                .addOnFailureListener(
+                        e -> Toast.makeText(signUpScreen.this, "Registration failed", Toast.LENGTH_SHORT).show());
     }
 
     @Override
@@ -359,10 +338,11 @@ public class signUpScreen extends AppCompatActivity {
         if (requestCode==1000) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri imageUri = data.getData();
+                iv_profile_pic.setTag(imageUri);
                 //check size of img
                 //todo - turns to true if user enter a code that sent to phone when register, otherwise cannot upload a pic
                 if (confirmation) {
-                    uploadImageToFirebase(imageUri);
+//                    uploadImageToFirebase(imageUri);
                 } else {
                 }
 
@@ -370,9 +350,9 @@ public class signUpScreen extends AppCompatActivity {
         }
     }
 
-    private void uploadImageToFirebase(Uri imageUri) {
+    private void uploadImageToFirebase(Uri imageUri, boolean isAdmin) {
 
-        String emailProfile = et_email_address_signUp.getText().toString().replace(".","-");
+        String emailProfile = Utils.emailToPath(et_email_address_signUp.getText().toString());
 
         Dialog d = new Dialog(this);
         d.setContentView(R.layout.loading_dialog);
@@ -387,6 +367,7 @@ public class signUpScreen extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         Glide.with(getApplicationContext()).load(uri).centerCrop().into(iv_profile_pic);
+                        uploadPerson(isAdmin);
                         d.dismiss();
                     }
                 });
@@ -405,7 +386,6 @@ public class signUpScreen extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(signUpScreen.this, "FAILED!!!!", Toast.LENGTH_LONG).show();
-
             }
         });
     }

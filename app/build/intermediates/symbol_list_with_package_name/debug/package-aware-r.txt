@@ -3434,6 +3434,7 @@ layout activity_splashscreen
 layout activity_super_with_navigation_drawer
 layout activity_users_rv_admin
 layout admin_rv_item
+layout admin_rv_item_updated
 layout background_dropdown_spinner_items
 layout background_spinner1
 layout browser_actions_context_menu_page

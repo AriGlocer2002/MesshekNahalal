@@ -11,16 +11,15 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.Person;
+import com.example.messheknahalal.Objects.User;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.SuperActivityWithNavigationDrawer;
 import com.example.messheknahalal.Utils.Utils;
@@ -40,6 +39,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
 
@@ -49,7 +49,7 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
             personRef = FirebaseDatabase.getInstance().getReference().child("Person");
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
-    ImageView screen_profile_img;
+    RoundedImageView screen_profile_img;
     Button btn_update_data, btn_reset_pass;
     EditText et_name, et_last_name, et_email, et_phone;
 
@@ -61,8 +61,6 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
 
         FirebaseUser user = auth.getCurrentUser();
         String userEmail = user.getEmail();
-        String userPath = "User_"+userEmail.replace(".","-");
-        String personPath = "Person_"+userEmail.replace(".","-");
         rStore = FirebaseStorage.getInstance().getReference();
 
         //setting profile image in the screen
@@ -111,7 +109,8 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
                         et_phone.getText().toString().isEmpty()) {
 
                     Utils.showAlertDialog("Empty fields", "Please finish to complete all the fields.", MyProfileScreenUser.this);
-                }else {
+                }
+                else {
                     String name = et_name.getText().toString();
                     String last_name = et_last_name.getText().toString();
                     String phone = et_phone.getText().toString();
@@ -119,21 +118,62 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
                     name = Utils.capitalizeString(name);
                     last_name = Utils.capitalizeString(last_name);
 
-                    userRef.child(userPath).child("name").setValue(name);
-                    userRef.child(userPath).child("last_name").setValue(last_name);
-                    userRef.child(userPath).child("phone").setValue(phone);
+                    String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-                    personRef.child(personPath).child("name").setValue(name);
-                    personRef.child(personPath).child("last_name").setValue(last_name);
-                    personRef.child(personPath).child("phone").setValue(phone);
-
-                    intent = new Intent(MyProfileScreenUser.this, mainScreenUser.class);
-                    startActivity(intent);
+                    User updatedUser = new User(name,last_name , email, phone, "user");
+                    updateUser(updatedUser);
                 }
             }
         });
 
         initializeNavigationDrawer(false);
+    }
+
+    public void updateUser(@NonNull User updatedUser) {
+        Uri imageUri = (Uri) screen_profile_img.getTag();
+        if (imageUri == null){
+            uploadUserToFirebase(updatedUser);
+        }
+        else {
+            uploadImageToFirebase(imageUri, updatedUser);
+        }
+    }
+
+    public void uploadUserToFirebase(@NonNull User user){
+        String userPath = Utils.emailToUserPath(user.getEmail());
+        String personPath = Utils.emailToPersonPath(user.getEmail());
+
+        personRef.child(personPath).setValue(user).addOnSuccessListener(
+                new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        userRef.child(userPath).setValue(user).addOnSuccessListener(
+                                new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(MyProfileScreenUser.this,
+                                                "User's data was successfully updated",
+                                                Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(MyProfileScreenUser.this, mainScreenUser.class));
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(MyProfileScreenUser.this, "Failed",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                        });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MyProfileScreenUser.this, "Failed",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 
     @Override
@@ -142,14 +182,13 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
         if (requestCode==1000) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri imageUri = data.getData();
-                //check size of img
-                uploadImageToFirebase(imageUri);
-
+                Glide.with(this).load(imageUri).centerCrop().into(screen_profile_img);
+                screen_profile_img.setTag(imageUri);
             }
         }
     }
 
-    private void uploadImageToFirebase(Uri imageUri) {
+    private void uploadImageToFirebase(Uri imageUri, User updatedUser) {
         String emailProfile = et_email.getText().toString().replace(".","-");
 
         Dialog d = new Dialog(this);
@@ -165,7 +204,11 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
                     @Override
                     public void onSuccess(Uri uri) {
                         Glide.with(getApplicationContext()).load(uri).centerCrop().into(screen_profile_img);
-                        Glide.with(getApplicationContext()).load(uri).centerCrop().into(nv_profile_img);
+
+                        String picture = uri.toString();
+                        updatedUser.setPicture(picture);
+                        uploadUserToFirebase(updatedUser);
+
                         d.dismiss();
                     }
                 });
@@ -184,7 +227,6 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(MyProfileScreenUser.this, e.getMessage(), Toast.LENGTH_LONG).show();
-
             }
         });
     }
@@ -215,12 +257,20 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
                     String name = p.getName();
                     String last_name = p.getLast_name();
                     String phone = p.getPhone();
+                    String picture = p.getPicture();
 
                     et_name.setText(name);
                     et_last_name.setText(last_name);
                     et_phone.setText(phone);
                     et_email.setText(email);
                     et_email.setEnabled(false);
+
+                    if (picture != null && !picture.isEmpty()){
+                        Glide.with(getApplicationContext()).load(picture).centerCrop().into(screen_profile_img);
+                    }
+                    else {
+                        Glide.with(getApplicationContext()).load(R.drawable.sample_profile).centerCrop().into(screen_profile_img);
+                    }
                 }
             }
 

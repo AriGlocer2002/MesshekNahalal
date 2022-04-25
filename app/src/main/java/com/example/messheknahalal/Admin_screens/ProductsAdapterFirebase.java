@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Objects.Product;
 import com.example.messheknahalal.R;
+import com.example.messheknahalal.Utils.Utils;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
@@ -91,9 +92,9 @@ public class ProductsAdapterFirebase extends
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        String pid = getItem(getBindingAdapterPosition()).getPid();
+                        String name = getItem(getBindingAdapterPosition()).getName();
                         String product_type = getItem(getBindingAdapterPosition()).getType();
-                        deleteProduct(pid, product_type);
+                        deleteProduct(name, product_type);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -111,8 +112,9 @@ public class ProductsAdapterFirebase extends
             return true;
         }
 
-        public void deleteProduct(String pid, @NonNull String type){
-            FirebaseDatabase.getInstance().getReference("Product").child(type).child(pid).removeValue();
+        public void deleteProduct(String name, @NonNull String type){
+            String productPath = Utils.productNameToPath(name);
+            FirebaseDatabase.getInstance().getReference("Product").child(type).child(productPath).removeValue();
         }
     }
 

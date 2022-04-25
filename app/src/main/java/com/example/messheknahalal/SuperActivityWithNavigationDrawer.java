@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,7 +21,7 @@ import com.example.messheknahalal.Admin_screens.UsersRecycleViewScreenAdmin;
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.User_screens.mainScreenUser;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.messheknahalal.Utils.Utils;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,8 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
 
@@ -129,27 +127,19 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
     protected void loadDrawerData(){
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-        String personPath = "Person_" + email.replace(".","-");
-
-        loadDrawerNameAndLastName(personPath);
-        loadDrawerEmail(email);
-        loadDrawerImage(email);
-    }
-
-    protected void loadDrawerNameAndLastName(String path){
+        String personPath = Utils.emailToPersonPath(email);
 
         DatabaseReference personRef = FirebaseDatabase.getInstance().getReference().child("Person");
 
-        personRef.child(path).addValueEventListener(new ValueEventListener() {
+        personRef.child(personPath).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Person p = snapshot.getValue(Person.class);
-                String name = p.getName();
-                String last_name = p.getLast_name();
-                String fullName = name + " " + last_name;
-
-                TextView navAdminName = headerView.findViewById(R.id.header_nd_tv_name);
-                navAdminName.setText(fullName);
+                if (snapshot.exists()){
+                    Person p = snapshot.getValue(Person.class);
+                    loadDrawerNameAndLastName(p.getName(), p.getLast_name());
+                    loadDrawerEmail(p.getEmail());
+                    loadDrawerImage(p.getPicture());
+                }
             }
 
             @Override
@@ -159,6 +149,13 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
         });
     }
 
+    protected void loadDrawerNameAndLastName(String name, String last_name){
+        String fullName = name + " " + last_name;
+
+        TextView navAdminName = headerView.findViewById(R.id.header_nd_tv_name);
+        navAdminName.setText(fullName);
+    }
+
     protected View headerView;
 
     protected void loadDrawerEmail(String email){
@@ -166,20 +163,16 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
         navEmail.setText(email);
     }
 
-    protected ImageView nv_profile_img;
+    protected RoundedImageView nv_profile_img;
 
-    protected void loadDrawerImage(@NonNull String email){
-        StorageReference rStore = FirebaseStorage.getInstance().getReference();
-
+    protected void loadDrawerImage(String picture){
         nv_profile_img = headerView.findViewById(R.id.header_nd_iv_pp);
-        StorageReference profileRef = rStore.child("profiles/pp_" + email.replace(".","-") + ".jpg");
-
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(SuperActivityWithNavigationDrawer.this).load(uri).centerCrop().into(nv_profile_img);
-            }
-        });
+        if (picture != null && !picture.isEmpty()){
+            Glide.with(getApplicationContext()).load(picture).centerCrop().into(nv_profile_img);
+        }
+        else {
+            Glide.with(getApplicationContext()).load(R.drawable.sample_profile).centerCrop().into(nv_profile_img);
+        }
     }
 
     protected void sendEmail(@NonNull String recipientsList, String subject, String text){

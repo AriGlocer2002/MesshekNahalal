@@ -131,13 +131,10 @@ public class CreateNewProductAdmin extends AppCompatActivity {
 
         productRef = FirebaseDatabase.getInstance().getReference().child("Product").child(productType);
 
-        String pid = "Product-" + productRef.push().getKey();
-        p.setPid(pid);
-
         Uri uri = (Uri) product_img.getTag();
         Log.d("ariel", "imageUri is " + uri.toString());
 
-        uploadProductToFirebase(uri, p);
+        uploadProduct(uri, p);
     }
 
     @Override
@@ -162,39 +159,47 @@ public class CreateNewProductAdmin extends AppCompatActivity {
         product_img.setImageResource(R.drawable.upload_image_img);
     }
 
-    private void uploadProductToFirebase(Uri imageUri, @NonNull Product product) {
-        //Checking product name format
-        String productType = product.getType();
-        String pid = product.getPid();
-
+    private void uploadProduct(Uri imageUri, @NonNull Product product) {
         if(imageUri == null){
-            DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product")
-                    .child(productType).child(pid);
-
-            productRef.setValue(product).addOnSuccessListener(
-                    new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(CreateNewProductAdmin.this, "The product has been created successfully", Toast.LENGTH_SHORT).show();
-                            resetAllFields();
-                        }
-                    });
+            uploadProductToFirebase(product);
         }
         else {
             uploadImageToFirebase(imageUri, product);
         }
     }
 
+    public void uploadProductToFirebase(@NonNull Product product) {
+        String productPath = Utils.productNameToPath(product.getName());
+
+        DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product")
+                .child(product.getType()).child(productPath);
+
+        productRef.setValue(product).addOnSuccessListener(
+                new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(CreateNewProductAdmin.this, "The product has been created successfully", Toast.LENGTH_SHORT).show();
+                        resetAllFields();
+                    }
+                })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(CreateNewProductAdmin.this, "The product creation failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void uploadImageToFirebase(Uri imageUri, @NonNull Product product){
 
         String productType = product.getType();
-        String pid = product.getPid();
+        String productPath = Utils.productNameToPath(product.getName());
 
         Dialog d = new Dialog(this);
         d.setContentView(R.layout.loading_dialog);
         d.show();
 
-        StorageReference fileRef = rStore.child("products/"+productType+"/"+pid+".jpg");
+        StorageReference fileRef = rStore.child("products/"+productType+"/"+productPath+".jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -202,19 +207,7 @@ public class CreateNewProductAdmin extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         product.setPicture(uri.toString());
-
-                        DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product")
-                                .child(productType).child(pid);
-
-                        productRef.setValue(product).addOnSuccessListener(
-                                new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        d.dismiss();
-                                        Toast.makeText(CreateNewProductAdmin.this, "The product has been created successfully", Toast.LENGTH_SHORT).show();
-                                        resetAllFields();
-                                    }
-                                });
+                        uploadProductToFirebase(product);
                     }
                 });
             }

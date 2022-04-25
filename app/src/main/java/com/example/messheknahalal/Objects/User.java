@@ -18,8 +18,8 @@ public class User extends Person {
         super(name, last_name, email, phone, type);
     }
 
-    public User(String name, String last_name, String email, String phone, String type, String token) {
-        super(name, last_name, email, phone, type, token);
+    public User(String name, String last_name, String email, String phone, String type, String picture) {
+        super(name, last_name, email, phone, type, picture);
     }
 
     public String getLast_login() {

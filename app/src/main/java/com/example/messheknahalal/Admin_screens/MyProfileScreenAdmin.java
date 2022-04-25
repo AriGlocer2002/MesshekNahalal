@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.example.messheknahalal.Objects.Admin;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.SuperActivityWithNavigationDrawer;
@@ -38,6 +38,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
 
@@ -48,7 +49,7 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    ImageView screen_profile_img;
+    RoundedImageView screen_profile_img;
     Button btn_update_data, btn_reset_pass;
     EditText et_name, et_last_name, et_email, et_phone;
 
@@ -60,8 +61,6 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
 
         FirebaseUser user = auth.getCurrentUser();
         String adminEmail = user.getEmail();
-        String adminPath = "Admin_"+adminEmail.replace(".","-");
-        String personPath = "Person_"+adminEmail.replace(".","-");
         rStore = FirebaseStorage.getInstance().getReference();
 
         //setting profile image in the screen
@@ -118,21 +117,62 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
                     name = Utils.capitalizeString(name);
                     last_name = Utils.capitalizeString(last_name);
 
-                    adminRef.child(adminPath).child("name").setValue(name);
-                    adminRef.child(adminPath).child("last_name").setValue(last_name);
-                    adminRef.child(adminPath).child("phone").setValue(phone);
+                    String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-                    personRef.child(personPath).child("name").setValue(name);
-                    personRef.child(personPath).child("last_name").setValue(last_name);
-                    personRef.child(personPath).child("phone").setValue(phone);
-
-                    intent = new Intent(MyProfileScreenAdmin.this, mainScreenAdmin.class);
-                    startActivity(intent);
+                    Admin updatedAdmin = new Admin(name,last_name , email, phone, "admin", "");
+                    updateAmin(updatedAdmin);
                 }
             }
         });
 
         initializeNavigationDrawer(true);
+
+    }
+
+    public void updateAmin(Admin updatedAdmin) {
+        Uri imageUri = (Uri) screen_profile_img.getTag();
+        if (imageUri == null){
+            uploadAdminToFirebase(updatedAdmin);
+        }
+        else {
+            uploadImageToFirebase(imageUri, updatedAdmin);
+        }
+    }
+
+    public void uploadAdminToFirebase(@NonNull Admin admin){
+        String adminPath = Utils.emailToAdminPath(admin.getEmail());
+        String personPath = Utils.emailToPersonPath(admin.getEmail());
+
+        personRef.child(personPath).setValue(admin).addOnSuccessListener(
+                new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        adminRef.child(adminPath).setValue(admin).addOnSuccessListener(
+                                new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(MyProfileScreenAdmin.this,
+                                                "User's data was successfully updated",
+                                                Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(MyProfileScreenAdmin.this, mainScreenAdmin.class));
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(MyProfileScreenAdmin.this, "Failed",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MyProfileScreenAdmin.this, "Failed",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     }
 
@@ -143,13 +183,13 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
             if (resultCode == Activity.RESULT_OK) {
                 Uri imageUri = data.getData();
                 //check size of img
-                uploadImageToFirebase(imageUri);
-
+                Glide.with(this).load(imageUri).centerCrop().into(screen_profile_img);
+                screen_profile_img.setTag(imageUri);
             }
         }
     }
 
-    private void uploadImageToFirebase(Uri imageUri) {
+    private void uploadImageToFirebase(Uri imageUri, Admin updatedAdmin) {
         String emailProfile = et_email.getText().toString().replace(".","-");
 
         Dialog d = new Dialog(this);
@@ -165,7 +205,11 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
                     @Override
                     public void onSuccess(Uri uri) {
                         Glide.with(getApplicationContext()).load(uri).centerCrop().into(screen_profile_img);
-                        Glide.with(getApplicationContext()).load(uri).centerCrop().into(nv_profile_img);
+
+                        String picture = uri.toString();
+                        updatedAdmin.setPicture(picture);
+                        uploadAdminToFirebase(updatedAdmin);
+
                         d.dismiss();
                     }
                 });
@@ -184,7 +228,6 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(MyProfileScreenAdmin.this, "FAILED!!!!", Toast.LENGTH_LONG).show();
-
             }
         });
     }
@@ -193,7 +236,6 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.drawer_layout), message, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
-
 
     public void showData(@NonNull String email){
         et_email = findViewById(R.id.my_profile_admin_et_email_address);
@@ -211,12 +253,20 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
                     String name = p.getName();
                     String last_name = p.getLast_name();
                     String phone = p.getPhone();
+                    String picture = p.getPicture();
 
                     et_name.setText(name);
                     et_last_name.setText(last_name);
                     et_phone.setText(phone);
                     et_email.setText(email);
                     et_email.setEnabled(false);
+
+                    if (picture != null && !picture.isEmpty()){
+                        Glide.with(getApplicationContext()).load(picture).centerCrop().into(screen_profile_img);
+                    }
+                    else {
+                        Glide.with(getApplicationContext()).load(R.drawable.sample_profile).centerCrop().into(screen_profile_img);
+                    }
                 }
             }
 

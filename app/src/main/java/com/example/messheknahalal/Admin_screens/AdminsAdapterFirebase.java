@@ -9,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,10 +22,8 @@ import com.example.messheknahalal.Utils.Utils;
 import com.example.messheknahalal.delete_user.FCMSend;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, AdminsAdapterFirebase.AdminViewHolderFirebase> {
@@ -53,7 +51,7 @@ public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, Admins
 
     public class AdminViewHolderFirebase extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        RelativeLayout rl_admin_item;
+        ConstraintLayout cl_admin_item;
 
         TextView tv_full_name;
         TextView tv_email;
@@ -69,7 +67,7 @@ public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, Admins
         public AdminViewHolderFirebase(@NonNull View itemView) {
             super(itemView);
 
-            rl_admin_item = itemView.findViewById(R.id.rl_admin_item);
+            cl_admin_item = itemView.findViewById(R.id.rl_admin_item);
 
             tv_full_name = itemView.findViewById(R.id.admins_rv_item_tv_full_name);
             tv_email = itemView.findViewById(R.id.admins_rv_item_tv_email);
@@ -162,21 +160,19 @@ public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, Admins
         holder.tv_email.setText(model.getEmail());
         holder.tv_phone.setText(model.getPhone());
 
-        rStore = FirebaseStorage.getInstance().getReference();
-        StorageReference profileRef = rStore.child("profiles/pp_" + model.getEmail().replace(".","-")+".jpg");
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(context).load(uri).centerCrop().into(holder.admins_rv_item_iv_pp);
-            }
-        });
+        if (model.getPicture() != null && !model.getPicture().isEmpty()){
+            Glide.with(context).load(model.getPicture()).centerCrop().into(holder.admins_rv_item_iv_pp);
+        }
+        else {
+            Glide.with(context).load(R.drawable.sample_profile).centerCrop().into(holder.admins_rv_item_iv_pp);
+        }
     }
 
     @NonNull
     @Override
     public AdminsAdapterFirebase.AdminViewHolderFirebase onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.admin_rv_item, parent, false);
+                .inflate(R.layout.admin_rv_item_updated, parent, false);
 
         return new AdminsAdapterFirebase.AdminViewHolderFirebase(view);
     }
