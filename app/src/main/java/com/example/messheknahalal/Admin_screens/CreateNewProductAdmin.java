@@ -197,6 +197,7 @@ public class CreateNewProductAdmin extends AppCompatActivity {
 
         Dialog d = new Dialog(this);
         d.setContentView(R.layout.loading_dialog);
+d.setCanceledOnTouchOutside(false);
         d.show();
 
         StorageReference fileRef = rStore.child("products/"+productType+"/"+productPath+".jpg");

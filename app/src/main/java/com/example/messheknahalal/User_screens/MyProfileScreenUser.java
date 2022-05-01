@@ -151,9 +151,8 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
                                 new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
-                                        Toast.makeText(MyProfileScreenUser.this,
-                                                "User's data was successfully updated",
-                                                Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MyProfileScreenUser.this, "User's data was successfully updated", Toast.LENGTH_SHORT).show();
+                                        Log.d("ariel", user.getType());
                                         startActivity(new Intent(MyProfileScreenUser.this, mainScreenUser.class));
                                     }
                                 })
@@ -193,6 +192,7 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
 
         Dialog d = new Dialog(this);
         d.setContentView(R.layout.loading_dialog);
+        d.setCanceledOnTouchOutside(false);
         d.show();
 
         StorageReference fileRef = rStore.child("profiles/pp_"+emailProfile+".jpg");
@@ -203,7 +203,7 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Glide.with(getApplicationContext()).load(uri).centerCrop().into(screen_profile_img);
+                        Glide.with(MyProfileScreenUser.this).load(uri).centerCrop().into(screen_profile_img);
 
                         String picture = uri.toString();
                         updatedUser.setPicture(picture);

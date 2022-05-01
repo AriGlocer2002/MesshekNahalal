@@ -192,7 +192,7 @@ public class signUpScreen extends AppCompatActivity {
 
     private void createPerson(String code, String email, String password){
 
-        adminCodeRef.child("code").addValueEventListener(new ValueEventListener() {
+        adminCodeRef.child("code").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
                 //if exists the dataSnapshot
@@ -241,8 +241,18 @@ public class signUpScreen extends AppCompatActivity {
         });
     }
 
-    public void createPerson(boolean isAdmin){
-        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    public void createPerson(boolean isAdmin) {
+//        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        String name = et_name_signUp.getText().toString();
+        String last_name = et_last_name_signUp.getText().toString();
+        String email = et_email_address_signUp.getText().toString();
+        String phone = et_phone_number_signUp.getText().toString();
+
+        name = Utils.capitalizeString(name);
+        last_name = Utils.capitalizeString(last_name);
+
+        Person person = new Person(name, last_name, email, phone, "");
 
         FirebaseMessaging.getInstance().subscribeToTopic("Notification_to_" + Utils.emailForFCM(email))
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -252,11 +262,11 @@ public class signUpScreen extends AppCompatActivity {
 
                         Uri imageUri = (Uri) iv_profile_pic.getTag();
 
-                        if (imageUri == null){
-                            uploadPerson(isAdmin);
+                        if (imageUri == null) {
+                            uploadPerson(person, isAdmin);
                         }
                         else {
-                            uploadImageToFirebase(imageUri, isAdmin);
+                            uploadImageToFirebase(person, imageUri, isAdmin);
                         }
                     }
                 })
@@ -269,27 +279,19 @@ public class signUpScreen extends AppCompatActivity {
         });
     }
 
-    public void uploadPerson(boolean isAdmin){
-
-        String name = et_name_signUp.getText().toString();
-        String last_name = et_last_name_signUp.getText().toString();
-        String email = et_email_address_signUp.getText().toString();
-        String phone = et_phone_number_signUp.getText().toString();
-        String code = et_admin_code_signUp.getText().toString();
-
-        name = Utils.capitalizeString(name);
-        last_name = Utils.capitalizeString(last_name);
-
+    public void uploadPerson(Person person, boolean isAdmin){
 
         if (isAdmin){
-            Admin admin = new Admin(name, last_name, email, phone, "admin", code);
-            Person person = new Person(name, last_name, email, phone, "admin");
+            person.setType("admin");
+
+            Admin admin = new Admin(person.getName(), person.getLast_name(), person.getEmail(), person.getPhone(), person.getType(), et_admin_code_signUp.getText().toString());
 
             uploadAdmin(person, admin);
         }
         else {
-            User user = new User(name, last_name, email, phone, "user");
-            Person person = new Person(name, last_name, email, phone, "user");
+            person.setType("user");
+
+            User user = new User(person.getName(), person.getLast_name(), person.getEmail(), person.getPhone(), person.getType());
 
             uploadUser(person, user);
         }
@@ -339,23 +341,18 @@ public class signUpScreen extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 Uri imageUri = data.getData();
                 iv_profile_pic.setTag(imageUri);
-                //check size of img
-                //todo - turns to true if user enter a code that sent to phone when register, otherwise cannot upload a pic
-                if (confirmation) {
-//                    uploadImageToFirebase(imageUri);
-                } else {
-                }
-
+                Glide.with(this).load(imageUri).centerCrop().into(iv_profile_pic);
             }
         }
     }
 
-    private void uploadImageToFirebase(Uri imageUri, boolean isAdmin) {
+    private void uploadImageToFirebase(Person person, Uri imageUri, boolean isAdmin) {
 
         String emailProfile = Utils.emailToPath(et_email_address_signUp.getText().toString());
 
         Dialog d = new Dialog(this);
         d.setContentView(R.layout.loading_dialog);
+        d.setCanceledOnTouchOutside(false);
         d.show();
 
         StorageReference fileRef = rStore.child("profiles/pp_"+emailProfile+".jpg");
@@ -366,8 +363,9 @@ public class signUpScreen extends AppCompatActivity {
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Glide.with(getApplicationContext()).load(uri).centerCrop().into(iv_profile_pic);
-                        uploadPerson(isAdmin);
+                        Glide.with(signUpScreen.this).load(uri).centerCrop().into(iv_profile_pic);
+                        person.setPicture(uri.toString());
+                        uploadPerson(person, isAdmin);
                         d.dismiss();
                     }
                 });
@@ -393,10 +391,11 @@ public class signUpScreen extends AppCompatActivity {
     public void snackBar(String message){
         Snackbar snackbar = Snackbar
                 .make(findViewById(R.id.sign_up_screen), message, Snackbar.LENGTH_INDEFINITE)
-                .setAction("Continue",new View.OnClickListener(){
+                .setAction("Continue", new View.OnClickListener(){
                     @Override
                     public void onClick(View view) {
                         intent = new Intent(signUpScreen.this, cb_admin.isChecked() ? mainScreenAdmin.class : mainScreenUser.class);
+                        Log.d("ariel", "cb_admin is " + cb_admin.isChecked());
                         startActivity(intent);
                     }
                 });

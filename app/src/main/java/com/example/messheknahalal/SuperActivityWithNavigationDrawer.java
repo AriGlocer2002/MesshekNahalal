@@ -20,6 +20,7 @@ import com.example.messheknahalal.Admin_screens.ProductsRecycleViewScreenAdmin;
 import com.example.messheknahalal.Admin_screens.UsersRecycleViewScreenAdmin;
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
 import com.example.messheknahalal.Objects.Person;
+import com.example.messheknahalal.User_screens.MyProfileScreenUser;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.example.messheknahalal.Utils.Utils;
 import com.google.android.material.navigation.NavigationView;
@@ -41,6 +42,8 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
     protected Toolbar toolbar;
 
     protected void initializeNavigationDrawer(boolean isAdmin){
+
+        Log.d("ariel", "isAdmin is " + isAdmin);
 
         drawerMenu = findViewById(R.id.drawer_layout);
         nav_view = findViewById(R.id.nav_view);
@@ -72,7 +75,7 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
 //                        break;
 
                     case R.id.myProfile_item:
-                        navigationIntent = new Intent(getApplicationContext(), MyProfileScreenAdmin.class);
+                        navigationIntent = new Intent(getApplicationContext(), isAdmin ? MyProfileScreenAdmin.class : MyProfileScreenUser.class);
                         startActivity(navigationIntent);
                         break;
 

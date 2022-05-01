@@ -152,7 +152,7 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         Toast.makeText(MyProfileScreenAdmin.this,
-                                                "User's data was successfully updated",
+                                                "Admin's data was successfully updated",
                                                 Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(MyProfileScreenAdmin.this, mainScreenAdmin.class));
                                     }
@@ -194,6 +194,7 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
 
         Dialog d = new Dialog(this);
         d.setContentView(R.layout.loading_dialog);
+d.setCanceledOnTouchOutside(false);
         d.show();
 
         StorageReference fileRef = rStore.child("profiles/pp_"+emailProfile+".jpg");

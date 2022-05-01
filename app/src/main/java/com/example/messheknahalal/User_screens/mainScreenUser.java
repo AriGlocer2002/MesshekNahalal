@@ -92,7 +92,7 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer {
                     fragment = getSupportFragmentManager().findFragmentByTag(TAG);
                     if (fragment == null){
                         fragment = currentFragment;
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_admin_container, fragment, TAG).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_user_container, fragment, TAG).commit();
                     }
 
                     return true;
