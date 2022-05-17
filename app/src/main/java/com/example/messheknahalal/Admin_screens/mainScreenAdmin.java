@@ -1,19 +1,34 @@
 package com.example.messheknahalal.Admin_screens;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.SuperActivityWithNavigationDrawer;
+import com.example.messheknahalal.VPAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
+
+import java.util.ArrayList;
 
 public class mainScreenAdmin extends SuperActivityWithNavigationDrawer {
 
     BottomNavigationView bottomNav;
+
+    Intent intent;
+    ViewPager2 viewPager2;
+    ArrayList<Integer> imageList;
+    VPAdapter adapter;
+    WormDotsIndicator dotsIndicator;
+    Button btn_my_profile, btn_orders, btn_users, btn_products, btn_create_new_product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,47 +37,38 @@ public class mainScreenAdmin extends SuperActivityWithNavigationDrawer {
 
         initializeNavigationDrawer(true);
 
-        //bottom navigation bar
-        bottomNav = findViewById(R.id.main_screen_admin_bottomNav);
-
-        bottomNav.setOnItemSelectedListener(bottomNavMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_admin_container, new HomeFragmentAdmin(), HomeFragmentAdmin.TAG).commit();
-
         Log.d("ariel", getLocalClassName());
+
+        viewPager2 = findViewById(R.id.fragment_home_admin_viewPager);
+        dotsIndicator = findViewById(R.id.fragment_home_admin_dots);
+
+        imageList = new ArrayList<>();
+        imageList.add(R.drawable.image_nahalal);
+        imageList.add(R.drawable.bees_pic);
+        imageList.add(R.drawable.gan_yarak);
+        imageList.add(R.drawable.lettuce_img);
+        adapter = new VPAdapter(imageList);
+
+        viewPager2.setAdapter(adapter);
+        dotsIndicator.setViewPager2(viewPager2);
+
+        btn_create_new_product = findViewById(R.id.fragment_products_admin_btn_new_product);
+
+        btn_create_new_product.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), CreateNewProductAdmin.class)));
+
+        btn_my_profile = findViewById(R.id.fragment_home_admin_btn_my_profile);
+        btn_orders = findViewById(R.id.fragment_home_admin_btn_orders);
+        btn_users = findViewById(R.id.fragment_home_admin_btn_users);
+        btn_products = findViewById(R.id.fragment_home_admin_btn_products);
+
+
+        btn_my_profile.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), MyProfileScreenAdmin.class)));
+
+//        btn_orders.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), .class)));
+
+        btn_users.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), UsersRecycleViewScreenAdmin.class)));
+
+        btn_products.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ProductsRecycleViewScreenAdmin.class)));
     }
-
-    public BottomNavigationView.OnItemSelectedListener bottomNavMethod = new
-            BottomNavigationView.OnItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-                    Fragment fragment;
-                    Fragment currentFragment;
-                    String TAG;
-
-                    switch (menuItem.getItemId()) {
-                        case R.id.home:
-                            TAG = HomeFragmentAdmin.TAG;
-                            currentFragment = new HomeFragmentAdmin();
-                            break;
-
-                        case R.id.products:
-                            TAG = ProductsFragmentAdmin.TAG;
-                            currentFragment = new ProductsFragmentAdmin();
-                            break;
-                        default:
-                            throw new IllegalStateException(
-                                    "Unexpected value: " + menuItem.getItemId());
-                    }
-
-                    fragment = getSupportFragmentManager().findFragmentByTag(TAG);
-                    if (fragment == null){
-                        fragment = currentFragment;
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_admin_container, fragment, TAG).commit();
-                    }
-
-                    return true;
-                }
-            };
 
 }

@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:text="Loading... "
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textPercent_loading_dialog"
@@ -25,7 +25,7 @@
         android:layout_marginStart="100dp"
         android:text="0.0%"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <ProgressBar
         android:id="@+id/progressBar_loading_dialog"

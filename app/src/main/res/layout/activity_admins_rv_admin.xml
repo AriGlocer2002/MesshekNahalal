@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="Admins List"
                 android:layout_centerHorizontal="true"
-                android:textSize="35dp"
+                android:textSize="35sp"
                 android:fontFamily="@font/grenze_semi_bold_italic"
                 android:textColor="@color/black"
                 />
@@ -70,7 +70,7 @@
                 android:fontFamily="@font/grenze_semi_bold_italic"
                 android:text="Reset admins code"
                 android:textColor="@color/black"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
 
             <ImageView

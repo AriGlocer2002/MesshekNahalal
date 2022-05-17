@@ -111,9 +111,11 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer {
         switch (item.getItemId()){
             case R.id.shopping:
                 Toast.makeText(this, "Shopping", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, ShoppingScreen.class));
                 return true;
         }
         return false;
+
     }
 
     public String getCurrentDate(){

@@ -40,7 +40,7 @@
                 android:fontFamily="@font/grenze_semi_bold_italic"
                 android:text="Products List"
                 android:textColor="@color/black"
-                android:textSize="35dp" />
+                android:textSize="35sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -65,7 +65,6 @@
                     android:layout_height="80dp"
                     android:padding="10dp"
                     android:layout_marginHorizontal="5dp"
-                    android:layout_toEndOf="@id/products_rv_screen_btn_vegetable"
                     android:src="@drawable/fruit" />
 
                 <ImageView
@@ -74,7 +73,6 @@
                     android:layout_height="80dp"
                     android:padding="10dp"
                     android:layout_marginHorizontal="5dp"
-                    android:layout_toEndOf="@id/products_rv_screen_btn_fruit"
                     android:src="@drawable/shelves" />
 
                 <ImageView
@@ -82,7 +80,6 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginHorizontal="5dp"
-                    android:layout_toEndOf="@id/products_rv_screen_btn_shelf"
                     android:padding="10dp"
                     android:src="@drawable/more_ic" />
 
@@ -90,13 +87,13 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/products_rv_screen_rv"
-                android:layout_width="357dp"
-                android:layout_height="490dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/products_rv_screen_rl_buttons"
                 android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="40dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="20sp"
+                android:layout_marginBottom="20dp"
                 android:padding="3sp" />
 
         </RelativeLayout>

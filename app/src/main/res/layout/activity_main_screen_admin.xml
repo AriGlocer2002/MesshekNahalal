@@ -9,10 +9,9 @@
     tools:context=".Admin_screens.mainScreenAdmin"
     tools:openDrawer="start">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -20,28 +19,99 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/fragment_home_admin_iv_logo_background"
+            android:layout_width="306dp"
+            android:layout_height="47dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/toolbar"
+            app:srcCompat="@drawable/back1" />
+
+        <ImageView
+            android:id="@+id/fragment_home_admin_iv_logo"
+            android:layout_width="295dp"
+            android:layout_height="55dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/toolbar"
+            app:srcCompat="@drawable/logo2" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/fragment_home_admin_viewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="300dp"
+            android:layout_below="@+id/fragment_home_admin_iv_logo"
+            android:layout_marginHorizontal="0dp" />
 
-            <FrameLayout
-                android:id="@+id/main_screen_admin_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+            android:id="@+id/fragment_home_admin_dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_home_admin_viewPager"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            app:dotsColor="@color/white" />
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/main_screen_admin_bottomNav"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:background="?android:attr/windowBackground"
-                app:itemIconTint="@drawable/bottom_nav_icon_color_selector"
-                app:itemTextColor="@drawable/bottom_nav_icon_color_selector"
-                app:menu="@menu/menu" />
+        <Button
+            android:id="@+id/fragment_products_admin_btn_new_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/fragment_home_admin_dots"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#4FCA69"
+            android:textColor="@android:color/black"
+            android:text="Create new product" />
 
-        </RelativeLayout>
+        <Button
+            android:id="@+id/fragment_home_admin_btn_my_profile"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/fragment_products_admin_btn_new_product"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#03A9F4"
+            android:drawableStart="@drawable/ic_profile"
+            android:text="My profile" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/fragment_home_admin_btn_orders"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/fragment_products_admin_btn_new_product"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:layout_alignParentEnd="true"
+            android:text="Orders"
+            android:backgroundTint="#4CAF50"
+            android:drawableStart="@drawable/ic_receipt" />
+
+        <Button
+            android:id="@+id/fragment_home_admin_btn_users"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/fragment_home_admin_btn_my_profile"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#3F51B5"
+            android:drawableStart="@drawable/ic_user_circle"
+            android:text="Users" />
+
+        <Button
+            android:id="@+id/fragment_home_admin_btn_products"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/fragment_home_admin_btn_my_profile"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:backgroundTint="#FF9800"
+            android:drawableStart="@drawable/ic_shopping_basket"
+            android:text="Products" />
+
+    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

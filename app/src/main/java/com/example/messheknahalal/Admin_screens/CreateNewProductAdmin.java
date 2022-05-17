@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -35,13 +35,16 @@ import com.google.firebase.storage.UploadTask;
 
 public class CreateNewProductAdmin extends AppCompatActivity {
 
-    Spinner spinner;
-    ImageView product_img;
-    Button btn_back, btn_confirm;
-    TextInputEditText tie_name, tie_stock, tie_price;
+    protected Spinner spinner;
+    protected ImageView product_img;
+    protected Button btn_back, btn_confirm;
+    protected TextInputEditText tie_name, tie_stock, tie_price;
+    protected CheckBox cb_countable;
 
-    DatabaseReference productRef;
-    StorageReference rStore = FirebaseStorage.getInstance().getReference();
+    protected DatabaseReference productRef;
+    protected StorageReference rStore = FirebaseStorage.getInstance().getReference();
+
+    protected final String[] products_types = {"","Vegetable","Fruit","Shelf","Other"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class CreateNewProductAdmin extends AppCompatActivity {
         tie_name = findViewById(R.id.create_new_product_admin_tie_product_name);
         tie_stock = findViewById(R.id.create_new_product_admin_tie_product_stock_amount);
         tie_price = findViewById(R.id.create_new_product_admin_tie_product_price);
+        cb_countable = findViewById(R.id.cb_countable);
 
         btn_back = findViewById(R.id.create_new_product_admin_btn_back);
         btn_confirm = findViewById(R.id.create_new_product_admin_btn_confirm);
@@ -84,7 +88,6 @@ public class CreateNewProductAdmin extends AppCompatActivity {
         });
 
         //setting spinner information
-        String[] products_types = {"","Vegetable","Fruit","Shelf","Other"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.background_spinner1, products_types);
         adapter.setDropDownViewResource(R.layout.background_dropdown_spinner_items);
 
@@ -116,23 +119,18 @@ public class CreateNewProductAdmin extends AppCompatActivity {
     }
 
     private void createProduct(){
-        spinner = findViewById(R.id.create_new_product_admin_spinner_type);
-        tie_name = findViewById(R.id.create_new_product_admin_tie_product_name);
-        tie_stock = findViewById(R.id.create_new_product_admin_tie_product_stock_amount);
-        tie_price = findViewById(R.id.create_new_product_admin_tie_product_price);
-        product_img = findViewById(R.id.create_new_product_admin_iv_upload_image);
 
-        String productType = (String)spinner.getSelectedItem();
+        String productType = (String) spinner.getSelectedItem();
         String productName = tie_name.getText().toString();
-        String productStock = tie_stock.getText().toString();
-        String productPrice = tie_price.getText().toString();
+        double productStock = Double.parseDouble(tie_stock.getText().toString());
+        double productPrice = Double.parseDouble(tie_price.getText().toString());
+        boolean productCountable = cb_countable.isChecked();
 
-        Product p = new Product(productType, productName, productStock, productPrice);
+        Product p = new Product(productType, productName, productStock, productPrice, productCountable);
 
         productRef = FirebaseDatabase.getInstance().getReference().child("Product").child(productType);
 
         Uri uri = (Uri) product_img.getTag();
-        Log.d("ariel", "imageUri is " + uri.toString());
 
         uploadProduct(uri, p);
     }
@@ -159,7 +157,7 @@ public class CreateNewProductAdmin extends AppCompatActivity {
         product_img.setImageResource(R.drawable.upload_image_img);
     }
 
-    private void uploadProduct(Uri imageUri, @NonNull Product product) {
+    public void uploadProduct(Uri imageUri, @NonNull Product product) {
         if(imageUri == null){
             uploadProductToFirebase(product);
         }
@@ -179,6 +177,7 @@ public class CreateNewProductAdmin extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(CreateNewProductAdmin.this, "The product has been created successfully", Toast.LENGTH_SHORT).show();
+
                         resetAllFields();
                     }
                 })
@@ -197,7 +196,7 @@ public class CreateNewProductAdmin extends AppCompatActivity {
 
         Dialog d = new Dialog(this);
         d.setContentView(R.layout.loading_dialog);
-d.setCanceledOnTouchOutside(false);
+        d.setCanceledOnTouchOutside(false);
         d.show();
 
         StorageReference fileRef = rStore.child("products/"+productType+"/"+productPath+".jpg");

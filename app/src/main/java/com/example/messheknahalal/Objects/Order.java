@@ -1,53 +1,38 @@
 package com.example.messheknahalal.Objects;
 
-import androidx.annotation.NonNull;
-
 public class Order {
-    private String date;
-    private String status;
-    private float totalPrice;
 
-    public Order(){
+    private String product;
+    private String name;
 
-    }
+    public Order(){}
 
-    public Order(String date, String status, float totalPrice) {
-        this.date = date;
-        this.status = status;
-        this.totalPrice = totalPrice;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public float getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    @NonNull
     @Override
     public String toString() {
         return "Order{" +
-                "date='" + date + '\'' +
-                ", status='" + status + '\'' +
-                ", totalPrice=" + totalPrice +
+                "product='" + product + '\'' +
+                ", name='" + name + '\'' +
                 '}';
+    }
+
+    public Order(String product, String name) {
+        this.product = product;
+        this.name = name;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

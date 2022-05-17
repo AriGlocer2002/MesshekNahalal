@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,22 +33,26 @@ public class ProductsAdapterFirebase extends
      */
 
     private final Context context;
+    private final boolean isAdmin;
+    private final OnAddToCartListener onAddToCartListener;
 
-    public ProductsAdapterFirebase(@NonNull FirebaseRecyclerOptions<Product> options, Context context) {
+    public ProductsAdapterFirebase(@NonNull FirebaseRecyclerOptions<Product> options, Context context, boolean isAdmin, OnAddToCartListener onAddToCartListener) {
         super(options);
         this.context = context;
+        this.isAdmin = isAdmin;
+        this.onAddToCartListener = onAddToCartListener;
     }
 
     public class ProductViewHolderFirebase extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnLongClickListener {
 
-        RelativeLayout rl_product_item;
 
         TextView tv_full_name;
         TextView tv_price;
         TextView tv_stock;
 
         Button btn_edit;
+        Button btn_cart;
 
         ImageView products_rv_item_iv_pp;
         ImageView products_rv_item_iv_pp_frame;
@@ -57,14 +60,18 @@ public class ProductsAdapterFirebase extends
         public ProductViewHolderFirebase(@NonNull View itemView) {
             super(itemView);
 
-            rl_product_item = itemView.findViewById(R.id.rl_product_item);
-
             tv_full_name = itemView.findViewById(R.id.products_rv_item_tv_full_name);
             tv_price = itemView.findViewById(R.id.products_rv_item_tv_price_num);
             tv_stock = itemView.findViewById(R.id.products_rv_item_tv_stock_num);
 
-            btn_edit = itemView.findViewById(R.id.products_rv_item_button_edit);
-            btn_edit.setOnClickListener(this);
+            if (isAdmin){
+                btn_edit = itemView.findViewById(R.id.products_rv_item_button_edit);
+                btn_edit.setOnClickListener(this);
+            }
+            else {
+                btn_cart = itemView.findViewById(R.id.products_rv_item_button_cart);
+                btn_cart.setOnClickListener(this);
+            }
 
             products_rv_item_iv_pp = itemView.findViewById(R.id.products_rv_item_iv_pp);
             products_rv_item_iv_pp_frame = itemView.findViewById(R.id.products_rv_item_iv_pp_frame);
@@ -78,6 +85,9 @@ public class ProductsAdapterFirebase extends
                 Intent intent = new Intent(context, EditProduct.class);
                 intent.putExtra("product", getItem(getBindingAdapterPosition()));
                 context.startActivity(intent);
+            }
+            else if(view == btn_cart){
+                onAddToCartListener.addToCart(getAbsoluteAdapterPosition(), getItem(getAbsoluteAdapterPosition()));
             }
         }
 
@@ -123,9 +133,8 @@ public class ProductsAdapterFirebase extends
 
         holder.tv_full_name.setText(model.getName());
         holder.tv_price.setText(model.getPrice() + " ₪");
-        holder.tv_stock.setText(model.getStock());
+        holder.tv_stock.setText(model.getStock() + "");
 
-        String type = "Vegetable";
 
         if (model.getPicture() != null){
             Glide.with(context).load(model.getPicture()).centerCrop().into(holder.products_rv_item_iv_pp);
@@ -140,7 +149,7 @@ public class ProductsAdapterFirebase extends
     @Override
     public ProductsAdapterFirebase.ProductViewHolderFirebase onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.products_rv_item, parent, false);
+                .inflate(isAdmin ? R.layout.products_rv_item_admin : R.layout.products_rv_item_user, parent, false);
 
         return new ProductsAdapterFirebase.ProductViewHolderFirebase(view);
     }
@@ -149,4 +158,10 @@ public class ProductsAdapterFirebase extends
     public int getItemCount() {
         return getSnapshots().size();
     }
+
+    public interface OnAddToCartListener{
+        void addToCart(int position, Product product);
+    }
+
+
 }

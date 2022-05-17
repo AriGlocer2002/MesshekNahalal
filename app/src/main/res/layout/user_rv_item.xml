@@ -58,7 +58,7 @@
             android:fontFamily="@font/heebo_regular"
             android:text="email"
             android:textColor="@color/black"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/users_rv_item_tv_phone"
@@ -70,7 +70,7 @@
             android:fontFamily="@font/heebo_light"
             android:text="Phone number"
             android:textColor="@color/black"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
 
         <ImageView
             android:id="@+id/users_rv_item_iv_phone"

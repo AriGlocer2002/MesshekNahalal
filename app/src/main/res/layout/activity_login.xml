@@ -44,7 +44,7 @@
         android:gravity="center"
         android:text="Login"
         android:textColor="@color/black"
-        android:textSize="45dp"
+        android:textSize="45sp"
         app:layout_constraintVertical_bias="0.097" />
 
 
@@ -64,7 +64,7 @@
         android:inputType="textEmailAddress"
         android:textColor="@color/black"
         android:textColorHint="@android:color/black"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/login_screen_et_password"
@@ -81,7 +81,7 @@
         android:inputType="textPassword"
         android:textColor="@color/black"
         android:textColorHint="@android:color/black"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/login_screen_iv_forgot_password"
@@ -101,7 +101,7 @@
         android:layout_marginTop="10dp"
         android:text="Forgot your password?"
         android:textColor="#3454C5"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/login_screen_btn_login"

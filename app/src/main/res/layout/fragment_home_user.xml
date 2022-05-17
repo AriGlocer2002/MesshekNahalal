@@ -70,7 +70,7 @@
                 android:scrollbars="vertical"
                 android:text="@string/fragment_home_string"
                 android:textColor="@color/black"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
 
         </ScrollView>
 

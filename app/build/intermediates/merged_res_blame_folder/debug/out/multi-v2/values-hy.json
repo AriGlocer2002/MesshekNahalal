@@ -21,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\ariog\\.gradle\\caches\\transforms-3\\ca1f15c00dbc7bc2d7056472f3c86747\\transformed\\material-1.5.0\\res\\values-hy\\values-hy.xml",
+                    "source": "C:\\Users\\ariog\\.gradle\\caches\\transforms-3\\65db87689b713ce8712822713c7df8f0\\transformed\\core-1.7.0\\res\\values-hy\\values-hy.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "107",
+                        "startColumns": "4",
+                        "startOffsets": "10268",
+                        "endColumns": "100",
+                        "endOffsets": "10364"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\ariog\\.gradle\\caches\\transforms-3\\cde9fca377a459121a79a3ac1a867be5\\transformed\\material-1.6.0\\res\\values-hy\\values-hy.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -37,23 +54,6 @@
                         "endLines": "5,33,34,35,36,55,56,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105",
                         "endColumns": "12,79,94,129,80,63,96,84,61,86,63,60,66,60,53,121,56,59,53,80,134,83,84,105,74,74,94,66,65,73,79,85,70,75,75,76,87,79,95,95,73,77,99,50,68,86,90,61,63,62,104,100,99,104,84",
                         "endOffsets": "265,3054,3149,3279,3360,6169,6266,6427,6489,6576,6640,6701,6768,6829,6883,7005,7062,7122,7176,7257,7392,7476,7561,7667,7742,7817,7912,7979,8045,8119,8199,8285,8356,8432,8508,8585,8673,8753,8849,8945,9019,9097,9197,9248,9317,9404,9495,9557,9621,9684,9789,9890,9990,10095,10180"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\ariog\\.gradle\\caches\\transforms-3\\65db87689b713ce8712822713c7df8f0\\transformed\\core-1.7.0\\res\\values-hy\\values-hy.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "107",
-                        "startColumns": "4",
-                        "startOffsets": "10268",
-                        "endColumns": "100",
-                        "endOffsets": "10364"
                     }
                 },
                 {

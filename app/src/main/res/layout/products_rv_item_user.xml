@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rl_product_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/all_rv_rl_background"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/products_rv_item_iv_pp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="@+id/products_rv_item_iv_pp_frame"
+            app:layout_constraintEnd_toEndOf="@+id/products_rv_item_iv_pp_frame"
+            app:layout_constraintStart_toStartOf="@+id/products_rv_item_iv_pp_frame"
+            app:layout_constraintTop_toTopOf="@+id/products_rv_item_iv_pp_frame"
+            app:srcCompat="@drawable/default_product_pic_rv" />
+
+        <ImageView
+            android:id="@+id/products_rv_item_iv_pp_frame"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/portarit_square" />
+
+        <TextView
+            android:id="@+id/products_rv_item_tv_full_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/heebo_bold"
+            android:text="Full name"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/products_rv_item_iv_pp_frame"
+            app:layout_constraintStart_toStartOf="@+id/products_rv_item_iv_pp_frame"
+            app:layout_constraintTop_toBottomOf="@+id/products_rv_item_iv_pp_frame" />
+
+        <TextView
+            android:id="@+id/products_rv_item_tv_stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/heebo_light"
+            android:text="Stock:"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/products_rv_item_tv_full_name" />
+
+        <TextView
+            android:id="@+id/products_rv_item_tv_stock_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/products_rv_item_tv_stock"
+            android:layout_alignBottom="@+id/products_rv_item_tv_stock"
+            android:layout_marginStart="2dp"
+            android:layout_toStartOf="@+id/products_rv_item_button_cart"
+            android:fontFamily="@font/heebo_regular"
+            android:text="num"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/products_rv_item_tv_stock"
+            app:layout_constraintStart_toEndOf="@+id/products_rv_item_tv_stock"
+            app:layout_constraintTop_toTopOf="@+id/products_rv_item_tv_stock" />
+
+        <TextView
+            android:id="@+id/products_rv_item_tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:fontFamily="@font/heebo_regular"
+            android:text="Price:"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_marginStart="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/products_rv_item_tv_stock_num"
+            app:layout_constraintStart_toEndOf="@+id/products_rv_item_tv_stock_num"
+            app:layout_constraintTop_toTopOf="@+id/products_rv_item_tv_stock_num" />
+
+        <TextView
+            android:id="@+id/products_rv_item_tv_price_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/heebo_regular"
+            android:text="num"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_marginStart="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/products_rv_item_tv_price"
+            app:layout_constraintStart_toEndOf="@+id/products_rv_item_tv_price"
+            app:layout_constraintTop_toTopOf="@+id/products_rv_item_tv_price" />
+
+        <TextView
+            android:id="@+id/products_rv_item_tv_price_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/heebo_regular"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/products_rv_item_tv_price_num"
+            app:layout_constraintStart_toEndOf="@+id/products_rv_item_tv_price_num"
+            app:layout_constraintTop_toTopOf="@+id/products_rv_item_tv_price_num" />
+
+        <Button
+            android:id="@+id/products_rv_item_button_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Add to cart"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/products_rv_item_tv_stock" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

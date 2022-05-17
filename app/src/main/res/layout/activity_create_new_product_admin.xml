@@ -30,7 +30,7 @@
         android:gravity="center"
         android:text="New product"
         android:textColor="@color/black"
-        android:textSize="40dp" />
+        android:textSize="40sp" />
 
     <ImageView
         android:id="@+id/create_new_product_admin_iv_logo_background"
@@ -78,7 +78,7 @@
         android:layout_marginTop="30dp"
         android:text="Product image:"
         android:textColor="@color/black"
-        android:textSize="21dp" />
+        android:textSize="21sp" />
 
     <ImageView
         android:id="@+id/create_new_product_admin_iv_upload_image"
@@ -219,6 +219,17 @@
             app:suffixTextColor="@color/black"/>
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/cb_countable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Countable"
+        android:buttonTint="@color/black"
+        android:textColor="@color/black"
+        android:layout_below="@+id/textInput_create_new_product_admin_tie_product_price"
+        android:layout_alignStart="@+id/textInput_create_new_product_admin_tie_product_price"
+        />
 
     <Button
         android:id="@+id/create_new_product_admin_btn_confirm"

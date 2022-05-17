@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="Users List"
                 android:layout_centerHorizontal="true"
-                android:textSize="35dp"
+                android:textSize="35sp"
                 android:fontFamily="@font/grenze_semi_bold_italic"
                 android:textColor="@color/black"
                 />
@@ -71,7 +71,7 @@
                 android:fontFamily="@font/grenze_semi_bold_italic"
                 android:text="Admins List Screen"
                 android:textColor="@color/black"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
 
             <ImageView
@@ -103,7 +103,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="-2dp"
                 android:layout_toEndOf="@+id/users_rv_screen_b2"
-                android:backgroundTint="#59D674"
+                android:backgroundTint="@color/green"
                 android:text="Login"
                 android:textColor="@android:color/black" />
 

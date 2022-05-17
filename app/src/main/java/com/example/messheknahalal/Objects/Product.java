@@ -6,27 +6,44 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 public class Product implements Serializable {
+
     private String type;
     private String name;
-    private String stock;
-    private String price;
+    private double stock;
+    private double price;
     private String picture;
+    private double amount;
+    private boolean countable;
 
     public Product(){}
 
-    public Product(String type, String name, String stock, String price) {
+    public Product(String type, String name, double stock, double price, boolean countable) {
         this.type = type;
         this.name = name;
         this.stock = stock;
         this.price = price;
+        this.amount = 1;
+        this.countable = countable;
     }
 
-    public Product(String type, String name, String stock, String price, String picture) {
+    public Product(String type, String name, double stock, double price, String picture, boolean countable) {
         this.type = type;
         this.name = name;
         this.stock = stock;
         this.price = price;
         this.picture = picture;
+        this.amount = 1;
+        this.countable = countable;
+    }
+
+    public Product(String type, String name, double stock, double price, double amount, String picture, boolean countable) {
+        this.type = type;
+        this.name = name;
+        this.stock = stock;
+        this.price = price;
+        this.amount = amount;
+        this.picture = picture;
+        this.countable = countable;
     }
 
     public String getType() {
@@ -45,19 +62,19 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public String getStock() {
+    public double getStock() {
         return stock;
     }
 
-    public void setStock(String stock) {
+    public void setStock(double stock) {
         this.stock = stock;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -65,10 +82,13 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "Product{" +
-                "name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", stock='" + stock + '\'' +
-                ", price='" + price + '\'' +
+                "type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                ", stock=" + stock +
+                ", price=" + price +
+                ", picture='" + picture + '\'' +
+                ", amount=" + amount +
+                ", countable=" + countable +
                 '}';
     }
 
@@ -78,5 +98,21 @@ public class Product implements Serializable {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public boolean isCountable() {
+        return countable;
+    }
+
+    public void setCountable(boolean countable) {
+        this.countable = countable;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 }

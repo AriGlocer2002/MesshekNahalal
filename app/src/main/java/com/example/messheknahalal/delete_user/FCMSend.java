@@ -35,7 +35,6 @@ public class FCMSend {
         String title = "";
         String body = "";
 
-
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
             JSONObject json = new JSONObject();

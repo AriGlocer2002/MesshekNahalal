@@ -1,6 +1,7 @@
 package com.example.messheknahalal;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -16,6 +17,7 @@ import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
 import com.example.messheknahalal.Objects.Person;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.example.messheknahalal.Utils.DataBaseHelper;
+import com.example.messheknahalal.Utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +33,7 @@ public class splashScreen extends AppCompatActivity {
     Intent intent;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     DatabaseReference personRef = FirebaseDatabase.getInstance().getReference().child("Person");
-    private static int LOGIN_SCREEN = 5500;
+    private static final int LOGIN_SCREEN = 5500;
 
     DataBaseHelper user = new DataBaseHelper("User");
 
@@ -40,6 +42,9 @@ public class splashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
+
+        SQLiteDatabase db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
+        Utils.createAllTables(db);
 
         img_logo1 = findViewById(R.id.splash_screen_iv_main_logo);
         logoAnim = AnimationUtils.loadAnimation(this, R.anim.fade_in);

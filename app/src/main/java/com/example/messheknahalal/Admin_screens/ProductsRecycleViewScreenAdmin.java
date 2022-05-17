@@ -15,7 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProductsRecycleViewScreenAdmin extends SuperActivityWithNavigationDrawer
-        implements View.OnClickListener {
+        implements View.OnClickListener, ProductsAdapterFirebase.OnAddToCartListener {
 
     RecyclerView rv_products;
     ProductsAdapterFirebase productAdapter;
@@ -97,13 +97,18 @@ public class ProductsRecycleViewScreenAdmin extends SuperActivityWithNavigationD
                     .setLifecycleOwner(ProductsRecycleViewScreenAdmin.this)
                     .build();
 
-            productAdapter = new ProductsAdapterFirebase(options, ProductsRecycleViewScreenAdmin.this);
+            productAdapter = new ProductsAdapterFirebase(options, ProductsRecycleViewScreenAdmin.this, true, this);
 
             Log.d("ariel", "product recycling started");
 
             rv_products.setAdapter(productAdapter);
             rv_products.setLayoutManager(new WrapContentLinearLayoutManager(this));
         }
+
+    }
+
+    @Override
+    public void addToCart(int position, Product product) {
 
     }
 }

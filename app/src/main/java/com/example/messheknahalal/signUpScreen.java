@@ -147,6 +147,9 @@ public class signUpScreen extends AppCompatActivity {
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Log.d("ariel", "button clicked");
+
                 String email = et_email_address_signUp.getText().toString();
                 String password = et_password_signUp.getText().toString();
                 String confirm_password = et_confirm_password_signUp.getText().toString();
@@ -161,7 +164,7 @@ public class signUpScreen extends AppCompatActivity {
                     Utils.showAlertDialog("Error", "This email address is not valid", signUpScreen.this);
                 }
                 //check that the password has at least 8 characters
-                else if(password.length()<6){
+                else if(password.length() < 6){
                     Utils.showAlertDialog("Error", "The password is too short!\nPlease choose a new password", signUpScreen.this);
                 }
                 //check if the password and the confirmed password are the same
@@ -180,6 +183,8 @@ public class signUpScreen extends AppCompatActivity {
                     //    createPerson("admin", email, password);
                     //} else {
                     //create a new user in the db
+                    Log.d("ariel", "all inputs are right");
+
                     createPerson(code, email, password);
 
                 }
@@ -188,19 +193,25 @@ public class signUpScreen extends AppCompatActivity {
         });
     }
 
+    @Override
     public void onBackPressed(){}
 
     private void createPerson(String code, String email, String password){
 
-        adminCodeRef.child("code").addListenerForSingleValueEvent(new ValueEventListener() {
+        adminCodeRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds) {
                 //if exists the dataSnapshot
                 if (ds.exists()) {
 
+                    Log.d("ariel", "ds exists");
+
+
                     String codeDB = ds.getValue().toString();
 
                     if (cb_admin.isChecked() && codeDB.equals(code)) {
+
+                        Log.d("ariel", "creating admin");
 
                         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -219,6 +230,9 @@ public class signUpScreen extends AppCompatActivity {
                         Utils.showAlertDialog("Error", "The admin code is not valid", signUpScreen.this);
                     }
                     else if(!cb_admin.isChecked()){
+
+                        Log.d("ariel", "creating user");
+
                         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signUpScreen.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -243,6 +257,8 @@ public class signUpScreen extends AppCompatActivity {
 
     public void createPerson(boolean isAdmin) {
 //        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        Log.d("ariel", "createPerson(isADmin)");
 
         String name = et_name_signUp.getText().toString();
         String last_name = et_last_name_signUp.getText().toString();

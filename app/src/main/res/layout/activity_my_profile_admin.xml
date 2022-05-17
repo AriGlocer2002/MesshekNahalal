@@ -56,7 +56,7 @@
                 android:gravity="center"
                 android:text="My Profile"
                 android:textColor="@color/black"
-                android:textSize="45dp" />
+                android:textSize="45sp" />
 
             <ImageView
                 android:id="@+id/my_profile_admin_iv_b1"
