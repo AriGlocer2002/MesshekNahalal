@@ -23,4 +23,6 @@
         <item>Shelf</item>
         <item>Others</item>
     </string-array>
+
+    <string name="shekel_logo">₪</string>
 </resources>

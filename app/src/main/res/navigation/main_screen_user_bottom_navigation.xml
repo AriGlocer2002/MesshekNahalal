@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_screen_user_bottom_navigation"
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.example.messheknahalal.User_screens.HomeFragmentUser"
+        android:label="fragment_home_user"
+        tools:layout="@layout/fragment_home_user" />
+
+    <fragment
+        android:id="@+id/products"
+        android:name="com.example.messheknahalal.User_screens.ProductsFragmentUser"
+        android:label="fragment_products_user"
+        tools:layout="@layout/fragment_products_user" />
+
+</navigation>

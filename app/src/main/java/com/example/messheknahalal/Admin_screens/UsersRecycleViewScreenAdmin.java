@@ -9,7 +9,7 @@ import android.widget.EditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.messheknahalal.Objects.User;
+import com.example.messheknahalal.models.User;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.SuperActivityWithNavigationDrawer;
 import com.example.messheknahalal.Utils.Utils;

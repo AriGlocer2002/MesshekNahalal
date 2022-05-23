@@ -1,4 +1,6 @@
-package com.example.messheknahalal.Objects;
+package com.example.messheknahalal.models;
+
+import androidx.annotation.NonNull;
 
 public class Order {
 
@@ -7,6 +9,7 @@ public class Order {
 
     public Order(){}
 
+    @NonNull
     @Override
     public String toString() {
         return "Order{" +

@@ -1,4 +1,4 @@
-package com.example.messheknahalal.Objects;
+package com.example.messheknahalal.models;
 
 import androidx.annotation.NonNull;
 
@@ -45,6 +45,10 @@ public class Person {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
+    }
+
+    public String getFullName(){
+        return name + " " + last_name;
     }
 
     public String getEmail() {

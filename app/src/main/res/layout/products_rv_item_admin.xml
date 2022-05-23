@@ -106,7 +106,7 @@
             android:layout_marginTop="5dp"
             android:layout_toStartOf="@+id/products_rv_item_button_edit"
             android:fontFamily="@font/heebo_regular"
-            android:text=""
+            android:text="@string/shekel_logo"
             android:textColor="@color/black"
             android:textSize="15sp" />
 

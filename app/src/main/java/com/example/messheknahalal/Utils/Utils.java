@@ -11,7 +11,7 @@ import android.net.Uri;
 import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
 
-import com.example.messheknahalal.Objects.Product;
+import com.example.messheknahalal.models.Product;
 
 import java.util.ArrayList;
 
@@ -36,7 +36,7 @@ public class Utils {
                 "product_name text, " +
                 "product_stock double," +
                 "product_price double," +
-                "product_amount double," +
+                "product_amount double default 1.0," +
                 "product_picture text," +
                 "product_countable integer default 0)");
     }
@@ -44,18 +44,6 @@ public class Utils {
     public static void deleteTable(@NonNull SQLiteDatabase db){
         db.execSQL("drop table if exists tbl_products");
     }
-
-    /*public static void addProduct(@NonNull SQLiteDatabase db, String name){
-        Cursor cursor = db.rawQuery("select*from tbl_products where product_name ='" + name + "'", null);
-
-        int amount = 1;
-
-        while (cursor.moveToNext()){
-            amount = cursor.getInt(2);
-            amount++;
-        }
-        db.execSQL("update product_name set = " + amount + " where product_name ='" + name +"'");
-    }*/
 
     public static void addProduct(@NonNull SQLiteDatabase db, @NonNull Product product){
         Cursor cursor = db.rawQuery("select*from tbl_products where product_name ='" + product.getName() + "'", null);
@@ -99,6 +87,21 @@ public class Utils {
         cursor.close();
 
         return products;
+    }
+
+    @NonNull
+    public static ArrayList<String> getSavedProductsNames(@NonNull SQLiteDatabase db){
+        ArrayList<String> names = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery("select product_name from tbl_products where product_amount > " + 0, null);
+        while (cursor.moveToNext()){
+            String name = cursor.getString(0);
+            names.add(name);
+        }
+
+        cursor.close();
+
+        return names;
     }
 
     public static void addAllProducts(SQLiteDatabase db, @NonNull ArrayList<Product> products) {

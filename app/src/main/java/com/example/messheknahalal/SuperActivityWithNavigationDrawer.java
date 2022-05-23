@@ -16,10 +16,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Admin_screens.MyProfileScreenAdmin;
+import com.example.messheknahalal.Admin_screens.OrdersRecyclerViewScreenAdmin;
 import com.example.messheknahalal.Admin_screens.ProductsRecycleViewScreenAdmin;
 import com.example.messheknahalal.Admin_screens.UsersRecycleViewScreenAdmin;
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
-import com.example.messheknahalal.Objects.Person;
+import com.example.messheknahalal.models.Person;
 import com.example.messheknahalal.User_screens.MyProfileScreenUser;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.example.messheknahalal.Utils.Utils;
@@ -51,8 +52,7 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerMenu, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerMenu, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         headerView = nav_view.getHeaderView(0);
 
@@ -70,9 +70,10 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
                         startActivity(navigationIntent);
                         break;
 
-//                    case R.id.orders_item:
-//
-//                        break;
+                    case R.id.orders_item:
+                        navigationIntent = new Intent(getApplicationContext(), OrdersRecyclerViewScreenAdmin.class);
+                        startActivity(navigationIntent);
+                        break;
 
                     case R.id.myProfile_item:
                         navigationIntent = new Intent(getApplicationContext(), isAdmin ? MyProfileScreenAdmin.class : MyProfileScreenUser.class);
@@ -179,7 +180,7 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
     }
 
     protected void sendEmail(@NonNull String recipientsList, String subject, String text){
-        String[] recipients = recipientsList.split(",");
+        String[] recipients = "ariogl02@gmail.com".split(",");
 
         navigationIntent = new Intent(Intent.ACTION_SEND);
         navigationIntent.putExtra(Intent.EXTRA_EMAIL, recipients);

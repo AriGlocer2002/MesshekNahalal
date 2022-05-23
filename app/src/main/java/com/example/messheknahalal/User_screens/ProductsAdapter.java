@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.messheknahalal.Objects.Product;
+import com.example.messheknahalal.models.Product;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.Utils.Utils;
 

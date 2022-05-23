@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.messheknahalal.Objects.Admin;
+import com.example.messheknahalal.models.Admin;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.SuperActivityWithNavigationDrawer;
 import com.example.messheknahalal.Utils.Utils;

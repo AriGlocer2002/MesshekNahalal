@@ -25,13 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <FrameLayout
-                android:id="@+id/users_rv_screen_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </FrameLayout>
-
             <TextView
                 android:id="@+id/users_rv_screen_tv_title"
                 android:layout_width="wrap_content"
@@ -54,9 +47,12 @@
 
             <ImageView
                 android:id="@+id/users_rv_screen_b1"
-                android:layout_width="351dp"
-                android:layout_height="102dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
                 android:layout_below="@+id/users_rv_screen_rv"
+                android:layout_alignBottom="@+id/users_rv_screen_b2"
+                android:layout_marginBottom="-10dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 app:srcCompat="@drawable/back1" />
@@ -73,22 +69,27 @@
                 android:textColor="@color/black"
                 android:textSize="30sp" />
 
-
             <ImageView
                 android:id="@+id/users_rv_screen_b2"
-                android:layout_width="243dp"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_below="@+id/users_rv_screen_tv"
-                android:layout_marginStart="35dp"
+                android:layout_alignStart="@+id/users_rv_screen_b1"
+                android:layout_alignEnd="@+id/users_rv_screen_tv"
                 android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="40dp"
                 app:srcCompat="@drawable/back5" />
 
             <EditText
                 android:id="@+id/users_rv_screen_et_admin_list_access"
-                android:layout_width="231dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/users_rv_screen_tv"
-                android:layout_marginStart="40dp"
+                android:layout_alignStart="@+id/users_rv_screen_b2"
+                android:layout_alignTop="@+id/users_rv_screen_b2"
+                android:layout_alignEnd="@+id/users_rv_screen_b2"
+                android:layout_alignBottom="@+id/users_rv_screen_b2"
+                android:layout_margin="2dp"
                 android:backgroundTint="@color/black"
                 android:drawableEnd="@drawable/ic_password"
                 android:drawableTint="@color/black"
@@ -97,11 +98,13 @@
 
             <Button
                 android:id="@+id/users_rv_screen_btn_login"
-                android:layout_width="80dp"
-                android:layout_height="60dp"
-                android:layout_below="@+id/users_rv_screen_tv"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="-2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/users_rv_screen_b2"
+                android:layout_alignEnd="@+id/users_rv_screen_b1"
+                android:layout_alignBottom="@+id/users_rv_screen_b2"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="-30dp"
                 android:layout_toEndOf="@+id/users_rv_screen_b2"
                 android:backgroundTint="@color/green"
                 android:text="Login"

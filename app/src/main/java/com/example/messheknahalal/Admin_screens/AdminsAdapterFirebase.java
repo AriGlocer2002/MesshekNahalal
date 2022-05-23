@@ -16,7 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.messheknahalal.Objects.Admin;
+import com.example.messheknahalal.models.Admin;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.Utils.Utils;
 import com.example.messheknahalal.delete_user.FCMSend;

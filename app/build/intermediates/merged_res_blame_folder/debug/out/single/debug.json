@@ -4,6 +4,10 @@
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\more_ic.png"
     },
     {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_orders_rv_item_admin.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\orders_rv_item_admin.xml"
+    },
+    {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_edit_product.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_edit_product.xml"
     },
@@ -78,6 +82,10 @@
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\navigation_main_screen_user_bottom_navigation.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\navigation\\main_screen_user_bottom_navigation.xml"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
@@ -422,6 +430,10 @@
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
         "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_orders_recycler_view_screen_admin.xml.flat",
+        "source": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_orders_recycler_view_screen_admin.xml"
     },
     {
         "merged": "C:\\Users\\ariog\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher.webp.flat",

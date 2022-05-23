@@ -17,8 +17,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
-import com.example.messheknahalal.Objects.Admin;
-import com.example.messheknahalal.Objects.Person;
+import com.example.messheknahalal.models.Admin;
+import com.example.messheknahalal.models.Person;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.SuperActivityWithNavigationDrawer;
 import com.example.messheknahalal.Utils.Utils;

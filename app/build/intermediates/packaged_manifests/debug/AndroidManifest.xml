@@ -28,6 +28,9 @@
         android:testOnly="true"
         android:theme="@style/Theme.MesshekNahalal" >
         <activity
+            android:name="com.example.messheknahalal.Admin_screens.OrdersRecyclerViewScreenAdmin"
+            android:exported="false" />
+        <activity
             android:name="com.example.messheknahalal.User_screens.ShoppingScreen"
             android:exported="false" />
         <activity
@@ -162,17 +165,6 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name="com.google.firebase.auth.api.fallback.service.FirebaseAuthFallbackService"
-            android:enabled="true"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="com.google.firebase.auth.api.gms.service.START" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </service>
-
         <provider
             android:name="com.squareup.picasso.PicassoProvider"
             android:authorities="com.example.messheknahalal.com.squareup.picasso"
@@ -249,6 +241,13 @@
                 android:name="androidx.lifecycle.ProcessLifecycleInitializer"
                 android:value="androidx.startup" />
         </provider>
+
+        <uses-library
+            android:name="androidx.window.extensions"
+            android:required="false" />
+        <uses-library
+            android:name="androidx.window.sidecar"
+            android:required="false" />
 
         <service
             android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"

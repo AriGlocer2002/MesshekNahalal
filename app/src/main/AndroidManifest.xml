@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MesshekNahalal">
         <activity
+            android:name=".Admin_screens.OrdersRecyclerViewScreenAdmin"
+            android:exported="false" />
+        <activity
             android:name=".User_screens.ShoppingScreen"
             android:exported="false" />
         <activity

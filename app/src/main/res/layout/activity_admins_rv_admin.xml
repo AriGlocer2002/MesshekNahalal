@@ -24,13 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <FrameLayout
-                android:id="@+id/admins_rv_screen_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </FrameLayout>
-
             <TextView
                 android:id="@+id/admins_rv_screen_tv_title"
                 android:layout_width="wrap_content"
@@ -53,9 +46,12 @@
 
             <ImageView
                 android:id="@+id/admins_rv_screen_b1"
-                android:layout_width="351dp"
-                android:layout_height="102dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
                 android:layout_below="@+id/admins_rv_screen_rv"
+                android:layout_alignBottom="@+id/admins_rv_screen_b2"
+                android:layout_marginBottom="-10dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 app:srcCompat="@drawable/back1" />
@@ -68,26 +64,31 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/grenze_semi_bold_italic"
-                android:text="Reset admins code"
+                android:text="Admins List Screen"
                 android:textColor="@color/black"
                 android:textSize="30sp" />
 
-
             <ImageView
                 android:id="@+id/admins_rv_screen_b2"
-                android:layout_width="243dp"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_below="@+id/admins_rv_screen_tv"
-                android:layout_marginStart="35dp"
+                android:layout_alignStart="@+id/admins_rv_screen_b1"
+                android:layout_alignEnd="@+id/admins_rv_screen_tv"
                 android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="40dp"
                 app:srcCompat="@drawable/back5" />
 
             <EditText
                 android:id="@+id/admins_rv_screen_et_new_admin_code"
-                android:layout_width="231dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/admins_rv_screen_tv"
-                android:layout_marginStart="40dp"
+                android:layout_alignStart="@+id/admins_rv_screen_b2"
+                android:layout_alignTop="@+id/admins_rv_screen_b2"
+                android:layout_alignEnd="@+id/admins_rv_screen_b2"
+                android:layout_alignBottom="@+id/admins_rv_screen_b2"
+                android:layout_margin="2dp"
                 android:backgroundTint="@color/black"
                 android:drawableEnd="@drawable/ic_password"
                 android:drawableTint="@color/black"
@@ -96,11 +97,13 @@
 
             <Button
                 android:id="@+id/admins_rv_screen_btn_reset_code"
-                android:layout_width="80dp"
-                android:layout_height="60dp"
-                android:layout_below="@+id/admins_rv_screen_tv"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="-2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/admins_rv_screen_b2"
+                android:layout_alignEnd="@+id/admins_rv_screen_b1"
+                android:layout_alignBottom="@+id/admins_rv_screen_b2"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="-30dp"
                 android:layout_toEndOf="@+id/admins_rv_screen_b2"
                 android:backgroundTint="#59D674"
                 android:text="Reset"

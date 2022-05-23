@@ -8,7 +8,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.SuperActivityWithNavigationDrawer;
@@ -22,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class mainScreenUser extends SuperActivityWithNavigationDrawer {
+public class mainScreenUser extends SuperActivityWithNavigationDrawer implements NavController.OnDestinationChangedListener {
 
     BottomNavigationView bottomNav;
     Intent intent;
@@ -45,8 +49,10 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer {
         //bottom navigation bar
         bottomNav = findViewById(R.id.main_screen_user_bottomNav);
 
-        bottomNav.setOnItemSelectedListener(bottomNavMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_user_container, new HomeFragmentUser(), HomeFragmentUser.TAG).commit();
+        NavController navController = Navigation.findNavController(this, R.id.main_screen_user_container);
+        navController.addOnDestinationChangedListener(this);
+
+        NavigationUI.setupWithNavController(bottomNav, navController);
 
         initializeNavigationDrawer(false);
 
@@ -54,7 +60,7 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer {
     }
 
     public void sendEmail(@NonNull String recipientsList, String subject, String text){
-        String[] recipients = recipientsList.split(",");
+        String[] recipients = "ariogl02@gmail.com".split(",");
 
         intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_EMAIL, recipients);
@@ -64,40 +70,6 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer {
         intent.setType("message/rfc822");
         startActivity(intent);
     }
-
-    public BottomNavigationView.OnItemSelectedListener bottomNavMethod = new
-            BottomNavigationView.OnItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-                    Fragment fragment;
-                    Fragment currentFragment;
-                    String TAG;
-
-                    switch (menuItem.getItemId()) {
-                        case R.id.home:
-                            TAG = HomeFragmentUser.TAG;
-                            currentFragment = new HomeFragmentUser();
-                            break;
-
-                        case R.id.products:
-                            TAG = ProductsFragmentUser.TAG;
-                            currentFragment = new ProductsFragmentUser();
-                            break;
-                        default:
-                            throw new IllegalStateException(
-                                    "Unexpected value: " + menuItem.getItemId());
-                    }
-
-                    fragment = getSupportFragmentManager().findFragmentByTag(TAG);
-                    if (fragment == null){
-                        fragment = currentFragment;
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen_user_container, fragment, TAG).commit();
-                    }
-
-                    return true;
-                }
-            };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -120,9 +92,14 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer {
 
     public String getCurrentDate(){
         Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = simpleDateFormat.format(c);
         return formattedDate;
+    }
+
+    @Override
+    public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+
     }
 }
 

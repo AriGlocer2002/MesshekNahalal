@@ -22,9 +22,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
-import com.example.messheknahalal.Objects.Admin;
-import com.example.messheknahalal.Objects.Person;
-import com.example.messheknahalal.Objects.User;
+import com.example.messheknahalal.models.Admin;
+import com.example.messheknahalal.models.Person;
+import com.example.messheknahalal.models.User;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.example.messheknahalal.Utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -101,7 +101,7 @@ public class signUpScreen extends AppCompatActivity {
                 }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     Utils.showAlertDialog("Error", "This email address is not valid and you can't save a profile picture", signUpScreen.this);
                 } else {
-                    String emailPath = "Person_"+email.replace(".", "-");
+                    String emailPath = Utils.emailToPersonPath(email);
                     personRef.child(emailPath).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot ds) {

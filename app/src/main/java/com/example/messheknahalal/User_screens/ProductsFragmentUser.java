@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase;
 import com.example.messheknahalal.Admin_screens.WrapContentLinearLayoutManager;
-import com.example.messheknahalal.Objects.Product;
+import com.example.messheknahalal.models.Product;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.Utils.Utils;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

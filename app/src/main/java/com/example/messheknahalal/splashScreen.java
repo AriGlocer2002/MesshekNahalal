@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
-import com.example.messheknahalal.Objects.Person;
+import com.example.messheknahalal.models.Person;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.example.messheknahalal.Utils.DataBaseHelper;
 import com.example.messheknahalal.Utils.Utils;
