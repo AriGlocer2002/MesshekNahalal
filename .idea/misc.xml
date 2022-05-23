@@ -121,10 +121,13 @@
         <entry key="..\:/Users/murad/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/user_rv_item_updated.xml" value="0.2295760082730093" />
         <entry key="..\:/Users/murad/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/viewpager_item.xml" value="0.2046875" />
         <entry key="..\:/Users/murad/AndroidStudioProjects/MesshekNahalal/app/src/main/res/menu/menu.xml" value="0.2046875" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout-v23/products_saved_rv_item_users.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_main_screen_user.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_shopping_screen.xml" value="0.21331521739130435" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

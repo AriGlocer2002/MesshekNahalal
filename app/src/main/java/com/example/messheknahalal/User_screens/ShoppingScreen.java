@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.messheknahalal.Admin_screens.WrapContentLinearLayoutManager;
@@ -29,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ShoppingScreen extends AppCompatActivity implements View.OnClickListener, ProductsAdapter.OnTotalPriceChangedListener {
+public class ShoppingScreen extends AppCompatActivity implements ProductsAdapter.OnTotalPriceChangedListener {
 
     RecyclerView rv_saved_products;
     ProductsAdapter productsAdapter;
@@ -43,7 +44,7 @@ public class ShoppingScreen extends AppCompatActivity implements View.OnClickLis
     TextView tv_total_price;
 
     SQLiteDatabase db;
-    MaterialButton btn_confirm, btn_back, btn_clear_cart;
+    MaterialButton btn_confirm, btn_back, btn_clear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +55,13 @@ public class ShoppingScreen extends AppCompatActivity implements View.OnClickLis
         rv_saved_products = findViewById(R.id.rv_saved_products);
 
         btn_confirm = findViewById(R.id.btn_confirm);
-        btn_confirm.setOnClickListener(this);
+        btn_confirm.setOnClickListener(v -> createCart());
 
         btn_back = findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(this);
+        btn_back.setOnClickListener(v -> onBackPressed());
+
+        btn_clear = findViewById(R.id.btn_clear);
+        btn_clear.setOnClickListener(v -> clearCart());
 
         tv_total_price = findViewById(R.id.tv_total_price);
 
@@ -69,22 +73,9 @@ public class ShoppingScreen extends AppCompatActivity implements View.OnClickLis
         rv_saved_products.setAdapter(productsAdapter);
         rv_saved_products.setLayoutManager(new WrapContentLinearLayoutManager(this));
 
-        onTotalPriceChanged(Utils.getTotalPrice(db));
-    }
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(rv_saved_products);
 
-    @Override
-    public void onClick(View v) {
-        if (v == btn_confirm) {
-            createCart();
-        }
-        else if (v == btn_back) {
-            onBackPressed();
-        }
-        else if(v == btn_clear_cart){
-            int size = Utils.getAmountOfProductInCart(db);
-            Utils.deleteTable(db);
-            productsAdapter.notifyItemRangeRemoved(0, size);
-        }
+        onTotalPriceChanged(Utils.getTotalPrice(db));
     }
 
     private void createCart() {
@@ -110,6 +101,7 @@ public class ShoppingScreen extends AppCompatActivity implements View.OnClickLis
                 notDeliveredOrders.child(String.valueOf(cart.getDate())).setValue(cart).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+                        checkProducts();
                         Toast.makeText(ShoppingScreen.this, "Cart successfully added", Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -128,8 +120,89 @@ public class ShoppingScreen extends AppCompatActivity implements View.OnClickLis
         });
     }
 
+    private void checkProducts() {
+        boolean inStock = true;
+        ArrayList<Product> savedProducts = Utils.getSavedProducts(db);
+
+        final int[] countOfProductsInStock = {0};
+
+        for (int i = 0; i < savedProducts.size(); i++) {
+            Product product = savedProducts.get(i);
+
+            boolean productInStock = true;
+
+            if (product.getAmount() == 0) {
+                Utils.deleteProduct(db, product.getName());
+                productInStock = false;
+            }
+            else {
+                checkIfProductIsInStock(product, new OnCheckStockListener() {
+                    @Override
+                    public void onCheckStock(Product product) {
+                        countOfProductsInStock[0]++;
+                        if (countOfProductsInStock[0] == savedProducts.size()) {
+                            createCart();
+                        }
+                    }
+                });
+            }
+            inStock = productInStock;
+        }
+    }
+
+    private void checkIfProductIsInStock(@NonNull Product product, OnCheckStockListener onCheckStockListener) {
+       DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product")
+               .child(product.getType()).child(Utils.productNameToPath(product.getName())).child("stock");
+
+       productRef.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                   @Override
+                   public void onSuccess(DataSnapshot dataSnapshot) {
+                       if (dataSnapshot.exists()){
+                           double stock = dataSnapshot.getValue(double.class);
+                           if (stock == 0){
+                               Utils.showAlertDialog("Product not in stock", "The product " + product.getName()
+                                       + " is not in stock anymore", ShoppingScreen.this);
+                           }
+                           else if (product.getAmount() > stock){
+                               Utils.showAlertDialog("Not enough in stock", "There is not enough of product " + product.getName()
+                                       + " in stock", ShoppingScreen.this);
+                           }
+                           else {
+                               onCheckStockListener.onCheckStock(product);
+                           }
+                       }
+                   }
+               });
+    }
+
+    public interface OnCheckStockListener{
+        void onCheckStock(Product product);
+    }
+
+    public void clearCart(){
+        int amount = Utils.getAmountOfProductInCart(db);
+        Utils.clearTable(db);
+        productsAdapter.notifyItemRangeRemoved(0, amount);
+        productsAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public void onTotalPriceChanged(double totalPrice) {
         tv_total_price.setText("total price: " + totalPrice + "₪");
     }
+
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,
+            ItemTouchHelper.START | ItemTouchHelper.END) {
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            Utils.deleteProduct(db, products.get(viewHolder.getAbsoluteAdapterPosition()).getName());
+            productsAdapter.notifyDataSetChanged();
+        }
+    };
 }

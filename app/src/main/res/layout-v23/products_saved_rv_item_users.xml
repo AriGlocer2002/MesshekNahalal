@@ -147,6 +147,15 @@
 
         </LinearLayout>
 
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_remove_24"
+            android:drawableTint="@color/black"
+            android:textColor="@color/black"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"/>
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

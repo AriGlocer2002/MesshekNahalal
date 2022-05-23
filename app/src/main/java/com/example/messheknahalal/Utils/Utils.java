@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 public class Utils {
 
     public final static String DATABASE_NAME = "db3";
-
 
     public final static String TABLE_PRODUCTS_NAME = "tbl_products";
     public final static String TABLE_PRODUCTS_COL_ID = "product_id";
@@ -36,7 +36,7 @@ public class Utils {
                 "product_name text, " +
                 "product_stock double," +
                 "product_price double," +
-                "product_amount double default 1.0," +
+                "product_amount double default 1," +
                 "product_picture text," +
                 "product_countable integer default 0)");
     }
@@ -113,6 +113,7 @@ public class Utils {
     public static int getAmountOfProductInCart(@NonNull SQLiteDatabase db){
         Cursor cursor = db.rawQuery("select*from tbl_products", null);
         int amount = cursor.getCount();
+        Log.d("ariel", "amount of products in cart is " + amount);
         cursor.close();
         return amount;
     }
@@ -201,4 +202,14 @@ public class Utils {
                 + '/' + context.getResources().getResourceTypeName(drawableId)
                 + '/' + context.getResources().getResourceEntryName(drawableId));
     }
+
+    public static void clearTable(@NonNull SQLiteDatabase db) {
+        db.execSQL("delete from tbl_products");
+        db.execSQL("vacuum");
+    }
+
+    public static void deleteProduct(@NonNull SQLiteDatabase db, String productName) {
+        db.execSQL("delete from tbl_products where product_name = '" + productName + "'");
+    }
+
 }

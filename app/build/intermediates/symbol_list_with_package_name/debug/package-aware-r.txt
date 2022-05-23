@@ -2828,6 +2828,7 @@ id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
 id btn_back
+id btn_clear
 id btn_confirm
 id buttonPanel
 id cache_measures

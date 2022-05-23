@@ -40,7 +40,7 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
     protected DrawerLayout drawerMenu;
     protected NavigationView nav_view;
 
-    protected Toolbar toolbar;
+    public Toolbar toolbar;
 
     protected void initializeNavigationDrawer(boolean isAdmin){
 

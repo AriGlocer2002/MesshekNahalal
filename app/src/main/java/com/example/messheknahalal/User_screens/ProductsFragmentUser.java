@@ -63,6 +63,9 @@ public class ProductsFragmentUser extends Fragment implements ProductsAdapterFir
 
         db = requireContext().openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
 
+        int amount = Utils.getAmountOfProductInCart(db);
+        ((mainScreenUser) requireActivity()).toolbar.getMenu().findItem(R.id.shopping).setTitle("" + amount);
+
         rv_vegetables_buy = view.findViewById(R.id.rv_vegetables_buy);
         rv_fruits_buy = view.findViewById(R.id.rv_fruits_buy);
         rv_shelf_buy = view.findViewById(R.id.rv_shelf_buy);
@@ -167,5 +170,8 @@ public class ProductsFragmentUser extends Fragment implements ProductsAdapterFir
     @Override
     public void addToCart(int position, Product product) {
         Utils.addProduct(db, product);
+
+        int amount = Utils.getAmountOfProductInCart(db);
+        ((mainScreenUser) requireActivity()).toolbar.getMenu().findItem(R.id.shopping).setTitle("" + amount);
     }
 }
