@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_login"
@@ -85,20 +84,23 @@
 
     <ImageView
         android:id="@+id/login_screen_iv_forgot_password"
-        android:layout_width="170dp"
-        android:layout_height="29dp"
-        android:layout_below="@id/login_screen_et_password"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/login_screen_tv_forgot_password"
+        android:layout_alignBottom="@+id/login_screen_tv_forgot_password"
+        android:layout_alignEnd="@+id/login_screen_tv_forgot_password"
+        android:layout_alignTop="@+id/login_screen_tv_forgot_password"
         app:srcCompat="@drawable/back2" />
 
     <TextView
         android:id="@+id/login_screen_tv_forgot_password"
-        android:layout_width="161dp"
-        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/login_screen_et_password"
-        android:layout_marginStart="35dp"
+        android:layout_alignStart="@+id/login_screen_et_password"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
+        android:padding="5dp"
         android:text="Forgot your password?"
         android:textColor="#3454C5"
         android:textSize="15sp" />

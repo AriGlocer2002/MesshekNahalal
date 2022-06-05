@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginVertical="2dp"
-    app:cardCornerRadius="10dp" >
+    app:cardCornerRadius="10dp">
 
     <RelativeLayout
         android:id="@+id/rl_product_item"
@@ -61,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/products_rv_item_tv_stock"
             android:layout_alignBottom="@+id/products_rv_item_tv_stock"
-            android:layout_marginStart="5dp"
+            android:layout_marginHorizontal="5dp"
             android:layout_toStartOf="@+id/products_rv_item_button_edit"
             android:layout_toEndOf="@+id/products_rv_item_tv_stock"
             android:fontFamily="@font/heebo_regular"
@@ -87,37 +85,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/products_rv_item_tv_stock_num"
-            android:layout_marginStart="5dp"
+            android:layout_marginHorizontal="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:layout_toStartOf="@+id/products_rv_item_tv_price_logo"
+            android:layout_toStartOf="@+id/products_rv_item_button_edit"
             android:layout_toEndOf="@+id/products_rv_item_tv_price"
             android:fontFamily="@font/heebo_regular"
             android:text="num"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/products_rv_item_tv_price_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/products_rv_item_tv_stock_num"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="5dp"
-            android:layout_toStartOf="@+id/products_rv_item_button_edit"
-            android:fontFamily="@font/heebo_regular"
-            android:text="@string/shekel_logo"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/products_rv_item_button_edit"
-            android:layout_width="wrap_content"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="45dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="3dp"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/black"
             android:text="Edit"
+            android:textColor="@color/white"
             android:textSize="12sp" />
 
     </RelativeLayout>

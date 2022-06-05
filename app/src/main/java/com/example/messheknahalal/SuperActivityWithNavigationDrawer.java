@@ -20,8 +20,9 @@ import com.example.messheknahalal.Admin_screens.OrdersRecyclerViewScreenAdmin;
 import com.example.messheknahalal.Admin_screens.ProductsRecycleViewScreenAdmin;
 import com.example.messheknahalal.Admin_screens.UsersRecycleViewScreenAdmin;
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
+import com.example.messheknahalal.delete_user.FCMSend;
 import com.example.messheknahalal.models.Person;
-import com.example.messheknahalal.User_screens.MyProfileScreenUser;
+import com.example.messheknahalal.messheknahalal.User_screens.MyProfileScreenUser;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.example.messheknahalal.Utils.Utils;
 import com.google.android.material.navigation.NavigationView;
@@ -31,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
@@ -57,7 +59,7 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
         headerView = nav_view.getHeaderView(0);
 
         drawerMenu.addDrawerListener(toggle);
-        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.black));
+        toggle.getDrawerArrowDrawable().setColor(getColor(R.color.black));
         getSupportActionBar().setTitle("");
         toggle.syncState();
 
@@ -92,6 +94,7 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
 
                     case R.id.logOut_item:
                         FirebaseAuth.getInstance().signOut();
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic(FCMSend.MESSHEK_NAHALAL_TOPIC);
                         navigationIntent = new Intent(getApplicationContext(), loginScreen.class);
                         startActivity(navigationIntent);
                         break;
@@ -107,7 +110,7 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
                         break;
 
                     case R.id.emailUs_item:
-                        sendEmail("ariogl02@gmail.com", "", "");
+                        sendEmail();
                         break;
 
                     case R.id.findUs_item:
@@ -130,7 +133,6 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
 
     protected void loadDrawerData(){
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
         String personPath = Utils.emailToPersonPath(email);
 
         DatabaseReference personRef = FirebaseDatabase.getInstance().getReference().child("Person");
@@ -140,7 +142,7 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     Person p = snapshot.getValue(Person.class);
-                    loadDrawerNameAndLastName(p.getName(), p.getLast_name());
+                    loadDrawerNameAndLastName(p.getFullName());
                     loadDrawerEmail(p.getEmail());
                     loadDrawerImage(p.getPicture());
                 }
@@ -153,9 +155,7 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
         });
     }
 
-    protected void loadDrawerNameAndLastName(String name, String last_name){
-        String fullName = name + " " + last_name;
-
+    protected void loadDrawerNameAndLastName(String fullName){
         TextView navAdminName = headerView.findViewById(R.id.header_nd_tv_name);
         navAdminName.setText(fullName);
     }
@@ -179,13 +179,13 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
         }
     }
 
-    protected void sendEmail(@NonNull String recipientsList, String subject, String text){
+    protected void sendEmail(){
         String[] recipients = "ariogl02@gmail.com".split(",");
 
         navigationIntent = new Intent(Intent.ACTION_SEND);
         navigationIntent.putExtra(Intent.EXTRA_EMAIL, recipients);
-        navigationIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        navigationIntent.putExtra(Intent.EXTRA_TEXT,text);
+        navigationIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+        navigationIntent.putExtra(Intent.EXTRA_TEXT, "");
 
         navigationIntent.setType("message/rfc822");
         startActivity(navigationIntent);

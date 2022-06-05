@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/sign_up_screen"
     android:layout_height="match_parent"
     android:background="@drawable/background_img"
     android:foregroundTint="@color/black">
 
-
     <Button
         android:id="@+id/sign_up_screen_btn_login"
-        android:layout_width="104dp"
-        android:layout_height="38dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/back1"
@@ -24,11 +23,10 @@
 
     <TextView
         android:id="@+id/sign_up_screen_screen_title"
-        android:layout_width="197dp"
-        android:layout_height="67dp"
-        android:layout_above="@+id/sign_up_screen_iv_logo_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sign_up_screen_btn_login"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
         android:fontFamily="@font/grenze_semi_bold_italic"
         android:gravity="center"
         android:text="Sign Up"
@@ -39,7 +37,7 @@
         android:id="@+id/sign_up_screen_iv_logo_background"
         android:layout_width="306dp"
         android:layout_height="47dp"
-        android:layout_above="@+id/sign_up_screen_iv_b1"
+        android:layout_below="@+id/sign_up_screen_screen_title"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         app:srcCompat="@drawable/back1" />
@@ -48,29 +46,32 @@
         android:id="@+id/sign_up_screen_iv_logo"
         android:layout_width="295dp"
         android:layout_height="55dp"
-        android:layout_above="@+id/sign_up_screen_iv_b1"
+        android:layout_alignTop="@+id/sign_up_screen_iv_logo_background"
+        android:layout_alignBottom="@+id/sign_up_screen_iv_logo_background"
+        android:layout_alignStart="@+id/sign_up_screen_iv_logo_background"
+        android:layout_alignEnd="@+id/sign_up_screen_iv_logo_background"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
         app:srcCompat="@drawable/logo2" />
-
 
     <ImageView
         android:id="@+id/sign_up_screen_iv_b1"
-        android:layout_width="378dp"
-        android:layout_height="279dp"
-        android:layout_above="@+id/sign_up_screen_cb_admin"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/sign_up_screen_iv_logo_background"
         android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="30dp"
+        android:layout_marginTop="10dp"
         app:srcCompat="@drawable/back4" />
-
 
     <EditText
         android:id="@+id/sign_up_screen_et_name"
-        android:layout_width="321dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sign_up_screen_iv_logo_background"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="5dp"
+        android:layout_alignTop="@+id/sign_up_screen_iv_b1"
+        android:layout_alignStart="@+id/sign_up_screen_iv_b1"
+        android:layout_alignEnd="@+id/sign_up_screen_iv_b1"
+        android:layout_marginHorizontal="20dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:foregroundTint="#000000"
@@ -81,10 +82,12 @@
 
     <EditText
         android:id="@+id/sign_up_screen_et_last_name"
-        android:layout_width="316dp"
-        android:layout_height="47dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/sign_up_screen_et_name"
-        android:layout_marginStart="40dp"
+        android:layout_alignStart="@+id/sign_up_screen_iv_b1"
+        android:layout_alignEnd="@+id/sign_up_screen_iv_b1"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
         android:ems="10"
@@ -96,11 +99,13 @@
 
     <EditText
         android:id="@+id/sign_up_screen_et_phone_number"
-        android:layout_width="316dp"
-        android:layout_height="47dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/sign_up_screen_et_last_name"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="-5dp"
+        android:layout_alignStart="@+id/sign_up_screen_iv_b1"
+        android:layout_alignEnd="@+id/sign_up_screen_iv_b1"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:hint="Phone number"
@@ -110,10 +115,12 @@
 
     <EditText
         android:id="@+id/sign_up_screen_et_email_address"
-        android:layout_width="316dp"
-        android:layout_height="47dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/sign_up_screen_et_phone_number"
-        android:layout_marginStart="40dp"
+        android:layout_alignStart="@+id/sign_up_screen_iv_b1"
+        android:layout_alignEnd="@+id/sign_up_screen_iv_b1"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="-5dp"
         android:backgroundTint="#000000"
         android:ems="10"
@@ -124,11 +131,13 @@
 
     <EditText
         android:id="@+id/sign_up_screen_et_password"
-        android:layout_width="316dp"
-        android:layout_height="47dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/sign_up_screen_et_email_address"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="-5dp"
+        android:layout_alignStart="@+id/sign_up_screen_iv_b1"
+        android:layout_alignEnd="@+id/sign_up_screen_iv_b1"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:hint="Password"
@@ -138,11 +147,13 @@
 
     <EditText
         android:id="@+id/sign_up_screen_et_confirm_password"
-        android:layout_width="316dp"
-        android:layout_height="47dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/sign_up_screen_et_password"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="-5dp"
+        android:layout_alignStart="@+id/sign_up_screen_iv_b1"
+        android:layout_alignEnd="@+id/sign_up_screen_iv_b1"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="5dp"
         android:backgroundTint="#000000"
         android:ems="10"
         android:hint="Confirm password"
@@ -150,87 +161,112 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black" />
 
-    <ImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/sign_up_screen_iv_b2"
-        android:layout_width="403dp"
+        android:layout_width="match_parent"
         android:layout_height="163dp"
+        android:layout_below="@+id/sign_up_screen_iv_b1"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="110dp"
-        app:srcCompat="@drawable/back3" />
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/back3">
 
-    <ImageView
-        android:id="@+id/sign_up_screen_iv_b3"
-        android:layout_width="228dp"
-        android:layout_height="150dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="117dp"
-        app:srcCompat="@drawable/back1" />
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sign_up_screen_constraint_layout"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/sign_up_screen_iv_frame_pp"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:background="@drawable/user_background"
+                android:scaleType="centerCrop" />
 
-    <ImageView
-        android:id="@+id/sign_up_screen_iv_pp"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_below="@+id/sign_up_screen_iv_b1"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="21dp"
-        android:clickable="true"
-        android:longClickable="false"
-        app:srcCompat="@drawable/default_profile_picture"
-        android:focusable="true" />
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/sign_up_screen_iv_pp"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_alignStart="@id/sign_up_screen_iv_frame_pp"
+                android:layout_alignTop="@id/sign_up_screen_iv_frame_pp"
+                android:layout_alignEnd="@id/sign_up_screen_iv_frame_pp"
+                android:layout_alignBottom="@id/sign_up_screen_iv_frame_pp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/sample_profile"
+                app:riv_border_color="@color/white"
+                app:riv_border_width="2sp"
+                app:riv_corner_radius="25sp" />
 
-    <ImageView
-        android:id="@+id/sign_up_screen_iv_frame_pp"
-        android:layout_width="121dp"
-        android:layout_height="113dp"
-        android:layout_below="@+id/sign_up_screen_iv_b1"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="15dp"
-        app:srcCompat="@drawable/profile_picture_frame" />
+        </RelativeLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/sign_up_screen_constraint_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:padding="10dp"
+            android:layout_margin="10dp">
 
-    <Button
-        android:id="@+id/sign_up_screen_btn_confirm"
-        android:layout_width="205dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="130dp"
-        android:backgroundTint="#59D674"
-        android:text="Confirm"
-        android:textColor="@android:color/black"
-        app:strokeWidth="2dp" />
+            <Button
+                android:id="@+id/sign_up_screen_btn_confirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#59D674"
+                android:text="Confirm"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="@+id/sign_up_screen_et_admin_code"
+                app:layout_constraintStart_toStartOf="@+id/sign_up_screen_et_admin_code"
+                app:layout_constraintTop_toBottomOf="@+id/sign_up_screen_et_admin_code"
+                app:strokeWidth="2dp" />
 
-    <CheckBox
-        android:id="@+id/sign_up_screen_cb_admin"
-        android:layout_width="172dp"
-        android:layout_height="34dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="225dp"
-        android:layout_marginStart="25dp"
-        android:backgroundTint="#000000"
-        android:buttonTint="#000000"
-        android:checked="false"
-        android:text="Are you an admin?"
-        android:textColor="#000000"
-        android:textColorHint="#000000" />
+            <CheckBox
+                android:id="@+id/sign_up_screen_cb_admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:backgroundTint="#000000"
+                android:buttonTint="#000000"
+                android:checked="false"
+                android:text="Are you an admin?"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/sign_up_screen_et_admin_code"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/sign_up_screen_btn_confirm"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="5dp"
-        android:backgroundTint="#000000"
-        android:ems="10"
-        android:hint="Admin code"
-        android:inputType="textPassword"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black" />
+            <EditText
+                android:id="@+id/sign_up_screen_et_admin_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
+                android:ems="10"
+                android:textSize="14sp"
+                android:hint="Admin code"
+                android:inputType="numberPassword"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sign_up_screen_cb_admin" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

@@ -18,9 +18,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
-import com.example.messheknahalal.models.Person;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.example.messheknahalal.Utils.Utils;
+import com.example.messheknahalal.delete_user.FCMSend;
+import com.example.messheknahalal.models.Person;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -44,9 +45,8 @@ public class loginScreen extends AppCompatActivity{
     ProgressDialog progressDialog;
     Dialog d;
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    DatabaseReference personRef = FirebaseDatabase.getInstance().getReference().child("Person");
-
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
+    final DatabaseReference personRef = FirebaseDatabase.getInstance().getReference().child("Person");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,17 +81,13 @@ public class loginScreen extends AppCompatActivity{
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        //check if the person is admin or user
-
-                                        FirebaseMessaging.getInstance().subscribeToTopic("Notification_to_" + Utils.emailForFCM(email))
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if(task.isSuccessful()){
-                                                            checkPersonType(email);
-                                                        }
-                                                    }
-                                                });
+                                        FirebaseMessaging.getInstance().subscribeToTopic(FCMSend.MESSHEK_NAHALAL_TOPIC)
+                                                .addOnSuccessListener(unused -> {
+                                                        //check if the person is admin or user
+                                                        checkPersonType(email);
+                                                })
+                                                .addOnFailureListener(e ->
+                                                        showAlertDialog("Error", "Failed!\nPlease try again!"));
 
                                     }
                                     else {
@@ -104,20 +100,9 @@ public class loginScreen extends AppCompatActivity{
             }
         });
 
-        iv_forgot_password.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createForgotPassDialog();
-            }
-        });
+        iv_forgot_password.setOnClickListener(v -> createForgotPassDialog());
 
-        btn_sign_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(loginScreen.this, signUpScreen.class);
-                startActivity(intent);
-            }
-        });
+        btn_sign_up.setOnClickListener(v -> startActivity(new Intent(loginScreen.this, signUpScreen.class)));
     }
 
     public void onBackPressed(){}
@@ -141,12 +126,7 @@ public class loginScreen extends AppCompatActivity{
         btn_back_dialog = d.findViewById(R.id.dialog_rp_btn_back);
         d.show();
 
-        btn_back_dialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                d.dismiss();
-            }
-        });
+        btn_back_dialog.setOnClickListener(v -> d.dismiss());
 
         btn_confirm_dialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,16 +136,19 @@ public class loginScreen extends AppCompatActivity{
 
                 if (email.isEmpty()) {
                     Toast.makeText(loginScreen.this, "Please fill the field", Toast.LENGTH_SHORT).show();
-                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                }
+                else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     Toast.makeText(loginScreen.this, "This email address is not valid", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else {
                     auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 snackBar("Please verify your email inbox to reset your password");
                                 d.dismiss();
-                            } else {
+                            }
+                            else {
                                 Toast.makeText(loginScreen.this, "Sorry, this email address is not linked to an account.\n Try again.", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -179,12 +162,7 @@ public class loginScreen extends AppCompatActivity{
     public void snackBar(String message){
         Snackbar snackbar = Snackbar
                 .make(findViewById(R.id.activity_login), message, Snackbar.LENGTH_INDEFINITE)
-                .setAction("OK",new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-
-                    }
-                });
+                .setAction("OK", view -> {});
         snackbar.show();
     }
 
@@ -210,12 +188,7 @@ public class loginScreen extends AppCompatActivity{
                     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
-                    firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            startActivity(new Intent(loginScreen.this, loginScreen.class));
-                        }
-                    });
+                    firebaseUser.delete().addOnCompleteListener(task -> startActivity(new Intent(loginScreen.this, loginScreen.class)));
                 }
             }
 

@@ -48,7 +48,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".User_screens.MyProfileScreenUser"
+            android:name=".messheknahalal.User_screens.MyProfileScreenUser"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

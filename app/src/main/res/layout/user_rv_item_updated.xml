@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
-    app:cardCornerRadius="8dp"
-    >
+    app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rl_user_item"
@@ -31,10 +28,6 @@
             android:id="@+id/users_rv_item_iv_pp"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:layout_alignStart="@+id/users_rv_item_iv_pp_frame"
-            android:layout_alignTop="@+id/users_rv_item_iv_pp_frame"
-            android:layout_alignEnd="@+id/users_rv_item_iv_pp_frame"
-            android:layout_alignBottom="@+id/users_rv_item_iv_pp_frame"
             android:layout_gravity="center"
             android:padding="2sp"
             android:src="@drawable/sample_profile"

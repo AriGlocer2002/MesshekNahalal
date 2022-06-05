@@ -16,6 +16,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.SuperActivityWithNavigationDrawer;
+import com.example.messheknahalal.Utils.Utils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,9 +30,8 @@ import java.util.Date;
 public class mainScreenUser extends SuperActivityWithNavigationDrawer implements NavController.OnDestinationChangedListener {
 
     BottomNavigationView bottomNav;
-    Intent intent;
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User");
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
+    final DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("User");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer implements
 
         FirebaseUser user = auth.getCurrentUser();
         String userEmail = user.getEmail();
-        String userPath = "User_" + userEmail.replace(".","-");
+        String userPath = Utils.emailToUserPath(userEmail);
 
         //reset last login date
         String date = getCurrentDate();
@@ -59,18 +59,6 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer implements
         Log.d("ariel", getLocalClassName());
     }
 
-    public void sendEmail(@NonNull String recipientsList, String subject, String text){
-        String[] recipients = "ariogl02@gmail.com".split(",");
-
-        intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_EMAIL, recipients);
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        intent.putExtra(Intent.EXTRA_TEXT,text);
-
-        intent.setType("message/rfc822");
-        startActivity(intent);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_bar_menu_1, menu);
@@ -80,11 +68,10 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer implements
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
-            case R.id.shopping:
-                Toast.makeText(this, "Shopping", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, ShoppingScreen.class));
-                return true;
+        if (item.getItemId() == R.id.shopping) {
+            Toast.makeText(this, "Shopping", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, ShoppingScreen.class));
+            return true;
         }
         return false;
 
@@ -93,8 +80,7 @@ public class mainScreenUser extends SuperActivityWithNavigationDrawer implements
     public String getCurrentDate(){
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String formattedDate = simpleDateFormat.format(c);
-        return formattedDate;
+        return simpleDateFormat.format(c);
     }
 
     @Override

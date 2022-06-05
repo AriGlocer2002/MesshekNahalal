@@ -52,11 +52,14 @@
 
     <ImageView
         android:id="@+id/create_new_product_admin_iv_b1"
-        android:layout_width="316dp"
-        android:layout_height="489dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_below="@+id/create_new_product_admin_iv_logo"
+        android:layout_alignBottom="@+id/create_new_product_admin_ll"
         android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="30dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="-10dp"
         app:srcCompat="@drawable/back3" />
 
     <ImageView
@@ -67,7 +70,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/back1" />
-
 
     <TextView
         android:id="@+id/create_new_product_admin_tv_product_picture"
@@ -129,119 +131,106 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/create_new_product_admin_iv_b4"
-        android:layout_width="293dp"
-        android:layout_height="193dp"
+    <LinearLayout
+        android:id="@+id/create_new_product_admin_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/create_new_product_admin_spinner_type"
         android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="60dp"
         android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/back4" />
+        android:layout_marginBottom="-10dp"
+        android:background="@drawable/back4"
+        android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_create_new_product_admin_et_product_name"
-        android:layout_width="288dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/create_new_product_admin_spinner_type"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:foregroundTint="#000000"
-        android:hint="Product's name"
-        android:inputType="textPersonName"
-        android:textColorHint="@color/black">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/create_new_product_admin_tie_product_name"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInput_create_new_product_admin_et_product_name"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="#000000"
+            android:hint="Product's name"
             android:textColorHint="@color/black"
-            app:suffixTextAppearance="@color/black"
-            app:suffixText=""
-            app:suffixTextColor="@color/black"/>
+            app:hintTextColor="@color/black">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/create_new_product_admin_tie_product_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/black"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_create_new_product_admin_tie_product_stock_amount"
-        android:layout_width="288dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textInput_create_new_product_admin_et_product_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
-        android:foregroundTint="#000000"
-        android:hint="Amount in stock"
-        android:textColorHint="@color/black"
-        android:inputType="numberDecimal"
-        >
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/create_new_product_admin_tie_product_stock_amount"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInput_create_new_product_admin_tie_product_stock_amount"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="Amount in stock"
             android:inputType="numberDecimal"
             android:textColorHint="@color/black"
-            app:suffixTextAppearance="@color/black"
-            app:suffixText=""
-            app:suffixTextColor="@color/black"/>
+            app:hintTextColor="@color/black">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/create_new_product_admin_tie_product_stock_amount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
 
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_create_new_product_admin_tie_product_price"
-        android:layout_width="288dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textInput_create_new_product_admin_tie_product_stock_amount"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
-        android:foregroundTint="#000000"
-        android:hint="Price"
-        android:textColorHint="@color/black"
-        android:inputType="numberDecimal"
-        app:suffixTextAppearance="@color/black"
-        app:suffixText="₪"
-        app:suffixTextColor="@color/black"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/create_new_product_admin_tie_product_price"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInput_create_new_product_admin_tie_product_price"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="numberDecimal"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/black"
-            app:suffixTextAppearance="@color/black"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:hint="Price"
+            android:textColorHint="@color/black"
+            app:hintTextColor="@color/black"
             app:suffixText="₪"
-            app:suffixTextColor="@color/black"/>
+            app:suffixTextAppearance="@color/black"
+            app:suffixTextColor="@color/black">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/create_new_product_admin_tie_product_price"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/black"
+                android:inputType="numberDecimal"
+                android:textColor="@color/black"
+                app:suffixText="₪"
+                app:suffixTextAppearance="@color/black"
+                app:suffixTextColor="@color/black" />
 
-    <CheckBox
-        android:id="@+id/cb_countable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Countable"
-        android:buttonTint="@color/black"
-        android:textColor="@color/black"
-        android:layout_below="@+id/textInput_create_new_product_admin_tie_product_price"
-        android:layout_alignStart="@+id/textInput_create_new_product_admin_tie_product_price"
-        />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+        <CheckBox
+            android:id="@+id/cb_countable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/black"
+            android:text="Countable"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/create_new_product_admin_btn_confirm"
-        android:layout_width="169dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/create_new_product_admin_iv_b1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="#59D674"
-        android:text="confirm"
+        android:text="Confirm"
         android:textColor="@android:color/black"
+        app:cornerRadius="10dp"
         app:strokeWidth="2dp" />
-
 
 </RelativeLayout>

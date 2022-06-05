@@ -3,27 +3,19 @@ package com.example.messheknahalal.Admin_screens;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.SuperActivityWithNavigationDrawer;
 import com.example.messheknahalal.VPAdapter;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 import java.util.ArrayList;
 
 public class mainScreenAdmin extends SuperActivityWithNavigationDrawer {
 
-    BottomNavigationView bottomNav;
-
-    Intent intent;
     ViewPager2 viewPager2;
     ArrayList<Integer> imageList;
     VPAdapter adapter;
@@ -54,21 +46,17 @@ public class mainScreenAdmin extends SuperActivityWithNavigationDrawer {
 
         btn_create_new_product = findViewById(R.id.fragment_products_admin_btn_new_product);
 
-        btn_create_new_product.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), CreateNewProductAdmin.class)));
+        btn_create_new_product.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), CreateNewProductAdmin.class)));
 
         btn_my_profile = findViewById(R.id.fragment_home_admin_btn_my_profile);
         btn_orders = findViewById(R.id.fragment_home_admin_btn_orders);
         btn_users = findViewById(R.id.fragment_home_admin_btn_users);
         btn_products = findViewById(R.id.fragment_home_admin_btn_products);
 
-
-        btn_my_profile.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), MyProfileScreenAdmin.class)));
-
-//        btn_orders.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), .class)));
-
-        btn_users.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), UsersRecycleViewScreenAdmin.class)));
-
-        btn_products.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ProductsRecycleViewScreenAdmin.class)));
+        btn_my_profile.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MyProfileScreenAdmin.class)));
+        btn_orders.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OrdersRecyclerViewScreenAdmin.class)));
+        btn_users.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), UsersRecycleViewScreenAdmin.class)));
+        btn_products.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ProductsRecycleViewScreenAdmin.class)));
     }
 
 }

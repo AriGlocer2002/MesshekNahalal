@@ -22,11 +22,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
+import com.example.messheknahalal.User_screens.mainScreenUser;
+import com.example.messheknahalal.Utils.Utils;
+import com.example.messheknahalal.delete_user.FCMSend;
 import com.example.messheknahalal.models.Admin;
 import com.example.messheknahalal.models.Person;
 import com.example.messheknahalal.models.User;
-import com.example.messheknahalal.User_screens.mainScreenUser;
-import com.example.messheknahalal.Utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,7 +40,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -54,21 +54,18 @@ public class signUpScreen extends AppCompatActivity {
     Button btn_login2, btn_confirm;
     CheckBox cb_admin;
     ImageView iv_profile_pic;
-    Intent intent;
-    FirebaseFirestore fStore;
     StorageReference rStore;
     FirebaseAuth auth;
     DatabaseReference userRef, adminRef, personRef, adminCodeRef;
-
-    boolean confirmation = true;   //todo - turns to true if user enter a code that sent to phone when register, otherwise cannot upload a pic
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
         auth = FirebaseAuth.getInstance();
 
-        adminCodeRef = FirebaseDatabase.getInstance().getReference("AdminCode");
+        adminCodeRef = FirebaseDatabase.getInstance().getReference("Admin Code");
         userRef = FirebaseDatabase.getInstance().getReference("User");
         adminRef = FirebaseDatabase.getInstance().getReference("Admin");
         personRef = FirebaseDatabase.getInstance().getReference("Person");
@@ -86,8 +83,6 @@ public class signUpScreen extends AppCompatActivity {
         iv_profile_pic = findViewById(R.id.sign_up_screen_iv_pp);
         et_admin_code_signUp.setVisibility(View.INVISIBLE);
 
-
-        fStore = FirebaseFirestore.getInstance();
         rStore = FirebaseStorage.getInstance().getReference();
 
         //to pick a profile picture
@@ -98,16 +93,21 @@ public class signUpScreen extends AppCompatActivity {
                 String email = et_email_address_signUp.getText().toString();
                 if(email.isEmpty()){
                     Utils.showAlertDialog("Error", "You can't pick a profile picture without an email", signUpScreen.this);
-                }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                }
+                else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     Utils.showAlertDialog("Error", "This email address is not valid and you can't save a profile picture", signUpScreen.this);
-                } else {
-                    String emailPath = Utils.emailToPersonPath(email);
-                    personRef.child(emailPath).addListenerForSingleValueEvent(new ValueEventListener() {
+                }
+                else {
+                    String personPath = Utils.emailToPersonPath(email);
+                    personRef.child(personPath).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot ds) {
                             //if exists the dataSnapshot
                             if (ds.exists()) {
-                                Utils.showAlertDialog("Error", "This email is already linked to another account\nIf you want to set a profile picture to it you can do it from the 'My Profile' screen", signUpScreen.this);
+                                Utils.showAlertDialog("Error",
+                                        "This email is already linked to another account" +
+                                                "\nIf you want to set a profile picture to it " +
+                                                "you can do it from the 'My Profile' screen", signUpScreen.this);
                             } else {
                                 //open gallery
                                 Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -124,25 +124,12 @@ public class signUpScreen extends AppCompatActivity {
             }
         });
 
-        cb_admin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //if the cell box is true or false
-                if (cb_admin.isChecked()) {
-                    et_admin_code_signUp.setVisibility(View.VISIBLE);
-                } else {
-                    et_admin_code_signUp.setVisibility(View.INVISIBLE);
-                }
-            }
+        cb_admin.setOnClickListener(v -> {
+            //if the cell box is true or false
+            et_admin_code_signUp.setVisibility(cb_admin.isChecked() ? View.VISIBLE : View.INVISIBLE);
         });
 
-        btn_login2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(signUpScreen.this, loginScreen.class);
-                startActivity(intent);
-            }
-        });
+        btn_login2.setOnClickListener(v -> startActivity(new Intent(signUpScreen.this, loginScreen.class)));
 
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -270,7 +257,7 @@ public class signUpScreen extends AppCompatActivity {
 
         Person person = new Person(name, last_name, email, phone, "");
 
-        FirebaseMessaging.getInstance().subscribeToTopic("Notification_to_" + Utils.emailForFCM(email))
+        FirebaseMessaging.getInstance().subscribeToTopic(FCMSend.MESSHEK_NAHALAL_TOPIC)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -322,8 +309,7 @@ public class signUpScreen extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         userRef.child(Utils.emailToUserPath(email)).setValue(user)
-                                .addOnSuccessListener(
-                                        unused1 -> snackBar("Account successfully created"))
+                                .addOnSuccessListener(u -> snackBar("Account successfully created"))
                                 .addOnFailureListener(
                                         e -> Toast.makeText(signUpScreen.this, "Registration failed", Toast.LENGTH_SHORT).show());
                     }
@@ -341,7 +327,7 @@ public class signUpScreen extends AppCompatActivity {
                     public void onSuccess(Void unused) {
                         adminRef.child(Utils.emailToAdminPath(email)).setValue(admin)
                                 .addOnSuccessListener(
-                                        unused1 -> snackBar("Account successfully created"))
+                                        u -> snackBar("Account successfully created"))
                                 .addOnFailureListener(
                                         e -> Toast.makeText(signUpScreen.this, "Registration failed", Toast.LENGTH_SHORT).show());
                     }
@@ -389,32 +375,22 @@ public class signUpScreen extends AppCompatActivity {
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                double progress=(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
+                double progress = (double) (100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
 
                 ProgressBar progressBar = d.findViewById(R.id.progressBar_loading_dialog);
                 TextView textViewProgress = d.findViewById(R.id.textPercent_loading_dialog);
                 progressBar.setProgress((int)progress);
                 textViewProgress.setText(progress+"%");
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(signUpScreen.this, "FAILED!!!!", Toast.LENGTH_LONG).show();
-            }
-        });
+        })
+        .addOnFailureListener(e -> Toast.makeText(signUpScreen.this, "FAILED!!!!", Toast.LENGTH_LONG).show());
     }
 
     public void snackBar(String message){
         Snackbar snackbar = Snackbar
                 .make(findViewById(R.id.sign_up_screen), message, Snackbar.LENGTH_INDEFINITE)
-                .setAction("Continue", new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-                        intent = new Intent(signUpScreen.this, cb_admin.isChecked() ? mainScreenAdmin.class : mainScreenUser.class);
-                        Log.d("ariel", "cb_admin is " + cb_admin.isChecked());
-                        startActivity(intent);
-                    }
-                });
+                .setAction("Continue", v ->
+                        startActivity(new Intent(signUpScreen.this, cb_admin.isChecked() ? mainScreenAdmin.class : mainScreenUser.class)));
         snackbar.show();
     }
 

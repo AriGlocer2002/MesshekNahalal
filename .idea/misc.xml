@@ -124,6 +124,11 @@
         <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout-v23/products_saved_rv_item_users.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_main_screen_user.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_shopping_screen.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_sign_up.xml" value="0.286231884057971" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/admin_rv_item.xml" value="0.15" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/orders_rv_item_admin.xml" value="0.309375" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/reset_password_dialog.xml" value="0.286231884057971" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/user_rv_item.xml" value="0.309375" />
       </map>
     </option>
   </component>

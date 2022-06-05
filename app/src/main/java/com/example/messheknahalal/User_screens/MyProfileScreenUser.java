@@ -43,16 +43,14 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
 
-    Intent intent;
-    StorageReference rStore;
-    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User"),
-            personRef = FirebaseDatabase.getInstance().getReference().child("Person");
+    final StorageReference rStore = FirebaseStorage.getInstance().getReference();
+    final DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User");
+    final DatabaseReference personRef = FirebaseDatabase.getInstance().getReference().child("Person");
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
     RoundedImageView screen_profile_img;
     Button btn_update_data, btn_reset_pass;
     EditText et_name, et_last_name, et_email, et_phone;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +59,6 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
 
         FirebaseUser user = auth.getCurrentUser();
         String userEmail = user.getEmail();
-        rStore = FirebaseStorage.getInstance().getReference();
 
         //setting profile image in the screen
         screen_profile_img = findViewById(R.id.my_profile_user_iv_pp);
@@ -73,6 +70,15 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
                 //open gallery
                 Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(openGalleryIntent, 1000);
+            }
+        });
+
+        screen_profile_img.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                screen_profile_img.setImageResource(R.drawable.sample_profile);
+                screen_profile_img.setTag(null);
+                return false;
             }
         });
 
@@ -216,7 +222,7 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                double progress=(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
+                double progress = (double) (100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
 
                 ProgressBar progressBar = d.findViewById(R.id.progressBar_loading_dialog);
                 TextView textViewProgress = d.findViewById(R.id.textPercent_loading_dialog);

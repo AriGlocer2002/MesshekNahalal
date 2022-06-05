@@ -36,8 +36,8 @@ public class DataBaseHelper {
         this.ref = ref;
     }
 
-
     public FirebaseAuth getAuth() {
         return auth;
     }
+
 }

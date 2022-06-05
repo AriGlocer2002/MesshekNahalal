@@ -42,12 +42,11 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
 
-    Intent intent;
-    StorageReference rStore;
-    DatabaseReference adminRef = FirebaseDatabase.getInstance().getReference().child("Admin"),
-            personRef = FirebaseDatabase.getInstance().getReference().child("Person");
+    final StorageReference rStore = FirebaseStorage.getInstance().getReference();
+    final DatabaseReference adminRef = FirebaseDatabase.getInstance().getReference().child("Admin");
+    final DatabaseReference personRef = FirebaseDatabase.getInstance().getReference().child("Person");
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
+    final FirebaseAuth auth = FirebaseAuth.getInstance();
 
     RoundedImageView screen_profile_img;
     Button btn_update_data, btn_reset_pass;
@@ -61,7 +60,6 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
 
         FirebaseUser user = auth.getCurrentUser();
         String adminEmail = user.getEmail();
-        rStore = FirebaseStorage.getInstance().getReference();
 
         //setting profile image in the screen
         screen_profile_img = findViewById(R.id.my_profile_admin_iv_pp);
@@ -73,6 +71,15 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
                 //open gallery
                 Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(openGalleryIntent, 1000);
+            }
+        });
+
+        screen_profile_img.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                screen_profile_img.setImageResource(R.drawable.sample_profile);
+                screen_profile_img.setTag(null);
+                return false;
             }
         });
 
@@ -109,7 +116,8 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
                         et_phone.getText().toString().isEmpty()) {
 
                     Utils.showAlertDialog("Empty fields", "Please finish to complete all the fields.", MyProfileScreenAdmin.this);
-                }else {
+                }
+                else {
                     String name = et_name.getText().toString();
                     String last_name = et_last_name.getText().toString();
                     String phone = et_phone.getText().toString();
@@ -126,7 +134,6 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
         });
 
         initializeNavigationDrawer(true);
-
     }
 
     public void updateAmin(Admin updatedAdmin) {
@@ -178,7 +185,7 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==1000) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri imageUri = data.getData();
@@ -194,7 +201,7 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
 
         Dialog d = new Dialog(this);
         d.setContentView(R.layout.loading_dialog);
-d.setCanceledOnTouchOutside(false);
+        d.setCanceledOnTouchOutside(false);
         d.show();
 
         StorageReference fileRef = rStore.child("profiles/pp_"+emailProfile+".jpg");
@@ -215,17 +222,19 @@ d.setCanceledOnTouchOutside(false);
                     }
                 });
             }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+        })
+        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                double progress=(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
+                double progress = (double) (100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
 
                 ProgressBar progressBar = d.findViewById(R.id.progressBar_loading_dialog);
                 TextView textViewProgress = d.findViewById(R.id.textPercent_loading_dialog);
                 progressBar.setProgress((int)progress);
                 textViewProgress.setText(progress+"%");
             }
-        }).addOnFailureListener(new OnFailureListener() {
+        })
+        .addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(MyProfileScreenAdmin.this, "FAILED!!!!", Toast.LENGTH_LONG).show();
@@ -243,7 +252,7 @@ d.setCanceledOnTouchOutside(false);
         et_phone = findViewById(R.id.my_profile_admin_et_phone_number);
         et_name = findViewById(R.id.my_profile_admin_et_name);
         et_last_name = findViewById(R.id.my_profile_admin_et_last_name);
-        String personPath = "Person_"+email.replace(".","-");
+        String personPath = Utils.emailToPersonPath(email);
 
         personRef.child(personPath).addValueEventListener(new ValueEventListener() {
             @Override

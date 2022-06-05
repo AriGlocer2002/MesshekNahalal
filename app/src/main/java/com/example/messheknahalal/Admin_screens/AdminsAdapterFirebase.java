@@ -16,15 +16,14 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.messheknahalal.models.Admin;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.Utils.Utils;
 import com.example.messheknahalal.delete_user.FCMSend;
+import com.example.messheknahalal.models.Admin;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.StorageReference;
 
 public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, AdminsAdapterFirebase.AdminViewHolderFirebase> {
 
@@ -37,7 +36,6 @@ public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, Admins
 
     private final Context context;
 
-    StorageReference rStore;
     private final DatabaseReference adminsRef;
     private final DatabaseReference peopleRef;
 
@@ -51,18 +49,18 @@ public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, Admins
 
     public class AdminViewHolderFirebase extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        ConstraintLayout cl_admin_item;
+        final ConstraintLayout cl_admin_item;
 
-        TextView tv_full_name;
-        TextView tv_email;
-        TextView tv_phone;
+        final TextView tv_full_name;
+        final TextView tv_email;
+        final TextView tv_phone;
 
-        ImageView admins_rv_item_iv_phone;
-        ImageView admins_rv_item_iv_email;
-        ImageView admins_rv_item_iv_message;
+        final ImageView admins_rv_item_iv_phone;
+        final ImageView admins_rv_item_iv_email;
+        final ImageView admins_rv_item_iv_message;
 
-        ImageView admins_rv_item_iv_pp;
-        ImageView admins_rv_item_iv_pp_frame;
+        final ImageView admins_rv_item_iv_pp;
+        final ImageView admins_rv_item_iv_pp_frame;
 
         public AdminViewHolderFirebase(@NonNull View itemView) {
             super(itemView);
@@ -102,7 +100,6 @@ public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, Admins
             }
             if (view == admins_rv_item_iv_message) {
                 String text = "";
-
                 String number = "+972" + getItem(getBindingAdapterPosition()).getPhone();
                 String url = "https://api.whatsapp.com/send?phone="+number + "&text=" + text;
                 Intent i = new Intent(Intent.ACTION_VIEW);
@@ -120,19 +117,11 @@ public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, Admins
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
                         String email = getItem(getBindingAdapterPosition()).getEmail();
-                        String token = getItem(getBindingAdapterPosition()).getToken();
-
-                        deleteAdmin(email, token);
+                        deleteAdmin(email);
                     }
                 });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
+                builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
                 AlertDialog dialog = builder.create();
                 dialog.setMessage("Do you really want to delete this admin?");
                 dialog.show();
@@ -141,8 +130,7 @@ public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, Admins
             return true;
         }
 
-        public void deleteAdmin(String email, String token){
-
+        public void deleteAdmin(String email){
             String adminPath = Utils.emailToAdminPath(email);
             String personPath = Utils.emailToPersonPath(email);
 
@@ -156,7 +144,7 @@ public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, Admins
     @Override
     public void onBindViewHolder(@NonNull AdminsAdapterFirebase.AdminViewHolderFirebase holder, int position, @NonNull Admin model) {
 
-        holder.tv_full_name.setText(model.getName()+" "+ model.getLast_name());
+        holder.tv_full_name.setText(model.getFullName());
         holder.tv_email.setText(model.getEmail());
         holder.tv_phone.setText(model.getPhone());
 
@@ -171,8 +159,7 @@ public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, Admins
     @NonNull
     @Override
     public AdminsAdapterFirebase.AdminViewHolderFirebase onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.admin_rv_item_updated, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_rv_item_updated, parent, false);
 
         return new AdminsAdapterFirebase.AdminViewHolderFirebase(view);
     }
@@ -180,5 +167,15 @@ public class AdminsAdapterFirebase extends FirebaseRecyclerAdapter<Admin, Admins
     @Override
     public int getItemCount() {
         return getSnapshots().size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 }

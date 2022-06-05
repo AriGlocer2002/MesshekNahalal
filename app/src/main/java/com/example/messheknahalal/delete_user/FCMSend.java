@@ -12,7 +12,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.messheknahalal.Utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,19 +25,20 @@ public class FCMSend {
     //API key for FCM
     private static final String SERVER_KEY = "key=AAAAMGJwnio:APA91bHmsrZxwvWPa4fHLO2tNLr5HuwtLRLfYZYsFuByqTroeAze8VIqJ8YyCo3WIKtSPqlwFCsbvckAtzsJQA3eHn4Tpy5r17O1ZrGdsk7s1KCI3OVJPp9BziVP4OJDk0oWeCiZcF8I";
 
-    public static void sendNotificationToOnePerson(@NonNull Context context, String email) {
+    public static final String MESSHEK_NAHALAL_TOPIC = "messhek_nahalal_topic";
 
+    public static void sendNotificationToOnePerson(@NonNull Context context, String email) {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        String title = "";
-        String body = "";
+        String title;
+        String body;
 
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
             JSONObject json = new JSONObject();
-            json.put("to", "/topics/" + "Notification_to_" + Utils.emailForFCM(email));
+            json.put("to", "/topics/" + MESSHEK_NAHALAL_TOPIC);
             JSONObject notification = new JSONObject();
 
             title = "User account deleted";
@@ -81,6 +81,7 @@ public class FCMSend {
             };
 
             queue.add(jsonObjectRequest);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

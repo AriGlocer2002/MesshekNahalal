@@ -18,7 +18,7 @@ public class OrdersRecyclerViewScreenAdmin extends SuperActivityWithNavigationDr
     RecyclerView rv_orders;
     OrdersAdapterFirebase ordersAdapter;
 
-    DatabaseReference notDeliveredOrders = FirebaseDatabase.getInstance().getReference("Orders");
+    final DatabaseReference notDeliveredOrders = FirebaseDatabase.getInstance().getReference("Orders");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

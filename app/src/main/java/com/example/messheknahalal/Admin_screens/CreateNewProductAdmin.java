@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,9 +21,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.messheknahalal.models.Product;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.Utils.Utils;
+import com.example.messheknahalal.models.Product;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -33,7 +34,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class CreateNewProductAdmin extends AppCompatActivity {
+public class CreateNewProductAdmin extends AppCompatActivity implements
+        AdapterView.OnItemClickListener {
 
     protected Spinner spinner;
     protected ImageView product_img;
@@ -42,16 +44,16 @@ public class CreateNewProductAdmin extends AppCompatActivity {
     protected CheckBox cb_countable;
 
     protected DatabaseReference productRef;
-    protected StorageReference rStore = FirebaseStorage.getInstance().getReference();
+    protected final StorageReference rStore = FirebaseStorage.getInstance().getReference();
 
-    protected final String[] products_types = {"","Vegetable","Fruit","Shelf","Other"};
+    protected final String[] products_types = {/*"",*/"Vegetable", "Fruit", "Shelf", "Other"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_product_admin);
 
-        spinner = findViewById(R.id.create_new_product_admin_spinner_type);
+//        spinner = findViewById(R.id.create_new_product_admin_spinner_type);
 
         tie_name = findViewById(R.id.create_new_product_admin_tie_product_name);
         tie_stock = findViewById(R.id.create_new_product_admin_tie_product_stock_amount);
@@ -87,11 +89,21 @@ public class CreateNewProductAdmin extends AppCompatActivity {
             }
         });
 
+        product_img.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                product_img.setImageResource(R.drawable.sample_profile);
+                product_img.setTag(null);
+                return false;
+            }
+        });
+
         //setting spinner information
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.background_spinner1, products_types);
         adapter.setDropDownViewResource(R.layout.background_dropdown_spinner_items);
 
         spinner.setAdapter(adapter);
+
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,6 +165,7 @@ public class CreateNewProductAdmin extends AppCompatActivity {
         tie_stock.setText("");
         tie_price.setText("");
         spinner.setSelection(0);
+        cb_countable.setChecked(false);
 
         product_img.setImageResource(R.drawable.upload_image_img);
     }
@@ -177,7 +190,6 @@ public class CreateNewProductAdmin extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(CreateNewProductAdmin.this, "The product has been created successfully", Toast.LENGTH_SHORT).show();
-
                         resetAllFields();
                     }
                 })
@@ -214,7 +226,7 @@ public class CreateNewProductAdmin extends AppCompatActivity {
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                double progress=(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount())/2;
+                double progress = (double) (100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount())/2;
 
                 ProgressBar progressBar = d.findViewById(R.id.progressBar_loading_dialog);
                 TextView textViewProgress = d.findViewById(R.id.textPercent_loading_dialog);
@@ -229,4 +241,8 @@ public class CreateNewProductAdmin extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
 }

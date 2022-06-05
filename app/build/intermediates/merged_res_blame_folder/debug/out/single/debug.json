@@ -36,12 +36,12 @@
         "source": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_shopping_screen.xml"
     },
     {
-        "merged": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_login.xml.flat",
-        "source": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_login.xml"
-    },
-    {
         "merged": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\layout\\activity_login.xml"
     },
     {
         "merged": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\font_heebo_black.ttf.flat",
@@ -56,12 +56,12 @@
         "source": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\upload_image_img.png"
     },
     {
-        "merged": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_shelves.png.flat",
-        "source": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\shelves.png"
-    },
-    {
         "merged": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_shelves.png.flat",
+        "source": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\src\\main\\res\\drawable\\shelves.png"
     },
     {
         "merged": "C:\\Users\\ror7\\AndroidStudioProjects\\MesshekNahalal\\app\\build\\intermediates\\merged_res\\debug\\drawable_image_nahalal.jpg.flat",

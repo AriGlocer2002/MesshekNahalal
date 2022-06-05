@@ -26,7 +26,7 @@ public class ProductsRecycleViewScreenAdmin extends SuperActivityWithNavigationD
     int currentPosition = -1;
     int oldPosition = -1;
 
-    ImageView[] productTypes = new ImageView[4];
+    final ImageView[] productTypes = new ImageView[4];
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +44,8 @@ public class ProductsRecycleViewScreenAdmin extends SuperActivityWithNavigationD
         productTypes[3] = btn_other;
 
         btn_vegetable.setOnClickListener(this);
-
         btn_fruit.setOnClickListener(this);
-
         btn_shelf.setOnClickListener(this);
-
         btn_other.setOnClickListener(this);
 
         btn_vegetable.callOnClick();
@@ -108,7 +105,5 @@ public class ProductsRecycleViewScreenAdmin extends SuperActivityWithNavigationD
     }
 
     @Override
-    public void addToCart(int position, Product product) {
-
-    }
+    public void addToCart(int position, Product product) {}
 }

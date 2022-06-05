@@ -10,10 +10,6 @@ public class User extends Person {
         //required for firebase
     }
 
-    /*public User(String last_login) {
-        this.last_login = last_login;
-    }*/
-
     public User(String name, String last_name, String email, String phone, String type) {
         super(name, last_name, email, phone, type);
     }

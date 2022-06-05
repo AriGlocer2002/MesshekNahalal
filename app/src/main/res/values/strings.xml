@@ -17,7 +17,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string-array name="products_types">
-        <item></item>
+        <item> </item>
         <item>Vegetables</item>
         <item>Fruits</item>
         <item>Shelf</item>

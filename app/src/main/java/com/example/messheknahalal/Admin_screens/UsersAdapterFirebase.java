@@ -16,15 +16,14 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.messheknahalal.models.User;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.Utils.Utils;
 import com.example.messheknahalal.delete_user.FCMSend;
+import com.example.messheknahalal.models.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.StorageReference;
 
 public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAdapterFirebase.UserViewHolderFirebase> {
 
@@ -37,7 +36,6 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
 
     private final Context context;
 
-    StorageReference rStore;
     private final DatabaseReference usersRef;
     private final DatabaseReference peopleRef;
 
@@ -50,21 +48,20 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
         this.peopleRef = FirebaseDatabase.getInstance().getReference("Person");
     }
 
-    public class UserViewHolderFirebase extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public class UserViewHolderFirebase extends RecyclerView.ViewHolder implements View.OnClickListener,
+            View.OnLongClickListener {
 
-//        RelativeLayout rl_user_item;
-        ConstraintLayout rl_user_item;
+        final ConstraintLayout rl_user_item;
 
-        TextView tv_full_name;
-        TextView tv_email;
-        TextView tv_phone;
+        final TextView tv_full_name;
+        final TextView tv_email;
+        final TextView tv_phone;
 
-        ImageView users_lv_item_iv_phone;
-        ImageView users_lv_item_iv_email;
-        ImageView users_lv_item_iv_message;
+        final ImageView users_lv_item_iv_phone;
+        final ImageView users_lv_item_iv_email;
+        final ImageView users_lv_item_iv_message;
 
-        ImageView users_lv_item_iv_pp;
-        ImageView users_lv_item_iv_pp_frame;
+        final ImageView users_lv_item_iv_pp;
 
         public UserViewHolderFirebase(@NonNull View itemView) {
             super(itemView);
@@ -85,7 +82,6 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
             users_lv_item_iv_message.setOnClickListener(this);
 
             users_lv_item_iv_pp = itemView.findViewById(R.id.users_rv_item_iv_pp);
-//            users_lv_item_iv_pp_frame = itemView.findViewById(R.id.users_rv_item_iv_pp_frame);
 
             itemView.setOnLongClickListener(this);
         }
@@ -104,7 +100,6 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
             }
             if (view == users_lv_item_iv_message) {
                 String text = "";
-
                 String number = "+972" + getItem(getBindingAdapterPosition()).getPhone();
                 String url = "https://api.whatsapp.com/send?phone=" + number + "&text=" + text;
                 Intent i = new Intent(Intent.ACTION_VIEW);
@@ -122,19 +117,11 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
                         String email = getItem(getBindingAdapterPosition()).getEmail();
-                        String token = getItem(getBindingAdapterPosition()).getToken();
-
-                        deleteUser(email, token);
+                        deleteUser(email);
                     }
                 });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
+                builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
                 AlertDialog dialog = builder.create();
                 dialog.setMessage("Do you really want to delete this user?");
                 dialog.show();
@@ -143,8 +130,7 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
             return true;
         }
 
-        public void deleteUser(String email, String token){
-
+        public void deleteUser(String email){
             String userPath = Utils.emailToUserPath(email);
             String personPath = Utils.emailToPersonPath(email);
 
@@ -158,8 +144,7 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolderFirebase holder, int position, @NonNull User model) {
-
-        holder.tv_full_name.setText(model.getName()+" "+ model.getLast_name());
+        holder.tv_full_name.setText(model.getFullName());
         holder.tv_email.setText(model.getEmail());
         holder.tv_phone.setText(model.getPhone());
 
@@ -182,5 +167,15 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
     @Override
     public int getItemCount() {
         return getSnapshots().size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 }

@@ -19,8 +19,6 @@ import java.util.ArrayList;
 
 public class HomeFragmentUser extends Fragment {
 
-    public static final String TAG = "HomeFragmentUser";
-
     public HomeFragmentUser() {
         // Required empty public constructor
     }

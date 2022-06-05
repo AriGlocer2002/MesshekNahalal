@@ -16,41 +16,53 @@
             android:id="@+id/tv_sort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sort by: "
-            android:textColor="@color/white"
             android:layout_marginStart="10dp"
-            android:textSize="30sp"/>
+            android:text="Sort by: "
+            android:textColor="@color/black"
+            android:textSize="30sp" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/sort_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_toEndOf="@id/tv_sort"
-            app:singleSelection="true"
+            android:layout_alignTop="@+id/tv_sort"
+            android:layout_alignBottom="@+id/tv_sort"
             android:clickable="true"
             app:selectionRequired="true"
-            android:layout_marginStart="10dp">
-
+            app:singleSelection="true"
+            android:focusable="true">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
-                android:clickable="true"
                 android:checkable="true"
-                app:checkedIconVisible="false"/>
+                android:clickable="true"
+                android:text="Name"
+                app:checkedIconVisible="false"
+                android:focusable="true" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price"
-                android:clickable="true"
                 android:checkable="true"
-                app:checkedIconVisible="false"/>
+                android:clickable="true"
+                android:text="Price"
+                app:checkedIconVisible="false"
+                android:focusable="true" />
 
-
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:clickable="true"
+                android:text="Stock"
+                app:checkedIconVisible="false"
+                android:focusable="true" />
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -59,17 +71,19 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="vertical"
+            android:gravity="center"
             android:layout_below="@id/sort_spinner"
             android:layout_marginTop="20dp">
-
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vegetables"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
-                android:textSize="30sp"/>
+                android:textSize="30sp"
+                android:padding="7.5dp"
+                android:background="@drawable/back1"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_vegetables_buy"
@@ -82,9 +96,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fruits"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
-                android:textSize="30sp"/>
+                android:textSize="30sp"
+                android:padding="7.5dp"
+                android:background="@drawable/back1"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_fruits_buy"
@@ -97,9 +113,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Shelf"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
-                android:textSize="30sp"/>
+                android:textSize="30sp"
+                android:padding="7.5dp"
+                android:background="@drawable/back1"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_shelf_buy"
@@ -112,9 +130,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Others"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
-                android:textSize="30sp"/>
+                android:textSize="30sp"
+                android:padding="7.5dp"
+                android:background="@drawable/back1"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_others_buy"

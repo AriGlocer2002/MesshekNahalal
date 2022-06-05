@@ -1,8 +1,6 @@
 package com.example.messheknahalal.User_screens;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,12 +10,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase;
 import com.example.messheknahalal.Admin_screens.WrapContentLinearLayoutManager;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.Utils.Utils;
 import com.example.messheknahalal.models.Cart;
 import com.example.messheknahalal.models.Person;
 import com.example.messheknahalal.models.Product;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
@@ -26,25 +26,26 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ShoppingScreen extends AppCompatActivity implements ProductsAdapter.OnTotalPriceChangedListener {
+public class ShoppingScreen extends AppCompatActivity {
 
     RecyclerView rv_saved_products;
-    ProductsAdapter productsAdapter;
+    ProductsAdapterFirebase productsAdapterFirebase;
 
-    DatabaseReference notDeliveredOrders = FirebaseDatabase.getInstance().getReference("Orders");
+    final DatabaseReference notDeliveredOrders = FirebaseDatabase.getInstance().getReference("Orders");
+    final DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference("Product");
 
     Toolbar toolbar;
 
-    ArrayList<Product> products;
-
     TextView tv_total_price;
 
-    SQLiteDatabase db;
     MaterialButton btn_confirm, btn_back, btn_clear;
+
+    DatabaseReference productsInCartRef = FirebaseDatabase.getInstance().getReference("Carts");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,52 +66,48 @@ public class ShoppingScreen extends AppCompatActivity implements ProductsAdapter
 
         tv_total_price = findViewById(R.id.tv_total_price);
 
-        db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
-        products = Utils.getSavedProducts(db);
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String emailPath = Utils.emailToUserPath(email);
 
-        productsAdapter = new ProductsAdapter(products, this, this);
+        productsInCartRef = productsInCartRef.child(emailPath).child("products");
 
-        rv_saved_products.setAdapter(productsAdapter);
+        FirebaseRecyclerOptions<Product> options = new FirebaseRecyclerOptions.Builder<Product>()
+                .setLifecycleOwner(this)
+                .setQuery(productsInCartRef, Product.class)
+                .build();
+
+        productsAdapterFirebase = new ProductsAdapterFirebase(options,this);
+
+        rv_saved_products.setAdapter(productsAdapterFirebase);
         rv_saved_products.setLayoutManager(new WrapContentLinearLayoutManager(this));
 
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(rv_saved_products);
 
-        onTotalPriceChanged(Utils.getTotalPrice(db));
+        checkTotalPrice();
     }
 
-    private void createCart() {
-        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        double finalPrice = Utils.getTotalPrice(db);
-        ArrayList<String> productNames = Utils.getSavedProductsNames(db);
-
-        if (productNames.isEmpty()){
-            Toast.makeText(this, "There are no products in cart", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String emailPath = Utils.emailToPersonPath(email);
-
-        FirebaseDatabase.getInstance().getReference("Person").child(emailPath).addListenerForSingleValueEvent(new ValueEventListener() {
+    private void checkTotalPrice() {
+        productsInCartRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Person person = snapshot.getValue(Person.class);
-                String personName = person.getFullName();
+                if (snapshot.exists()){
+                    double totalPrice = 0;
 
-                Cart cart = new Cart(email, personName, false, finalPrice, productNames, -System.currentTimeMillis());
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        Product product = dataSnapshot.getValue(Product.class);
+                        double price = product.getPrice();
+                        double amount = product.getAmount();
 
-                notDeliveredOrders.child(String.valueOf(cart.getDate())).setValue(cart).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        checkProducts();
-                        Toast.makeText(ShoppingScreen.this, "Cart successfully added", Toast.LENGTH_SHORT).show();
+                        totalPrice += price * amount;
                     }
-                })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(ShoppingScreen.this, "Cart adding failed", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+
+                    tv_total_price.setText("Total price: " + totalPrice + "₪");
+                    tv_total_price.setTag(totalPrice);
+                }
+                else {
+                    tv_total_price.setText("Total price: 0.0 ₪");
+                    tv_total_price.setTag(0);
+                }
             }
 
             @Override
@@ -120,78 +117,109 @@ public class ShoppingScreen extends AppCompatActivity implements ProductsAdapter
         });
     }
 
-    private void checkProducts() {
-        boolean inStock = true;
-        ArrayList<Product> savedProducts = Utils.getSavedProducts(db);
+    private void createCart() {
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String emailPath = Utils.emailToUserPath(email);
 
-        final int[] countOfProductsInStock = {0};
+        double finalPrice = (double) tv_total_price.getTag();
+        ArrayList<Product> products = new ArrayList<>(productsAdapterFirebase.getSnapshots());
 
-        for (int i = 0; i < savedProducts.size(); i++) {
-            Product product = savedProducts.get(i);
+        if (products.isEmpty()){
+            Toast.makeText(this, "There are no products in cart", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-            boolean productInStock = true;
+        FirebaseDatabase.getInstance().getReference("User").child(emailPath).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Person person = snapshot.getValue(Person.class);
+                String personName = person.getFullName();
 
-            if (product.getAmount() == 0) {
-                Utils.deleteProduct(db, product.getName());
-                productInStock = false;
+                Cart cart = new Cart(email, personName, false, finalPrice, products, System.currentTimeMillis());
+
+                if (checkProducts(products)){
+                    notDeliveredOrders.child(String.valueOf(cart.getDate())).setValue(cart).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    clearCart();
+                                    changeStock(products);
+                                    Toast.makeText(ShoppingScreen.this, "Cart successfully added", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(ShoppingScreen.this, "Cart adding failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
             }
-            else {
-                checkIfProductIsInStock(product, new OnCheckStockListener() {
-                    @Override
-                    public void onCheckStock(Product product) {
-                        countOfProductsInStock[0]++;
-                        if (countOfProductsInStock[0] == savedProducts.size()) {
-                            createCart();
-                        }
-                    }
-                });
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
-            inStock = productInStock;
+        });
+    }
+
+    private void changeStock(@NonNull ArrayList<Product> products) {
+        for (Product product : products){
+            String productPath = Utils.productNameToPath(product.getName());
+            productsRef.child(product.getType()).child(productPath)
+                    .child("stock").setValue(ServerValue.increment(-product.getAmount()));
         }
     }
 
-    private void checkIfProductIsInStock(@NonNull Product product, OnCheckStockListener onCheckStockListener) {
-       DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product")
-               .child(product.getType()).child(Utils.productNameToPath(product.getName())).child("stock");
+    private boolean checkProducts(@NonNull ArrayList<Product> products) {
+        ArrayList<String> notInStock = new ArrayList<>();
+        ArrayList<String> notEnoughInStock = new ArrayList<>();
 
-       productRef.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                   @Override
-                   public void onSuccess(DataSnapshot dataSnapshot) {
-                       if (dataSnapshot.exists()){
-                           double stock = dataSnapshot.getValue(double.class);
-                           if (stock == 0){
-                               Utils.showAlertDialog("Product not in stock", "The product " + product.getName()
-                                       + " is not in stock anymore", ShoppingScreen.this);
-                           }
-                           else if (product.getAmount() > stock){
-                               Utils.showAlertDialog("Not enough in stock", "There is not enough of product " + product.getName()
-                                       + " in stock", ShoppingScreen.this);
-                           }
-                           else {
-                               onCheckStockListener.onCheckStock(product);
-                           }
-                       }
-                   }
-               });
-    }
+        boolean inStock = true;
 
-    public interface OnCheckStockListener{
-        void onCheckStock(Product product);
+        for (int i = 0; i < products.size(); i++) {
+            Product product = products.get(i);
+            if (product.getStock() == 0){
+                notInStock.add(product.getName());
+                inStock = false;
+            }
+            else if (product.getAmount() > product.getStock()){
+                notEnoughInStock.add(product.getName());
+                inStock = false;
+            }
+        }
+
+        if (!inStock){
+
+            if (!notInStock.isEmpty()){
+                String notInStockMessage = "These products are not in stock anymore: \n";
+                for (String productName : notInStock){
+                    notInStockMessage += ", " + productName + "\n";
+                }
+
+                notInStockMessage = notInStockMessage.replaceFirst(",", "");
+                Utils.showAlertDialog("Product not in stock", notInStockMessage, ShoppingScreen.this);
+            }
+
+            if (!notEnoughInStock.isEmpty()){
+                String notEnoughInStockMessage = "There is not enough of this products: \n";
+                for (String productName : notEnoughInStock){
+                    notEnoughInStockMessage += ", " + productName + "\n";
+                }
+
+                notEnoughInStockMessage = notEnoughInStockMessage.replaceFirst(",", "");
+                Utils.showAlertDialog("Not enough in stock", notEnoughInStockMessage, ShoppingScreen.this);
+            }
+
+        }
+
+        return inStock;
     }
 
     public void clearCart(){
-        int amount = Utils.getAmountOfProductInCart(db);
-        Utils.clearTable(db);
-        productsAdapter.notifyItemRangeRemoved(0, amount);
-        productsAdapter.notifyDataSetChanged();
+        productsInCartRef.removeValue();
     }
 
-    @Override
-    public void onTotalPriceChanged(double totalPrice) {
-        tv_total_price.setText("total price: " + totalPrice + "₪");
-    }
-
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,
+    final ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,
             ItemTouchHelper.START | ItemTouchHelper.END) {
 
         @Override
@@ -201,8 +229,9 @@ public class ShoppingScreen extends AppCompatActivity implements ProductsAdapter
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            Utils.deleteProduct(db, products.get(viewHolder.getAbsoluteAdapterPosition()).getName());
-            productsAdapter.notifyDataSetChanged();
+            Product product = productsAdapterFirebase.getItem(viewHolder.getBindingAdapterPosition());
+            String productPath = Utils.productNameToPath(product.getName());
+            productsInCartRef.child(productPath).removeValue();
         }
     };
 }

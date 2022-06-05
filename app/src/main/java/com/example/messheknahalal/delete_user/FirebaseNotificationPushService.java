@@ -1,41 +1,33 @@
 package com.example.messheknahalal.delete_user;
 
-import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import com.example.messheknahalal.R;
-import com.example.messheknahalal.Utils.Utils;
 import com.example.messheknahalal.loginScreen;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.Objects;
 
 public class FirebaseNotificationPushService extends FirebaseMessagingService {
 
     public static final int DELETE_PERSON_NOTIFICATION_ID = 666;
 
-    private FirebaseAuth firebaseAuth;
-    private FirebaseUser firebaseUser;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
-    @SuppressLint("NewApi")
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
 
@@ -52,47 +44,46 @@ public class FirebaseNotificationPushService extends FirebaseMessagingService {
 
         String email = firebaseUser.getEmail();
 
-        if (remoteMessage.getData().containsKey("email") && !remoteMessage.getData().get("email").equals(email)){
+        if (remoteMessage.getData().containsKey("email") && !Objects.equals(remoteMessage.getData().get("email"), email)){
             return;
         }
 
         String title = remoteMessage.getNotification().getTitle();
         String body = remoteMessage.getNotification().getBody();
 
+        String id = "MESSAGE";
 
-        String CHANNEL_ID = "MESSAGE";
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
 
-        NotificationChannel channel = new NotificationChannel(
-                CHANNEL_ID,
-                "Delete User",
-                NotificationManager.IMPORTANCE_HIGH);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(id, "Delete User Channel", NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(channel);
+        }
 
-        Intent intentToLoginScreen = new Intent(this, loginScreen.class);
-        intentToLoginScreen.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        Intent intent = new Intent(this, loginScreen.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        PendingIntent pintentToLoginScreen = PendingIntent.getActivity(this, 0, intentToLoginScreen, PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-        getSystemService(NotificationManager.class).createNotificationChannel(channel);
-        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, id)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setSmallIcon(R.drawable.human_skull)
                 .setColorized(true)
                 .setColor(Color.BLACK)
                 .setAutoCancel(true)
-                .setContentIntent(pintentToLoginScreen);
+                .setContentIntent(pendingIntent);
 
-        NotificationManagerCompat.from(this).notify(DELETE_PERSON_NOTIFICATION_ID, notification.build());
-
+        notificationManager.notify(DELETE_PERSON_NOTIFICATION_ID, notification.build());
         deleteCurrentFirebaseUser();
 
         super.onMessageReceived(remoteMessage);
     }
 
     public void deleteCurrentFirebaseUser() {
-
-        firebaseUser.delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+        firebaseUser.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.d("ariel", "the user was successfully deleted");
@@ -116,20 +107,8 @@ public class FirebaseNotificationPushService extends FirebaseMessagingService {
             return;
         }
 
-        String email = firebaseUser.getEmail();
-
-        if (email != null) {
-            String path = Utils.emailToUserPath(email);
-            FirebaseDatabase.getInstance().getReference("User").child(path).child("token").setValue(token);
-        }
-
-        FirebaseMessaging.getInstance().subscribeToTopic("Notification_to_" + Utils.emailForFCM(email)).addOnCompleteListener(
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-
-                    }
-                });
+        FirebaseMessaging.getInstance().subscribeToTopic(FCMSend.MESSHEK_NAHALAL_TOPIC).addOnCompleteListener(
+                task -> Log.d("ariel", ""));
 
     }
 }

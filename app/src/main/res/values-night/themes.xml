@@ -1,16 +1,16 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+<resources>
+    <!-- Base application theme.
     <style name="Theme.MesshekNahalal" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-<!--        <item name="colorPrimary">@color/purple_200</item>-->
-<!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
-<!--        <item name="colorOnPrimary">@color/black</item>-->
-<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
-<!--        <item name="colorSecondary">@color/teal_200</item>-->
-<!--        <item name="colorSecondaryVariant">@color/teal_200</item>-->
-<!--        <item name="colorOnSecondary">@color/black</item>-->
-<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
-<!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
-        <!-- Customize your theme here. -->
-    </style>
+        &lt;!&ndash; Primary brand color. &ndash;&gt;
+&lt;!&ndash;        <item name="colorPrimary">@color/purple_200</item>&ndash;&gt;
+&lt;!&ndash;        <item name="colorPrimaryVariant">@color/purple_700</item>&ndash;&gt;
+&lt;!&ndash;        <item name="colorOnPrimary">@color/black</item>&ndash;&gt;
+&lt;!&ndash;        &lt;!&ndash; Secondary brand color. &ndash;&gt;&ndash;&gt;
+&lt;!&ndash;        <item name="colorSecondary">@color/teal_200</item>&ndash;&gt;
+&lt;!&ndash;        <item name="colorSecondaryVariant">@color/teal_200</item>&ndash;&gt;
+&lt;!&ndash;        <item name="colorOnSecondary">@color/black</item>&ndash;&gt;
+&lt;!&ndash;        &lt;!&ndash; Status bar color. &ndash;&gt;&ndash;&gt;
+&lt;!&ndash;        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>&ndash;&gt;
+        &lt;!&ndash; Customize your theme here. &ndash;&gt;
+    </style>-->
 </resources>

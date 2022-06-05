@@ -10,24 +10,20 @@ public class Cart {
     private String userName;
     private boolean delivered;
     private double finalPrice;
-    private List<String> products;
+    private List<Product> products;
     private long date;
     private long number;
-    private String status;
-    private String userStatus;
 
     public Cart(){}
 
-    public Cart(String userEmail, String userName, boolean delivered, double finalPrice, List<String> products, long date) {
+    public Cart(String userEmail, String userName, boolean delivered, double finalPrice, List<Product> products, long date) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.delivered = delivered;
         this.finalPrice = finalPrice;
         this.products = products;
-        this.date = date;
-        this.number = Long.getLong(String.valueOf(date).substring(3, 9));
-        this.status = delivered + "-" + date;
-        this.userStatus = userEmail + "-" + date;
+        this.date = -date;
+        this.number = Long.parseLong(String.valueOf(-date).substring(3, 9));
     }
 
     public String getUserEmail() {
@@ -62,11 +58,11 @@ public class Cart {
         this.finalPrice = finalPrice;
     }
 
-    public List<String> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<String> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 
@@ -75,27 +71,13 @@ public class Cart {
     public String toString() {
         return "Cart{" +
                 "userEmail='" + userEmail + '\'' +
+                ", userName='" + userName + '\'' +
                 ", delivered=" + delivered +
                 ", finalPrice=" + finalPrice +
                 ", products=" + products +
                 ", date=" + date +
+                ", number=" + number +
                 '}';
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getUserStatus() {
-        return userStatus;
-    }
-
-    public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus;
     }
 
     public String getUserName() {
