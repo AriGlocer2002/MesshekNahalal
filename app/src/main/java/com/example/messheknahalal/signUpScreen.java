@@ -24,7 +24,7 @@ import com.bumptech.glide.Glide;
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.example.messheknahalal.Utils.Utils;
-import com.example.messheknahalal.delete_user.FCMSend;
+import com.example.messheknahalal.notifications.FCMSend;
 import com.example.messheknahalal.models.Admin;
 import com.example.messheknahalal.models.Person;
 import com.example.messheknahalal.models.User;

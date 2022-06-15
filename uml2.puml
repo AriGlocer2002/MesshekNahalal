@@ -1,0 +1,133 @@
+@startuml
+class com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase {
+}
+class com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.ProductViewHolderFirebase {
+}
+interface com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.OnAddToCartListener {
+}
+class com.example.messheknahalal.models.Product {
+}
+class com.example.messheknahalal.Admin_screens.UsersRecycleViewScreenAdmin {
+}
+class com.example.messheknahalal.VPAdapter {
+}
+class com.example.messheknahalal.VPAdapter.ViewHolder {
+}
+class com.example.messheknahalal.Utils.MesshekNahalal {
+}
+class com.example.messheknahalal.Admin_screens.EditProduct {
+}
+class com.example.messheknahalal.splashScreen {
+}
+class com.example.messheknahalal.delete_user.FCMSend {
+}
+class com.example.messheknahalal.Admin_screens.UsersAdapterFirebase {
+}
+class com.example.messheknahalal.Admin_screens.UsersAdapterFirebase.UserViewHolderFirebase {
+}
+class com.example.messheknahalal.User_screens.ProductsFragmentUser {
+}
+class com.example.messheknahalal.Admin_screens.ProductsRecycleViewScreenAdmin {
+}
+class com.example.messheknahalal.Admin_screens.OrdersRecyclerViewScreenAdmin {
+}
+class com.example.messheknahalal.User_screens.ShoppingScreen {
+}
+class com.example.messheknahalal.Utils.DataBaseHelper {
+}
+class com.example.messheknahalal.User_screens.HomeFragmentUser {
+}
+class com.example.messheknahalal.Admin_screens.WrapContentLinearLayoutManager {
+}
+class com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase {
+}
+class com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase.OrderViewHolderFirebase {
+}
+class com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase {
+}
+class com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase.AdminViewHolderFirebase {
+}
+class com.example.messheknahalal.signUpScreen {
+}
+class com.example.messheknahalal.Utils.Utils {
+}
+class com.example.messheknahalal.Admin_screens.mainScreenAdmin {
+}
+class com.example.messheknahalal.Admin_screens.MyProfileScreenAdmin {
+}
+class com.example.messheknahalal.User_screens.MyProfileScreenUser {
+}
+class com.example.messheknahalal.User_screens.mainScreenUser {
+}
+class com.example.messheknahalal.loginScreen {
+}
+class com.example.messheknahalal.models.User {
+}
+class com.example.messheknahalal.models.Person {
+}
+class com.example.messheknahalal.Admin_screens.AdminsRecycleViewScreenAdmin {
+}
+class com.example.messheknahalal.delete_user.FirebaseNotificationPushService {
+}
+class com.example.messheknahalal.models.Cart {
+}
+class com.example.messheknahalal.SuperActivityWithNavigationDrawer {
+}
+class com.example.messheknahalal.models.Admin {
+}
+class com.example.messheknahalal.Admin_screens.CreateNewProductAdmin {
+}
+
+
+com.firebase.ui.database.FirebaseRecyclerAdapter <|-- com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase
+com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase +.. com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.ProductViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnClickListener <|.. com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.ProductViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnLongClickListener <|.. com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.ProductViewHolderFirebase
+com.example.messheknahalal.Admin_screens.ViewHolder <|-- com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.ProductViewHolderFirebase
+com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase +.. com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.OnAddToCartListener
+java.io.Serializable <|.. com.example.messheknahalal.models.Product
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.Admin_screens.UsersRecycleViewScreenAdmin
+com.example.messheknahalal.Adapter <|-- com.example.messheknahalal.VPAdapter
+com.example.messheknahalal.VPAdapter +.. com.example.messheknahalal.VPAdapter.ViewHolder
+com.example.messheknahalal.ViewHolder <|-- com.example.messheknahalal.VPAdapter.ViewHolder
+android.app.Application <|-- com.example.messheknahalal.Utils.MesshekNahalal
+com.example.messheknahalal.Admin_screens.CreateNewProductAdmin <|-- com.example.messheknahalal.Admin_screens.EditProduct
+androidx.appcompat.app.AppCompatActivity <|-- com.example.messheknahalal.splashScreen
+com.firebase.ui.database.FirebaseRecyclerAdapter <|-- com.example.messheknahalal.Admin_screens.UsersAdapterFirebase
+com.example.messheknahalal.Admin_screens.UsersAdapterFirebase +.. com.example.messheknahalal.Admin_screens.UsersAdapterFirebase.UserViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnClickListener <|.. com.example.messheknahalal.Admin_screens.UsersAdapterFirebase.UserViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnLongClickListener <|.. com.example.messheknahalal.Admin_screens.UsersAdapterFirebase.UserViewHolderFirebase
+com.example.messheknahalal.Admin_screens.ViewHolder <|-- com.example.messheknahalal.Admin_screens.UsersAdapterFirebase.UserViewHolderFirebase
+com.example.messheknahalal.User_screens.OnAddToCartListener <|.. com.example.messheknahalal.User_screens.ProductsFragmentUser
+androidx.fragment.app.Fragment <|-- com.example.messheknahalal.User_screens.ProductsFragmentUser
+com.example.messheknahalal.Admin_screens.OnClickListener <|.. com.example.messheknahalal.Admin_screens.ProductsRecycleViewScreenAdmin
+com.example.messheknahalal.Admin_screens.OnAddToCartListener <|.. com.example.messheknahalal.Admin_screens.ProductsRecycleViewScreenAdmin
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.Admin_screens.ProductsRecycleViewScreenAdmin
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.Admin_screens.OrdersRecyclerViewScreenAdmin
+androidx.appcompat.app.AppCompatActivity <|-- com.example.messheknahalal.User_screens.ShoppingScreen
+androidx.fragment.app.Fragment <|-- com.example.messheknahalal.User_screens.HomeFragmentUser
+androidx.recyclerview.widget.LinearLayoutManager <|-- com.example.messheknahalal.Admin_screens.WrapContentLinearLayoutManager
+com.firebase.ui.database.FirebaseRecyclerAdapter <|-- com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase
+com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase +.. com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase.OrderViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnClickListener <|.. com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase.OrderViewHolderFirebase
+com.example.messheknahalal.Admin_screens.ViewHolder <|-- com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase.OrderViewHolderFirebase
+com.firebase.ui.database.FirebaseRecyclerAdapter <|-- com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase
+com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase +.. com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase.AdminViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnClickListener <|.. com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase.AdminViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnLongClickListener <|.. com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase.AdminViewHolderFirebase
+com.example.messheknahalal.Admin_screens.ViewHolder <|-- com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase.AdminViewHolderFirebase
+androidx.appcompat.app.AppCompatActivity <|-- com.example.messheknahalal.signUpScreen
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.Admin_screens.mainScreenAdmin
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.Admin_screens.MyProfileScreenAdmin
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.User_screens.MyProfileScreenUser
+com.example.messheknahalal.User_screens.OnDestinationChangedListener <|.. com.example.messheknahalal.User_screens.mainScreenUser
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.User_screens.mainScreenUser
+androidx.appcompat.app.AppCompatActivity <|-- com.example.messheknahalal.loginScreen
+com.example.messheknahalal.models.Person <|-- com.example.messheknahalal.models.User
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.Admin_screens.AdminsRecycleViewScreenAdmin
+com.google.firebase.messaging.FirebaseMessagingService <|-- com.example.messheknahalal.delete_user.FirebaseNotificationPushService
+androidx.appcompat.app.AppCompatActivity <|-- com.example.messheknahalal.SuperActivityWithNavigationDrawer
+com.example.messheknahalal.models.Person <|-- com.example.messheknahalal.models.Admin
+com.example.messheknahalal.Admin_screens.OnItemClickListener <|.. com.example.messheknahalal.Admin_screens.CreateNewProductAdmin
+androidx.appcompat.app.AppCompatActivity <|-- com.example.messheknahalal.Admin_screens.CreateNewProductAdmin
+@enduml

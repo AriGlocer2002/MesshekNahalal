@@ -57,7 +57,6 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile_admin);
 
-
         FirebaseUser user = auth.getCurrentUser();
         String adminEmail = user.getEmail();
 
@@ -260,19 +259,17 @@ public class MyProfileScreenAdmin extends SuperActivityWithNavigationDrawer {
                 //if exists the dataSnapshot
                 if (ds.exists()) {
                     Person p = ds.getValue(Person.class);
-                    String name = p.getName();
-                    String last_name = p.getLast_name();
-                    String phone = p.getPhone();
                     String picture = p.getPicture();
 
-                    et_name.setText(name);
-                    et_last_name.setText(last_name);
-                    et_phone.setText(phone);
-                    et_email.setText(email);
+                    et_name.setText(p.getName());
+                    et_last_name.setText(p.getLast_name());
+                    et_phone.setText(p.getPhone());
+                    et_email.setText(p.getPicture());
                     et_email.setEnabled(false);
 
                     if (picture != null && !picture.isEmpty()){
                         Glide.with(getApplicationContext()).load(picture).centerCrop().into(screen_profile_img);
+                        screen_profile_img.setTag(picture);
                     }
                     else {
                         Glide.with(getApplicationContext()).load(R.drawable.sample_profile).centerCrop().into(screen_profile_img);

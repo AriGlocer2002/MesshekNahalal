@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.Utils.Utils;
-import com.example.messheknahalal.delete_user.FCMSend;
+import com.example.messheknahalal.notifications.FCMSend;
 import com.example.messheknahalal.models.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -112,7 +112,7 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
         public boolean onLongClick(View view) {
             if (view == itemView){
 
-                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Confirm delete of user");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -137,7 +137,7 @@ public class UsersAdapterFirebase extends FirebaseRecyclerAdapter<User, UsersAda
             usersRef.child(userPath).removeValue();
             peopleRef.child(personPath).removeValue();
 
-            FCMSend.sendNotificationsToDeletePerson(context, email);
+            FCMSend.sendNotificationToDeletePerson(context, email);
         }
 
     }

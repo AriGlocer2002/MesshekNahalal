@@ -1,0 +1,555 @@
+@startuml
+class com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase {
+- Context context
+- OnAddToCartListener onAddToCartListener
+- int mode
++ DatabaseReference productsInCartRef
++ DatabaseReference productsRef
++ {static} int RV_PRODUCTS_ADMIN
++ {static} int RV_PRODUCTS_USER
++ {static} int RV_PRODUCTS_IN_CART
++ <<Create>> ProductsAdapterFirebase(FirebaseRecyclerOptions<Product>,Context,boolean,OnAddToCartListener)
++ <<Create>> ProductsAdapterFirebase(FirebaseRecyclerOptions<Product>,Context)
++ void onBindViewHolder(ProductsAdapterFirebase.ProductViewHolderFirebase,int,Product)
++ ProductsAdapterFirebase.ProductViewHolderFirebase onCreateViewHolder(ViewGroup,int)
++ int getItemCount()
++ int getItemViewType(int)
++ long getItemId(int)
+}
+class com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.ProductViewHolderFirebase {
+~ TextView tv_full_name
+~ TextView tv_price
+~ TextView tv_stock
+~ MaterialButton btn_edit
+~ MaterialButton btn_cart
+~ ImageView iv_remove
+~ TextView tv_amount
+~ ImageView iv_add
+~ ImageView products_rv_item_iv_pp
+~ ImageView products_rv_item_iv_pp_frame
++ <<Create>> ProductViewHolderFirebase(View)
++ void onClick(View)
++ boolean onLongClick(View)
++ void deleteProduct(String,String)
+}
+interface com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.OnAddToCartListener {
+~ void addToCart(int,Product)
+}
+class com.example.messheknahalal.models.Product {
+- String type
+- String name
+- double stock
+- double price
+- String picture
+- double amount
+- boolean countable
++ <<Create>> Product()
++ <<Create>> Product(String,String,double,double,boolean)
++ <<Create>> Product(String,String,double,double,String,boolean)
++ <<Create>> Product(String,String,double,double,double,String,boolean)
++ String getType()
++ void setType(String)
++ String getName()
++ void setName(String)
++ double getStock()
++ void setStock(double)
++ double getPrice()
++ void setPrice(double)
++ String toString()
++ String print()
++ String getPicture()
++ void setPicture(String)
++ boolean isCountable()
++ void setCountable(boolean)
++ double getAmount()
++ void setAmount(double)
+}
+class com.example.messheknahalal.Admin_screens.UsersRecycleViewScreenAdmin {
+~ RecyclerView rv_users
+~ UsersAdapterFirebase userAdapter
+~ EditText et_adminListAccess
+~ Button btn_login
+~ DatabaseReference adminCodeRef
+# void onCreate(Bundle)
+}
+class com.example.messheknahalal.VPAdapter {
+~ ArrayList<Integer> viewPagerItemArrayList
++ <<Create>> VPAdapter(ArrayList<Integer>)
++ ViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(ViewHolder,int)
++ int getItemCount()
+}
+class com.example.messheknahalal.VPAdapter.ViewHolder {
+~ ImageView picture
++ <<Create>> ViewHolder(View)
+}
+class com.example.messheknahalal.Utils.MesshekNahalal {
+~ DatabaseReference productsInCartRef
++ void onCreate()
+}
+class com.example.messheknahalal.Admin_screens.EditProduct {
+~ DatabaseReference oldProductRef
+~ Product oldProduct
+# void onCreate(Bundle)
+- void setProductData(Product)
++ void uploadProduct(Uri,Product)
++ void uploadProductToFirebase(Product)
+}
+class com.example.messheknahalal.splashScreen {
+~ ImageView img_logo1
+~ Animation logoAnim
+~ Intent intent
+~ FirebaseAuth auth
+~ DatabaseReference personRef
+- {static} int LOGIN_SCREEN
+# void onCreate(Bundle)
++ void checkPersonType(String)
++ void onBackPressed()
+}
+class com.example.messheknahalal.delete_user.FCMSend {
+- {static} String BASE_URL
+- {static} String SERVER_KEY
++ {static} String MESSHEK_NAHALAL_TOPIC
++ {static} void sendNotificationToOnePerson(Context,String)
++ {static} void sendNotificationsToDeletePerson(Context,String)
+}
+class com.example.messheknahalal.Admin_screens.UsersAdapterFirebase {
+- Context context
+- DatabaseReference usersRef
+- DatabaseReference peopleRef
++ <<Create>> UsersAdapterFirebase(FirebaseRecyclerOptions<User>,Context)
++ void onBindViewHolder(UserViewHolderFirebase,int,User)
++ UsersAdapterFirebase.UserViewHolderFirebase onCreateViewHolder(ViewGroup,int)
++ int getItemCount()
++ int getItemViewType(int)
++ long getItemId(int)
+}
+class com.example.messheknahalal.Admin_screens.UsersAdapterFirebase.UserViewHolderFirebase {
+~ ConstraintLayout rl_user_item
+~ TextView tv_full_name
+~ TextView tv_email
+~ TextView tv_phone
+~ ImageView users_lv_item_iv_phone
+~ ImageView users_lv_item_iv_email
+~ ImageView users_lv_item_iv_message
+~ ImageView users_lv_item_iv_pp
++ <<Create>> UserViewHolderFirebase(View)
++ void onClick(View)
++ boolean onLongClick(View)
++ void deleteUser(String)
+}
+class com.example.messheknahalal.User_screens.ProductsFragmentUser {
+~ RecyclerView rv_vegetables_buy
+~ RecyclerView rv_fruits_buy
+~ RecyclerView rv_shelf_buy
+~ RecyclerView rv_others_buy
+~ ChipGroup sort
+~ DatabaseReference productsInCartRef
+~ DatabaseReference productsRef
+~ Query vegetablesRef
+~ Query fruitsRef
+~ Query shelfRef
+~ Query othersRef
+~ FirebaseRecyclerOptions<Product> vegetablesOptions
+~ FirebaseRecyclerOptions<Product> fruitsOptions
+~ FirebaseRecyclerOptions<Product> shelfOptions
+~ FirebaseRecyclerOptions<Product> othersOptions
+~ ProductsAdapterFirebase vegetablesAdapter
++ <<Create>> ProductsFragmentUser()
++ void onViewCreated(View,Bundle)
+- void changeSort(String)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void addToCart(int,Product)
+}
+class com.example.messheknahalal.Admin_screens.ProductsRecycleViewScreenAdmin {
+~ RecyclerView rv_products
+~ ProductsAdapterFirebase productAdapter
+~ ImageView btn_vegetable
+~ String type
+~ int currentPosition
+~ int oldPosition
+~ ImageView[] productTypes
+# void onCreate(Bundle)
++ void onClick(View)
++ void addToCart(int,Product)
+}
+class com.example.messheknahalal.Admin_screens.OrdersRecyclerViewScreenAdmin {
+~ RecyclerView rv_orders
+~ OrdersAdapterFirebase ordersAdapter
+~ DatabaseReference notDeliveredOrders
+# void onCreate(Bundle)
+}
+class com.example.messheknahalal.User_screens.ShoppingScreen {
+~ RecyclerView rv_saved_products
+~ ProductsAdapterFirebase productsAdapterFirebase
+~ DatabaseReference notDeliveredOrders
+~ DatabaseReference productsRef
+~ Toolbar toolbar
+~ TextView tv_total_price
+~ MaterialButton btn_confirm
+~ DatabaseReference productsInCartRef
+~ ItemTouchHelper.SimpleCallback itemTouchHelperCallback
+# void onCreate(Bundle)
+- void checkTotalPrice()
+- void createCart()
+- void changeStock(ArrayList<Product>)
+- boolean checkProducts(ArrayList<Product>)
++ void clearCart()
+}
+class com.example.messheknahalal.Utils.DataBaseHelper {
+- FirebaseDatabase db
+- DatabaseReference ref
+- FirebaseAuth auth
++ <<Create>> DataBaseHelper(String)
++ <<Create>> DataBaseHelper(FirebaseDatabase,DatabaseReference)
++ FirebaseDatabase getDb()
++ void setDb(FirebaseDatabase)
++ DatabaseReference getRef()
++ void setRef(DatabaseReference)
++ FirebaseAuth getAuth()
+}
+class com.example.messheknahalal.User_screens.HomeFragmentUser {
+~ ViewPager2 viewPager2
+~ ArrayList<Integer> imageList
+~ VPAdapter adapter
+~ WormDotsIndicator dotsIndicator
++ <<Create>> HomeFragmentUser()
++ void onViewCreated(View,Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+class com.example.messheknahalal.Admin_screens.WrapContentLinearLayoutManager {
++ <<Create>> WrapContentLinearLayoutManager(Context)
++ <<Create>> WrapContentLinearLayoutManager(Context,int,boolean)
++ <<Create>> WrapContentLinearLayoutManager(Context,AttributeSet,int,int)
++ void onLayoutChildren(RecyclerView.Recycler,RecyclerView.State)
+}
+class com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase {
+- Context context
++ <<Create>> OrdersAdapterFirebase(FirebaseRecyclerOptions<Cart>,Context)
++ void onBindViewHolder(OrdersAdapterFirebase.OrderViewHolderFirebase,int,Cart)
++ OrdersAdapterFirebase.OrderViewHolderFirebase onCreateViewHolder(ViewGroup,int)
++ int getItemCount()
++ int getItemViewType(int)
++ long getItemId(int)
+}
+class com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase.OrderViewHolderFirebase {
+~ TextView tv_user_name
+~ TextView tv_status
+~ TextView tv_final_price
+~ TextView tv_date
+~ TextView tv_order_num
++ <<Create>> OrderViewHolderFirebase(View)
++ void onClick(View)
+}
+class com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase {
+- Context context
+- DatabaseReference adminsRef
+- DatabaseReference peopleRef
++ <<Create>> AdminsAdapterFirebase(FirebaseRecyclerOptions<Admin>,Context)
++ void onBindViewHolder(AdminsAdapterFirebase.AdminViewHolderFirebase,int,Admin)
++ AdminsAdapterFirebase.AdminViewHolderFirebase onCreateViewHolder(ViewGroup,int)
++ int getItemCount()
++ int getItemViewType(int)
++ long getItemId(int)
+}
+class com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase.AdminViewHolderFirebase {
+~ ConstraintLayout cl_admin_item
+~ TextView tv_full_name
+~ TextView tv_email
+~ TextView tv_phone
+~ ImageView admins_rv_item_iv_phone
+~ ImageView admins_rv_item_iv_email
+~ ImageView admins_rv_item_iv_message
+~ ImageView admins_rv_item_iv_pp
+~ ImageView admins_rv_item_iv_pp_frame
++ <<Create>> AdminViewHolderFirebase(View)
++ void onClick(View)
++ boolean onLongClick(View)
++ void deleteAdmin(String)
+}
+class com.example.messheknahalal.signUpScreen {
+~ EditText et_name_signUp
+~ Button btn_login2
+~ CheckBox cb_admin
+~ ImageView iv_profile_pic
+~ StorageReference rStore
+~ FirebaseAuth auth
+~ DatabaseReference userRef
+# void onCreate(Bundle)
++ void onBackPressed()
+- void createPerson(String,String,String)
++ void createPerson(boolean)
++ void uploadPerson(Person,boolean)
++ void uploadUser(Person,User)
++ void uploadAdmin(Person,Admin)
+# void onActivityResult(int,int,Intent)
+- void uploadImageToFirebase(Person,Uri,boolean)
++ void snackBar(String)
+- boolean emptyET()
+}
+class com.example.messheknahalal.Utils.Utils {
++ {static} String capitalizeString(String)
++ {static} void showAlertDialog(String,String,Context)
++ {static} String emailToPath(String)
++ {static} String emailForFCM(String)
++ {static} String emailToUserPath(String)
++ {static} String emailToPersonPath(String)
++ {static} String productNameToPath(String)
++ {static} String emailToAdminPath(String)
++ {static} Uri getUriToDrawable(Context,int)
++ {static} void clearTable(SQLiteDatabase)
++ {static} void deleteProduct(SQLiteDatabase,String)
+}
+class com.example.messheknahalal.Admin_screens.mainScreenAdmin {
+~ ViewPager2 viewPager2
+~ ArrayList<Integer> imageList
+~ VPAdapter adapter
+~ WormDotsIndicator dotsIndicator
+~ Button btn_my_profile
+# void onCreate(Bundle)
+}
+class com.example.messheknahalal.Admin_screens.MyProfileScreenAdmin {
+~ StorageReference rStore
+~ DatabaseReference adminRef
+~ DatabaseReference personRef
+~ FirebaseAuth auth
+~ RoundedImageView screen_profile_img
+~ Button btn_update_data
+~ EditText et_name
+# void onCreate(Bundle)
++ void updateAmin(Admin)
++ void uploadAdminToFirebase(Admin)
+# void onActivityResult(int,int,Intent)
+- void uploadImageToFirebase(Uri,Admin)
++ void snackBar(String)
++ void showData(String)
+}
+class com.example.messheknahalal.User_screens.MyProfileScreenUser {
+~ StorageReference rStore
+~ DatabaseReference userRef
+~ DatabaseReference personRef
+~ FirebaseAuth auth
+~ RoundedImageView screen_profile_img
+~ Button btn_update_data
+~ EditText et_name
+# void onCreate(Bundle)
++ void updateUser(User)
++ void uploadUserToFirebase(User)
+# void onActivityResult(int,int,Intent)
+- void uploadImageToFirebase(Uri,User)
++ boolean onCreateOptionsMenu(Menu)
++ void snackBar(String)
++ void showData(String)
+}
+class com.example.messheknahalal.User_screens.mainScreenUser {
+~ BottomNavigationView bottomNav
+~ FirebaseAuth auth
+~ DatabaseReference userRef
+# void onCreate(Bundle)
++ boolean onCreateOptionsMenu(Menu)
++ boolean onOptionsItemSelected(MenuItem)
++ String getCurrentDate()
++ void onDestinationChanged(NavController,NavDestination,Bundle)
+}
+class com.example.messheknahalal.loginScreen {
+~ EditText et_email_login
+~ Button btn_login
+~ Intent intent
+~ ImageView iv_forgot_password
+~ TextView tv_forgot_password
+~ ProgressDialog progressDialog
+~ Dialog d
+~ FirebaseAuth auth
+~ DatabaseReference personRef
+# void onCreate(Bundle)
++ void onBackPressed()
++ void showAlertDialog(String,String)
++ void createForgotPassDialog()
++ void snackBar(String)
++ void checkPersonType(String)
+}
+class com.example.messheknahalal.models.User {
+# String last_login
++ <<Create>> User()
++ <<Create>> User(String,String,String,String,String)
++ <<Create>> User(String,String,String,String,String,String)
++ String getLast_login()
++ void setLast_login(String)
++ String toString()
+}
+class com.example.messheknahalal.models.Person {
+# String name
+# String last_name
+# String email
+# String phone
+# String type
+# String token
+# String picture
++ <<Create>> Person()
++ <<Create>> Person(String,String,String,String,String)
++ <<Create>> Person(String,String,String,String,String,String)
++ String getName()
++ void setName(String)
++ String getLast_name()
++ void setLast_name(String)
++ String getFullName()
++ String getEmail()
++ void setEmail(String)
++ String getPhone()
++ void setPhone(String)
++ String getType()
++ void setType(String)
++ String toString()
++ String getToken()
++ void setToken(String)
++ String getPicture()
++ void setPicture(String)
+}
+class com.example.messheknahalal.Admin_screens.AdminsRecycleViewScreenAdmin {
+~ RecyclerView rv_admins
+~ AdminsAdapterFirebase adminAdapter
+~ MaterialButton btn_choose_date
+~ Button admins_rv_screen_btn_reset_code
+~ EditText admins_rv_screen_et_new_admin_code
+~ DatabaseReference startDateRef
+~ DatabaseReference endDateRef
+# void onCreate(Bundle)
+- void showDatePickerDialog()
+- void showStartTimePickerDialog(int,int,int)
+- void showEndTimePickerDialog(int,int,int,int,int)
+- void checkField()
+- void resetAdminCode(String)
++ boolean onCreateOptionsMenu(Menu)
++ boolean onOptionsItemSelected(MenuItem)
+}
+class com.example.messheknahalal.delete_user.FirebaseNotificationPushService {
++ {static} int DELETE_PERSON_NOTIFICATION_ID
+~ FirebaseAuth firebaseAuth
+~ FirebaseUser firebaseUser
++ void onMessageReceived(RemoteMessage)
++ void deleteCurrentFirebaseUser()
++ void onNewToken(String)
+}
+class com.example.messheknahalal.models.Cart {
+- String userEmail
+- String userName
+- boolean delivered
+- double finalPrice
+- List<Product> products
+- long date
+- long number
++ <<Create>> Cart()
++ <<Create>> Cart(String,String,boolean,double,List<Product>,long)
++ String getUserEmail()
++ void setUserEmail(String)
++ boolean isDelivered()
++ void setDelivered(boolean)
++ long getDate()
++ void setDate(long)
++ double getFinalPrice()
++ void setFinalPrice(double)
++ List<Product> getProducts()
++ void setProducts(List<Product>)
++ String toString()
++ String getUserName()
++ void setUserName(String)
++ long getNumber()
++ void setNumber(long)
+}
+class com.example.messheknahalal.SuperActivityWithNavigationDrawer {
+# Intent navigationIntent
+# DrawerLayout drawerMenu
+# NavigationView nav_view
++ Toolbar toolbar
+# View headerView
+# RoundedImageView nv_profile_img
+# void initializeNavigationDrawer(boolean)
+# void loadDrawerData()
+# void loadDrawerNameAndLastName(String)
+# void loadDrawerEmail(String)
+# void loadDrawerImage(String)
+# void sendEmail()
++ void onBackPressed()
+}
+class com.example.messheknahalal.models.Admin {
+- String code
++ <<Create>> Admin()
++ <<Create>> Admin(String)
++ <<Create>> Admin(String,String,String,String,String,String)
++ <<Create>> Admin(String,String,String,String,String,String,String)
++ String getCode()
++ void setCode(String)
++ String toString()
+}
+class com.example.messheknahalal.Admin_screens.CreateNewProductAdmin {
+# Spinner spinner
+# ImageView product_img
+# Button btn_back
+# TextInputEditText tie_name
+# CheckBox cb_countable
+# DatabaseReference productRef
+# StorageReference rStore
+# String[] products_types
+# void onCreate(Bundle)
+- void createProduct()
+# void onActivityResult(int,int,Intent)
++ void resetAllFields()
++ void uploadProduct(Uri,Product)
++ void uploadProductToFirebase(Product)
++ void uploadImageToFirebase(Uri,Product)
++ void onItemClick(AdapterView<?>,View,int,long)
+}
+
+
+com.firebase.ui.database.FirebaseRecyclerAdapter <|-- com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase
+com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase +.. com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.ProductViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnClickListener <|.. com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.ProductViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnLongClickListener <|.. com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.ProductViewHolderFirebase
+com.example.messheknahalal.Admin_screens.ViewHolder <|-- com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.ProductViewHolderFirebase
+com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase +.. com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase.OnAddToCartListener
+java.io.Serializable <|.. com.example.messheknahalal.models.Product
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.Admin_screens.UsersRecycleViewScreenAdmin
+com.example.messheknahalal.Adapter <|-- com.example.messheknahalal.VPAdapter
+com.example.messheknahalal.VPAdapter +.. com.example.messheknahalal.VPAdapter.ViewHolder
+com.example.messheknahalal.ViewHolder <|-- com.example.messheknahalal.VPAdapter.ViewHolder
+android.app.Application <|-- com.example.messheknahalal.Utils.MesshekNahalal
+com.example.messheknahalal.Admin_screens.CreateNewProductAdmin <|-- com.example.messheknahalal.Admin_screens.EditProduct
+androidx.appcompat.app.AppCompatActivity <|-- com.example.messheknahalal.splashScreen
+com.firebase.ui.database.FirebaseRecyclerAdapter <|-- com.example.messheknahalal.Admin_screens.UsersAdapterFirebase
+com.example.messheknahalal.Admin_screens.UsersAdapterFirebase +.. com.example.messheknahalal.Admin_screens.UsersAdapterFirebase.UserViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnClickListener <|.. com.example.messheknahalal.Admin_screens.UsersAdapterFirebase.UserViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnLongClickListener <|.. com.example.messheknahalal.Admin_screens.UsersAdapterFirebase.UserViewHolderFirebase
+com.example.messheknahalal.Admin_screens.ViewHolder <|-- com.example.messheknahalal.Admin_screens.UsersAdapterFirebase.UserViewHolderFirebase
+com.example.messheknahalal.User_screens.OnAddToCartListener <|.. com.example.messheknahalal.User_screens.ProductsFragmentUser
+androidx.fragment.app.Fragment <|-- com.example.messheknahalal.User_screens.ProductsFragmentUser
+com.example.messheknahalal.Admin_screens.OnClickListener <|.. com.example.messheknahalal.Admin_screens.ProductsRecycleViewScreenAdmin
+com.example.messheknahalal.Admin_screens.OnAddToCartListener <|.. com.example.messheknahalal.Admin_screens.ProductsRecycleViewScreenAdmin
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.Admin_screens.ProductsRecycleViewScreenAdmin
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.Admin_screens.OrdersRecyclerViewScreenAdmin
+androidx.appcompat.app.AppCompatActivity <|-- com.example.messheknahalal.User_screens.ShoppingScreen
+androidx.fragment.app.Fragment <|-- com.example.messheknahalal.User_screens.HomeFragmentUser
+androidx.recyclerview.widget.LinearLayoutManager <|-- com.example.messheknahalal.Admin_screens.WrapContentLinearLayoutManager
+com.firebase.ui.database.FirebaseRecyclerAdapter <|-- com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase
+com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase +.. com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase.OrderViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnClickListener <|.. com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase.OrderViewHolderFirebase
+com.example.messheknahalal.Admin_screens.ViewHolder <|-- com.example.messheknahalal.Admin_screens.OrdersAdapterFirebase.OrderViewHolderFirebase
+com.firebase.ui.database.FirebaseRecyclerAdapter <|-- com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase
+com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase +.. com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase.AdminViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnClickListener <|.. com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase.AdminViewHolderFirebase
+com.example.messheknahalal.Admin_screens.OnLongClickListener <|.. com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase.AdminViewHolderFirebase
+com.example.messheknahalal.Admin_screens.ViewHolder <|-- com.example.messheknahalal.Admin_screens.AdminsAdapterFirebase.AdminViewHolderFirebase
+androidx.appcompat.app.AppCompatActivity <|-- com.example.messheknahalal.signUpScreen
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.Admin_screens.mainScreenAdmin
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.Admin_screens.MyProfileScreenAdmin
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.User_screens.MyProfileScreenUser
+com.example.messheknahalal.User_screens.OnDestinationChangedListener <|.. com.example.messheknahalal.User_screens.mainScreenUser
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.User_screens.mainScreenUser
+androidx.appcompat.app.AppCompatActivity <|-- com.example.messheknahalal.loginScreen
+com.example.messheknahalal.models.Person <|-- com.example.messheknahalal.models.User
+com.example.messheknahalal.SuperActivityWithNavigationDrawer <|-- com.example.messheknahalal.Admin_screens.AdminsRecycleViewScreenAdmin
+com.google.firebase.messaging.FirebaseMessagingService <|-- com.example.messheknahalal.delete_user.FirebaseNotificationPushService
+androidx.appcompat.app.AppCompatActivity <|-- com.example.messheknahalal.SuperActivityWithNavigationDrawer
+com.example.messheknahalal.models.Person <|-- com.example.messheknahalal.models.Admin
+com.example.messheknahalal.Admin_screens.OnItemClickListener <|.. com.example.messheknahalal.Admin_screens.CreateNewProductAdmin
+androidx.appcompat.app.AppCompatActivity <|-- com.example.messheknahalal.Admin_screens.CreateNewProductAdmin
+@enduml

@@ -9,11 +9,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MesshekNahalal extends Application {
 
-    DatabaseReference productsInCartRef = FirebaseDatabase.getInstance().getReference("Carts");
+    DatabaseReference productsInCartRef;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        productsInCartRef = FirebaseDatabase.getInstance().getReference("Carts");
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 

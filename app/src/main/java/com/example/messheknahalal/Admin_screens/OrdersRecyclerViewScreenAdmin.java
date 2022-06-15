@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.SuperActivityWithNavigationDrawer;
-import com.example.messheknahalal.models.Cart;
+import com.example.messheknahalal.models.Order;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-public class OrdersRecyclerViewScreenAdmin extends SuperActivityWithNavigationDrawer {
+public class OrdersRecyclerViewScreenAdmin extends SuperActivityWithNavigationDrawer implements
+        OrdersAdapterFirebase.onOrderClickListener {
 
     RecyclerView rv_orders;
     OrdersAdapterFirebase ordersAdapter;
@@ -29,17 +30,28 @@ public class OrdersRecyclerViewScreenAdmin extends SuperActivityWithNavigationDr
 
         Query query = notDeliveredOrders.orderByChild("delivered").equalTo(false);
 
-        FirebaseRecyclerOptions<Cart> options
-                = new FirebaseRecyclerOptions.Builder<Cart>()
-                .setQuery(query, Cart.class)
+        FirebaseRecyclerOptions<Order> options
+                = new FirebaseRecyclerOptions.Builder<Order>()
+                .setQuery(query, Order.class)
                 .setLifecycleOwner(this)
                 .build();
 
-        ordersAdapter = new OrdersAdapterFirebase(options, this);
+        ordersAdapter = new OrdersAdapterFirebase(options, this, true, this);
 
         rv_orders.setAdapter(ordersAdapter);
         rv_orders.setLayoutManager(new WrapContentLinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
         initializeNavigationDrawer(true);
+    }
+
+    @Override
+    public void onOrderClick(int oldPosition, int position) {
+        OrdersAdapterFirebase.OrderViewHolderFirebase viewHolder
+                = (OrdersAdapterFirebase.OrderViewHolderFirebase) rv_orders.findViewHolderForAdapterPosition(oldPosition);
+
+        if (viewHolder != null) {
+            viewHolder.collapse();
+            rv_orders.scrollToPosition(position);
+        }
     }
 }

@@ -41,6 +41,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cart_screen_logo_app" />
 
+    <TextView
+        android:id="@+id/tv_empty_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Empty cart"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:visibility="gone"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/ll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cart_screen_logo_app"
+        app:drawableTopCompat="@drawable/ic_shopping_cart_big"
+        app:drawableTint="@color/black" />
+
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
@@ -62,7 +78,7 @@
             android:textSize="20sp"
             android:padding="5dp"
             android:textAllCaps="true"
-            android:text="TOTAL PRICE: 0₪"
+            android:text="TOTAL PRICE: 0 ₪"
             android:textColor="@color/black"
             android:textStyle="bold"
             />

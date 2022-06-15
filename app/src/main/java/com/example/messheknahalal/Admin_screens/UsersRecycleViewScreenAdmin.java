@@ -31,7 +31,7 @@ public class UsersRecycleViewScreenAdmin extends SuperActivityWithNavigationDraw
     EditText et_adminListAccess;
     Button btn_login;
 
-    final DatabaseReference adminCodeRef = FirebaseDatabase.getInstance().getReference("Admin Code");
+    final DatabaseReference mainAdminCodeRef = FirebaseDatabase.getInstance().getReference("Main Admin Code");
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +43,8 @@ public class UsersRecycleViewScreenAdmin extends SuperActivityWithNavigationDraw
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //todo - cambiar luego passAccess
 
-                adminCodeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                mainAdminCodeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot ds) {
                         //if exists the dataSnapshot

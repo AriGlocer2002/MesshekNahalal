@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class WrapContentLinearLayoutManager extends LinearLayoutManager {
+
     public WrapContentLinearLayoutManager(Context context) {
         super(context);
     }

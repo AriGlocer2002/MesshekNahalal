@@ -1,6 +1,7 @@
 package com.example.messheknahalal.User_screens;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +15,7 @@ import com.example.messheknahalal.Admin_screens.ProductsAdapterFirebase;
 import com.example.messheknahalal.Admin_screens.WrapContentLinearLayoutManager;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.Utils.Utils;
-import com.example.messheknahalal.models.Cart;
+import com.example.messheknahalal.models.Order;
 import com.example.messheknahalal.models.Person;
 import com.example.messheknahalal.models.Product;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -41,6 +42,7 @@ public class ShoppingScreen extends AppCompatActivity {
 
     Toolbar toolbar;
 
+    TextView tv_empty_cart;
     TextView tv_total_price;
 
     MaterialButton btn_confirm, btn_back, btn_clear;
@@ -64,6 +66,7 @@ public class ShoppingScreen extends AppCompatActivity {
         btn_clear = findViewById(R.id.btn_clear);
         btn_clear.setOnClickListener(v -> clearCart());
 
+        tv_empty_cart = findViewById(R.id.tv_empty_cart);
         tv_total_price = findViewById(R.id.tv_total_price);
 
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
@@ -75,6 +78,18 @@ public class ShoppingScreen extends AppCompatActivity {
                 .setLifecycleOwner(this)
                 .setQuery(productsInCartRef, Product.class)
                 .build();
+
+        productsInCartRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                tv_empty_cart.setVisibility(snapshot.exists() ? View.GONE : View.VISIBLE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         productsAdapterFirebase = new ProductsAdapterFirebase(options,this);
 
@@ -135,7 +150,7 @@ public class ShoppingScreen extends AppCompatActivity {
                 Person person = snapshot.getValue(Person.class);
                 String personName = person.getFullName();
 
-                Cart cart = new Cart(email, personName, false, finalPrice, products, System.currentTimeMillis());
+                Order cart = new Order(email, personName, false, finalPrice, products, System.currentTimeMillis());
 
                 if (checkProducts(products)){
                     notDeliveredOrders.child(String.valueOf(cart.getDate())).setValue(cart).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -143,13 +158,13 @@ public class ShoppingScreen extends AppCompatActivity {
                                 public void onSuccess(Void unused) {
                                     clearCart();
                                     changeStock(products);
-                                    Toast.makeText(ShoppingScreen.this, "Cart successfully added", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ShoppingScreen.this, "Order successfully added", Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(ShoppingScreen.this, "Cart adding failed", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ShoppingScreen.this, "Order adding failed", Toast.LENGTH_SHORT).show();
                                 }
                             });
                 }

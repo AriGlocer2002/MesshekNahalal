@@ -164,13 +164,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/sign_up_screen_iv_b2"
         android:layout_width="match_parent"
-        android:layout_height="163dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/sign_up_screen_iv_b1"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/back3">
 
         <RelativeLayout
@@ -215,12 +215,12 @@
             android:id="@+id/sign_up_screen_constraint_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:background="@drawable/back1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:padding="10dp"
-            android:layout_margin="10dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <Button
                 android:id="@+id/sign_up_screen_btn_confirm"
@@ -256,11 +256,11 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#000000"
                 android:ems="10"
-                android:textSize="14sp"
                 android:hint="Admin code"
                 android:inputType="numberPassword"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sign_up_screen_cb_admin" />

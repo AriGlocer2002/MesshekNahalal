@@ -45,7 +45,6 @@ public class mainScreenAdmin extends SuperActivityWithNavigationDrawer {
         dotsIndicator.setViewPager2(viewPager2);
 
         btn_create_new_product = findViewById(R.id.fragment_products_admin_btn_new_product);
-
         btn_create_new_product.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), CreateNewProductAdmin.class)));
 
         btn_my_profile = findViewById(R.id.fragment_home_admin_btn_my_profile);

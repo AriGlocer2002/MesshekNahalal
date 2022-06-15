@@ -54,4 +54,10 @@ public class HomeFragmentUser extends Fragment {
         return inflater.inflate(R.layout.fragment_home_user, container, false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        dotsIndicator.setViewPager2(viewPager2);
+    }
+
 }

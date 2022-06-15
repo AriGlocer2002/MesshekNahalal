@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="2dp"
+    app:cardCornerRadius="10dp">
+
+    <RelativeLayout
+        android:id="@+id/rl_product_item"
+        android:padding="10dp"
+        android:background="@drawable/all_rv_rl_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/products_rv_item_iv_pp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_alignTop="@+id/products_rv_item_iv_pp_frame"
+            android:layout_alignStart="@+id/products_rv_item_iv_pp_frame"
+            android:layout_alignBottom="@+id/products_rv_item_iv_pp_frame"
+            android:layout_alignEnd="@+id/products_rv_item_iv_pp_frame"
+            app:srcCompat="@drawable/default_product_pic_rv"/>
+
+        <ImageView
+            android:id="@+id/products_rv_item_iv_pp_frame"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/portarit_square" />
+
+        <TextView
+            android:id="@+id/products_rv_item_tv_full_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/products_rv_item_iv_pp_frame"
+            android:fontFamily="@font/heebo_bold"
+            android:text="Full name"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/products_rv_item_tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:layout_toEndOf="@+id/products_rv_item_tv_full_name"
+            android:fontFamily="@font/heebo_regular"
+            android:text=" x "
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/products_rv_item_tv_amount_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:layout_toEndOf="@+id/products_rv_item_tv_amount"
+            android:fontFamily="@font/heebo_regular"
+            android:text="num"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/products_rv_item_tv_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/heebo_regular"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

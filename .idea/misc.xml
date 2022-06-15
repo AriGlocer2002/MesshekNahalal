@@ -122,17 +122,29 @@
         <entry key="..\:/Users/murad/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/viewpager_item.xml" value="0.2046875" />
         <entry key="..\:/Users/murad/AndroidStudioProjects/MesshekNahalal/app/src/main/res/menu/menu.xml" value="0.2046875" />
         <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout-v23/products_saved_rv_item_users.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_admins_rv_admin.xml" value="0.309375" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_create_new_product_admin.xml" value="0.309375" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_edit_product.xml" value="0.309375" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_login.xml" value="0.6422764227642277" />
         <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_main_screen_user.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_my_profile_admin.xml" value="0.309375" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_my_profile_user.xml" value="0.309375" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_products_rv_admin.xml" value="0.309375" />
         <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_shopping_screen.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/activity_sign_up.xml" value="0.286231884057971" />
         <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/admin_rv_item.xml" value="0.15" />
         <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/orders_rv_item_admin.xml" value="0.309375" />
         <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/reset_password_dialog.xml" value="0.286231884057971" />
         <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/layout/user_rv_item.xml" value="0.309375" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/menu/action_bar_menu_1.xml" value="0.309375" />
+        <entry key="..\:/Users/ror7/AndroidStudioProjects/MesshekNahalal/app/src/main/res/menu/action_bar_menu_2.xml" value="0.309375" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="jbr-11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

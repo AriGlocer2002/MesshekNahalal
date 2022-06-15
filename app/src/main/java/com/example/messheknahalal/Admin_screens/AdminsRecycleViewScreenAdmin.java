@@ -1,25 +1,27 @@
 package com.example.messheknahalal.Admin_screens;
 
-import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.messheknahalal.ChooseDayOfWeekDialog;
 import com.example.messheknahalal.R;
 import com.example.messheknahalal.SuperActivityWithNavigationDrawer;
 import com.example.messheknahalal.Utils.Utils;
+import com.example.messheknahalal.notifications.FCMSend;
 import com.example.messheknahalal.models.Admin;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.button.MaterialButton;
@@ -30,9 +32,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.DayOfWeek;
+import java.util.Locale;
 
 public class AdminsRecycleViewScreenAdmin extends SuperActivityWithNavigationDrawer {
 
@@ -44,8 +47,7 @@ public class AdminsRecycleViewScreenAdmin extends SuperActivityWithNavigationDra
     Button admins_rv_screen_btn_reset_code;
     EditText admins_rv_screen_et_new_admin_code;
 
-    final DatabaseReference startDateRef = FirebaseDatabase.getInstance().getReference("Start Date");
-    final DatabaseReference endDateRef = FirebaseDatabase.getInstance().getReference("End Date");
+    final DatabaseReference dateRef = FirebaseDatabase.getInstance().getReference("Date");
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,51 +80,17 @@ public class AdminsRecycleViewScreenAdmin extends SuperActivityWithNavigationDra
         btn_choose_date.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                startDateRef.removeValue();
-                endDateRef.removeValue();
+                dateRef.removeValue();
                 return true;
             }
         });
 
-        startDateRef.addValueEventListener(new ValueEventListener() {
+        dateRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.exists()){
-                    btn_choose_date.setText("Choose date");
-                    return;
+                if (snapshot.exists()){
+                    btn_choose_date.setText(snapshot.getValue(String.class));
                 }
-
-                endDateRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (!dataSnapshot.exists()){
-                            btn_choose_date.setText("Choose date");
-                            return;
-                        }
-
-                        long startTime = snapshot.getValue(long.class);
-                        long endTime = dataSnapshot.getValue(long.class);
-
-                        Date startDate = new Date(startTime);
-                        Date endDate = new Date(endTime);
-
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-                        SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm");
-
-                        String date = simpleDateFormat.format(startDate);
-                        String startTimeText = simpleTimeFormat.format(startDate);
-                        String endTimeText = simpleTimeFormat.format(endDate);
-
-                        btn_choose_date.setText(date + "\n" + startTimeText + " - " + endTimeText);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
             }
 
             @Override
@@ -134,46 +102,45 @@ public class AdminsRecycleViewScreenAdmin extends SuperActivityWithNavigationDra
     }
 
     private void showDatePickerDialog() {
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this);
-        datePickerDialog.setOnDateSetListener(
-                (view, year, month, dayOfMonth) -> showStartTimePickerDialog(year, month+1, dayOfMonth));
-
-        DatePicker datePicker = datePickerDialog.getDatePicker();
-
-        datePicker.setMinDate(Calendar.getInstance().getTimeInMillis());
-        datePicker.setFirstDayOfWeek(Calendar.SUNDAY);
-
-        datePickerDialog.updateDate(datePicker.getYear(), datePicker.getMonth()-1, datePicker.getDayOfMonth());
-        datePickerDialog.show();
+        ChooseDayOfWeekDialog chooseDayOfWeekDialog = new ChooseDayOfWeekDialog(this, this::showStartTimePickerDialog);
+        chooseDayOfWeekDialog.show();
     }
 
-    private void showStartTimePickerDialog(int year, int month, int dayOfMonth) {
-
+    private void showStartTimePickerDialog(int dayOfWeekPosition) {
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                (view, hourOfDay, minute) -> showEndTimePickerDialog(year, month, dayOfMonth, hourOfDay, minute),
+                (view, hourOfDay, minute) -> showEndTimePickerDialog(dayOfWeekPosition, hourOfDay, minute),
                 9, 0, true);
 
         timePickerDialog.show();
     }
 
-    private void showEndTimePickerDialog(int year, int month, int dayOfMonth, int startHour, int startMinute) {
+    private void showEndTimePickerDialog(int dayOfWeekPosition, int startHour, int startMinute) {
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                 new TimePickerDialog.OnTimeSetListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        Date startDate = new Date(year - 1900, month, dayOfMonth, startHour, startMinute);
-                        Date endDate = new Date(year - 1900, month, dayOfMonth, hourOfDay, minute);
+                        Time startTime = new Time(startHour, startMinute, 0);
+                        Time endTime = new Time(hourOfDay, minute, 0);
 
-                        if (startDate.after(endDate)){
-                            Utils.showAlertDialog("Error", "End time can't be before start time",
-                                    AdminsRecycleViewScreenAdmin.this);
+                        if (startTime.after(endTime)){
+                            Utils.showAlertDialog("Error", "End time can't be before start time", AdminsRecycleViewScreenAdmin.this);
                         }
                         else {
-                            startDateRef.setValue(startDate.getTime());
-                            endDateRef.setValue(endDate.getTime());
-                        }
+                           SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm");
 
+                            String startTimeText = simpleTimeFormat.format(startTime);
+                            String endTimeText = simpleTimeFormat.format(endTime);
+
+                            DayOfWeek dayOfWeek = DayOfWeek.of(dayOfWeekPosition);
+
+                            String message = dayOfWeek.toString().toLowerCase(Locale.ROOT)
+                                    + "\n" + startTimeText + " - " + endTimeText;
+
+                            dateRef.setValue("Every " + message);
+                            FCMSend.sendNotificationToAllUsers(AdminsRecycleViewScreenAdmin.this, "every " + message);
+                        }
                     }
                 }, 10, 0, true);
 

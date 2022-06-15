@@ -75,9 +75,9 @@ public class ProductsFragmentUser extends Fragment implements ProductsAdapterFir
         sorts.add("stock");
 
         List<Integer> chips = new ArrayList<>();
-        chips.add(R.id.chip_1);
-        chips.add(R.id.chip_2);
-        chips.add(R.id.chip_3);
+        chips.add(R.id.chip_name);
+        chips.add(R.id.chip_price);
+        chips.add(R.id.chip_stock);
 
         sort.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
             @Override
@@ -163,6 +163,11 @@ public class ProductsFragmentUser extends Fragment implements ProductsAdapterFir
         rv_fruits_buy.setAdapter(fruitsAdapter);
         rv_shelf_buy.setAdapter(shelfAdapter);
         rv_others_buy.setAdapter(othersAdapter);
+
+        rv_vegetables_buy.smoothScrollToPosition(0);
+        rv_fruits_buy.smoothScrollToPosition(0);
+        rv_shelf_buy.smoothScrollToPosition(0);
+        rv_others_buy.smoothScrollToPosition(0);
     }
 
     @Override

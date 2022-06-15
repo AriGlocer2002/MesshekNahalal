@@ -2,7 +2,6 @@ package com.example.messheknahalal.Admin_screens;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -141,10 +140,8 @@ public class ProductsAdapterFirebase extends
         @Override
         public void onClick(View view) {
 
-            String productPath = Utils.productNameToPath(getItem(getBindingAdapterPosition()).getName());
-
             if (view == btn_edit) {
-                Intent intent = new Intent(context, EditProduct.class);
+                Intent intent = new Intent(context, EditProductAdmin.class);
                 intent.putExtra("product", getItem(getBindingAdapterPosition()));
                 context.startActivity(intent);
             }
@@ -156,7 +153,7 @@ public class ProductsAdapterFirebase extends
                 double amount = getItem(getBindingAdapterPosition()).getAmount();
                 double by = countable ? 1 : 0.25;
 
-                productsInCartRef.child(productPath).child("amount").setValue(amount + by);
+                getRef(getBindingAdapterPosition()).child("amount").setValue(amount + by);
             }
             else if (view == iv_remove) {
                 boolean countable = getItem(getBindingAdapterPosition()).isCountable();
@@ -164,7 +161,7 @@ public class ProductsAdapterFirebase extends
                 double by = countable ? 1 : 0.25;
 
                 if (amount > by) {
-                    productsInCartRef.child(productPath).child("amount").setValue(amount - by);
+                    getRef(getBindingAdapterPosition()).child("amount").setValue(amount - by);
                 }
             }
         }
@@ -176,14 +173,8 @@ public class ProductsAdapterFirebase extends
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Confirm delete of product");
 
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String name = getItem(getBindingAdapterPosition()).getName();
-                        String product_type = getItem(getBindingAdapterPosition()).getType();
-                        deleteProduct(name, product_type);
-                    }
-                })
+                builder.setPositiveButton("Yes",
+                                (dialogInterface, i) -> getRef(getBindingAdapterPosition()).removeValue())
                 .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
 
                 AlertDialog dialog = builder.create();
@@ -193,16 +184,13 @@ public class ProductsAdapterFirebase extends
 
             return true;
         }
-
-        public void deleteProduct(String name, @NonNull String type){
-            String productPath = Utils.productNameToPath(name);
-            FirebaseDatabase.getInstance().getReference("Product").child(type).child(productPath).removeValue();
-        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull ProductsAdapterFirebase.ProductViewHolderFirebase holder, int position, @NonNull Product model) {
         String productPath = Utils.productNameToPath(model.getName());
+
+        final int pos = holder.getBindingAdapterPosition();
 
         holder.tv_full_name.setText(model.getName());
         holder.tv_stock.setText(model.getStock() + "");
@@ -239,16 +227,16 @@ public class ProductsAdapterFirebase extends
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (!snapshot.exists()){
-                                    productsInCartRef.child(productPath).removeValue();
+                                    getRef(pos).removeValue();
                                     return;
                                 }
 
                                 Product newProduct = snapshot.getValue(Product.class);
 
                                 if (!model.toString().equals(newProduct.toString())){
-                                    productsInCartRef.child(productPath).child("price").setValue(newProduct.getPrice());
-                                    productsInCartRef.child(productPath).child("stock").setValue(newProduct.getStock());
-                                    productsInCartRef.child(productPath).child("type").setValue(newProduct.getType());
+                                    getRef(pos).child("price").setValue(newProduct.getPrice());
+                                    getRef(pos).child("stock").setValue(newProduct.getStock());
+                                    getRef(pos).child("type").setValue(newProduct.getType());
                                 }
                             }
 

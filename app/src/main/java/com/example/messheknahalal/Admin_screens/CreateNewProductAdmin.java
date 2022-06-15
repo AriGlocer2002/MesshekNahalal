@@ -98,6 +98,8 @@ public class CreateNewProductAdmin extends AppCompatActivity implements
             }
         });
 
+        spinner = findViewById(R.id.create_new_product_admin_spinner_type);
+
         //setting spinner information
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.background_spinner1, products_types);
         adapter.setDropDownViewResource(R.layout.background_dropdown_spinner_items);

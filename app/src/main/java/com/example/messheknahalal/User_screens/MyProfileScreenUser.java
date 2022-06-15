@@ -252,7 +252,7 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
         et_phone = findViewById(R.id.my_profile_user_et_phone_number);
         et_name = findViewById(R.id.my_profile_user_et_name);
         et_last_name = findViewById(R.id.my_profile_user_et_last_name);
-        String personPath = "Person_"+email.replace(".","-");
+        String personPath = Utils.emailToPersonPath(email);
 
         personRef.child(personPath).addValueEventListener(new ValueEventListener() {
             @Override
@@ -273,6 +273,7 @@ public class MyProfileScreenUser extends SuperActivityWithNavigationDrawer {
 
                     if (picture != null && !picture.isEmpty()){
                         Glide.with(getApplicationContext()).load(picture).centerCrop().into(screen_profile_img);
+                        screen_profile_img.setTag(picture);
                     }
                     else {
                         Glide.with(getApplicationContext()).load(R.drawable.sample_profile).centerCrop().into(screen_profile_img);

@@ -10,9 +10,10 @@
     tools:context=".Admin_screens.mainScreenAdmin"
     tools:openDrawer="start">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -20,112 +21,117 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 
-        <ImageView
-            android:id="@+id/fragment_home_admin_iv_logo_background"
-            android:layout_width="306dp"
-            android:layout_height="47dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/toolbar"
-            app:srcCompat="@drawable/back1" />
-
-        <ImageView
-            android:id="@+id/fragment_home_admin_iv_logo"
-            android:layout_width="295dp"
-            android:layout_height="55dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/toolbar"
-            app:srcCompat="@drawable/logo2" />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/fragment_home_admin_viewPager"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_below="@+id/fragment_home_admin_iv_logo"
-            android:layout_marginHorizontal="0dp" />
+            android:layout_height="match_parent">
 
-        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-            android:id="@+id/fragment_home_admin_dots"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/fragment_home_admin_viewPager"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            app:dotsColor="@color/white" />
+            <ImageView
+                android:id="@+id/fragment_home_admin_iv_logo_background"
+                android:layout_width="306dp"
+                android:layout_height="47dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentTop="true"
+                app:srcCompat="@drawable/back1" />
 
-        <Button
-            android:id="@+id/fragment_products_admin_btn_new_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/fragment_home_admin_dots"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#4FCA69"
-            android:textColor="@android:color/black"
-            android:text="Create new product" />
+            <ImageView
+                android:id="@+id/fragment_home_admin_iv_logo"
+                android:layout_width="295dp"
+                android:layout_height="55dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/logo2" />
 
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_below="@+id/fragment_products_admin_btn_new_product"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="10dp"
-            android:columnCount="2"
-            android:rowCount="2"
-            android:columnOrderPreserved="true"
-            app:layout_constraintHorizontal_weight="2"
-            app:layout_constraintVertical_weight="2"
-            android:rowOrderPreserved="true">
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/fragment_home_admin_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@+id/fragment_home_admin_iv_logo"
+                android:layout_marginHorizontal="0dp" />
 
-            <Button
-                android:id="@+id/fragment_home_admin_btn_my_profile"
+            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                android:id="@+id/fragment_home_admin_dots"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:backgroundTint="#03A9F4"
-                android:drawableStart="@drawable/ic_profile"
-                android:text="My profile" />
+                android:layout_below="@id/fragment_home_admin_viewPager"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                app:dotsColor="@color/white" />
 
             <Button
-                android:id="@+id/fragment_home_admin_btn_orders"
+                android:id="@+id/fragment_products_admin_btn_new_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:text="Orders"
-                android:backgroundTint="#4CAF50"
-                android:drawableStart="@drawable/ic_receipt" />
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/fragment_home_admin_dots"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#4FCA69"
+                android:textColor="@android:color/black"
+                android:text="Create new product" />
 
-            <Button
-                android:id="@+id/fragment_home_admin_btn_users"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:backgroundTint="#3F51B5"
-                android:drawableStart="@drawable/ic_user_circle"
-                android:text="Users" />
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/fragment_products_admin_btn_new_product"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="10dp"
+                android:columnCount="2"
+                android:rowCount="2"
+                android:columnOrderPreserved="true"
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintVertical_weight="2"
+                android:rowOrderPreserved="true">
 
-            <Button
-                android:id="@+id/fragment_home_admin_btn_products"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:backgroundTint="#FF9800"
-                android:drawableStart="@drawable/ic_shopping_basket"
-                android:text="Products" />
+                <Button
+                    android:id="@+id/fragment_home_admin_btn_my_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:backgroundTint="#03A9F4"
+                    android:drawableStart="@drawable/ic_profile"
+                    android:text="My profile" />
 
-        </GridLayout>
+                <Button
+                    android:id="@+id/fragment_home_admin_btn_orders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="Orders"
+                    android:backgroundTint="#4CAF50"
+                    android:drawableStart="@drawable/ic_receipt" />
 
-    </RelativeLayout>
+                <Button
+                    android:id="@+id/fragment_home_admin_btn_users"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:backgroundTint="#3F51B5"
+                    android:drawableStart="@drawable/ic_user_circle"
+                    android:text="Users" />
+
+                <Button
+                    android:id="@+id/fragment_home_admin_btn_products"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:backgroundTint="#FF9800"
+                    android:drawableStart="@drawable/ic_shopping_basket"
+                    android:text="Products" />
+
+            </GridLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

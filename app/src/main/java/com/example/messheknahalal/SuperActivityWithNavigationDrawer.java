@@ -20,9 +20,10 @@ import com.example.messheknahalal.Admin_screens.OrdersRecyclerViewScreenAdmin;
 import com.example.messheknahalal.Admin_screens.ProductsRecycleViewScreenAdmin;
 import com.example.messheknahalal.Admin_screens.UsersRecycleViewScreenAdmin;
 import com.example.messheknahalal.Admin_screens.mainScreenAdmin;
-import com.example.messheknahalal.delete_user.FCMSend;
+import com.example.messheknahalal.User_screens.OrdersRecyclerViewScreenUser;
+import com.example.messheknahalal.notifications.FCMSend;
 import com.example.messheknahalal.models.Person;
-import com.example.messheknahalal.messheknahalal.User_screens.MyProfileScreenUser;
+import com.example.messheknahalal.User_screens.MyProfileScreenUser;
 import com.example.messheknahalal.User_screens.mainScreenUser;
 import com.example.messheknahalal.Utils.Utils;
 import com.google.android.material.navigation.NavigationView;
@@ -45,8 +46,11 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
     public Toolbar toolbar;
 
     protected void initializeNavigationDrawer(boolean isAdmin){
-
         Log.d("ariel", "isAdmin is " + isAdmin);
+        Log.d("ariel", "class is " + getLocalClassName());
+        if (getCallingPackage() != null){
+            Log.d("ariel", "from class " + getCallingPackage());
+        }
 
         drawerMenu = findViewById(R.id.drawer_layout);
         nav_view = findViewById(R.id.nav_view);
@@ -54,8 +58,8 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerMenu, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerMenu, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         headerView = nav_view.getHeaderView(0);
 
         drawerMenu.addDrawerListener(toggle);
@@ -71,55 +75,44 @@ public class SuperActivityWithNavigationDrawer extends AppCompatActivity {
                         navigationIntent = new Intent(getApplicationContext(), isAdmin ? mainScreenAdmin.class : mainScreenUser.class);
                         startActivity(navigationIntent);
                         break;
-
                     case R.id.orders_item:
                         navigationIntent = new Intent(getApplicationContext(), OrdersRecyclerViewScreenAdmin.class);
                         startActivity(navigationIntent);
                         break;
-
                     case R.id.myProfile_item:
                         navigationIntent = new Intent(getApplicationContext(), isAdmin ? MyProfileScreenAdmin.class : MyProfileScreenUser.class);
                         startActivity(navigationIntent);
                         break;
-
                     case R.id.users_item:
                         navigationIntent = new Intent(getApplicationContext(), UsersRecycleViewScreenAdmin.class);
                         startActivity(navigationIntent);
                         break;
-
                     case R.id.products_item:
                         navigationIntent = new Intent(getApplicationContext(), ProductsRecycleViewScreenAdmin.class);
                         startActivity(navigationIntent);
                         break;
-
                     case R.id.logOut_item:
                         FirebaseAuth.getInstance().signOut();
                         FirebaseMessaging.getInstance().unsubscribeFromTopic(FCMSend.MESSHEK_NAHALAL_TOPIC);
                         navigationIntent = new Intent(getApplicationContext(), loginScreen.class);
                         startActivity(navigationIntent);
                         break;
-
                     case R.id.myOrders_item:
-
-                        break;
-
-                    case R.id.callUs_item:
-                        navigationIntent = new Intent(Intent.ACTION_DIAL);
-                        navigationIntent.setData(Uri.parse("tel:0506829187"));
+                        navigationIntent = new Intent(getApplicationContext(), OrdersRecyclerViewScreenUser.class);
                         startActivity(navigationIntent);
                         break;
-
+                    case R.id.callUs_item:
+                        navigationIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:0506829187"));
+                        startActivity(navigationIntent);
+                        break;
                     case R.id.emailUs_item:
                         sendEmail();
                         break;
-
                     case R.id.findUs_item:
                         String addressString = "Agriculture and Sustainability Center WIZO Nahalal";
                         Uri geoLocation = Uri.parse("geo:0,0?q=" + addressString);
 
-                        navigationIntent = new Intent(Intent.ACTION_VIEW);
-                        navigationIntent.setData(geoLocation);
-
+                        navigationIntent = new Intent(Intent.ACTION_VIEW, geoLocation);
                         startActivity(navigationIntent);
                         break;
                 }
